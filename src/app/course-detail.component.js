@@ -9,18 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var AppComponent = (function () {
-    function AppComponent() {
-        this.title = 'Course List';
+var course_1 = require('./course');
+var CourseDetailComponent = (function () {
+    function CourseDetailComponent() {
     }
-    AppComponent = __decorate([
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', course_1.Course)
+    ], CourseDetailComponent.prototype, "course", void 0);
+    CourseDetailComponent = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            template: "\n    <h1>{{title}}</h1>\n    <nav>\n        <a routerLink=\"/dashboard\">Dashboard</a>\n        <a routerLink=\"/courses\">Courses</a>\n    </nav>\n    <router-outlet></router-outlet>\n  "
+            selector: 'course-detail',
+            template: "\n        <div *ngIf = \"course\">\n            <h2>{{course.name}} details</h2>\n            <div><label>id : </label>{{course.id}}</div>\n            <div>\n                <label> name: </label>\n                <input [(ngModel)] = \"course.name\" placeholder = \"name\"/>\n            </div>\n        </div>\n    "
         }), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], CourseDetailComponent);
+    return CourseDetailComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.CourseDetailComponent = CourseDetailComponent;
+//# sourceMappingURL=course-detail.component.js.map
