@@ -29,4 +29,9 @@ export class CourseDetailComponent implements OnInit {
     goBack(): void {
         this.location.back();
     }
+
+    save(): void {
+        this.courseService.update(this.course)
+            .then(() => this.goBack());
+    }
 }

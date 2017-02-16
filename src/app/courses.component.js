@@ -30,6 +30,32 @@ var CoursesComponent = (function () {
     CoursesComponent.prototype.gotoCourse = function () {
         this.router.navigate(['./course', this.selectedCourse.id]);
     };
+    CoursesComponent.prototype.toCourse = function (course) {
+        this.router.navigate(['./course', course.id]);
+    };
+    CoursesComponent.prototype.add = function (name) {
+        var _this = this;
+        name = name.trim();
+        if (!name) {
+            return;
+        }
+        this.courseService.create(name)
+            .then(function (course) {
+            _this.courses.push(course);
+            _this.selectedCourse = null;
+        });
+    };
+    CoursesComponent.prototype.delete = function (course) {
+        var _this = this;
+        this.courseService
+            .delete(course.id)
+            .then(function () {
+            _this.courses = _this.courses.filter(function (c) { return c !== course; });
+            if (_this.selectedCourse === course) {
+                _this.selectedCourse = null;
+            }
+        });
+    };
     CoursesComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

@@ -15,6 +15,7 @@ var CourseService = (function () {
     function CourseService(http) {
         this.http = http;
         this.coursesUrl = 'api/courses';
+        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
     }
     CourseService.prototype.getCourses = function () {
         return this.http.get(this.coursesUrl)
@@ -27,8 +28,33 @@ var CourseService = (function () {
         return Promise.reject(error.message || error);
     };
     CourseService.prototype.getCourse = function (id) {
-        return this.getCourses()
-            .then(function (courses) { return courses.find(function (course) { return course.id === id; }); });
+        var url = this.coursesUrl + "/" + id;
+        return this.http.get(url)
+            .toPromise()
+            .then(function (response) { return response.json().data; })
+            .catch(this.handleError);
+    };
+    CourseService.prototype.update = function (course) {
+        var url = this.coursesUrl + "/" + course.id;
+        return this.http
+            .put(url, JSON.stringify(course), { headers: this.headers })
+            .toPromise()
+            .then(function () { return course; })
+            .catch(this.handleError);
+    };
+    CourseService.prototype.create = function (name) {
+        return this.http
+            .post(this.coursesUrl, JSON.stringify({ name: name }), { headers: this.headers })
+            .toPromise()
+            .then(function (res) { return res.json().data; })
+            .catch(this.handleError);
+    };
+    CourseService.prototype.delete = function (id) {
+        var url = this.coursesUrl + "/" + id;
+        return this.http.delete(url, { headers: this.headers })
+            .toPromise()
+            .then(function () { return null; })
+            .catch(this.handleError);
     };
     CourseService = __decorate([
         core_1.Injectable(), 

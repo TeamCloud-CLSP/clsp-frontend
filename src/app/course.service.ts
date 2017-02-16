@@ -6,7 +6,7 @@ import { Course } from './course'
 @Injectable()
 export class CourseService {
     private coursesUrl = 'api/courses';
-
+    private headers = new Headers({ 'Content-Type': 'application/json' });
     constructor(private http: Http) { }
 
     getCourses(): Promise<Course[]> {
@@ -22,7 +22,35 @@ export class CourseService {
     }
 
     getCourse(id: number): Promise<Course> {
-        return this.getCourses()
-            .then(courses => courses.find(course => course.id === id));
+        const url = `${this.coursesUrl}/${id}`;
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json().data as Course)
+            .catch(this.handleError);
+    }
+
+    update(course: Course): Promise<Course> {
+        const url = `${this.coursesUrl}/${course.id}`;
+        return this.http
+            .put(url, JSON.stringify(course), { headers: this.headers })
+            .toPromise()
+            .then(() => course)
+            .catch(this.handleError);
+    }
+
+    create(name: string): Promise<Course> {
+        return this.http
+            .post(this.coursesUrl, JSON.stringify({ name: name }), { headers: this.headers })
+            .toPromise()
+            .then(res => res.json().data)
+            .catch(this.handleError);
+    }
+
+    delete(id: number): Promise<void> {
+        const url = `${this.coursesUrl}/${id}`;
+        return this.http.delete(url, { headers: this.headers })
+            .toPromise()
+            .then(() => null)
+            .catch(this.handleError);
     }
 }

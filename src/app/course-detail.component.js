@@ -29,6 +29,11 @@ var CourseDetailComponent = (function () {
     CourseDetailComponent.prototype.goBack = function () {
         this.location.back();
     };
+    CourseDetailComponent.prototype.save = function () {
+        var _this = this;
+        this.courseService.update(this.course)
+            .then(function () { return _this.goBack(); });
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', course_1.Course)

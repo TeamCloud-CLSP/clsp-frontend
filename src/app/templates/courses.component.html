@@ -1,13 +1,37 @@
-<ul class = "courses">
-  <li *ngFor = "let course of courses"
-    [class.selected]="course === selectedCourse"
-    (click) = "onSelect(course)">
-    <span class = "badge">{{course.id}}</span> {{course.name}}
-  </li>
-</ul>
+<div>
+    <label>Course name:</label> <input #courseName />
+    <button (click)="add(courseName.value); courseName.value=''">
+      Add
+    </button>
+</div>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            Course ID
+        </th>
+        <th>
+            Course Name
+        </th>
+        <th>
+
+        </th>
+    </tr>
+    <tr *ngFor="let course of courses">
+        <td (click)="onSelect(course)">
+            <a (click)="toCourse(course)">{{course.id}}</a>
+        </td>
+        <td (click)="onSelect(course)">
+            <a (click)="toCourse(course)">{{course.name}}</a>
+        </td>
+        <td>
+            <button class="btn btn-default" (click)="delete(course); $event.stopPropagation()">Delete</button>
+        </td>
+    </tr>
+</table>
 <div *ngIf="selectedCourse">
-  <h2>
-    {{selectedCourse.name | uppercase}} is my course
-  </h2>
-  <button (click)="gotoCourse()">View Details</button>
+    <h2>
+      {{selectedCourse.name | uppercase}} is my course
+    </h2>
+    <button (click)="gotoCourse()">View Details</button>
 </div>
