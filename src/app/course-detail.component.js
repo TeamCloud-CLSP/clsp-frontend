@@ -15,10 +15,10 @@ var course_service_1 = require('./course.service');
 var course_1 = require('./course');
 require('rxjs/add/operator/switchMap');
 var CourseDetailComponent = (function () {
-    function CourseDetailComponent(courseService, route, Location) {
+    function CourseDetailComponent(courseService, route, location) {
         this.courseService = courseService;
         this.route = route;
-        this.Location = Location;
+        this.location = location;
     }
     CourseDetailComponent.prototype.ngOnInit = function () {
         var _this = this;

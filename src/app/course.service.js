@@ -9,12 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var mock_courses_1 = require('./mock-courses');
+var http_1 = require('@angular/http');
+require('rxjs/add/operator/toPromise');
 var CourseService = (function () {
-    function CourseService() {
+    function CourseService(http) {
+        this.http = http;
+        this.coursesUrl = 'api/courses';
     }
     CourseService.prototype.getCourses = function () {
-        return Promise.resolve(mock_courses_1.COURSES);
+        return this.http.get(this.coursesUrl)
+            .toPromise()
+            .then(function (response) { return response.json().data; })
+            .catch(this.handleError);
+    };
+    CourseService.prototype.handleError = function (error) {
+        console.error('An error occured', error);
+        return Promise.reject(error.message || error);
     };
     CourseService.prototype.getCourse = function (id) {
         return this.getCourses()
@@ -22,7 +32,7 @@ var CourseService = (function () {
     };
     CourseService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [http_1.Http])
     ], CourseService);
     return CourseService;
 }());

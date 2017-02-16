@@ -11,14 +11,14 @@ import 'rxjs/add/operator/switchMap';
     templateUrl: './templates/course-detail.component.html'
 })
 
-export class CourseDetailComponent implements OnInit{
+export class CourseDetailComponent implements OnInit {
     @Input() course: Course;
 
     constructor(
         private courseService: CourseService,
         private route: ActivatedRoute,
-        private Location: Location
-    ) {}
+        private location: Location
+    ) { }
 
     ngOnInit(): void {
         this.route.params
