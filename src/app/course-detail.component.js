@@ -9,20 +9,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
+var common_1 = require('@angular/common');
+var course_service_1 = require('./course.service');
 var course_1 = require('./course');
+require('rxjs/add/operator/switchMap');
 var CourseDetailComponent = (function () {
-    function CourseDetailComponent() {
+    function CourseDetailComponent(courseService, route, Location) {
+        this.courseService = courseService;
+        this.route = route;
+        this.Location = Location;
     }
+    CourseDetailComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params
+            .switchMap(function (params) { return _this.courseService.getCourse(+params['id']); })
+            .subscribe(function (course) { return _this.course = course; });
+    };
+    CourseDetailComponent.prototype.goBack = function () {
+        this.location.back();
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', course_1.Course)
     ], CourseDetailComponent.prototype, "course", void 0);
     CourseDetailComponent = __decorate([
         core_1.Component({
+            moduleId: module.id,
             selector: 'course-detail',
-            template: "\n        <div *ngIf = \"course\">\n            <h2>{{course.name}} details</h2>\n            <div><label>id : </label>{{course.id}}</div>\n            <div>\n                <label> name: </label>\n                <input [(ngModel)] = \"course.name\" placeholder = \"name\"/>\n            </div>\n        </div>\n    "
+            templateUrl: './templates/course-detail.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [course_service_1.CourseService, router_1.ActivatedRoute, common_1.Location])
     ], CourseDetailComponent);
     return CourseDetailComponent;
 }());

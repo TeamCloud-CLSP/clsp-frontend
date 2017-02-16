@@ -16,6 +16,10 @@ var CourseService = (function () {
     CourseService.prototype.getCourses = function () {
         return Promise.resolve(mock_courses_1.COURSES);
     };
+    CourseService.prototype.getCourse = function (id) {
+        return this.getCourses()
+            .then(function (courses) { return courses.find(function (course) { return course.id === id; }); });
+    };
     CourseService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])

@@ -2,18 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Course } from './course';
 import { CourseService } from './course.service';
 @Component({
+  moduleId: module.id,
   selector: 'my-courses',
-  template: `
-    <h1>{{title}}</h1>
-    <ul class = "courses">
-      <li *ngFor = "let course of courses" 
-        [class.selected]="course === selectedCourse"
-        (click) = "onSelect(course)">
-        <span class = "badge">{{course.id}}</span> {{course.name}}
-      </li>
-    </ul>
-    <course-detail [course] = "selectedCourse"></course-detail>
-    `,
+  templateUrl: './templates/courses.component.html',
     styles: [`
     .selected {
       background-color: #CFD8DC !important;
@@ -68,7 +59,7 @@ import { CourseService } from './course.service';
 
 
 
-export class CoursesComponent implements OnInit { 
+export class CoursesComponent implements OnInit {
   title = 'Course List';
   selectedCourse : Course;
   courses : Course[];
@@ -95,7 +86,3 @@ export class CoursesComponent implements OnInit {
     this.selectedCourse = course;
   }
 }
-
-
-
-

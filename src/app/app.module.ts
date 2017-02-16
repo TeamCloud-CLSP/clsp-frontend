@@ -11,25 +11,13 @@ import { AppComponent }  from './app.component';
 import { CourseDetailComponent } from './course-detail.component'
 import { DashboardComponent } from './dashboard.component'
 
+import {AppRoutingModule} from './app-routing.module'
+
 @NgModule({
   imports: [
      BrowserModule,
      FormsModule,
-     RouterModule.forRoot([
-       {
-         path: 'courses',
-         component: CoursesComponent
-       },
-       {
-         path: 'dashboard',
-         component: DashboardComponent
-       },
-       {
-         path: '',
-         redirectTo: '/dashboard',
-         pathMatch: 'full'
-       }
-     ])
+     AppRoutingModule
      ],
   declarations: [ AppComponent, CourseDetailComponent, CoursesComponent, DashboardComponent ],
   providers: [ CourseService ],
