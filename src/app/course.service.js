@@ -14,11 +14,13 @@ require('rxjs/add/operator/toPromise');
 var CourseService = (function () {
     function CourseService(http) {
         this.http = http;
-        this.coursesUrl = 'api/courses';
-        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        this.coursesUrl = 'http://localhost:8000/api/designer/courses';
+        this.headers = new http_1.Headers();
     }
     CourseService.prototype.getCourses = function () {
-        return this.http.get(this.coursesUrl)
+        this.headers.append('Content-Type', 'application/json');
+        var options = new http_1.RequestOptions({ withCredentials: true });
+        return this.http.get(this.coursesUrl, options)
             .toPromise()
             .then(function (response) { return response.json().data; })
             .catch(this.handleError);

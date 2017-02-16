@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Course } from './course'
 
 @Injectable()
 export class CourseService {
-    private coursesUrl = 'api/courses';
-    private headers = new Headers({ 'Content-Type': 'application/json' });
+    private coursesUrl = 'http://localhost:8000/api/designer/courses';
+    private headers = new Headers();
+
     constructor(private http: Http) { }
 
     getCourses(): Promise<Course[]> {
-        return this.http.get(this.coursesUrl)
+        this.headers.append('Content-Type', 'application/json');
+        let options = new RequestOptions({ withCredentials: true });
+        return this.http.get(this.coursesUrl, options)
             .toPromise()
             .then(response => response.json().data as Course[])
             .catch(this.handleError);
