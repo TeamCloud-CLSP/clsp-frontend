@@ -11,9 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
+var http_1 = require('@angular/http');
 var course_service_1 = require('./course.service');
 var courses_component_1 = require('./courses.component');
 var app_component_1 = require('./app.component');
+var navbar_component_1 = require('./navbar.component');
 var course_detail_component_1 = require('./course-detail.component');
 var dashboard_component_1 = require('./dashboard.component');
 var app_routing_module_1 = require('./app-routing.module');
@@ -25,11 +27,18 @@ var AppModule = (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
-                app_routing_module_1.AppRoutingModule
+                app_routing_module_1.AppRoutingModule,
+                http_1.HttpModule
             ],
-            declarations: [app_component_1.AppComponent, course_detail_component_1.CourseDetailComponent, courses_component_1.CoursesComponent, dashboard_component_1.DashboardComponent],
+            declarations: [
+                app_component_1.AppComponent,
+                course_detail_component_1.CourseDetailComponent,
+                courses_component_1.CoursesComponent,
+                dashboard_component_1.DashboardComponent,
+                navbar_component_1.NavbarComponent
+            ],
             providers: [course_service_1.CourseService],
-            bootstrap: [app_component_1.AppComponent]
+            bootstrap: [app_component_1.AppComponent, navbar_component_1.NavbarComponent]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);
