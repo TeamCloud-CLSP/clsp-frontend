@@ -46,8 +46,11 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# PHPStorm
+.idea/
 
 typings
 node_modules
 jspm_packages
 bower_components
+

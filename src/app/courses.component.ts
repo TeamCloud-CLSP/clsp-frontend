@@ -42,10 +42,14 @@ export class CoursesComponent implements OnInit {
     add(name: string): void {
         name = name.trim();
         if (!name) { return; }
+        console.log("Adding " + name);
         this.courseService.create(name)
             .then(course => {
                 this.courses.push(course);
                 this.selectedCourse = null;
+            })
+            .catch(e => {
+                console.log(e);
             });
     }
 

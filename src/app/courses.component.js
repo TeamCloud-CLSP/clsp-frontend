@@ -39,10 +39,14 @@ var CoursesComponent = (function () {
         if (!name) {
             return;
         }
+        console.log("Adding " + name);
         this.courseService.create(name)
             .then(function (course) {
             _this.courses.push(course);
             _this.selectedCourse = null;
+        })
+            .catch(function (e) {
+            console.log(e);
         });
     };
     CoursesComponent.prototype.delete = function (course) {
