@@ -15,7 +15,7 @@ export class ProfRegistrationsComponent implements OnInit {
     courseId: number;
     profRegistrations: ProfRegistration[];
     course: Course;
-    constructor(
+    constructor(sub
         private courseService: CourseService,
         private route: ActivatedRoute,
         private router: Router
