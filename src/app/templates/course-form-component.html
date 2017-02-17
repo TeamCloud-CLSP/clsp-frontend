@@ -1,0 +1,8 @@
+<header>
+    <h2>Add a course</h2>
+</header>
+<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <label for="name">Course name:</label>
+    <input type="text" name="name" id="name" formControlName="name">
+    <button type="submit">Add</button>
+</form>

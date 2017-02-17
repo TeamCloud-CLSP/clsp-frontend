@@ -12,6 +12,8 @@ var core_1 = require('@angular/core');
 var ProfRegistrationComponent = (function () {
     function ProfRegistrationComponent() {
     }
+    ProfRegistrationComponent.prototype.ngOnInit = function () {
+    };
     ProfRegistrationComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

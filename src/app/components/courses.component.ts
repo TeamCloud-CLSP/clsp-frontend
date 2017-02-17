@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router }   from '@angular/router';
+
 import { Course } from '../models/course';
 import { CourseService } from '../services/course.service';
-import { Router }   from '@angular/router';
+import {MockCourseService} from "../services/mock-course.service";
+
 @Component({
     moduleId: module.id,
     selector: 'my-courses',
@@ -9,15 +12,15 @@ import { Router }   from '@angular/router';
     styleUrls: ['../css/courses.component.css']
 })
 
-
-
 export class CoursesComponent implements OnInit {
     title = 'Course List';
     selectedCourse: Course;
     courses: Course[];
+    fakeCourses: Course[];
 
     constructor(
         private courseService: CourseService,
+        private mockCourseService: MockCourseService,
         private router: Router
     ) { }
 
@@ -27,6 +30,7 @@ export class CoursesComponent implements OnInit {
 
     ngOnInit(): void {
         this.getCourses();
+        this.fakeCourses = this.mockCourseService.get();
     }
     onSelect(course: Course): void {
         this.selectedCourse = course;
@@ -60,5 +64,8 @@ export class CoursesComponent implements OnInit {
                 this.courses = this.courses.filter(c => c !== course);
                 if (this.selectedCourse === course) { this.selectedCourse = null }
             });
+    }
+    mockDelete(course: Course) {
+        this.mockCourseService.delete(course);
     }
 }

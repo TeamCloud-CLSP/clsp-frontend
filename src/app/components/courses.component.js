@@ -9,11 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var course_service_1 = require('../services/course.service');
 var router_1 = require('@angular/router');
+var course_service_1 = require('../services/course.service');
+var mock_course_service_1 = require("../services/mock-course.service");
 var CoursesComponent = (function () {
-    function CoursesComponent(courseService, router) {
+    function CoursesComponent(courseService, mockCourseService, router) {
         this.courseService = courseService;
+        this.mockCourseService = mockCourseService;
         this.router = router;
         this.title = 'Course List';
     }
@@ -23,6 +25,7 @@ var CoursesComponent = (function () {
     };
     CoursesComponent.prototype.ngOnInit = function () {
         this.getCourses();
+        this.fakeCourses = this.mockCourseService.get();
     };
     CoursesComponent.prototype.onSelect = function (course) {
         this.selectedCourse = course;
@@ -60,6 +63,9 @@ var CoursesComponent = (function () {
             }
         });
     };
+    CoursesComponent.prototype.mockDelete = function (course) {
+        this.mockCourseService.delete(course);
+    };
     CoursesComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -67,7 +73,7 @@ var CoursesComponent = (function () {
             templateUrl: '../templates/courses.component.html',
             styleUrls: ['../css/courses.component.css']
         }), 
-        __metadata('design:paramtypes', [course_service_1.CourseService, router_1.Router])
+        __metadata('design:paramtypes', [course_service_1.CourseService, mock_course_service_1.MockCourseService, router_1.Router])
     ], CoursesComponent);
     return CoursesComponent;
 }());

@@ -9,5 +9,6 @@ import { Location }                 from '@angular/common';
 })
 
 export class ProfRegistrationComponent implements OnInit {
-
+    ngOnInit() {
+    }
 }

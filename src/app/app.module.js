@@ -16,7 +16,9 @@ var http_1 = require('@angular/http');
 var angular_in_memory_web_api_1 = require('angular-in-memory-web-api');
 var in_memory_data_service_1 = require('./services/in-memory-data.service');
 var course_service_1 = require('./services/course.service');
+var mock_course_service_1 = require("./services/mock-course.service");
 var courses_component_1 = require('./components/courses.component');
+var course_form_component_1 = require('./components/course-form-component');
 var app_component_1 = require('./app.component');
 var navbar_component_1 = require('./components/navbar.component');
 var course_detail_component_1 = require('./components/course-detail.component');
@@ -29,7 +31,7 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [
                 platform_browser_1.BrowserModule,
-                forms_1.FormsModule,
+                forms_1.ReactiveFormsModule,
                 app_routing_module_1.AppRoutingModule,
                 http_1.HttpModule,
                 angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(in_memory_data_service_1.InMemoryDataService, { passThruUnknownUrl: true })
@@ -38,10 +40,14 @@ var AppModule = (function () {
                 app_component_1.AppComponent,
                 course_detail_component_1.CourseDetailComponent,
                 courses_component_1.CoursesComponent,
+                course_form_component_1.CourseFormComponent,
                 dashboard_component_1.DashboardComponent,
                 navbar_component_1.NavbarComponent
             ],
-            providers: [course_service_1.CourseService],
+            providers: [
+                course_service_1.CourseService,
+                mock_course_service_1.MockCourseService
+            ],
             bootstrap: [app_component_1.AppComponent, navbar_component_1.NavbarComponent]
         }), 
         __metadata('design:paramtypes', [])

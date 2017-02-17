@@ -1,0 +1,32 @@
+import {Course} from "../models/course";
+export class MockCourseService {
+    courses = [
+        { id: 11, name: 'JAPN 1001' },
+        { id: 12, name: 'JAPN 1002' },
+        { id: 13, name: 'JAPN 2001' },
+        { id: 14, name: 'CHIN 1001' },
+        { id: 15, name: 'CHIN 1002' },
+        { id: 16, name: 'CHIN 2001' },
+        { id: 17, name: 'RUSS 1001' },
+        { id: 18, name: 'RUSS 1002' },
+        { id: 19, name: 'RUSS 2001' },
+        { id: 20, name: 'RUSS 2002' }
+    ];
+    id = 21;
+
+    get() {
+        return this.courses;
+    }
+
+    add(course: Course) {
+        course.id = this.id++;
+        this.courses.push(course);
+    }
+
+    delete(course: Course) {
+        let index = this.courses.indexOf(course);
+        if (index >= 0) {
+            this.courses.splice(index, 1);
+        }
+    }
+}
