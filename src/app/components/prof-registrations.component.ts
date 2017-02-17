@@ -51,4 +51,11 @@ export class ProfRegistrationsComponent implements OnInit {
             })
     }
 
+    deleteReg(reg: ProfRegistration): void {
+        this.courseService.deleteProfRegistration(reg.id)
+            .then(() => {
+                this.profRegistrations = this.profRegistrations.filter(c => c !== reg);
+            });
+    }
+
 }

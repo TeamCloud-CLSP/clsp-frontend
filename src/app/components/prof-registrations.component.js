@@ -47,6 +47,13 @@ var ProfRegistrationsComponent = (function () {
             _this.getProfRegistrationsByCourse();
         });
     };
+    ProfRegistrationsComponent.prototype.deleteReg = function (reg) {
+        var _this = this;
+        this.courseService.deleteProfRegistration(reg.id)
+            .then(function () {
+            _this.profRegistrations = _this.profRegistrations.filter(function (c) { return c !== reg; });
+        });
+    };
     ProfRegistrationsComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

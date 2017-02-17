@@ -5,6 +5,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Registration for {{registration.professor_username != null ? registration.professor_username : "Unassigned"}}</h3>
+                <span (click)="deleteReg(registration)" class="pull-right clickable glyphicon glyphicon-remove" data-effect="fadeOut"></span>
             </div>
             <div class="panel-body container">
                 <div class="row">

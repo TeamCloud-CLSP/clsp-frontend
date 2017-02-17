@@ -50,7 +50,7 @@ export class CourseService {
     }
 
     delete(id: number): Promise<void> {
-        const url = `${this.designerUrl}/${id}`;
+        const url = `${this.designerUrl}/course/${id}`;
         return this.http.delete(url, this.options)
             .toPromise()
             .then(() => null)
@@ -77,6 +77,14 @@ export class CourseService {
         const url = `${this.designerUrl}/registrations/professor`;
         return this.http.post(url,
             JSON.stringify({ date_start: reg.date_start, date_end: reg.date_end, course_id: reg.course_id }), this.options)
+            .toPromise()
+            .then(() => null)
+            .catch(this.handleError);
+    }
+
+    deleteProfRegistration(id: number): Promise<void> {
+        const url = `${this.designerUrl}/registrations/professor/${id}`;
+        return this.http.delete(url, this.options)
             .toPromise()
             .then(() => null)
             .catch(this.handleError);
