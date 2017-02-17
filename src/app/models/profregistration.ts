@@ -1,9 +1,9 @@
 export class ProfRegistration {
     id: number;
-    date_created: string;
-    date_deleted: string;
-    date_start: string;
-    date_end: string;
+    date_created: number;
+    date_deleted: number;
+    date_start: number;
+    date_end: number;
     signup_code: string;
     professor_id: number;
     professor_username: string;

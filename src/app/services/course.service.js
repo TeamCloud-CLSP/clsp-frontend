@@ -19,7 +19,7 @@ var CourseService = (function () {
         this.options = new http_1.RequestOptions({ withCredentials: true, headers: this.headers });
     }
     CourseService.prototype.getCourses = function () {
-        return this.http.get(this.designerUrl + "/courses", { withCredentials: true })
+        return this.http.get(this.designerUrl + "/courses", this.options)
             .toPromise()
             .then(function (response) { return response.json().data; })
             .catch(this.handleError);
@@ -30,32 +30,45 @@ var CourseService = (function () {
     };
     CourseService.prototype.getCourse = function (id) {
         var url = this.designerUrl + "/course/" + id;
-        return this.http.get(url, { withCredentials: true })
+        return this.http.get(url, this.options)
             .toPromise()
             .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     CourseService.prototype.update = function (course) {
         var url = this.designerUrl + "/course/" + course.id;
-        var options = new http_1.RequestOptions({ headers: this.headers, withCredentials: true });
         return this.http
-            .post(url, JSON.stringify({ name: course.name }), options)
+            .post(url, JSON.stringify({ name: course.name }), this.options)
             .toPromise()
             .then(function () { return course; })
             .catch(this.handleError);
     };
     CourseService.prototype.create = function (name) {
         return this.http
-            .post(this.designerUrl, JSON.stringify({ name: name }), { headers: this.headers })
+            .post(this.designerUrl, JSON.stringify({ name: name }), this.options)
             .toPromise()
             .then(function (res) { return res.json().data; })
             .catch(this.handleError);
     };
     CourseService.prototype.delete = function (id) {
         var url = this.designerUrl + "/" + id;
-        return this.http.delete(url, { headers: this.headers })
+        return this.http.delete(url, this.options)
             .toPromise()
             .then(function () { return null; })
+            .catch(this.handleError);
+    };
+    CourseService.prototype.getProfRegistrations = function () {
+        var url = this.designerUrl + "/registrations/professor";
+        return this.http.get(url, this.options)
+            .toPromise()
+            .then(function (response) { return response.json().data; })
+            .catch(this.handleError);
+    };
+    CourseService.prototype.getProfRegistrationsByCourse = function (id) {
+        var url = this.designerUrl + "/course/" + id + "/registrations/professor";
+        return this.http.get(url, this.options)
+            .toPromise()
+            .then(function (response) { return response.json().data; })
             .catch(this.handleError);
     };
     CourseService = __decorate([

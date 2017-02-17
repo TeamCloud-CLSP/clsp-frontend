@@ -7,15 +7,20 @@ import { HttpModule } from '@angular/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './services/in-memory-data.service';
 
+// Services
 import { CourseService } from './services/course.service'
 import {MockCourseService} from "./services/mock-course.service";
+
+// Components
 import { CoursesComponent } from './components/courses.component'
 import { CourseFormComponent } from './components/course-form-component'
 import { AppComponent }  from './app.component';
 import { NavbarComponent } from './components/navbar.component'
 import { CourseDetailComponent } from './components/course-detail.component'
 import { DashboardComponent } from './components/dashboard.component'
+import {ProfRegistrationsComponent} from './components/prof-registrations.component'
 
+//Routing
 import {AppRoutingModule} from './app-routing.module'
 
 @NgModule({
@@ -32,7 +37,8 @@ import {AppRoutingModule} from './app-routing.module'
         CoursesComponent,
         CourseFormComponent,
         DashboardComponent,
-        NavbarComponent
+        NavbarComponent,
+        ProfRegistrationsComponent
     ],
     providers: [
         CourseService,

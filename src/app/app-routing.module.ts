@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard.component'
 import { CoursesComponent } from './components/courses.component'
 import { CourseDetailComponent } from './components/course-detail.component'
-
+import { ProfRegistrationsComponent } from './components/prof-registrations.component'
 const routes: Routes = [
     {
         path: 'courses',
@@ -22,6 +22,10 @@ const routes: Routes = [
     {
         path: 'course/:id',
         component: CourseDetailComponent
+    },
+    {
+        path: 'profregistrationlist/:id',
+        component: ProfRegistrationsComponent
     },
 ];
 

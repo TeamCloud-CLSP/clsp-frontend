@@ -1,0 +1,53 @@
+<div *ngIf="course">
+    <h1>Professor Registrations for {{course.name}}</h1>
+    <div *ngFor="let registration of profRegistrations">
+        <br />
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Registration for {{registration.professor_username}}</h3>
+            </div>
+            <div class="panel-body container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <b>Date Created</b>
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            {{registration.date_created * 1000 | date}}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <b>Date Deleted</b>
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            {{registration.date_deleted != null ? (registration.date_deleted * 1000 | date) : "N/A"}}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <b>Start Date</b>
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            {{registration.date_start * 1000 | date}}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <b>End Date</b>
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            {{registration.date_end * 1000 | date}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
