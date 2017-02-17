@@ -14,13 +14,13 @@ var forms_1 = require('@angular/forms');
 var http_1 = require('@angular/http');
 // Imports for loading & configuring the in-memory web api
 var angular_in_memory_web_api_1 = require('angular-in-memory-web-api');
-var in_memory_data_service_1 = require('./in-memory-data.service');
-var course_service_1 = require('./course.service');
-var courses_component_1 = require('./courses.component');
+var in_memory_data_service_1 = require('./services/in-memory-data.service');
+var course_service_1 = require('./services/course.service');
+var courses_component_1 = require('./components/courses.component');
 var app_component_1 = require('./app.component');
-var navbar_component_1 = require('./navbar.component');
-var course_detail_component_1 = require('./course-detail.component');
-var dashboard_component_1 = require('./dashboard.component');
+var navbar_component_1 = require('./components/navbar.component');
+var course_detail_component_1 = require('./components/course-detail.component');
+var dashboard_component_1 = require('./components/dashboard.component');
 var app_routing_module_1 = require('./app-routing.module');
 var AppModule = (function () {
     function AppModule() {

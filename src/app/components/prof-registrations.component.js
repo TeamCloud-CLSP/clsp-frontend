@@ -9,18 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var NavbarComponent = (function () {
-    function NavbarComponent() {
+var ProfRegistrationComponent = (function () {
+    function ProfRegistrationComponent() {
     }
-    NavbarComponent = __decorate([
+    ProfRegistrationComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'site-navbar',
-            templateUrl: './templates/navbar.component.html'
+            selector: 'prof-registrations',
+            templateUrl: '../templates/prof-registrations.component.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], NavbarComponent);
-    return NavbarComponent;
+    ], ProfRegistrationComponent);
+    return ProfRegistrationComponent;
 }());
-exports.NavbarComponent = NavbarComponent;
-//# sourceMappingURL=navbar.component.js.map
+exports.ProfRegistrationComponent = ProfRegistrationComponent;
+//# sourceMappingURL=prof-registrations.component.js.map

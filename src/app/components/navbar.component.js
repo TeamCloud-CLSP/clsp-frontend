@@ -9,25 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var course_service_1 = require('./course.service');
-var DashboardComponent = (function () {
-    function DashboardComponent(courseService) {
-        this.courseService = courseService;
-        this.courses = [];
+var NavbarComponent = (function () {
+    function NavbarComponent() {
     }
-    DashboardComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.courseService.getCourses().then(function (courses) { return _this.courses = courses.slice(0, 2); });
-    };
-    DashboardComponent = __decorate([
+    NavbarComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'my-dashboard',
-            templateUrl: './templates/dashboard.component.html'
+            selector: 'site-navbar',
+            templateUrl: '../templates/navbar.component.html'
         }), 
-        __metadata('design:paramtypes', [course_service_1.CourseService])
-    ], DashboardComponent);
-    return DashboardComponent;
+        __metadata('design:paramtypes', [])
+    ], NavbarComponent);
+    return NavbarComponent;
 }());
-exports.DashboardComponent = DashboardComponent;
-//# sourceMappingURL=dashboard.component.js.map
+exports.NavbarComponent = NavbarComponent;
+//# sourceMappingURL=navbar.component.js.map

@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var common_1 = require('@angular/common');
-var course_service_1 = require('./course.service');
-var course_1 = require('./course');
+var course_service_1 = require('../services/course.service');
+var course_1 = require('../models/course');
 require('rxjs/add/operator/switchMap');
 var CourseDetailComponent = (function () {
     function CourseDetailComponent(courseService, route, location) {
@@ -42,7 +42,7 @@ var CourseDetailComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'course-detail',
-            templateUrl: './templates/course-detail.component.html'
+            templateUrl: '../templates/course-detail.component.html'
         }), 
         __metadata('design:paramtypes', [course_service_1.CourseService, router_1.ActivatedRoute, common_1.Location])
     ], CourseDetailComponent);

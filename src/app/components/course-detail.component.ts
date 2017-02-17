@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
-import { CourseService } from './course.service';
-import { Course } from './course';
+import { CourseService } from '../services/course.service';
+import { Course } from '../models/course';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
     moduleId: module.id,
     selector: 'course-detail',
-    templateUrl: './templates/course-detail.component.html'
+    templateUrl: '../templates/course-detail.component.html'
 })
 
 export class CourseDetailComponent implements OnInit {

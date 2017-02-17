@@ -14,13 +14,12 @@ require('rxjs/add/operator/toPromise');
 var CourseService = (function () {
     function CourseService(http) {
         this.http = http;
-        this.coursesUrl = 'http://localhost:8000/api/designer/courses';
-        this.headers = new http_1.Headers();
+        this.designerUrl = 'http://localhost:8000/api/designer';
+        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        this.options = new http_1.RequestOptions({ withCredentials: true, headers: this.headers });
     }
     CourseService.prototype.getCourses = function () {
-        this.headers.append('Content-Type', 'application/json');
-        var options = new http_1.RequestOptions({ withCredentials: true });
-        return this.http.get(this.coursesUrl, options)
+        return this.http.get(this.designerUrl + "/courses", { withCredentials: true })
             .toPromise()
             .then(function (response) { return response.json().data; })
             .catch(this.handleError);
@@ -30,29 +29,30 @@ var CourseService = (function () {
         return Promise.reject(error.message || error);
     };
     CourseService.prototype.getCourse = function (id) {
-        var url = this.coursesUrl + "/" + id;
-        return this.http.get(url)
+        var url = this.designerUrl + "/course/" + id;
+        return this.http.get(url, { withCredentials: true })
             .toPromise()
-            .then(function (response) { return response.json().data; })
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     CourseService.prototype.update = function (course) {
-        var url = this.coursesUrl + "/" + course.id;
+        var url = this.designerUrl + "/course/" + course.id;
+        var options = new http_1.RequestOptions({ headers: this.headers, withCredentials: true });
         return this.http
-            .put(url, JSON.stringify(course), { headers: this.headers })
+            .post(url, JSON.stringify({ name: course.name }), options)
             .toPromise()
             .then(function () { return course; })
             .catch(this.handleError);
     };
     CourseService.prototype.create = function (name) {
         return this.http
-            .post(this.coursesUrl, JSON.stringify({ name: name }), { headers: this.headers })
+            .post(this.designerUrl, JSON.stringify({ name: name }), { headers: this.headers })
             .toPromise()
             .then(function (res) { return res.json().data; })
             .catch(this.handleError);
     };
     CourseService.prototype.delete = function (id) {
-        var url = this.coursesUrl + "/" + id;
+        var url = this.designerUrl + "/" + id;
         return this.http.delete(url, { headers: this.headers })
             .toPromise()
             .then(function () { return null; })

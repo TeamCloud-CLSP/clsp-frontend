@@ -5,14 +5,14 @@ import { HttpModule } from '@angular/http';
 
 // Imports for loading & configuring the in-memory web api
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './in-memory-data.service';
+import { InMemoryDataService }  from './services/in-memory-data.service';
 
-import { CourseService } from './course.service'
-import { CoursesComponent } from './courses.component'
+import { CourseService } from './services/course.service'
+import { CoursesComponent } from './components/courses.component'
 import { AppComponent }  from './app.component';
-import { NavbarComponent } from './navbar.component'
-import { CourseDetailComponent } from './course-detail.component'
-import { DashboardComponent } from './dashboard.component'
+import { NavbarComponent } from './components/navbar.component'
+import { CourseDetailComponent } from './components/course-detail.component'
+import { DashboardComponent } from './components/dashboard.component'
 
 import {AppRoutingModule} from './app-routing.module'
 

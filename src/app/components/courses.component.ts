@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Course } from './course';
-import { CourseService } from './course.service';
+import { Course } from '../models/course';
+import { CourseService } from '../services/course.service';
 import { Router }   from '@angular/router';
 @Component({
     moduleId: module.id,
     selector: 'my-courses',
-    templateUrl: './templates/courses.component.html',
-    styleUrls: ['./css/courses.component.css']
+    templateUrl: '../templates/courses.component.html',
+    styleUrls: ['../css/courses.component.css']
 })
 
 

@@ -10,9 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var dashboard_component_1 = require('./dashboard.component');
-var courses_component_1 = require('./courses.component');
-var course_detail_component_1 = require('./course-detail.component');
+var dashboard_component_1 = require('./components/dashboard.component');
+var courses_component_1 = require('./components/courses.component');
+var course_detail_component_1 = require('./components/course-detail.component');
 var routes = [
     {
         path: 'courses',

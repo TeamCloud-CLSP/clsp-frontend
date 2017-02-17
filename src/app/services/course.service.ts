@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { Course } from './course'
+import { Course } from '../models/course'
 
 @Injectable()
 export class CourseService {
-    private coursesUrl = 'http://localhost:8000/api/designer/courses';
-    private headers = new Headers();
-
+    private designerUrl = 'http://localhost:8000/api/designer';
+    private headers = new Headers({ 'Content-Type': 'application/json' });
+    private options = new RequestOptions({ withCredentials: true, headers: this.headers })
     constructor(private http: Http) { }
 
     getCourses(): Promise<Course[]> {
-        this.headers.append('Content-Type', 'application/json');
-        let options = new RequestOptions({ withCredentials: true });
-        return this.http.get(this.coursesUrl, options)
+        return this.http.get(this.designerUrl + "/courses", { withCredentials: true })
             .toPromise()
             .then(response => response.json().data as Course[])
             .catch(this.handleError);
@@ -25,17 +23,18 @@ export class CourseService {
     }
 
     getCourse(id: number): Promise<Course> {
-        const url = `${this.coursesUrl}/${id}`;
-        return this.http.get(url)
+        const url = `${this.designerUrl}/course/${id}`;
+        return this.http.get(url, { withCredentials: true })
             .toPromise()
-            .then(response => response.json().data as Course)
+            .then(response => response.json() as Course)
             .catch(this.handleError);
     }
 
     update(course: Course): Promise<Course> {
-        const url = `${this.coursesUrl}/${course.id}`;
+        const url = `${this.designerUrl}/course/${course.id}`;
+        let options = new RequestOptions({ headers: this.headers, withCredentials: true })
         return this.http
-            .put(url, JSON.stringify(course), { headers: this.headers })
+            .post(url, JSON.stringify({ name: course.name }), options)
             .toPromise()
             .then(() => course)
             .catch(this.handleError);
@@ -43,14 +42,14 @@ export class CourseService {
 
     create(name: string): Promise<Course> {
         return this.http
-            .post(this.coursesUrl, JSON.stringify({ name: name }), { headers: this.headers })
+            .post(this.designerUrl, JSON.stringify({ name: name }), { headers: this.headers })
             .toPromise()
             .then(res => res.json().data)
             .catch(this.handleError);
     }
 
     delete(id: number): Promise<void> {
-        const url = `${this.coursesUrl}/${id}`;
+        const url = `${this.designerUrl}/${id}`;
         return this.http.delete(url, { headers: this.headers })
             .toPromise()
             .then(() => null)
