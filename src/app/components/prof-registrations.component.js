@@ -9,18 +9,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var ProfRegistrationComponent = (function () {
-    function ProfRegistrationComponent() {
+var router_1 = require('@angular/router');
+var course_service_1 = require('../services/course.service');
+var router_2 = require('@angular/router');
+var ProfRegistrationsComponent = (function () {
+    function ProfRegistrationsComponent(courseService, route, router) {
+        this.courseService = courseService;
+        this.route = route;
+        this.router = router;
     }
-    ProfRegistrationComponent = __decorate([
+    ProfRegistrationsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params
+            .switchMap(function (params) { return _this.courseService.getProfRegistrationsByCourse(+params['id']); })
+            .subscribe(function (registrations) { return _this.profRegistrations = registrations; });
+        this.route.params
+            .switchMap(function (params) { return _this.courseService.getCourse(+params['id']); })
+            .subscribe(function (course) { return _this.course = course; });
+    };
+    ProfRegistrationsComponent.prototype.getProfRegistrationsByCourse = function () {
+        var _this = this;
+        this.courseService.getProfRegistrationsByCourse(this.courseId)
+            .then(function (registrations) { return _this.profRegistrations = registrations; });
+    };
+    ProfRegistrationsComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'prof-registrations',
             templateUrl: '../templates/prof-registrations.component.html'
         }), 
-        __metadata('design:paramtypes', [])
-    ], ProfRegistrationComponent);
-    return ProfRegistrationComponent;
+        __metadata('design:paramtypes', [course_service_1.CourseService, router_1.ActivatedRoute, router_2.Router])
+    ], ProfRegistrationsComponent);
+    return ProfRegistrationsComponent;
 }());
-exports.ProfRegistrationComponent = ProfRegistrationComponent;
+exports.ProfRegistrationsComponent = ProfRegistrationsComponent;
 //# sourceMappingURL=prof-registrations.component.js.map

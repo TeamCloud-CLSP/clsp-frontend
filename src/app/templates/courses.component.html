@@ -17,6 +17,9 @@
         <th>
 
         </th>
+        <th>
+
+        </th>
     </tr>
     <tr *ngFor="let course of courses">
         <td (click)="onSelect(course)">
@@ -27,6 +30,9 @@
         </td>
         <td>
             <button class="btn btn-default" (click)="delete(course); $event.stopPropagation()">Delete</button>
+        </td>
+        <td>
+            <button class="btn btn-default" (click)="toPRList(course)">View Registrations</button>
         </td>
     </tr>
 </table>

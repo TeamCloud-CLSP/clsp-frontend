@@ -13,6 +13,7 @@ var router_1 = require('@angular/router');
 var dashboard_component_1 = require('./components/dashboard.component');
 var courses_component_1 = require('./components/courses.component');
 var course_detail_component_1 = require('./components/course-detail.component');
+var prof_registrations_component_1 = require('./components/prof-registrations.component');
 var routes = [
     {
         path: 'courses',
@@ -30,6 +31,10 @@ var routes = [
     {
         path: 'course/:id',
         component: course_detail_component_1.CourseDetailComponent
+    },
+    {
+        path: 'profregistrationlist/:id',
+        component: prof_registrations_component_1.ProfRegistrationsComponent
     },
 ];
 var AppRoutingModule = (function () {

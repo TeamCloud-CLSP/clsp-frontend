@@ -39,6 +39,10 @@ export class CoursesComponent implements OnInit {
         this.router.navigate(['./course', course.id]);
     }
 
+    toPRList(course: Course): void {
+        this.router.navigate(['./profregistrationlist', course.id]);
+    }
+
     add(name: string): void {
         name = name.trim();
         if (!name) { return; }

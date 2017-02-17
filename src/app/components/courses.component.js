@@ -33,6 +33,9 @@ var CoursesComponent = (function () {
     CoursesComponent.prototype.toCourse = function (course) {
         this.router.navigate(['./course', course.id]);
     };
+    CoursesComponent.prototype.toPRList = function (course) {
+        this.router.navigate(['./profregistrationlist', course.id]);
+    };
     CoursesComponent.prototype.add = function (name) {
         var _this = this;
         name = name.trim();
