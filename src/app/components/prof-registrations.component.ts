@@ -14,6 +14,7 @@ import { Course } from '../models/course';
 export class ProfRegistrationsComponent implements OnInit {
     courseId: number;
     profRegistrations: ProfRegistration[];
+    newRegistration: ProfRegistration;
     course: Course;
     constructor(sub
         private courseService: CourseService,
@@ -31,8 +32,23 @@ export class ProfRegistrationsComponent implements OnInit {
     }
 
     getProfRegistrationsByCourse(): void {
-        this.courseService.getProfRegistrationsByCourse(this.courseId)
+        this.courseService.getProfRegistrationsByCourse(this.course.id)
             .then(registrations => this.profRegistrations = registrations);
+    }
+
+    newCode(): void {
+        this.newRegistration = new ProfRegistration();
+    }
+
+    onSubmit(): void {
+        this.newRegistration.date_start = new Date(this.newRegistration.date_start).getTime() / 1000;
+        this.newRegistration.date_end = new Date(this.newRegistration.date_end).getTime() / 1000;
+        this.newRegistration.course_id = +this.course.id;
+        this.courseService.createProfessorRegistration(this.newRegistration)
+            .then(() => {
+                this.newRegistration = null;
+                this.getProfRegistrationsByCourse();
+            })
     }
 
 }

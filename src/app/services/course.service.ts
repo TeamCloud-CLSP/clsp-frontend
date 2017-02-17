@@ -41,10 +41,11 @@ export class CourseService {
     }
 
     create(name: string): Promise<Course> {
+        const url = `${this.designerUrl}/course`
         return this.http
-            .post(this.designerUrl, JSON.stringify({ name: name }), this.options)
+            .post(url, JSON.stringify({ name: name }), this.options)
             .toPromise()
-            .then(res => res.json().data)
+            .then(response => response.json() as Course)
             .catch(this.handleError);
     }
 
@@ -71,4 +72,15 @@ export class CourseService {
             .then(response => response.json().data as ProfRegistration[])
             .catch(this.handleError);
     }
+
+    createProfessorRegistration(reg: ProfRegistration): Promise<void> {
+        const url = `${this.designerUrl}/registrations/professor`;
+        return this.http.post(url,
+            JSON.stringify({ date_start: reg.date_start, date_end: reg.date_end, course_id: reg.course_id }), this.options)
+            .toPromise()
+            .then(() => null)
+            .catch(this.handleError);
+    }
+
+
 }

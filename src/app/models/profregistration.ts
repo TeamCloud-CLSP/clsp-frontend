@@ -9,4 +9,8 @@ export class ProfRegistration {
     professor_username: string;
     course_id: number;
     course_name: number;
+
+    constructor() {
+
+    }
 }
