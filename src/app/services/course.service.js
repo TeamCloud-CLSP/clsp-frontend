@@ -44,10 +44,11 @@ var CourseService = (function () {
             .catch(this.handleError);
     };
     CourseService.prototype.create = function (name) {
+        var url = this.designerUrl + "/course";
         return this.http
-            .post(this.designerUrl, JSON.stringify({ name: name }), this.options)
+            .post(url, JSON.stringify({ name: name }), this.options)
             .toPromise()
-            .then(function (res) { return res.json().data; })
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     CourseService.prototype.delete = function (id) {
@@ -69,6 +70,13 @@ var CourseService = (function () {
         return this.http.get(url, this.options)
             .toPromise()
             .then(function (response) { return response.json().data; })
+            .catch(this.handleError);
+    };
+    CourseService.prototype.createProfessorRegistration = function (reg) {
+        var url = this.designerUrl + "/registrations/professor";
+        return this.http.post(url, JSON.stringify({ date_start: reg.date_start, date_end: reg.date_end, course_id: reg.course_id }), this.options)
+            .toPromise()
+            .then(function () { return null; })
             .catch(this.handleError);
     };
     CourseService = __decorate([

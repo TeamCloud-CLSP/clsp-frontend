@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
+var profregistration_1 = require('../models/profregistration');
 var course_service_1 = require('../services/course.service');
 var router_2 = require('@angular/router');
 var ProfRegistrationsComponent = (function () {
@@ -29,8 +30,22 @@ var ProfRegistrationsComponent = (function () {
     };
     ProfRegistrationsComponent.prototype.getProfRegistrationsByCourse = function () {
         var _this = this;
-        this.courseService.getProfRegistrationsByCourse(this.courseId)
+        this.courseService.getProfRegistrationsByCourse(this.course.id)
             .then(function (registrations) { return _this.profRegistrations = registrations; });
+    };
+    ProfRegistrationsComponent.prototype.newCode = function () {
+        this.newRegistration = new profregistration_1.ProfRegistration();
+    };
+    ProfRegistrationsComponent.prototype.onSubmit = function () {
+        var _this = this;
+        this.newRegistration.date_start = new Date(this.newRegistration.date_start).getTime() / 1000;
+        this.newRegistration.date_end = new Date(this.newRegistration.date_end).getTime() / 1000;
+        this.newRegistration.course_id = +this.course.id;
+        this.courseService.createProfessorRegistration(this.newRegistration)
+            .then(function () {
+            _this.newRegistration = null;
+            _this.getProfRegistrationsByCourse();
+        });
     };
     ProfRegistrationsComponent = __decorate([
         core_1.Component({
