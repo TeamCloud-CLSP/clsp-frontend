@@ -1,4 +1,4 @@
-<div *ngIf="course">
+<div *ngIf="course" class="row">
     <div>
         <h2>{{course.name}} details</h2>
         <div><label>id : </label>{{course.id}}</div>
@@ -10,4 +10,14 @@
         <button (click)="save()">Save</button>
         <!-- <prof-registrations [courseId]="course.id"></prof-registrations> -->
     </div>
+</div>
+<br />
+<div *ngIf="course && !edited" class="row">
+    <label> Media Link: </label>
+    <input [(ngModel)]="media" placeholder="" />
+    <button (click)="addMedia()">Add</button>
+</div>
+<div *ngIf="edited">
+    <iframe width="420" height="315" [src]='getSafeURL()'>
+    </iframe>
 </div>
