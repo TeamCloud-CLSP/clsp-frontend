@@ -9,6 +9,7 @@ import { InMemoryDataService }  from './services/in-memory-data.service';
 
 // Services
 import { CourseService } from './services/course.service'
+import { AdminService } from './services/admin.service'
 
 // Components
 import { CoursesComponent } from './components/courses.component'
@@ -17,6 +18,7 @@ import { NavbarComponent } from './components/navbar.component'
 import { CourseDetailComponent } from './components/course-detail.component'
 import { DashboardComponent } from './components/dashboard.component'
 import {ProfRegistrationsComponent} from './components/prof-registrations.component'
+import { AdminDashboardComponent } from './components/admin-dashboard.component'
 
 //Routing
 import {AppRoutingModule} from './app-routing.module'
@@ -35,9 +37,10 @@ import {AppRoutingModule} from './app-routing.module'
         CoursesComponent,
         DashboardComponent,
         NavbarComponent,
-        ProfRegistrationsComponent
+        ProfRegistrationsComponent,
+        AdminDashboardComponent
     ],
-    providers: [CourseService],
+    providers: [CourseService, AdminService],
     bootstrap: [AppComponent, NavbarComponent]
 })
 export class AppModule { }

@@ -17,6 +17,7 @@ var angular_in_memory_web_api_1 = require('angular-in-memory-web-api');
 var in_memory_data_service_1 = require('./services/in-memory-data.service');
 // Services
 var course_service_1 = require('./services/course.service');
+var admin_service_1 = require('./services/admin.service');
 // Components
 var courses_component_1 = require('./components/courses.component');
 var app_component_1 = require('./app.component');
@@ -24,6 +25,7 @@ var navbar_component_1 = require('./components/navbar.component');
 var course_detail_component_1 = require('./components/course-detail.component');
 var dashboard_component_1 = require('./components/dashboard.component');
 var prof_registrations_component_1 = require('./components/prof-registrations.component');
+var admin_dashboard_component_1 = require('./components/admin-dashboard.component');
 //Routing
 var app_routing_module_1 = require('./app-routing.module');
 var AppModule = (function () {
@@ -44,9 +46,10 @@ var AppModule = (function () {
                 courses_component_1.CoursesComponent,
                 dashboard_component_1.DashboardComponent,
                 navbar_component_1.NavbarComponent,
-                prof_registrations_component_1.ProfRegistrationsComponent
+                prof_registrations_component_1.ProfRegistrationsComponent,
+                admin_dashboard_component_1.AdminDashboardComponent
             ],
-            providers: [course_service_1.CourseService],
+            providers: [course_service_1.CourseService, admin_service_1.AdminService],
             bootstrap: [app_component_1.AppComponent, navbar_component_1.NavbarComponent]
         }), 
         __metadata('design:paramtypes', [])

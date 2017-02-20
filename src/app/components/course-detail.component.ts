@@ -49,4 +49,9 @@ export class CourseDetailComponent implements OnInit {
     getSafeURL() {
         return this.sanitizer.bypassSecurityTrustResourceUrl(this.media);
     }
+
+    removeMedia(): void {
+        this.media = null;
+        this.edited = false;
+    }
 }

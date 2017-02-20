@@ -5,6 +5,7 @@ import { DashboardComponent } from './components/dashboard.component'
 import { CoursesComponent } from './components/courses.component'
 import { CourseDetailComponent } from './components/course-detail.component'
 import { ProfRegistrationsComponent } from './components/prof-registrations.component'
+import { AdminDashboardComponent } from './components/admin-dashboard.component'
 const routes: Routes = [
     {
         path: 'courses',
@@ -27,6 +28,10 @@ const routes: Routes = [
         path: 'profregistrationlist/:id',
         component: ProfRegistrationsComponent
     },
+    {
+        path: 'admindashboard',
+        component: AdminDashboardComponent
+    }
 ];
 
 @NgModule({

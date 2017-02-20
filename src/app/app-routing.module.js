@@ -14,6 +14,7 @@ var dashboard_component_1 = require('./components/dashboard.component');
 var courses_component_1 = require('./components/courses.component');
 var course_detail_component_1 = require('./components/course-detail.component');
 var prof_registrations_component_1 = require('./components/prof-registrations.component');
+var admin_dashboard_component_1 = require('./components/admin-dashboard.component');
 var routes = [
     {
         path: 'courses',
@@ -36,6 +37,10 @@ var routes = [
         path: 'profregistrationlist/:id',
         component: prof_registrations_component_1.ProfRegistrationsComponent
     },
+    {
+        path: 'admindashboard',
+        component: admin_dashboard_component_1.AdminDashboardComponent
+    }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {

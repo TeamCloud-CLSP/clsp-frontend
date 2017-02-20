@@ -44,6 +44,10 @@ var CourseDetailComponent = (function () {
     CourseDetailComponent.prototype.getSafeURL = function () {
         return this.sanitizer.bypassSecurityTrustResourceUrl(this.media);
     };
+    CourseDetailComponent.prototype.removeMedia = function () {
+        this.media = null;
+        this.edited = false;
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', course_1.Course)
