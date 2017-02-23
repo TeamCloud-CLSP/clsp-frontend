@@ -22,6 +22,7 @@ import { AdminDashboardComponent } from './components/admin-dashboard.component'
 
 //Routing
 import {AppRoutingModule} from './app-routing.module'
+import {AccountService} from "./services/account.service";
 
 @NgModule({
     imports: [
@@ -40,7 +41,7 @@ import {AppRoutingModule} from './app-routing.module'
         ProfRegistrationsComponent,
         AdminDashboardComponent
     ],
-    providers: [CourseService, AdminService],
-    bootstrap: [AppComponent, NavbarComponent]
+    providers: [CourseService, AdminService, AccountService],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -8,7 +8,7 @@ import { ProfRegistrationsComponent } from './components/prof-registrations.comp
 import { AdminDashboardComponent } from './components/admin-dashboard.component'
 const routes: Routes = [
     {
-        path: 'courses',
+        path: 'designer/courses',
         component: CoursesComponent
     },
     {
@@ -29,7 +29,7 @@ const routes: Routes = [
         component: ProfRegistrationsComponent
     },
     {
-        path: 'admindashboard',
+        path: 'admin',
         component: AdminDashboardComponent
     }
 ];
