@@ -19,6 +19,7 @@ import { CourseDetailComponent } from './components/course-detail.component'
 import { DashboardComponent } from './components/dashboard.component'
 import {ProfRegistrationsComponent} from './components/prof-registrations.component'
 import { AdminDashboardComponent } from './components/admin-dashboard.component'
+import { AccountDashboardComponent } from './components/account-dashboard.component'
 
 //Routing
 import {AppRoutingModule} from './app-routing.module'
@@ -39,7 +40,8 @@ import {AccountService} from "./services/account.service";
         DashboardComponent,
         NavbarComponent,
         ProfRegistrationsComponent,
-        AdminDashboardComponent
+        AdminDashboardComponent,
+        AccountDashboardComponent
     ],
     providers: [CourseService, AdminService, AccountService],
     bootstrap: [AppComponent]

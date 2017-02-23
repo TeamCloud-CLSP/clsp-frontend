@@ -16,7 +16,7 @@
                 <li *ngIf="account.is_administrator"><a routerLink="/admin" routerLinkActive="active">Admin</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/account">{{ account.username }}</a></li>
+                <li><a routerLink="/account" routerLinkActive="active">{{ account.username }}</a></li>
                 <li><a href="http://localhost:8000/logout">Logout</a></li>
             </ul>
         </div>

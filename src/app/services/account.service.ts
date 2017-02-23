@@ -10,7 +10,24 @@ export class AccountService {
     private options = new RequestOptions({ withCredentials: true, headers: this.headers })
     public account: User;
     constructor(private http: Http) {
-        this.account = {
+        this.account = this.getEmptyAccount();
+        this.getAccount();
+    }
+
+    private handleError(error: any): Promise<any> {
+        console.error('An error occured', error);
+        return Promise.reject(error.message || error);
+    }
+
+    getAccount(): Promise<User> {
+        return this.http.get(this.accountUrl, this.options)
+            .toPromise()
+            .then(response => response.json() as User)
+            .catch(this.handleError);
+    }
+
+    public getEmptyAccount() {
+        return {
             "id": 1,
             "username": "",
             "email": "",
@@ -25,18 +42,5 @@ export class AccountService {
             "is_designer": false,
             "is_administrator": false
         } as User;
-        this.getAccount();
-    }
-
-    private handleError(error: any): Promise<any> {
-        console.error('An error occured', error);
-        return Promise.reject(error.message || error);
-    }
-
-    getAccount(): Promise<User> {
-        return this.http.get(this.accountUrl, this.options)
-            .toPromise()
-            .then(response => response.json() as User)
-            .catch(this.handleError);
     }
 }
