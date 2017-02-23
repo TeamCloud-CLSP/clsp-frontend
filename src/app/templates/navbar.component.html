@@ -14,6 +14,7 @@
                 <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
                 <li *ngIf="account.is_designer"><a routerLink="/designer/courses" routerLinkActive="active">Courses</a></li>
                 <li *ngIf="account.is_administrator"><a routerLink="/admin" routerLinkActive="active">Admin</a></li>
+                <li *ngIf="account.is_professor"><a routerLink="/professor" routerLinkActive="active">Classes</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a routerLink="/account" routerLinkActive="active">{{ account.username }}</a></li>

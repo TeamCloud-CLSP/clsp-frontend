@@ -10,6 +10,8 @@ import { InMemoryDataService }  from './services/in-memory-data.service';
 // Services
 import { CourseService } from './services/course.service'
 import { AdminService } from './services/admin.service'
+import {AccountService} from "./services/account.service";
+import {ProfessorService} from "./services/professor.service";
 
 // Components
 import { CoursesComponent } from './components/courses.component'
@@ -20,10 +22,11 @@ import { DashboardComponent } from './components/dashboard.component'
 import {ProfRegistrationsComponent} from './components/prof-registrations.component'
 import { AdminDashboardComponent } from './components/admin-dashboard.component'
 import { AccountDashboardComponent } from './components/account-dashboard.component'
+import { ProfessorDashboardComponent } from "./components/professor-dashboard.component";
 
 //Routing
 import {AppRoutingModule} from './app-routing.module'
-import {AccountService} from "./services/account.service";
+import {ProfessorClassComponent} from "./components/professor-class.component";
 
 @NgModule({
     imports: [
@@ -41,9 +44,11 @@ import {AccountService} from "./services/account.service";
         NavbarComponent,
         ProfRegistrationsComponent,
         AdminDashboardComponent,
-        AccountDashboardComponent
+        AccountDashboardComponent,
+        ProfessorDashboardComponent,
+        ProfessorClassComponent
     ],
-    providers: [CourseService, AdminService, AccountService],
+    providers: [CourseService, AdminService, AccountService, ProfessorService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,6 +7,8 @@ import { CourseDetailComponent } from './components/course-detail.component'
 import { ProfRegistrationsComponent } from './components/prof-registrations.component'
 import { AdminDashboardComponent } from './components/admin-dashboard.component'
 import { AccountDashboardComponent } from './components/account-dashboard.component'
+import {ProfessorDashboardComponent} from "./components/professor-dashboard.component";
+import {ProfessorClassComponent} from "./components/professor-class.component";
 
 const routes: Routes = [
     {
@@ -37,6 +39,14 @@ const routes: Routes = [
     {
         path: 'account',
         component: AccountDashboardComponent
+    },
+    {
+        path: 'professor',
+        component: ProfessorDashboardComponent
+    },
+    {
+        path: 'professor/class/:id',
+        component: ProfessorClassComponent
     }
 ];
 
