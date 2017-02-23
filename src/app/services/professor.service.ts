@@ -28,7 +28,7 @@ export class ProfessorService{
     getClass(id: number): Promise<CLSPClass> {
         return this.http.get(this.baseUrl + "/classes/" + id, this.options)
             .toPromise()
-            .then(response => response.json().data as CLSPClass[])
+            .then(response => response.json().data as CLSPClass)
             .catch(this.handleError);
     }
 

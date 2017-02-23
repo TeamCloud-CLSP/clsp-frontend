@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {ProfessorService} from "../services/professor.service";
-import {Class} from "../models/class";
+import {CLSPClass} from "../models/clsp-class";
 @Component({
     moduleId: module.id,
     selector: 'professor-dashboard',
@@ -9,7 +9,7 @@ import {Class} from "../models/class";
 
 export class ProfessorDashboardComponent {
 
-    private classes: Class[];
+    private classes: CLSPClass[];
 
     constructor(
         private professorService: ProfessorService
