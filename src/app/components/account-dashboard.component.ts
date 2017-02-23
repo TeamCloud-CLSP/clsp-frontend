@@ -24,4 +24,21 @@ export class AccountDashboardComponent {
     getAccount(): void {
         this.accountService.getAccount().then(account => this.account = account);
     }
+
+    getRoles(): string {
+        var stuff = "";
+        if(this.account.is_designer) {
+            stuff += "ROLE_DESIGNER, ";
+        }
+        if(this.account.is_student) {
+            stuff += "ROLE_STUDENT, ";
+        }
+        if(this.account.is_administrator) {
+            stuff += "ROLE_ADMIN, ";
+        }
+        if(this.account.is_professor) {
+            stuff += "ROLE_PROFESSOR, ";
+        }
+        return stuff;
+    }
 }
