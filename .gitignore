@@ -54,3 +54,9 @@ node_modules
 jspm_packages
 bower_components
 
+# Angular2 files
+src/system-config.js*
+src/app/**/*.js
+src/app/**/*.map
+src/aot/*
+src/dist/*
