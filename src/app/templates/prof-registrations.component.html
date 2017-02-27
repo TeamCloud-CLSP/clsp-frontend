@@ -63,17 +63,21 @@
     </div>
     <div *ngIf="newRegistration" class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">New Registration Code</h3>
+            <h3 class="panel-title">Create Student Registration</h3>
         </div>
         <div class="panel-body container">
             <form (ngSubmit)="onSubmit()" #registrationForm="ngForm">
                 <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" required [(ngModel)]="newRegistration.name" name="date_start">
+                </div>
+                <div class="form-group">
                     <label for="name">Start Date</label>
-                    <input data-provide="datepicker" type="date" class="form-control" id="start_date" required [(ngModel)]="newRegistration.date_start" name="date_start">
+                    <input type="date" class="form-control" id="date_start" required [(ngModel)]="newRegistration.date_start" name="date_start">
                 </div>
                 <div class="form-group">
                     <label for="name">End Date</label>
-                    <input data-provide="datepicker" type="date" class="form-control" id="end_date" required [(ngModel)]="newRegistration.date_end" name="date_end">
+                    <input type="date" class="form-control" id="date_end" required [(ngModel)]="newRegistration.date_end" name="date_end">
                 </div>
                 <button type="submit" class="btn btn-success" [disabled]="!registrationForm.form.valid">Submit</button>
             </form>

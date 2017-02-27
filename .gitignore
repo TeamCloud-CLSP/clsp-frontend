@@ -60,3 +60,4 @@ src/app/**/*.js
 src/app/**/*.map
 src/aot/*
 src/dist/*
+*.log

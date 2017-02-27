@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -11,10 +11,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
                 <li *ngIf="account.is_designer"><a routerLink="/designer/courses" routerLinkActive="active">Courses</a></li>
                 <li *ngIf="account.is_administrator"><a routerLink="/admin" routerLinkActive="active">Admin</a></li>
-                <li *ngIf="account.is_professor"><a routerLink="/professor" routerLinkActive="active">Classes</a></li>
+                <li *ngIf="account.is_professor"><a routerLink="/professor" routerLinkActive="active">Dashboard</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a routerLink="/account" routerLinkActive="active">{{ account.username }}</a></li>
