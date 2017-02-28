@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Course } from '../models/course';
+import { Course, Language } from '../models/course';
 import { CourseService } from '../services/course.service';
 import { Router }   from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule }   from '@angular/forms';
 @Component({
     moduleId: module.id,
     selector: 'my-courses',
@@ -13,8 +15,10 @@ import { Router }   from '@angular/router';
 
 export class CoursesComponent implements OnInit {
     title = 'Course List';
-    selectedCourse: Course;
     courses: Course[];
+    newCourse: Course;
+    languages: Language[];
+    selectedLanguage: Language;
 
     constructor(
         private courseService: CourseService,
@@ -25,14 +29,13 @@ export class CoursesComponent implements OnInit {
         this.courseService.getCourses().then(courses => this.courses = courses);
     }
 
+    getLanguages(): void {
+        this.courseService.getLanguages().then(languages => this.languages = languages);
+    }
+
     ngOnInit(): void {
         this.getCourses();
-    }
-    onSelect(course: Course): void {
-        this.selectedCourse = course;
-    }
-    gotoCourse(): void {
-        this.router.navigate(['./course', this.selectedCourse.id]);
+        this.getLanguages();
     }
 
     toCourse(course: Course): void {
@@ -43,26 +46,27 @@ export class CoursesComponent implements OnInit {
         this.router.navigate(['./profregistrationlist', course.id]);
     }
 
-    add(name: string): void {
-        name = name.trim();
-        if (!name) { return; }
-        console.log("Adding " + name);
-        this.courseService.create(name)
-            .then(course => {
-                this.courses.push(course);
-                this.selectedCourse = null;
-            })
-            .catch(e => {
-                console.log(e);
-            });
-    }
-
     delete(course: Course): void {
         this.courseService
             .delete(course.id)
             .then(() => {
                 this.courses = this.courses.filter(c => c !== course);
-                if (this.selectedCourse === course) { this.selectedCourse = null }
             });
+    }
+
+    createCourse(): void {
+        this.selectedLanguage = null;
+        this.newCourse = new Course();
+    }
+
+    onSubmit(): void {
+        this.newCourse.language_id = this.selectedLanguage.id;
+        this.courseService.createCourse(this.newCourse)
+            .then(course => {
+                this.courses.push(course);
+                this.newCourse = null;
+                this.selectedLanguage = null;
+            });
+
     }
 }

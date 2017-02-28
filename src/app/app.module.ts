@@ -16,16 +16,17 @@ import {ProfessorService} from "./services/professor.service";
 // Components
 import { CoursesComponent } from './components/courses.component'
 import { AppComponent }  from './app.component';
-import { NavbarComponent } from './components/navbar.component'
-import { CourseDetailComponent } from './components/course-detail.component'
-import { DashboardComponent } from './components/dashboard.component'
-import {ProfRegistrationsComponent} from './components/prof-registrations.component'
-import { AdminDashboardComponent } from './components/admin-dashboard.component'
-import { AccountDashboardComponent } from './components/account-dashboard.component'
+import { NavbarComponent } from './components/navbar.component';
+import { CourseDetailComponent } from './components/course-detail.component';
+import { DashboardComponent } from './components/dashboard.component';
+import { ProfRegistrationsComponent } from './components/prof-registrations.component';
+import { AdminDashboardComponent } from './components/admin-dashboard.component';
+import { AccountDashboardComponent } from './components/account-dashboard.component';
 import { ProfessorDashboardComponent } from "./components/professor-dashboard.component";
+import { UnitDetailComponent } from "./components/unit-detail.component";
 
 //Routing
-import {AppRoutingModule} from './app-routing.module'
+import {AppRoutingModule} from './app-routing.module';
 import {ProfessorClassComponent} from "./components/professor-class.component";
 
 @NgModule({
@@ -46,7 +47,8 @@ import {ProfessorClassComponent} from "./components/professor-class.component";
         AdminDashboardComponent,
         AccountDashboardComponent,
         ProfessorDashboardComponent,
-        ProfessorClassComponent
+        ProfessorClassComponent,
+        UnitDetailComponent
     ],
     providers: [CourseService, AdminService, AccountService, ProfessorService],
     bootstrap: [AppComponent]

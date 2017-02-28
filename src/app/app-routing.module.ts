@@ -9,6 +9,7 @@ import { AdminDashboardComponent } from './components/admin-dashboard.component'
 import { AccountDashboardComponent } from './components/account-dashboard.component'
 import {ProfessorDashboardComponent} from "./components/professor-dashboard.component";
 import {ProfessorClassComponent} from "./components/professor-class.component";
+import { UnitDetailComponent } from "./components/unit-detail.component";
 
 const routes: Routes = [
     {
@@ -47,6 +48,10 @@ const routes: Routes = [
     {
         path: 'professor/class/:id',
         component: ProfessorClassComponent
+    },
+    {
+        path: 'unit/:id',
+        component: UnitDetailComponent
     }
 ];
 

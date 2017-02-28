@@ -3,7 +3,8 @@
  */
 export class User {
     id: number;
-    username : string;
+    name: string;
+    username: string;
     email: string;
     is_active: boolean;
     date_created: number;
@@ -16,5 +17,5 @@ export class User {
     is_designer: boolean;
     is_administrator: boolean;
     password: string;
-    constructor(){}
+    constructor() { }
 }

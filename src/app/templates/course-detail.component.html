@@ -6,20 +6,71 @@
             <label> name: </label>
             <input [(ngModel)]="course.name" placeholder="name" />
         </div>
+        <div>
+            <label> Description: </label>
+            <textarea [(ngModel)]="course.description" placeholder="description"></textarea>
+        </div>
         <button (click)="goBack()">Back</button>
         <button (click)="save()">Save</button>
         <!-- <prof-registrations [courseId]="course.id"></prof-registrations> -->
     </div>
+
+    <br />
+    <h2>{{course.name}} Units</h2>
+    <table class="table table-hover">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Weight
+            </th>
+            <th>
+
+            </th>
+        </tr>
+        <tr *ngFor="let unit of units" class="unit-row">
+            <td (click)="toUnit(unit)">
+                {{unit.name}}
+            </td>
+            <td (click)="toUnit(unit)">
+                {{unit.description}}
+            </td>
+            <td (click)="toUnit(unit)">
+                {{unit.weight}}
+            </td>
+            <td>
+                <button class="btn btn-default" (click)="deleteUnit(unit)">Delete Unit</button>
+            </td>
+        </tr>
+    </table>
 </div>
+
+<button *ngIf="!newUnit" (click)="createUnit()" class="btn btn-default">Add Unit</button>
 <br />
-<div *ngIf="course && !edited" class="row">
-    <label> Media Link: </label>
-    <input [(ngModel)]="media" placeholder="" />
-    <button (click)="addMedia()">Add</button>
-</div>
-<div *ngIf="edited && media">
-    <iframe width="420" height="315" [src]='getSafeURL()'>
-    </iframe>
-    <br/>
-    <button (click)="removeMedia()">Remove Media</button>
+<br />
+<div *ngIf="newUnit" class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Create New Unit</h3>
+    </div>
+    <div class="panel-body container">
+        <form (ngSubmit)="onSubmit()" #unitForm="ngForm">
+            <div class="form-group">
+                <label for="name">Unit Name</label>
+                <input type="text" class="form-control" id="name" required [(ngModel)]="newUnit.name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="name">Unit Description</label>
+                <textarea type="text" class="form-control description-text" id="description" [(ngModel)]="newUnit.description" name="description" rows="10" cols="12"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="name">Weight</label>
+                <input type="number" class="form-control description-text" id="weight" [(ngModel)]="newUnit.weight" name="weight">
+            </div>
+            <button type="submit" class="btn btn-success" [disabled]="!unitForm.form.valid">Submit</button>
+        </form>
+    </div>
 </div>

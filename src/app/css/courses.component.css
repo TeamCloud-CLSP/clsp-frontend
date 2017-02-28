@@ -53,3 +53,12 @@ button.delete {
   background-color: gray !important;
   color:white;
 }
+
+.panel-default>.course-panel-header :hover {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.description-text {
+    resize: none;
+}
