@@ -18,6 +18,7 @@ export class UnitDetailComponent implements OnInit {
     edited: boolean;
     songs: Song[];
     newSong: Song;
+    courseName: string;
     constructor(
         private courseService: CourseService,
         private route: ActivatedRoute,
@@ -29,7 +30,12 @@ export class UnitDetailComponent implements OnInit {
     ngOnInit(): void {
         this.route.params
             .switchMap((params: Params) => this.courseService.getUnit(+params['id']))
-            .subscribe(unit => this.unit = unit);
+            .subscribe(unit => {
+                this.unit = unit;
+                this.courseService.getCourse(unit.course_id).then(course => {
+                    this.courseName = course.name;
+                })
+            });
         this.route.params
             .switchMap((params: Params) => this.courseService.getSongs(+params['id']))
             .subscribe(songs => this.songs = songs);

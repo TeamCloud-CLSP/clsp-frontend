@@ -1,6 +1,8 @@
-<h2>My Courses</h2>
-<br />
-<div *ngFor="let course of courses">
+<div class="row">
+    <h2>My Courses</h2>
+    <br />
+</div>
+<div *ngFor="let course of courses" class="row">
     <br />
     <div class="panel panel-default">
         <div class="panel-heading course-panel-header" (click)="toCourse(course)">
@@ -22,34 +24,36 @@
         </div>
     </div>
 </div>
-<button *ngIf="!newCourse" (click)="createCourse()" class="btn btn-default">Add Course</button>
-<br />
-<br />
-<div *ngIf="newCourse" class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">Create New Course</h3>
-    </div>
-    <div class="panel-body container">
-        <div>
-            <label for="name">Language</label>
-            <br />
-            <select [(ngModel)]="selectedLanguage" class="dropdown">
+<div class="row">
+    <button *ngIf="!newCourse" (click)="createCourse()" class="btn btn-default">Add Course</button>
+    <br />
+    <br />
+    <div *ngIf="newCourse" class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Create New Course</h3>
+        </div>
+        <div class="panel-body container">
+            <div>
+                <label for="name">Language</label>
+                <br />
+                <select [(ngModel)]="selectedLanguage" class="dropdown">
                 <option *ngFor="let l of languages" [ngValue] = "l">
                     {{l.name}}
                 </option>
             </select>
+            </div>
+            <br />
+            <form (ngSubmit)="onSubmit()" #courseForm="ngForm">
+                <div class="form-group">
+                    <label for="name">Course Name</label>
+                    <input type="text" class="form-control" id="name" required [(ngModel)]="newCourse.name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="name">Course Description</label>
+                    <textarea type="text" class="form-control description-text" id="description" [(ngModel)]="newCourse.description" name="description" rows="10" cols="12"></textarea>
+                </div>
+                <button type="submit" class="btn btn-success" [disabled]="!courseForm.form.valid">Submit</button>
+            </form>
         </div>
-        <br />
-        <form (ngSubmit)="onSubmit()" #courseForm="ngForm">
-            <div class="form-group">
-                <label for="name">Course Name</label>
-                <input type="text" class="form-control" id="name" required [(ngModel)]="newCourse.name" name="name">
-            </div>
-            <div class="form-group">
-                <label for="name">Course Description</label>
-                <textarea type="text" class="form-control description-text" id="description" [(ngModel)]="newCourse.description" name="description" rows="10" cols="12"></textarea>
-            </div>
-            <button type="submit" class="btn btn-success" [disabled]="!courseForm.form.valid">Submit</button>
-        </form>
     </div>
 </div>

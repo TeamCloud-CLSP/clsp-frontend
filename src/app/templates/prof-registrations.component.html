@@ -1,6 +1,8 @@
 <div *ngIf="course">
-    <h1>Professor Registrations for {{course.name}}</h1>
-    <div *ngFor="let registration of profRegistrations">
+    <div class="row">
+        <h1>Professor Registrations for {{course.name}}</h1>
+    </div>
+    <div *ngFor="let registration of profRegistrations" class="row">
         <br />
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -61,28 +63,32 @@
             </div>
         </div>
     </div>
-    <div *ngIf="newRegistration" class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Create Student Registration</h3>
-        </div>
-        <div class="panel-body container">
-            <form (ngSubmit)="onSubmit()" #registrationForm="ngForm">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" required [(ngModel)]="newRegistration.name" name="date_start">
-                </div>
-                <div class="form-group">
-                    <label for="name">Start Date</label>
-                    <input type="date" class="form-control" id="date_start" required [(ngModel)]="newRegistration.date_start" name="date_start">
-                </div>
-                <div class="form-group">
-                    <label for="name">End Date</label>
-                    <input type="date" class="form-control" id="date_end" required [(ngModel)]="newRegistration.date_end" name="date_end">
-                </div>
-                <button type="submit" class="btn btn-success" [disabled]="!registrationForm.form.valid">Submit</button>
-            </form>
+    <div class="row">
+        <button *ngIf="!newRegistration" (click)="newCode()" class="btn btn-default">New Registration Code</button>
+        <br />
+        <br />
+        <div *ngIf="newRegistration" class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Create Student Registration</h3>
+            </div>
+            <div class="panel-body container">
+                <form (ngSubmit)="onSubmit()" #registrationForm="ngForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" required [(ngModel)]="newRegistration.name" name="date_start">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Start Date</label>
+                        <input type="date" class="form-control" id="date_start" required [(ngModel)]="newRegistration.date_start" name="date_start">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">End Date</label>
+                        <input type="date" class="form-control" id="date_end" required [(ngModel)]="newRegistration.date_end" name="date_end">
+                    </div>
+                    <button type="submit" class="btn btn-success" [disabled]="!registrationForm.form.valid">Submit</button>
+                </form>
+            </div>
         </div>
     </div>
-    <button (click)="newCode()" class="btn btn-default">New Registration Code</button>
 </div>
 <br />
