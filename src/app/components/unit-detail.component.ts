@@ -47,7 +47,9 @@ export class UnitDetailComponent implements OnInit {
     }
 
     updateUnit(): void {
-        this.courseService.updateUnit(this.unit);
+        this.courseService.updateUnit(this.unit).then(
+            () => this.edited = false
+        );
     }
 
     deleteSong(song: Song): void {
@@ -70,6 +72,10 @@ export class UnitDetailComponent implements OnInit {
                 this.newSong = null;
             });
 
+    }
+
+    editUnit(): void {
+        this.edited = true;
     }
 
 }

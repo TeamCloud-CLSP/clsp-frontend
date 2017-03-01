@@ -9,7 +9,7 @@
         <button (click)="editCourse()" class="btn btn-default">Edit</button>
     </div>
     <div *ngIf="edited" class="row">
-        <div class="form-grom">
+        <div class="form-group">
             <label for="name"> Name: </label>
             <input class="form-control" [(ngModel)]="course.name" placeholder="name" />
         </div>
