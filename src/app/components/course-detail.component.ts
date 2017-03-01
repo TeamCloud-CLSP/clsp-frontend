@@ -46,7 +46,7 @@ export class CourseDetailComponent implements OnInit {
 
     save(): void {
         this.courseService.update(this.course)
-            .then(() => this.goBack());
+            .then(() => this.edited = false);
     }
 
     addMedia(): void {
@@ -87,5 +87,9 @@ export class CourseDetailComponent implements OnInit {
             .then(() => {
                 this.units = this.units.filter(x => x != unit);
             });
+    }
+
+    editCourse(): void {
+        this.edited = true;
     }
 }
