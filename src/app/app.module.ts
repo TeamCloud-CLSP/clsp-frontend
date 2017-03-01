@@ -28,6 +28,8 @@ import { UnitDetailComponent } from "./components/unit-detail.component";
 //Routing
 import {AppRoutingModule} from './app-routing.module';
 import {ProfessorClassComponent} from "./components/professor-class.component";
+import {SongDetailComponent} from "./components/song-detail.component";
+import {CulturalNotesComponent} from "./components/modules/culturalnotes.component";
 
 @NgModule({
     imports: [
@@ -48,7 +50,9 @@ import {ProfessorClassComponent} from "./components/professor-class.component";
         AccountDashboardComponent,
         ProfessorDashboardComponent,
         ProfessorClassComponent,
-        UnitDetailComponent
+        UnitDetailComponent,
+        SongDetailComponent,
+        CulturalNotesComponent
     ],
     providers: [CourseService, AdminService, AccountService, ProfessorService],
     bootstrap: [AppComponent]

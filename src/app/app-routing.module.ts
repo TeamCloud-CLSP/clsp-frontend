@@ -10,6 +10,7 @@ import { AccountDashboardComponent } from './components/account-dashboard.compon
 import {ProfessorDashboardComponent} from "./components/professor-dashboard.component";
 import {ProfessorClassComponent} from "./components/professor-class.component";
 import { UnitDetailComponent } from "./components/unit-detail.component";
+import { SongDetailComponent } from "./components/song-detail.component";
 
 const routes: Routes = [
     {
@@ -52,6 +53,10 @@ const routes: Routes = [
     {
         path: 'unit/:id',
         component: UnitDetailComponent
+    },
+    {
+        path: 'unit/:unit_id/song/:id',
+        component: SongDetailComponent
     }
 ];
 

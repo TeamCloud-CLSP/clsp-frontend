@@ -61,6 +61,10 @@ export class UnitDetailComponent implements OnInit {
         this.newSong = new Song();
     }
 
+    toSong(song: Song): void {
+        this.router.navigate(['./unit/' + this.unit.id + '/song', song.id]);
+    }
+
     onSubmit(): void {
         this.newSong.unit_id = +this.unit.id;
         this.courseService.createSong(this.newSong)

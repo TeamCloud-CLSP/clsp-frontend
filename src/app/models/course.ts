@@ -36,3 +36,10 @@ export class Song {
     weight: number;
     constructor() { }
 }
+
+export class Module {
+    id: number;
+    has_password: boolean;
+    song_id: number;
+    module_type: string;
+}

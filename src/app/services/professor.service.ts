@@ -7,7 +7,7 @@ import {StudentRegistration, Student} from "../models/studentregistration";
 
 @Injectable()
 export class ProfessorService {
-    private baseUrl = 'http://localhost:8000/api/professor';
+    private baseUrl = 'http://localhost/api/professor';
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private options = new RequestOptions({ withCredentials: true, headers: this.headers });
 

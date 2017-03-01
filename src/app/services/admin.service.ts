@@ -6,7 +6,7 @@ import {ProfRegistration} from '../models/profregistration'
 
 @Injectable()
 export class AdminService {
-    private adminUrl = 'http://localhost:8000/api/admin';
+    private adminUrl = 'http://localhost/api/admin';
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private options = new RequestOptions({ withCredentials: true, headers: this.headers })
     constructor(private http: Http) { }

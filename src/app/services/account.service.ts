@@ -5,7 +5,7 @@ import { User } from '../models/user'
 
 @Injectable()
 export class AccountService {
-    private accountUrl = 'http://localhost:8000/api/account';
+    private accountUrl = 'http://localhost/api/account';
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private options = new RequestOptions({ withCredentials: true, headers: this.headers })
     public account: User;
