@@ -14,10 +14,12 @@
                         </h3>
                     <span class="pull-right clickable glyphicon glyphicon-remove" data-effect="fadeOut"></span>
                 </div>
-                <div class="panel-body container" [ngSwitch]="module.module_type">
-                    <p>{{module.module_type}}</p>
-                    <div *ngSwitchCase="'module_cn'"><clsp-cultural-notes></clsp-cultural-notes></div>
-                    <div *ngSwitchDefault>default</div>
+                <div *ngIf="song">
+                    <div class="panel-body container" [ngSwitch]="module.module_type">
+                        <div *ngSwitchCase="'module_cn'"><clsp-cultural-notes [song]="song"></clsp-cultural-notes></div>
+                        <div *ngSwitchCase="'module_dw'"><clsp-discussion-and-writing ></clsp-discussion-and-writing></div>
+                        <div *ngSwitchDefault>default</div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -30,6 +30,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {ProfessorClassComponent} from "./components/professor-class.component";
 import {SongDetailComponent} from "./components/song-detail.component";
 import {CulturalNotesComponent} from "./components/modules/culturalnotes.component";
+import {DiscussionAndWritingComponent} from "./components/modules/discussionandwriting.component";
+import {AnnotationComponent} from "./components/modules/annotation.component";
 
 @NgModule({
     imports: [
@@ -52,7 +54,9 @@ import {CulturalNotesComponent} from "./components/modules/culturalnotes.compone
         ProfessorClassComponent,
         UnitDetailComponent,
         SongDetailComponent,
-        CulturalNotesComponent
+        CulturalNotesComponent,
+        DiscussionAndWritingComponent,
+        AnnotationComponent
     ],
     providers: [CourseService, AdminService, AccountService, ProfessorService],
     bootstrap: [AppComponent]

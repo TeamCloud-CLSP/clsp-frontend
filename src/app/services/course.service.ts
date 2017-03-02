@@ -3,6 +3,7 @@ import {Headers, Http, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {Course, Language, Unit, Song, Module} from '../models/course'
 import {ProfRegistration} from '../models/profregistration'
+import {CulturalNoteKeywords} from "../models/modules/CulturalNoteKeywords";
 
 @Injectable()
 export class CourseService {
@@ -189,6 +190,14 @@ export class CourseService {
         return this.http.delete(url, this.options)
             .toPromise()
             .then(() => null)
+            .catch(this.handleError);
+    }
+
+    getKeywordsForSong(songId: number): Promise<null> {
+        const url = `${this.designerUrl}/song/${songId}/keywords`;
+        return this.http.get(url, this.options)
+            .toPromise()
+            .then(response => response.json().data as CulturalNoteKeywords[])
             .catch(this.handleError);
     }
 

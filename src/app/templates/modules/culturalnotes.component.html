@@ -1,1 +1,20 @@
-<b>Cultural notes</b>
+<div id="cultural-notes-module">
+    <style>
+        .highlight {
+            background-color: #222222;
+            color: #F5F5F5;
+            padding-left: 2px;
+            padding-right: 2px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .pop-floating {
+            background-color: purple;
+            position: absolute;
+        }
+    </style>
+
+    <p *ngIf="processedLyrics" [innerHTML]="processedLyrics"></p>
+    <button class="btn btn-default">Save</button>
+</div>
