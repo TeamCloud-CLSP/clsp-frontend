@@ -4,12 +4,13 @@ import 'rxjs/add/operator/toPromise';
 import {Course, Language, Unit, Song, Module} from '../models/course'
 import {ProfRegistration} from '../models/profregistration'
 import {CulturalNoteKeywords} from "../models/modules/CulturalNoteKeywords";
-
+import {GlobalParameters} from '../global-parameters';
 @Injectable()
 export class CourseService {
-    private designerUrl = 'http://localhost/api/designer';
-    private headers = new Headers({'Content-Type': 'application/json'});
-    private options = new RequestOptions({withCredentials: true, headers: this.headers})
+    private parameters = new GlobalParameters();
+    private designerUrl = this.parameters.url + "/api/designer";
+    private headers = new Headers({ 'Content-Type': 'application/json' });
+    private options = new RequestOptions({ withCredentials: true, headers: this.headers })
 
     constructor(private http: Http) {
     }
@@ -148,7 +149,7 @@ export class CourseService {
     updateUnit(unit: Unit): Promise<Unit> {
         const url = `${this.designerUrl}/unit/${unit.id}`;
         return this.http.post(url,
-            JSON.stringify({name: unit.name, description: unit.description, weight: unit.weight}),
+            JSON.stringify({ name: unit.name, description: unit.description, weight: unit.weight }),
             this.options)
             .toPromise()
             .then(response => response.json() as Unit)
@@ -193,27 +194,27 @@ export class CourseService {
             .catch(this.handleError);
     }
 
-    getKeywordsForSong(songId: number): Promise<null> {
-        const url = `${this.designerUrl}/song/${songId}/keywords`;
-        return this.http.get(url, this.options)
-            .toPromise()
-            .then(response => response.json().data as CulturalNoteKeywords[])
-            .catch(this.handleError);
-    }
+getKeywordsForSong(songId: number): Promise < null > {
+    const url = `${this.designerUrl}/song/${songId}/keywords`;
+    return this.http.get(url, this.options)
+        .toPromise()
+        .then(response => response.json().data as CulturalNoteKeywords[])
+        .catch(this.handleError);
+}
 
-    getModules(songId: number): Promise<Module[]> {
-        const url = `${this.designerUrl}/song/${songId}/modules`;
-        return this.http.get(url, this.options)
-            .toPromise()
-            .then(response => response.json().data as Module[])
-            .catch(this.handleError);
-    }
+getModules(songId: number): Promise < Module[] > {
+    const url = `${this.designerUrl}/song/${songId}/modules`;
+    return this.http.get(url, this.options)
+        .toPromise()
+        .then(response => response.json().data as Module[])
+        .catch(this.handleError);
+}
 
-    deleteUnit(unit: Unit): Promise < null > {
-        const url = `${this.designerUrl}/unit/${unit.id}`;
-        return this.http.delete(url, this.options)
-            .toPromise()
-            .then(() => null)
-            .catch(this.handleError);
-    }
+deleteUnit(unit: Unit): Promise < null > {
+    const url = `${this.designerUrl}/unit/${unit.id}`;
+    return this.http.delete(url, this.options)
+        .toPromise()
+        .then(() => null)
+        .catch(this.handleError);
+}
 }

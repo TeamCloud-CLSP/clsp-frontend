@@ -3,10 +3,11 @@ import { Headers, Http, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { User } from '../models/user'
 import {ProfRegistration} from '../models/profregistration'
-
+import {GlobalParameters} from '../global-parameters';
 @Injectable()
 export class AdminService {
-    private adminUrl = 'http://localhost/api/admin';
+    private parameters = new GlobalParameters();
+    private adminUrl = this.parameters.url + "/api/admin";
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private options = new RequestOptions({ withCredentials: true, headers: this.headers })
     constructor(private http: Http) { }

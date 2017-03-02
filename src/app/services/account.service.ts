@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { User } from '../models/user';
+import {GlobalParameters} from '../global-parameters';
 
 @Injectable()
 export class AccountService {
-    private accountUrl = 'http://localhost/api/account';
+    private parameters = new GlobalParameters();
+    private accountUrl = this.parameters.url + "/api/account";
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private options = new RequestOptions({ withCredentials: true, headers: this.headers })
     public account: User;

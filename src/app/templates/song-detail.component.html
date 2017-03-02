@@ -4,7 +4,9 @@
             <a href="course/{{unit.course_id}}">{{courseName}}</a> >> <a href="unit/{{unit.id}}">{{unit.name}}</a> >> <b *ngIf="song">{{song.album}}</b>
         </p>
     </div>
-    <h1 *ngIf="song">Modules for {{song.album}}</h1>
+    <div class="row">
+        <h1 *ngIf="song">Modules for {{song.album}}</h1>
+    </div>
     <div *ngIf="modules">
         <div *ngFor="let module of modules" class="row">
             <br />
@@ -16,8 +18,12 @@
                 </div>
                 <div *ngIf="song">
                     <div class="panel-body container" [ngSwitch]="module.module_type">
-                        <div *ngSwitchCase="'module_cn'"><clsp-cultural-notes [song]="song"></clsp-cultural-notes></div>
-                        <div *ngSwitchCase="'module_dw'"><clsp-discussion-and-writing ></clsp-discussion-and-writing></div>
+                        <div *ngSwitchCase="'module_cn'">
+                            <clsp-cultural-notes [song]="song"></clsp-cultural-notes>
+                        </div>
+                        <div *ngSwitchCase="'module_dw'">
+                            <clsp-discussion-and-writing></clsp-discussion-and-writing>
+                        </div>
                         <div *ngSwitchDefault>default</div>
                     </div>
                 </div>

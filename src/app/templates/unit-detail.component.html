@@ -31,7 +31,7 @@
     <div *ngFor="let song of songs" class="row">
         <br />
         <div class="panel panel-default">
-            <div class="panel-heading" (click)="toSong(song)">
+            <div class="panel-heading song-title" (click)="toSong(song)">
                 <h3 class="panel-title">{{song.title}}</h3>
                 <span (click)="deleteSong(song)" class="pull-right clickable glyphicon glyphicon-remove" data-effect="fadeOut"></span>
             </div>

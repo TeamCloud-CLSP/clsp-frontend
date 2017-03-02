@@ -10,7 +10,8 @@ import 'rxjs/add/operator/switchMap';
 @Component({
     moduleId: module.id,
     selector: 'unit-detail',
-    templateUrl: '../templates/unit-detail.component.html'
+    templateUrl: '../templates/unit-detail.component.html',
+    styleUrls: ['../css/unit-detail.component.css']
 })
 
 export class UnitDetailComponent implements OnInit {
