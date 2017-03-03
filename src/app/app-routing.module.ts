@@ -11,6 +11,7 @@ import {ProfessorDashboardComponent} from "./components/professor-dashboard.comp
 import {ProfessorClassComponent} from "./components/professor-class.component";
 import { UnitDetailComponent } from "./components/unit-detail.component";
 import { SongDetailComponent } from "./components/song-detail.component";
+import { HeaderDetailComponent } from "./components/header-detail.component"
 
 const routes: Routes = [
     {
@@ -57,6 +58,10 @@ const routes: Routes = [
     {
         path: 'unit/:unit_id/song/:id',
         component: SongDetailComponent
+    },
+    {
+        path: 'unit/:unit_id/song/:song_id/header/:header_id',
+        component: HeaderDetailComponent
     }
 ];
 

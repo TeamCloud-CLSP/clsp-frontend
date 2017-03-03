@@ -1,0 +1,16 @@
+<div class="row">
+    <h2>Questions</h2>
+</div>
+<div class="row">
+    <label for="question">Question</label>
+    <input class="form-control" name="question" id="question">
+    <label for="type">Type</label>
+    <select class="form-control" name="type" id="type" (change)="onChange($event.target.value)">
+            <option value="short-answer">Short Answer</option>
+            <option value="long-answer">Long Answer</option>
+            <option value="multiple-choice">Multiple Choice</option>
+            <option value="multiple-select">Multiple Select</option>
+        </select>
+    <br />
+    <button class="btn btn-default">Save</button>
+</div>
