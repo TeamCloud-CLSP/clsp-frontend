@@ -29,6 +29,7 @@ export class DiscussionAndWritingComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        console.log(this.songId);
         this.moduleService.getDWHeaders(this.songId)
             .then(headers => this.headers = headers);
     }

@@ -21,10 +21,10 @@ export class SongDetailComponent implements OnInit {
     selectors: any;
 
     constructor(private courseService: CourseService,
-                private route: ActivatedRoute,
-                private location: Location,
-                private sanitizer: DomSanitizer,
-                private router: Router) {
+        private route: ActivatedRoute,
+        private location: Location,
+        private sanitizer: DomSanitizer,
+        private router: Router) {
     }
 
     ngOnInit() {
@@ -33,10 +33,10 @@ export class SongDetailComponent implements OnInit {
         };
         console.log(this.route.params);
         this.route.params
-            .switchMap((params: Params) => this.courseService.getSongs(+params['unit_id']))
-            .subscribe(songs => {
-                console.log(songs);
-                this.song = songs[0];
+            .switchMap((params: Params) => this.courseService.getSong(+params['id']))
+            .subscribe(song => {
+                console.log(song);
+                this.song = song;
             });
 
         this.route.params

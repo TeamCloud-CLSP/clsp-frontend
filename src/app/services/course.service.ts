@@ -165,6 +165,14 @@ export class CourseService {
             .catch(this.handleError);
     }
 
+    getSong(songId: number): Promise<Song> {
+        const url = `${this.designerUrl}/song/${songId}`;
+        return this.http.get(url, this.options)
+            .toPromise()
+            .then(response => response.json() as Song)
+            .catch(this.handleError);
+    }
+
     createSong(song: Song): Promise<Song> {
         const url = `${this.designerUrl}/song`;
         return this.http.post(url,
