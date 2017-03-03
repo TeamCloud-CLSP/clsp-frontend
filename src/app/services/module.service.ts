@@ -5,7 +5,7 @@ import {Course, Language, Unit, Song, Module} from '../models/course'
 import {ProfRegistration} from '../models/profregistration'
 import {CulturalNoteKeywords} from "../models/modules/CulturalNoteKeywords";
 import {GlobalParameters} from '../global-parameters';
-import {Header} from '../models/modules/header';
+import {Header, Question} from '../models/modules/header';
 @Injectable()
 export class ModuleService {
     private parameters = new GlobalParameters();
@@ -21,8 +21,15 @@ export class ModuleService {
         return Promise.reject(error.message || error);
     }
 
+    getHeader(headerId: number): Promise<Header> {
+        const url = `${this.designerUrl}/header/${headerId}`
+        return this.http.get(url, this.options)
+            .toPromise()
+            .then(response => response.json() as Header)
+            .catch(this.handleError);
+    }
+
     createDWHeader(header: Header): Promise<Header> {
-        console.log(header);
         const url = `${this.designerUrl}/song/${header.song_id}/module_dw/headers`
         return this.http.post(url,
             JSON.stringify({
@@ -39,6 +46,31 @@ export class ModuleService {
         return this.http.get(url, this.options)
             .toPromise()
             .then(response => response.json().data as Header[])
+            .catch(this.handleError);
+    }
+
+    getQuestions(headerId: number): Promise<Question[]> {
+        const url = `${this.designerUrl}/header/${headerId}/items`;
+        return this.http.get(url, this.options)
+            .toPromise()
+            .then(response => response.json().data as Question[])
+            .catch(this.handleError);
+    }
+
+    createQuestion(question: Question): Promise<Question> {
+        const url = `${this.designerUrl}/item`;
+        return this.http.post(url,
+            JSON.stringify({
+                heading_id: question.heading_id,
+                content: question.content,
+                type: question.type,
+                weight: question.weight,
+                choices: question.choices,
+                answers: question.answers
+            }),
+            this.options)
+            .toPromise()
+            .then(response => response.json() as Question)
             .catch(this.handleError);
     }
 }
