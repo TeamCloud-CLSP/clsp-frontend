@@ -12,6 +12,30 @@
         <h3>
             {{question.weight}}. {{question.content}}
         </h3>
+        <h4>Type: {{question.type}}</h4>
+        <div *ngIf="question.type == 'fill-blank'">
+            <p>
+                <b>Answer: </b> {{question.answers}}
+            </p>
+        </div>
+        <div *ngIf="question.type == 'multiple-choice' || question.type =='multiple-select'">
+            <div *ngFor="let choice of getChoices(question.choices); let i = index;" class="col-md-12">
+                <p>
+                    <b>Choice {{convertAscii(i)}}:</b> {{choice.choice}}
+                </p>
+            </div>
+            <div class="col-md-12" *ngIf="question.type == 'multiple-choice'">
+                <p>
+                    <b>Correct Choice: </b> {{getChoices(question.answers)[0].choice}}
+                </p>
+            </div>
+            <div class="col-md-12" *ngIf="question.type == 'multiple-select'">
+                <b>Correct Choices:</b>
+                <p *ngFor="let answer of getChoices(question.answers);">
+                    {{answer.choice}}
+                </p>
+            </div>
+        </div>
     </div>
     <br />
     <div class="row" *ngIf="!newQuestion">
@@ -43,14 +67,32 @@
                         <label for="name">Question</label>
                         <input type="text" class="form-control" id="content" required [(ngModel)]="newQuestion.content" name="content">
                     </div>
-                    <div *ngIf="selectedType == 'multiple-choice'" style="margin-left:20px;">
-                        <div class="form-group" *ngFor="let choice of choices; let i = index">
-                            <label for="choice">Choice{{i}}</label>
-                            <input type="text" class="form-control" id="choice" required [(ngModel)]="choices[i].choice" name="choice{{i}}" />
+                    <div *ngIf="selectedType == 'multiple-choice' || selectedType == 'multiple-select'">
+                        <div style="margin-left:20px;">
+                            <div class="form-group" *ngFor="let choice of choices; let i = index;">
+                                <label for="choice">Choice {{convertAscii(i)}}</label>
+                                <input type="text" class="form-control" id="choice" required [(ngModel)]="choices[i].choice" name="choice{{i}}" />
+                            </div>
+                            <button type="button" class="btn btn-default" (click)="addChoice()">Add Choice</button>
+                            <br />
+                            <br />
                         </div>
-                        <button type="button" class="btn btn-default" (click)="addChoice()">Add Choice</button>
-                        <br />
-                        <br />
+                        <div class="form-group" *ngIf="selectedType == 'multiple-choice'">
+                            <label for="type">Answer</label>
+                            <select class="form-control" name="mcAnswer" id="mcAnswer" [(ngModel)]="mcAnswer">
+                                <option *ngFor="let choice of choices; let i = index;" value="{{choice.choice}}">Choice {{convertAscii(i)}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group" *ngIf="selectedType == 'multiple-select'">
+                            <label for="type">Answers</label>
+                            <select multiple class="form-control" name="msAnswers" id="msAnswers" [(ngModel)]="msAnswers">
+                                <option *ngFor="let choice of choices; let i = index;" value="{{choice.choice}}">Choice {{convertAscii(i)}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" *ngIf="selectedType == 'fill-blank'">
+                        <label for="type">Answer</label>
+                        <input type="text" class="form-control" id="answer" [(ngModel)]="newQuestion.answers" name="answer">
                     </div>
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>

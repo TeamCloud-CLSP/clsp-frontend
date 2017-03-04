@@ -22,6 +22,8 @@ export class HeaderDetailComponent implements OnInit {
     newQuestion: Question;
     selectedType: string;
     choices: Choice[];
+    mcAnswer: string;
+    msAnswers: string[];
 
     constructor(
         private courseService: CourseService,
@@ -57,16 +59,19 @@ export class HeaderDetailComponent implements OnInit {
         this.route.params
             .switchMap((params: Params) => this.moduleService.getQuestions(+params['header_id']))
             .subscribe(questions => {
-                this.questions = questions.sort(x => x.weight);
+                this.questions = questions.sort((x, y) => x.weight - y.weight);
+                console.log(questions);
             });
     }
 
     createQuestion(): void {
-        this.newQuestion = new Question();
         var newChoice = new Choice();
         newChoice.choice = "New Choice"
         this.choices = [newChoice];
-        console.log(this.choices);
+        this.mcAnswer = null;
+        this.selectedType = null;
+        this.msAnswers = [];
+        this.newQuestion = new Question();
     }
 
     cancel(): void {
@@ -75,19 +80,42 @@ export class HeaderDetailComponent implements OnInit {
 
     addChoice(): void {
         var newChoice = new Choice();
-        newChoice.choice = ""
+        newChoice.choice = "New Choice"
         this.choices.push(newChoice);
+    }
+
+    convertAscii(num: number): String {
+        return String.fromCharCode(97 + num).toUpperCase();
+    }
+
+    getChoices(choiceString: string): Choice[] {
+        return JSON.parse(choiceString) as Choice[];
     }
 
     onSubmit(): void {
         this.newQuestion.heading_id = +this.header.id;
         this.newQuestion.type = this.selectedType;
+        if (this.selectedType == "multiple-choice") {
+            this.newQuestion.choices = JSON.stringify(this.choices);
+            var answer = new Choice();
+            answer.choice = this.mcAnswer;
+            this.newQuestion.answers = JSON.stringify([answer]);
+        }
+        else if (this.selectedType == "multiple-select") {
+            this.newQuestion.choices = JSON.stringify(this.choices);
+            var answers: Choice[] = [];
+            for (let answer of this.msAnswers) {
+                var choice = new Choice();
+                choice.choice = answer;
+                answers.push(choice);
+            }
+            this.newQuestion.answers = JSON.stringify(answers);
+        }
         this.moduleService.createQuestion(this.newQuestion)
             .then(question => {
                 this.newQuestion = null;
                 this.questions.push(question);
-                this.selectedType = null;
-                this.questions.sort(x => x.weight);
+                this.questions.sort((x, y) => x.weight - y.weight);
             });
     }
 
