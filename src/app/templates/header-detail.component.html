@@ -36,6 +36,7 @@
                 </p>
             </div>
         </div>
+        <button class="btn btn-default" (click)="deleteQuestion(question)">Delete Question</button>
     </div>
     <br />
     <div class="row" *ngIf="!newQuestion">
@@ -69,10 +70,16 @@
                     </div>
                     <div *ngIf="selectedType == 'multiple-choice' || selectedType == 'multiple-select'">
                         <div style="margin-left:20px;">
-                            <div class="form-group" *ngFor="let choice of choices; let i = index;">
+                            <div class="input-group" *ngFor="let choice of choices; let i = index;" style="margin-top: 10px;">
                                 <label for="choice">Choice {{convertAscii(i)}}</label>
                                 <input type="text" class="form-control" id="choice" required [(ngModel)]="choices[i].choice" name="choice{{i}}" />
+                                <span class="input-group-btn">
+                                    <button (click) = "removeChoice(i)" class="btn btn-default" type="button" style="margin-top:25px;">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                </button>
+                                </span>
                             </div>
+                            <br />
                             <button type="button" class="btn btn-default" (click)="addChoice()">Add Choice</button>
                             <br />
                             <br />

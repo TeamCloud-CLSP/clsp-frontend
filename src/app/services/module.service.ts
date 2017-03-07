@@ -73,4 +73,12 @@ export class ModuleService {
             .then(response => response.json() as Question)
             .catch(this.handleError);
     }
+
+    deleteQuestion(questionId: number): Promise<void> {
+        const url = `${this.designerUrl}/item/${questionId}`;
+        return this.http.delete(url, this.options)
+            .toPromise()
+            .then(() => null)
+            .catch(this.handleError);
+    }
 }

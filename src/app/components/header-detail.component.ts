@@ -74,6 +74,11 @@ export class HeaderDetailComponent implements OnInit {
         this.newQuestion = new Question();
     }
 
+    deleteQuestion(question: Question): void {
+        this.moduleService.deleteQuestion(question.id)
+            .then(() => this.questions = this.questions.filter(x => x != question));
+    }
+
     cancel(): void {
         this.newQuestion = null;
     }
@@ -82,6 +87,10 @@ export class HeaderDetailComponent implements OnInit {
         var newChoice = new Choice();
         newChoice.choice = "New Choice"
         this.choices.push(newChoice);
+    }
+
+    removeChoice(index: number): void {
+        this.choices.splice(index, 1);
     }
 
     convertAscii(num: number): String {

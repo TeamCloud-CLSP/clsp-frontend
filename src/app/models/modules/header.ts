@@ -6,6 +6,7 @@ export class Header {
 }
 
 export class Question {
+    id: number;
     heading_id: number;
     content: string;
     type: string;
