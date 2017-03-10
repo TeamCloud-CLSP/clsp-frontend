@@ -1,20 +1,32 @@
 <div id="cultural-notes-module">
-    <style>
-        .highlight {
-            background-color: #222222;
-            color: #F5F5F5;
-            padding-left: 2px;
-            padding-right: 2px;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .pop-floating {
-            background-color: purple;
-            position: absolute;
-        }
-    </style>
-
-    <p *ngIf="processedLyrics" [innerHTML]="processedLyrics"></p>
-    <button class="btn btn-default">Save</button>
+    <!--<textarea [(ngModel)]="currentDescription">-->
+    <!--</textarea>-->
+    <!--<button (click)="addAnnotation()">Annotate</button>-->
+    <!--<p *ngIf="currentPhrase">Annotating: {{currentPhrase}}</p>-->
+    <!--<button class="btn btn-default">Save</button>-->
+    <h2>Lyrics</h2>
+    <!--<div [froalaEditor]>Hello, Froala!</div>-->
+    <div *ngIf="!editing" (mouseup)="startAnnotate()">
+        <p *ngFor="let line of lines">
+        <span *ngFor="let word of line">
+            <span *ngIf="phrases[word]">
+                <clsp-annotation [content]="word" [description]="phrases[word]"></clsp-annotation>
+            </span>
+            <span *ngIf="!phrases[word]">
+                {{word}}
+            </span>
+        </span>
+        </p>
+        <button class="btn btn-default" (click)="startEdit()">Edit</button>
+        <div *ngIf="annotating">
+            <span>Current phrase: {{currentPhrase}}</span>
+            <textarea class="form-control" [value]="currentDescription"></textarea>
+            <button (click)="saveAnnotation()" class="btn btn-default">Annotate</button>
+        </div>
+    </div>
+    <div *ngIf="editing">
+        <button class="btn btn-default" (click)="cancelEdit()">Cancel</button>
+        <textarea class="form-control" [value]="this.song.lyrics"></textarea>
+        <button class="btn btn-default">Save</button>
+    </div>
 </div>

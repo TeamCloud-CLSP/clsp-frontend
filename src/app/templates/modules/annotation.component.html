@@ -1,1 +1,16 @@
-<span (click)="onClickAnnotation($event.target)" class="highlight">{{content}}<div style="display: none;" class="pop-floating">{{description}}</div></span>
+<style>
+    .highlight {
+        background-color: #222222;
+        color: #F5F5F5;
+        padding-left: 2px;
+        padding-right: 2px;
+        cursor: pointer;
+    }
+
+    .highlight:hover {
+        background-color: lightgrey;
+        color: black;
+    }
+
+</style>
+<span (click)="onClickAnnotation($event.target)" class="highlight" placement="top" popover="{{description}}"> {{content}}</span>

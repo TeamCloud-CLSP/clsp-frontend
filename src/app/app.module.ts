@@ -27,6 +27,7 @@ import { ProfessorDashboardComponent } from "./components/professor-dashboard.co
 import { UnitDetailComponent } from "./components/unit-detail.component";
 import { HeaderDetailComponent } from "./components/header-detail.component"
 
+import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
 
 //Routing
 import {AppRoutingModule} from './app-routing.module';
@@ -35,6 +36,7 @@ import {SongDetailComponent} from "./components/song-detail.component";
 import {CulturalNotesComponent} from "./components/modules/culturalnotes.component";
 import {DiscussionAndWritingComponent} from "./components/modules/discussionandwriting.component";
 import {AnnotationComponent} from "./components/modules/annotation.component";
+import {PopoverModule} from "ng2-bootstrap";
 
 @NgModule({
     imports: [
@@ -42,7 +44,10 @@ import {AnnotationComponent} from "./components/modules/annotation.component";
         FormsModule,
         AppRoutingModule,
         HttpModule,
-        InMemoryWebApiModule.forRoot(InMemoryDataService, { passThruUnknownUrl: true })
+        InMemoryWebApiModule.forRoot(InMemoryDataService, { passThruUnknownUrl: true }),
+        PopoverModule.forRoot(),
+        FroalaEditorModule.forRoot(),
+        FroalaViewModule.forRoot()
     ],
     declarations: [
         AppComponent,
@@ -60,7 +65,10 @@ import {AnnotationComponent} from "./components/modules/annotation.component";
         CulturalNotesComponent,
         DiscussionAndWritingComponent,
         AnnotationComponent,
-        HeaderDetailComponent
+        HeaderDetailComponent,
+    ],
+    entryComponents: [
+        AnnotationComponent
     ],
     providers: [
         CourseService,

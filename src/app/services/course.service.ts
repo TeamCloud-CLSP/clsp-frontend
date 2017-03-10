@@ -5,12 +5,13 @@ import {Course, Language, Unit, Song, Module} from '../models/course'
 import {ProfRegistration} from '../models/profregistration'
 import {CulturalNoteKeywords} from "../models/modules/CulturalNoteKeywords";
 import {GlobalParameters} from '../global-parameters';
+import {CulturalNote} from "../models/modules/CulturalNote";
 @Injectable()
 export class CourseService {
     private parameters = new GlobalParameters();
     private designerUrl = this.parameters.url + "/api/designer";
-    private headers = new Headers({ 'Content-Type': 'application/json' });
-    private options = new RequestOptions({ withCredentials: true, headers: this.headers })
+    private headers = new Headers({'Content-Type': 'application/json'});
+    private options = new RequestOptions({withCredentials: true, headers: this.headers})
 
     constructor(private http: Http) {
     }
@@ -149,7 +150,7 @@ export class CourseService {
     updateUnit(unit: Unit): Promise<Unit> {
         const url = `${this.designerUrl}/unit/${unit.id}`;
         return this.http.post(url,
-            JSON.stringify({ name: unit.name, description: unit.description, weight: unit.weight }),
+            JSON.stringify({name: unit.name, description: unit.description, weight: unit.weight}),
             this.options)
             .toPromise()
             .then(response => response.json() as Unit)
@@ -202,27 +203,91 @@ export class CourseService {
             .catch(this.handleError);
     }
 
-getKeywordsForSong(songId: number): Promise < null > {
-    const url = `${this.designerUrl}/song/${songId}/keywords`;
-    return this.http.get(url, this.options)
-        .toPromise()
-        .then(response => response.json().data as CulturalNoteKeywords[])
-        .catch(this.handleError);
-}
+    updateSong(song: Song): Promise<null> {
+        const url = `${this.designerUrl}/song/${song.id}`;
+        return this.http.post(url,
+            JSON.stringify({
+                title: song.title,
+                album: song.album,
+                artist: song.artist,
+                description: song.description,
+                lyrics: song.lyrics,
+                file_name: song.file_name,
+                file_type: song.file_type,
+                embed: song.embed,
+                weight: song.weight,
+                unit_id: song.unit_id
+            }),
+            this.options)
+            .toPromise()
+            .then(response => response.json() as Unit)
+            .catch(this.handleError);
+    }
 
-getModules(songId: number): Promise < Module[] > {
-    const url = `${this.designerUrl}/song/${songId}/modules`;
-    return this.http.get(url, this.options)
-        .toPromise()
-        .then(response => response.json().data as Module[])
-        .catch(this.handleError);
-}
+    createCulturalNote(note: CulturalNote): Promise<CulturalNote> {
+        const url = `${this.designerUrl}/keyword`;
+        return this.http.post(url,
+            JSON.stringify({
+                song_id: note.songId,
+                phrase: note.phrase,
+                description: note.description
+            }),
+            this.options)
+            .toPromise()
+            .then(response => response.json() as CulturalNote)
+            .catch(this.handleError);
+    }
 
-deleteUnit(unit: Unit): Promise < null > {
-    const url = `${this.designerUrl}/unit/${unit.id}`;
-    return this.http.delete(url, this.options)
-        .toPromise()
-        .then(() => null)
-        .catch(this.handleError);
-}
+    // updateCulturalNote(note: any): Promise<null> {
+    // const url = `${this.designerUrl}/song/${song.id}`;
+    // return this.http.post(url,
+    //     JSON.stringify({
+    //         title: song.title,
+    //         album: song.album,
+    //         artist: song.artist,
+    //         description: song.description,
+    //         lyrics: song.lyrics,
+    //         file_name: song.file_name,
+    //         file_type: song.file_type,
+    //         embed: song.embed,
+    //         weight: song.weight,
+    //         unit_id: song.unit_id
+    //     }),
+    //     this.options)
+    //     .toPromise()
+    //     .then(response => response.json() as Unit)
+    //     .catch(this.handleError);
+    // }
+
+    getCulturalNote(songId: number): Promise < CulturalNote[] > {
+        const url = `${this.designerUrl}/song/${songId}/keywords`;
+        return this.http.get(url, this.options)
+            .toPromise()
+            .then(response => {
+                let data = response.json().data as CulturalNote[];
+                for (let i = 0; i < data.length; i++) {
+                    data[i].songId = songId;
+                }
+                return data;
+            })
+            .catch(error => {
+                console.log("ERRORR");
+            });
+    }
+
+    getModules(songId: number): Promise < Module[] > {
+        const url = `${this.designerUrl}/song/${songId}/modules`;
+        return this.http.get(url, this.options)
+            .toPromise()
+            .then(response => response.json().data as Module[])
+            .catch(this.handleError);
+    }
+
+    deleteUnit(unit: Unit): Promise < null > {
+        const url = `${this.designerUrl}/unit/${unit.id}`;
+        return this.http.delete(url, this.options)
+            .toPromise()
+            .then(() => null)
+            .catch(this.handleError);
+    }
 }

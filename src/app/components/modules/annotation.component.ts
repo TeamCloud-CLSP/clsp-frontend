@@ -24,9 +24,12 @@ export class AnnotationComponent implements OnInit {
 
     ngOnInit() {
         console.log("annotation created");
+        console.log(this.content);
+        // console.log($('what'));
     }
 
     onClickAnnotation(element: HTMLElement) {
+        console.log(this.content);
         let popover = element.querySelector('.pop-floating');
         // if(popover.style.display == "inline-block") {
         //     popover.style.display = "none";
