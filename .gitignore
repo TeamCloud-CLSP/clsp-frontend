@@ -61,3 +61,6 @@ src/app/**/*.map
 src/aot/*
 src/dist/*
 *.log
+src\app\global-parameters.ts
+src/app/global-parameters.ts
+src/app/global-parameters.ts

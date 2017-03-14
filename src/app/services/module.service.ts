@@ -6,6 +6,7 @@ import {ProfRegistration} from '../models/profregistration'
 import {CulturalNoteKeywords} from "../models/modules/CulturalNoteKeywords";
 import {GlobalParameters} from '../global-parameters';
 import {Header, Question} from '../models/modules/header';
+import {CulturalNote} from "../models/modules/CulturalNote";
 @Injectable()
 export class ModuleService {
     private parameters = new GlobalParameters();
@@ -79,6 +80,122 @@ export class ModuleService {
         return this.http.delete(url, this.options)
             .toPromise()
             .then(() => null)
+            .catch(this.handleError);
+    }
+
+    getModuleCN(songId: number): Promise<any> {
+        const url = `${this.designerUrl}/song/${songId}/module_cn`;
+        return this.http.get(url, this.options)
+            .toPromise()
+            .then(response => response.json().data as Question[])
+            .catch(this.handleError);
+    }
+
+    setPasswordCN(songId: number, password: string): Promise<null> {
+        const url = `${this.designerUrl}/song/${songId}/module_cn/edit`;
+        var has_password = true;
+        if (password == "") {
+            has_password = false;
+        }
+        return this.http.post(url,
+            JSON.stringify({
+                password: password,
+                has_password: has_password,
+                is_enabled: true
+            }),
+            this.options)
+            .toPromise()
+            .then(response => response.json() as Module)
+            .catch(this.handleError);
+    }
+
+    setPasswordDW(songId: number, password: string): Promise<null> {
+        const url = `${this.designerUrl}/song/${songId}/module_dw/edit`;
+        var has_password = true;
+        if (password == "") {
+            has_password = false;
+        }
+        return this.http.post(url,
+            JSON.stringify({
+                password: password,
+                has_password: has_password,
+                is_enabled: true
+            }),
+            this.options)
+            .toPromise()
+            .then(response => response.json() as Module)
+            .catch(this.handleError);
+    }
+
+    setPasswordGE(songId: number, password: string): Promise<null> {
+        const url = `${this.designerUrl}/song/${songId}/module_ge/edit`;
+        var has_password = true;
+        if (password == "") {
+            has_password = false;
+        }
+        return this.http.post(url,
+            JSON.stringify({
+                password: password,
+                has_password: has_password,
+                is_enabled: true
+            }),
+            this.options)
+            .toPromise()
+            .then(response => response.json() as Module)
+            .catch(this.handleError);
+    }
+
+    setPasswordLS(songId: number, password: string): Promise<null> {
+        const url = `${this.designerUrl}/song/${songId}/module_ls/edit`;
+        var has_password = true;
+        if (password == "") {
+            has_password = false;
+        }
+        return this.http.post(url,
+            JSON.stringify({
+                password: password,
+                has_password: has_password,
+                is_enabled: true
+            }),
+            this.options)
+            .toPromise()
+            .then(response => response.json() as Module)
+            .catch(this.handleError);
+    }
+
+    setPasswordLT(songId: number, password: string): Promise<null> {
+        const url = `${this.designerUrl}/song/${songId}/module_lt/edit`;
+        var has_password = true;
+        if (password == "") {
+            has_password = false;
+        }
+        return this.http.post(url,
+            JSON.stringify({
+                password: password,
+                has_password: has_password,
+                is_enabled: true
+            }),
+            this.options)
+            .toPromise()
+            .then(response => response.json() as Module)
+            .catch(this.handleError);
+    }
+
+    setPasswordQU(songId: number, password: string): Promise<null> {
+        const url = `${this.designerUrl}/song/${songId}/module_qu/edit`;
+        var has_password = true;
+        if (password == "") {
+            has_password = false;
+        }
+        return this.http.post(url,
+            JSON.stringify({
+                password: password,
+                has_password: has_password,
+                is_enabled: true
+            }),
+            this.options)
+            .toPromise()
+            .then(response => response.json() as Module)
             .catch(this.handleError);
     }
 }

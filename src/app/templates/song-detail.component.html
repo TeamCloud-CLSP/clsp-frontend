@@ -19,6 +19,16 @@
                     </div>
                     <div *ngIf="song">
                         <div class="panel-body container" [ngSwitch]="module.module_type">
+                            <div *ngIf="!passwordEdit" class="row">
+                                <label for="password">Password</label>
+                                <p>{{module.password}}</p>
+                                <button (click)="changePassword()" class="btn btn-default">Change Password</button>
+                            </div>
+                            <div *ngIf="passwordEdit" class="row">
+                                <label for="password">Password</label>
+                                <input [(ngModel)]="module.password" class="form-control " name="password" id="password" />
+                                <button class="btn btn-default" (click)="setPassword(module.module_type)">Set Password</button><button class="btn btn-default" (click)="cancelPassEdit()">Cancel</button>
+                            </div>
                             <div *ngSwitchCase="'module_cn'">
                                 <clsp-cultural-notes [song]="song"></clsp-cultural-notes>
                             </div>

@@ -6,6 +6,7 @@ import {CourseService} from '../services/course.service';
 import {Course, Unit, Song, Module} from '../models/course';
 import {Router}   from '@angular/router';
 import 'rxjs/add/operator/switchMap';
+import {ModuleService} from "../services/module.service";
 
 @Component({
     moduleId: module.id,
@@ -17,14 +18,17 @@ export class SongDetailComponent implements OnInit {
     song: Song;
     unit: Unit;
     modules: Module[];
+    passwords: string[];
     courseName: string;
     selectors: any;
+    passwordEdit: boolean;
 
     constructor(private courseService: CourseService,
-        private route: ActivatedRoute,
-        private location: Location,
-        private sanitizer: DomSanitizer,
-        private router: Router) {
+                private moduleService: ModuleService,
+                private route: ActivatedRoute,
+                private location: Location,
+                private sanitizer: DomSanitizer,
+                private router: Router) {
     }
 
     ngOnInit() {
@@ -46,6 +50,13 @@ export class SongDetailComponent implements OnInit {
                 this.modules = modules;
             });
 
+       /* var i = 0;
+        for (i = 0; i < 6; i++) {
+            this.passwords[i] = this.modules[i].password;
+        }*/
+
+        this.passwordEdit = false;
+
 
         this.route.params
             .switchMap((params: Params) => this.courseService.getUnit(+params['unit_id']))
@@ -58,5 +69,42 @@ export class SongDetailComponent implements OnInit {
                     this.courseName = course.name;
                 });
             });
+    }
+
+    setPassword(type: string) {
+        if (type == "module_cn") {
+            this.moduleService.setPasswordCN(this.song.id, this.modules[0].password).then(value => {
+                console.log("password updated");
+            });
+        } else if (type == "module_dw") {
+            this.moduleService.setPasswordDW(this.song.id, this.modules[1].password).then(value => {
+                console.log("password updated");
+            });
+        } else if (type == "module_ge") {
+            this.moduleService.setPasswordGE(this.song.id, this.modules[2].password).then(value => {
+                console.log("password updated");
+            });
+        } else if (type == "module_ls") {
+            this.moduleService.setPasswordLS(this.song.id, this.modules[3].password).then(value => {
+                console.log("password updated");
+            });
+        } else if (type == "module_lt") {
+            this.moduleService.setPasswordLT(this.song.id, this.modules[4].password).then(value => {
+                console.log("password updated");
+            });
+        } else if (type == "module_qu") {
+            this.moduleService.setPasswordQU(this.song.id, this.modules[5].password).then(value => {
+                console.log("password updated");
+            });
+        }
+        this.passwordEdit = false;
+    }
+
+    changePassword() {
+        this.passwordEdit = true;
+    }
+
+    cancelPassEdit() {
+        this.passwordEdit = false;
     }
 }
