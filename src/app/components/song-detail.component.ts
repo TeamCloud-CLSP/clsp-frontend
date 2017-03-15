@@ -28,9 +28,7 @@ export class SongDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.selectors = {
-            "module_cn": "clsp-cultural-notes"
-        };
+
         console.log(this.route.params);
         this.route.params
             .switchMap((params: Params) => this.courseService.getSong(+params['id']))
@@ -39,11 +37,19 @@ export class SongDetailComponent implements OnInit {
                 this.song = song;
             });
 
+        let names = {
+            'module_cn': 'Cultural Notes',
+            'module_dw': 'Discussion and Writing',
+        };
+
         this.route.params
             .switchMap((params: Params) => this.courseService.getModules(+params['id']))
             .subscribe(modules => {
                 console.log(modules);
                 this.modules = modules;
+                for (let i = 0; i < this.modules.length; i++) {
+                    this.modules[i].friendly_name = names[this.modules[i].module_type] || this.modules[i].module_type;
+                }
             });
 
 

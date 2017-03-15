@@ -48,7 +48,7 @@ export class CulturalNotesComponent implements OnInit {
             }
             this.phrases = {};
             for (let i = 0; i < notes.length; i++) {
-                this.phrases[notes[i].phrase] = notes[i].description;
+                this.phrases[notes[i].phrase] = notes[i];
             }
         })
     }
@@ -102,6 +102,10 @@ export class CulturalNotesComponent implements OnInit {
         ref.instance.description = this.currentDescription;
         ref.instance.content = this.currentPhrase;
         ref.changeDetectorRef.detectChanges();
+    }
+
+    updateLyrics() {
+        this.courseService.updateSong(this.song);
     }
 
     mouseUp() {

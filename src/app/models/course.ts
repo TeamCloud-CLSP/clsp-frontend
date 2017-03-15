@@ -42,4 +42,5 @@ export class Module {
     has_password: boolean;
     song_id: number;
     module_type: string;
+    friendly_name: string;
 }

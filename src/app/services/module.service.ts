@@ -10,8 +10,8 @@ import {Header, Question} from '../models/modules/header';
 export class ModuleService {
     private parameters = new GlobalParameters();
     private designerUrl = this.parameters.url + "/api/designer";
-    private headers = new Headers({ 'Content-Type': 'application/json' });
-    private options = new RequestOptions({ withCredentials: true, headers: this.headers })
+    private headers = new Headers({'Content-Type': 'application/json'});
+    private options = new RequestOptions({withCredentials: true, headers: this.headers});
 
     constructor(private http: Http) {
     }
