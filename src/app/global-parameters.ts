@@ -1,4 +1,4 @@
 export class GlobalParameters {
-    url = "http://localhost"
+    url = "http://localhost:8000"
     constructor() { }
 }

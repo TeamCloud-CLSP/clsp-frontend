@@ -31,7 +31,7 @@ import { HeaderDetailComponent } from "./components/header-detail.component"
 import {AppRoutingModule} from './app-routing.module';
 import {ProfessorClassComponent} from "./components/professor-class.component";
 import {SongDetailComponent} from "./components/song-detail.component";
-import {CulturalNotesComponent} from "./components/modules/culturalnotes.component";
+import {CulturalNotesComponent, SafeHtml} from "./components/modules/culturalnotes.component";
 import {DiscussionAndWritingComponent} from "./components/modules/discussionandwriting.component";
 import {AnnotationComponent} from "./components/modules/annotation.component";
 import {PopoverModule} from "ng2-bootstrap";
@@ -62,6 +62,7 @@ import {PopoverModule} from "ng2-bootstrap";
         DiscussionAndWritingComponent,
         AnnotationComponent,
         HeaderDetailComponent,
+        SafeHtml
     ],
     entryComponents: [
         AnnotationComponent

@@ -7,26 +7,62 @@
     <h2>Lyrics</h2>
     <!--<div [froalaEditor]>Hello, Froala!</div>-->
     <div *ngIf="!editing" (mouseup)="startAnnotate()">
-        <p *ngFor="let line of lines">
-        <span *ngFor="let word of line">
-            <span *ngIf="phrases[word]">
-                <clsp-annotation [note]="phrases[word]"></clsp-annotation>
+        <p *ngIf="showLyrics == true && notes">
+            <span *ngFor="let piece of lyricPieces">
+                <span *ngIf="checkPiece(piece)">
+                    {{piece}}
+                </span>
+            <span *ngIf="!checkPiece(piece)">
+                    <clsp-annotation [note]="notes[+piece]"></clsp-annotation>
+                </span>
             </span>
-            <span *ngIf="!phrases[word]">
-                {{word}}
-            </span>
-        </span>
         </p>
+
         <button class="btn btn-default" (click)="startEdit()">Edit</button>
+        <br />
         <div *ngIf="annotating">
-            <span>Current phrase: {{currentPhrase}}</span>
-            <textarea class="form-control" [value]="currentDescription"></textarea>
+            <h2>Add Annotations</h2>
+            <span><b>Current phrase:</b> {{currentPhrase}}</span>
+            <textarea [(ngModel)]="currentDescription" class="form-control" [value]="currentDescription"></textarea>
+            <br />
             <button (click)="saveAnnotation()" class="btn btn-default">Annotate</button>
+        </div>
+        <br />
+        <br />
+        <div>
+            <h2>My Annotations</h2>
+            <table class="table">
+                <tr>
+                    <th>
+                        Phrase
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+                <tr *ngFor="let annotation of notes;let i = index">
+                    <td>
+                        {{annotation.phrase}}
+                    </td>
+                    <td>
+                        <input class="form-control" [(ngModel)]="notes[i].description" />
+                    </td>
+                    <td>
+                        <button (click)="updateAnnotation(i)" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     <div *ngIf="editing">
-        <button class="btn btn-default" (click)="cancelEdit()">Cancel</button>
-        <textarea class="form-control" [value]="this.song.lyrics"></textarea>
-        <button (click)="updateLyrics()" class="btn btn-default">Save</button>
+        <textarea class="form-control" [value]="this.song.lyrics" style="resize:none;" rows="10" cols="40"></textarea>
+        <br />
+        <div class="btn-group" role="group">
+            <button class="btn btn-default" (click)="cancelEdit()">Cancel</button>
+            <button (click)="updateLyrics()" class="btn btn-default">Save</button>
+        </div>
     </div>
 </div>

@@ -16,15 +16,15 @@ export class AnnotationComponent implements OnInit {
     @Input() note: CulturalNote;
 
     constructor(
-                private route: ActivatedRoute,
-                private location: Location,
-                private sanitizer: DomSanitizer,
-                private router: Router) {
+        private route: ActivatedRoute,
+        private location: Location,
+        private sanitizer: DomSanitizer,
+        private router: Router) {
     }
 
     ngOnInit() {
-        console.log("annotation created");
-        console.log(this.note.phrase);
+        //console.log("annotation created");
+        //console.log(this.note.phrase);
         // console.log($('what'));
     }
 

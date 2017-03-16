@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ComponentFactoryResolver, ViewContainerRef, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ComponentFactoryResolver, ViewContainerRef, ViewChild, Pipe} from '@angular/core';
 import {ActivatedRoute, Params}   from '@angular/router';
 import {Location}                 from '@angular/common';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
@@ -9,11 +9,24 @@ import 'rxjs/add/operator/switchMap';
 import {AnnotationComponent} from "./annotation.component";
 import {CulturalNote} from "../../models/modules/CulturalNote";
 
+@Pipe({ name: 'safeHtml' })
+export class SafeHtml {
+    constructor(private sanitizer: DomSanitizer) { }
+
+    transform(html: any) {
+        return this.sanitizer.bypassSecurityTrustHtml(html);
+    }
+}
+
+
 @Component({
     moduleId: module.id,
+    pipes: [SafeHtml],
     selector: 'clsp-cultural-notes',
     templateUrl: '../../templates/modules/culturalnotes.component.html'
 })
+
+
 
 export class CulturalNotesComponent implements OnInit {
     @Input() song: Song;
@@ -24,37 +37,41 @@ export class CulturalNotesComponent implements OnInit {
     phrases: any;
     editing: boolean;
     annotating: boolean;
+    notes: CulturalNote[];
+    showLyrics: boolean;
+    lyricPieces: string[];
 
     constructor(private courseService: CourseService,
-                private route: ActivatedRoute,
-                private location: Location,
-                private sanitizer: DomSanitizer,
-                private router: Router,
-                private componentFactoryResolver: ComponentFactoryResolver,
-                private viewContainerRef: ViewContainerRef) {
+        private route: ActivatedRoute,
+        private location: Location,
+        private sanitizer: DomSanitizer,
+        private router: Router,
+        private componentFactoryResolver: ComponentFactoryResolver,
+        private viewContainerRef: ViewContainerRef) {
     }
 
     ngOnInit() {
+        this.showLyrics = false;
         this.editing = false;
         this.annotating = false;
         this.currentPhrase = "";
         this.currentDescription = "";
         this.courseService.getCulturalNote(this.song.id).then(notes => {
-            console.log(this.song.lyrics);
-            let lines = this.song.lyrics.split("\n");
-            this.lines = [];
-            for (let i = 0; i < lines.length; i++) {
-                this.lines[i] = lines[i].split(" ");
+            //console.log(this.song.lyrics);
+            var lyrics = this.song.lyrics;
+            this.notes = notes;
+            for (var i = 0; i < notes.length; i++) {
+                var test = "|" + i.toString() + "|";
+                lyrics = lyrics.split(notes[i].phrase).join(test);
             }
-            this.phrases = {};
-            for (let i = 0; i < notes.length; i++) {
-                this.phrases[notes[i].phrase] = notes[i];
-            }
+            this.lyricPieces = lyrics.split('|').filter(x => x != "");
+            console.log(this.lyricPieces);
+            this.showLyrics = true;
         })
     }
 
     startEdit() {
-        console.log("editing");
+        //console.log("editing");
         this.editing = true;
     }
 
@@ -77,7 +94,17 @@ export class CulturalNotesComponent implements OnInit {
         note.phrase = this.currentPhrase;
         note.songId = this.song.id;
         this.courseService.createCulturalNote(note).then(value => {
-            console.log("created");
+            this.currentDescription = "";
+            this.annotating = false;
+
+            this.notes.push(value);
+            var lyrics = this.song.lyrics;
+            for (var i = 0; i < this.notes.length; i++) {
+                var test = "|" + i.toString() + "|";
+                lyrics = lyrics.split(this.notes[i].phrase).join(test);
+            }
+            this.lyricPieces = lyrics.split('|').filter(x => x != "");
+
         })
     }
 
@@ -91,8 +118,12 @@ export class CulturalNotesComponent implements OnInit {
         let pieces = this.processedLyrics.split(this.currentPhrase);
         // this.processedLyrics = processed.replace(this.currentPhrase, "<span></span>");
         // console.log(this.processedLyrics);
-        console.log("heypo");
+        //console.log("heypo");
         // this.insertAnnotation(this.viewContainerRef);
+    }
+
+    updateAnnotation() {
+
     }
 
     insertAnnotation(before: ViewContainerRef) {
@@ -110,9 +141,13 @@ export class CulturalNotesComponent implements OnInit {
 
     mouseUp() {
         let selected = this.getSelectionText().trim();
-        console.log(selected);
+        //console.log(selected);
         this.currentPhrase = selected;
 
+    }
+
+    checkPiece(piece: string) {
+        return isNaN(parseInt(piece));
     }
 
     getSelectionText(): string {
