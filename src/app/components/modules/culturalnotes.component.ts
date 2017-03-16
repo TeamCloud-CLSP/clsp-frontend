@@ -99,8 +99,8 @@ export class CulturalNotesComponent implements OnInit {
         const factory = this.componentFactoryResolver.resolveComponentFactory(
             AnnotationComponent);
         let ref = before.createComponent(factory);
-        ref.instance.description = this.currentDescription;
-        ref.instance.content = this.currentPhrase;
+        // ref.instance.description = this.currentDescription;
+        // ref.instance.content = this.currentPhrase;
         ref.changeDetectorRef.detectChanges();
     }
 
