@@ -19,7 +19,7 @@
                     </div>
                     <div *ngIf="song">
                         <div class="panel-body container" [ngSwitch]="module.module_type">
-                            <div *ngIf="!passwordEdit" class="row">
+                            <div *ngIf="!passwordEdit">
                                 <label for="password">Password</label>
                                 <p>{{module.password}}</p>
                                 <button (click)="changePassword()" class="btn btn-default">Change Password</button>
