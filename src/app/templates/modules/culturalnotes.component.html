@@ -10,7 +10,7 @@
         <p *ngFor="let line of lines">
         <span *ngFor="let word of line">
             <span *ngIf="phrases[word]">
-                <clsp-annotation [content]="word" [description]="phrases[word]"></clsp-annotation>
+                <clsp-annotation [note]="phrases[word]"></clsp-annotation>
             </span>
             <span *ngIf="!phrases[word]">
                 {{word}}
@@ -27,6 +27,6 @@
     <div *ngIf="editing">
         <button class="btn btn-default" (click)="cancelEdit()">Cancel</button>
         <textarea class="form-control" [value]="this.song.lyrics"></textarea>
-        <button class="btn btn-default">Save</button>
+        <button (click)="updateLyrics()" class="btn btn-default">Save</button>
     </div>
 </div>

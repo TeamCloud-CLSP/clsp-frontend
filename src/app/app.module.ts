@@ -27,8 +27,6 @@ import { ProfessorDashboardComponent } from "./components/professor-dashboard.co
 import { UnitDetailComponent } from "./components/unit-detail.component";
 import { HeaderDetailComponent } from "./components/header-detail.component"
 
-import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
-
 //Routing
 import {AppRoutingModule} from './app-routing.module';
 import {ProfessorClassComponent} from "./components/professor-class.component";
@@ -48,8 +46,6 @@ import {MediaService} from "./services/media.service";
         HttpModule,
         InMemoryWebApiModule.forRoot(InMemoryDataService, { passThruUnknownUrl: true }),
         PopoverModule.forRoot(),
-        FroalaEditorModule.forRoot(),
-        FroalaViewModule.forRoot()
     ],
     declarations: [
         AppComponent,

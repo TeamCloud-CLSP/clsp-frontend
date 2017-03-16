@@ -27,7 +27,6 @@
       'rxjs':                      'npm:rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
         'ng2-bootstrap':              'node_modules/ng2-bootstrap',
-        'angular2-froala-wysiwyg': 'node_modules/angular2-froala-wysiwyg/'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -38,7 +37,6 @@
         defaultExtension: 'js'
       },
         'ng2-bootstrap':              { format: 'cjs', main: 'bundles/ng2-bootstrap.umd.js', defaultExtension: 'js' },
-        'angular2-froala-wysiwyg':              { format: 'cjs', main: 'bundles/angular2-froala-wysiwyg.umd.js', defaultExtension: 'js' },
 
     }
   });
