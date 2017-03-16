@@ -30,7 +30,7 @@ export class DiscussionAndWritingComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log(this.songId);
+        //console.log(this.songId);
         this.moduleService.getDWHeaders(this.songId)
             .then(headers => {
                 this.headers = headers;
@@ -59,6 +59,6 @@ export class DiscussionAndWritingComponent implements OnInit {
     }
 
     onChange(newSelection: string) {
-        console.log(newSelection);
+        //console.log(newSelection);
     }
 }
