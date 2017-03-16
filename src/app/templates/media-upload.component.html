@@ -1,7 +1,14 @@
 <h1>Media Content Upload</h1>
 <form ng-app="fileUpload" ng-controller="MyCtrl" name="form">
-    <div class="button" ngf-select ng-model="file" ngf-multiple="false">Select</div>
-    Drop files: <div ngf-drop ng-model="file" class="drop-box">Drop</div>
+    <input type="file" placeholder="Upload file">
+    <label for="name">Name</label>
     <input class="form-control " name="name" id="name" />
-    <button type="submit" ng-click= submit(name) >Submit</button>
+    <button type="submit" (click)= uploadFile(name) >Submit</button>
 </form>
+
+<h2>Uploaded Files</h2>
+<div class="fileNames">
+    <div *ngFor="let name of fileNames" class="row">
+        {{name}}
+    </div>
+</div>

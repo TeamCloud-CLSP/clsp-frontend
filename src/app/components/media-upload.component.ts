@@ -12,7 +12,10 @@ import {Router} from "@angular/router";
     templateUrl: '../templates/media-upload.component.html'
 })
 
+
 export class MediaUploadComponent implements OnInit {
+
+    fileNames: string[];
 
     constructor(
         private mediaService: MediaService,
@@ -20,10 +23,18 @@ export class MediaUploadComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        this.getFiles();
+    }
 
+    getFiles(): void {
+        this.mediaService.getFiles().then(fileNames => this.fileNames = fileNames);
     }
 
     uploadFile(name: string) {
-
+        this.mediaService.addFile(name)
+            .then(name => {
+                this.fileNames.push(name);
+            });
+        this.getFiles();
     }
 }
