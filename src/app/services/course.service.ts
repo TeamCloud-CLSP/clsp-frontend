@@ -11,7 +11,7 @@ export class CourseService {
     private parameters = new GlobalParameters();
     private designerUrl = this.parameters.url + "/api/designer";
     private headers = new Headers({'Content-Type': 'application/json'});
-    private options = new RequestOptions({withCredentials: true, headers: this.headers})
+    private options = new RequestOptions({withCredentials: true, headers: this.headers});
 
     constructor(private http: Http) {
     }
@@ -168,6 +168,8 @@ export class CourseService {
 
     getSong(songId: number): Promise<Song> {
         const url = `${this.designerUrl}/song/${songId}`;
+        console.log("song options");
+        console.log(this.options);
         return this.http.get(url, this.options)
             .toPromise()
             .then(response => response.json() as Song)
@@ -205,6 +207,7 @@ export class CourseService {
 
     updateSong(song: Song): Promise<null> {
         const url = `${this.designerUrl}/song/${song.id}`;
+
         return this.http.post(url,
             JSON.stringify({
                 title: song.title,
@@ -226,12 +229,14 @@ export class CourseService {
 
     createCulturalNote(note: CulturalNote): Promise<CulturalNote> {
         const url = `${this.designerUrl}/keyword`;
+        let data = JSON.stringify({
+            song_id: note.songId,
+            phrase: note.phrase,
+            description: note.description
+        });
+        console.log(data);
         return this.http.post(url,
-            JSON.stringify({
-                song_id: note.songId,
-                phrase: note.phrase,
-                description: note.description
-            }),
+            data,
             this.options)
             .toPromise()
             .then(response => response.json() as CulturalNote)

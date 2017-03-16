@@ -1,7 +1,35 @@
+<style>
+    .clsp-disabled-cover {
+        position: relative;
+        float: left;
+        cursor: pointer;
+    }
+
+    .clsp-disabled-cover:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.5);
+        -moz-transition: background .1s linear;
+        -webkit-transition: background .1s linear;
+        -o-transition: background .1s linear;
+        transition: background .1s linear;
+    }
+
+    /*.clsp-disabled-cover:hover:before {*/
+        /*background: none;*/
+    /*}*/
+</style>
+
 <div>
     <div class="row" *ngIf="courseName">
         <p>
-            <a href="course/{{unit.course_id}}">{{courseName}}</a> >> <a href="unit/{{unit.id}}">{{unit.name}}</a> >> <b *ngIf="song">{{song.title}}</b>
+            <a href="course/{{unit.course_id}}">{{courseName}}</a> >> <a href="unit/{{unit.id}}">{{unit.name}}</a> >> <b
+                *ngIf="song">{{song.title}}</b>
         </p>
     </div>
     <div class="row" *ngIf="courseName">
@@ -10,14 +38,15 @@
     <div *ngIf="courseName">
         <div *ngIf="modules">
             <div *ngFor="let module of modules" class="row">
-                <br />
+                <br/>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">{{module.module_type}}                    <button class="btn btn-default">Enable</button>
-                            </h3>
+                        <h3 class="panel-title">{{module.friendly_name}}
+                            <button class="btn btn-default">Enable</button>
+                        </h3>
                         <span class="pull-right clickable glyphicon glyphicon-remove" data-effect="fadeOut"></span>
                     </div>
-                    <div *ngIf="song">
+                    <div *ngIf="song" >
                         <div class="panel-body container" [ngSwitch]="module.module_type">
                             <div *ngIf="!passwordEdit">
                                 <label for="password">Password</label>
@@ -33,7 +62,8 @@
                                 <clsp-cultural-notes [song]="song"></clsp-cultural-notes>
                             </div>
                             <div *ngSwitchCase="'module_dw'">
-                                <clsp-discussion-and-writing [songId]="song.id" [unitId]="unit.id"></clsp-discussion-and-writing>
+                                <clsp-discussion-and-writing [songId]="song.id"
+                                                             [unitId]="unit.id"></clsp-discussion-and-writing>
                             </div>
                             <div *ngSwitchDefault>default</div>
                         </div>

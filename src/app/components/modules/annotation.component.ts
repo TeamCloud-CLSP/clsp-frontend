@@ -4,6 +4,7 @@ import {Location}                 from '@angular/common';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {Router}   from '@angular/router';
 import 'rxjs/add/operator/switchMap';
+import {CulturalNote} from "../../models/modules/CulturalNote";
 
 @Component({
     moduleId: module.id,
@@ -12,8 +13,7 @@ import 'rxjs/add/operator/switchMap';
 })
 
 export class AnnotationComponent implements OnInit {
-    @Input() content: string;
-    @Input() description: string;
+    @Input() note: CulturalNote;
 
     constructor(
                 private route: ActivatedRoute,
@@ -24,12 +24,12 @@ export class AnnotationComponent implements OnInit {
 
     ngOnInit() {
         console.log("annotation created");
-        console.log(this.content);
+        console.log(this.note.phrase);
         // console.log($('what'));
     }
 
     onClickAnnotation(element: HTMLElement) {
-        console.log(this.content);
+        // console.log(this.content);
         let popover = element.querySelector('.pop-floating');
         // if(popover.style.display == "inline-block") {
         //     popover.style.display = "none";
