@@ -122,8 +122,11 @@ export class CulturalNotesComponent implements OnInit {
         // this.insertAnnotation(this.viewContainerRef);
     }
 
-    updateAnnotation() {
-
+    updateAnnotation(index: number) {
+        this.courseService.updateCulturalNotes(this.notes[index]).then(
+            note => {
+            }
+        )
     }
 
     insertAnnotation(before: ViewContainerRef) {

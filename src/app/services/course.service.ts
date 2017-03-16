@@ -280,6 +280,21 @@ getCulturalNote(songId: number): Promise < CulturalNote[] > {
         });
 }
 
+updateCulturalNotes(note: CulturalNote): Promise < CutluralNote > {
+    const url = `${this.designerUrl}/keyword/${note.id}`;
+    return this.http.post(
+        url,
+        JSON.stringify({
+            phrase: note.phrase,
+            description: note.description
+        }),
+        this.options
+    )
+        .toPromise()
+        .then(response => response.json() as CulturalNote)
+        .catch(this.handleError);
+}
+
 getModules(songId: number): Promise < Module[] > {
     const url = `${this.designerUrl}/song/${songId}/modules`;
     return this.http.get(url, this.options)
