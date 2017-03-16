@@ -18,10 +18,10 @@ export class SongDetailComponent implements OnInit {
     song: Song;
     unit: Unit;
     modules: Module[];
-    passwords: string[];
     courseName: string;
     selectors: any;
     passwordEdit: boolean;
+    moduleEditId: string;
 
     constructor(private courseService: CourseService,
                 private moduleService: ModuleService,
@@ -100,11 +100,14 @@ export class SongDetailComponent implements OnInit {
         this.passwordEdit = false;
     }
 
-    changePassword() {
+    changePassword(id: string) {
         this.passwordEdit = true;
+        this.moduleEditId = id;
+        console.log(id);
     }
 
     cancelPassEdit() {
         this.passwordEdit = false;
+        this.moduleEditId = "";
     }
 }

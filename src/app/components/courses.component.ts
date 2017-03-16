@@ -42,6 +42,10 @@ export class CoursesComponent implements OnInit {
         this.router.navigate(['./course', course.id]);
     }
 
+    toMedia(): void {
+        this.router.navigate(['designer/media']);
+    }
+
     toPRList(course: Course): void {
         this.router.navigate(['./profregistrationlist', course.id]);
     }

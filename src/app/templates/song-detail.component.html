@@ -19,12 +19,12 @@
                     </div>
                     <div *ngIf="song">
                         <div class="panel-body container" [ngSwitch]="module.module_type">
-                            <div *ngIf="!passwordEdit" class="row">
+                            <div *ngIf="!passwordEdit || module.module_type != moduleEditId" class="row">
                                 <label for="password">Password</label>
                                 <p>{{module.password}}</p>
-                                <button (click)="changePassword()" class="btn btn-default">Change Password</button>
+                                <button (click)="changePassword(module.module_type)" class="btn btn-default">Change Password</button>
                             </div>
-                            <div *ngIf="passwordEdit" class="row">
+                            <div *ngIf="passwordEdit && module.module_type == moduleEditId" class="row">
                                 <label for="password">Password</label>
                                 <input [(ngModel)]="module.password" class="form-control " name="password" id="password" />
                                 <button class="btn btn-default" (click)="setPassword(module.module_type)">Set Password</button><button class="btn btn-default" (click)="cancelPassEdit()">Cancel</button>
