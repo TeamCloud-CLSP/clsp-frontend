@@ -30,9 +30,9 @@
                 </p>
             </div>
             <div class="col-md-12" *ngIf="question.type == 'multiple-select'">
-                <b>Correct Choices:</b>
-                <p *ngFor="let answer of getChoices(question.answers);">
-                    {{answer.choice}}
+
+                <p>
+                    <b>Correct Choices: </b> <span *ngFor="let answer of getChoices(question.answers);"> {{answer.choice}} :</span>
                 </p>
             </div>
         </div>

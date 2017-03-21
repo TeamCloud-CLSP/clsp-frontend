@@ -24,6 +24,7 @@ export class HeaderDetailComponent implements OnInit {
     choices: Choice[];
     mcAnswer: string;
     msAnswers: string[];
+    fbAnswers: string[];
 
     constructor(
         private courseService: CourseService,
