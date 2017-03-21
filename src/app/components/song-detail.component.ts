@@ -22,6 +22,7 @@ export class SongDetailComponent implements OnInit {
     selectors: any;
     passwordEdit: boolean;
     moduleEditId: string;
+    currentModule: string;
 
     constructor(private courseService: CourseService,
         private moduleService: ModuleService,
@@ -49,11 +50,12 @@ export class SongDetailComponent implements OnInit {
         this.route.params
             .switchMap((params: Params) => this.courseService.getModules(+params['id']))
             .subscribe(modules => {
-                //console.log(modules);
+                console.log(modules);
                 this.modules = modules;
                 for (let i = 0; i < this.modules.length; i++) {
                     this.modules[i].friendly_name = names[this.modules[i].module_type] || this.modules[i].module_type;
                 }
+                this.currentModule = this.modules[0].friendly_name;
             });
 
         /* var i = 0;
@@ -75,6 +77,10 @@ export class SongDetailComponent implements OnInit {
                     this.courseName = course.name;
                 });
             });
+    }
+
+    setCurrModule(name: string) {
+        this.currentModule = name;
     }
 
     setPassword(type: string) {
