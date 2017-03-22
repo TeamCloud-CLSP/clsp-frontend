@@ -46,7 +46,8 @@ export class ProfessorService {
 
     createClass(clspClass: CreateClass): Promise<SingleClass> {
         const url = `${this.baseUrl}/classes`;
-        return this.http.post(url, JSON.stringify({ name: clspClass.name, course_id: clspClass.course_id }), this.options)
+        console.log(clspClass)
+        return this.http.post(url, JSON.stringify({ name: clspClass.name, course_id: clspClass.course_id, description: clspClass.description }), this.options)
             .toPromise()
             .then(response => response.json() as SingleClass)
             .catch(this.handleError);
