@@ -45,4 +45,5 @@ export class Module {
     friendly_name: string;
     is_enabled: boolean;
     password: string;
+    name: string;
 }

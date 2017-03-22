@@ -53,9 +53,9 @@ export class SongDetailComponent implements OnInit {
                 console.log(modules);
                 this.modules = modules;
                 for (let i = 0; i < this.modules.length; i++) {
-                    this.modules[i].friendly_name = names[this.modules[i].module_type] || this.modules[i].module_type;
+                    this.modules[i].name = this.modules[i].name || this.modules[i].module_type;
                 }
-                this.currentModule = this.modules[0].friendly_name;
+                this.currentModule = this.modules[0].module_type;
             });
 
         /* var i = 0;
@@ -81,6 +81,10 @@ export class SongDetailComponent implements OnInit {
 
     setCurrModule(name: string) {
         this.currentModule = name;
+    }
+
+    setModuleName(mod: Module) {
+        this.moduleService.setModuleName(this.song.id, mod);
     }
 
     setPassword(type: string) {

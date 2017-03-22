@@ -36,27 +36,34 @@
     <div class="row" *ngIf="courseName">
         <ul class="nav nav-tabs">
             <!-- <li class="active"><a data-toggle="tab" href="/#home">Home</a></li> -->
-            <li *ngFor="let module of modules" [ngClass]="{'active': module.friendly_name == currentModule}">
-                <a data-toggle="tab" (click)="setCurrModule(module.friendly_name)">{{module.friendly_name}}</a>
+            <li *ngFor="let module of modules" [ngClass]="{'active': module.module_type == currentModule}">
+                <a data-toggle="tab" (click)="setCurrModule(module.module_type)">{{module.name}}</a>
             </li>
         </ul>
         <br />
         <div class="tab-content" *ngFor="let module of modules">
-            <div class="panel panel-default" *ngIf="courseName && module.friendly_name == currentModule">
+            <div class="panel panel-default" *ngIf="courseName && module.module_type == currentModule">
                 <div class="panel-heading">
-                    <h3 class="panel-title">{{module.friendly_name}}
+                    <h3 class="panel-title">{{module.name}}
                         <button class="btn btn-default">Enable</button>
                     </h3>
                     <span class="pull-right clickable glyphicon glyphicon-remove" data-effect="fadeOut"></span>
                 </div>
                 <div *ngIf="song">
                     <div class="panel-body container" [ngSwitch]="module.module_type">
+                        <div>
+                            <h2>Edit Module Name</h2>
+                            <input [(ngModel)]="module.name" class="form-control" name="module_name" id="module_name" />
+                            <br />
+                            <button class="btn btn-success" (click)="setModuleName(module)">Save</button>
+                        </div>
+                        <br />
                         <div *ngIf="!passwordEdit">
                             <label for="password">Password</label>
                             <p>{{module.password}}</p>
                             <button (click)="changePassword(module.module_type)" class="btn btn-default">Change Password</button>
                         </div>
-                        <div *ngIf="passwordEdit && module.module_type == moduleEditId" class="row">
+                        <div *ngIf="passwordEdit && module.module_type == moduleEditId">
                             <label for="password">Password</label>
                             <input [(ngModel)]="module.password" class="form-control " name="password" id="password" />
                             <button class="btn btn-default" (click)="setPassword(module.module_type)">Set Password</button><button class="btn btn-default" (click)="cancelPassEdit()">Cancel</button>
