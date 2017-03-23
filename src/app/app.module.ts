@@ -37,6 +37,7 @@ import {AnnotationComponent} from "./components/modules/annotation.component";
 import {PopoverModule} from "ng2-bootstrap";
 import {MediaUploadComponent} from "./components/media-upload.component";
 import {MediaService} from "./services/media.service";
+import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 @NgModule({
     imports: [
@@ -45,7 +46,7 @@ import {MediaService} from "./services/media.service";
         AppRoutingModule,
         HttpModule,
         InMemoryWebApiModule.forRoot(InMemoryDataService, { passThruUnknownUrl: true }),
-        PopoverModule.forRoot(),
+        PopoverModule.forRoot()
     ],
     declarations: [
         AppComponent,
@@ -64,7 +65,9 @@ import {MediaService} from "./services/media.service";
         DiscussionAndWritingComponent,
         AnnotationComponent,
         HeaderDetailComponent,
-        MediaUploadComponent
+        MediaUploadComponent,
+        FileSelectDirective,
+        FileDropDirective
     ],
     entryComponents: [
         AnnotationComponent
