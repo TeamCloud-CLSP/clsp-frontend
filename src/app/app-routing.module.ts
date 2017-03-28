@@ -13,6 +13,7 @@ import { UnitDetailComponent } from "./components/unit-detail.component";
 import { SongDetailComponent } from "./components/song-detail.component";
 import { HeaderDetailComponent } from "./components/header-detail.component"
 import {MediaUploadComponent} from "./components/media-upload.component";
+import {StudentDashboardComponent} from "./components/student-dashboard.component";
 
 const routes: Routes = [
     {
@@ -43,6 +44,10 @@ const routes: Routes = [
     {
         path: 'account',
         component: AccountDashboardComponent
+    },
+    {
+        path: 'student',
+        component: StudentDashboardComponent
     },
     {
         path: 'professor',

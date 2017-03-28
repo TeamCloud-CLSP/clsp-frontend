@@ -20,3 +20,13 @@ export class CreateClass {
     public description: string;
     constructor() { }
 }
+
+export class StudentClass {
+    id: number;
+    name: string;
+    description: string;
+    date_start: number;
+    date_end: number;
+    course_id: number;
+    registration_id: number;
+}

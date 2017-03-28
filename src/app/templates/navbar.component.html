@@ -10,12 +10,12 @@
             <a class="navbar-brand" href="/">CLSP</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
+            <ul *ngIf="account" class="nav navbar-nav">
                 <li *ngIf="account.is_designer"><a routerLink="/designer/courses" routerLinkActive="active">Courses</a></li>
                 <li *ngIf="account.is_administrator"><a routerLink="/admin" routerLinkActive="active">Admin</a></li>
                 <li *ngIf="account.is_professor"><a routerLink="/professor" routerLinkActive="active">Dashboard</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <ul *ngIf="account" class="nav navbar-nav navbar-right">
                 <li><a routerLink="/account" routerLinkActive="active">{{ account.name }}</a></li>
                 <li><a href="http://localhost/logout">Logout</a></li>
             </ul>

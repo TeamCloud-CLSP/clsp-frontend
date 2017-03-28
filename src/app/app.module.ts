@@ -37,6 +37,8 @@ import {AnnotationComponent} from "./components/modules/annotation.component";
 import {PopoverModule} from "ng2-bootstrap";
 import {MediaUploadComponent} from "./components/media-upload.component";
 import {MediaService} from "./services/media.service";
+import {StudentDashboardComponent} from "./components/student-dashboard.component";
+import {StudentService} from "./services/student.service";
 
 @NgModule({
     imports: [
@@ -64,7 +66,8 @@ import {MediaService} from "./services/media.service";
         DiscussionAndWritingComponent,
         AnnotationComponent,
         HeaderDetailComponent,
-        MediaUploadComponent
+        MediaUploadComponent,
+        StudentDashboardComponent
     ],
     entryComponents: [
         AnnotationComponent
@@ -75,7 +78,8 @@ import {MediaService} from "./services/media.service";
         AccountService,
         ProfessorService,
         ModuleService,
-        MediaService
+        MediaService,
+        StudentService
     ],
     bootstrap: [AppComponent]
 })
