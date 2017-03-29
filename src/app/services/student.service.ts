@@ -47,6 +47,17 @@ export class StudentService {
             .catch(this.handleError);
     }
 
+    getUnit(unitId: number): Promise<Unit> {
+        return this.http.get(this.baseUrl + "/unit/" + unitId, this.options)
+            .toPromise()
+            .then(response => {
+                console.log("got unit from serv");
+                console.log(response.json());
+                return response.json() as Unit;
+            })
+            .catch(this.handleError);
+    }
+
     getSongs(unitId: number): Promise<Song[]> {
         return this.http.get(this.baseUrl + "/unit/" + unitId + "/songs", this.options)
             .toPromise()

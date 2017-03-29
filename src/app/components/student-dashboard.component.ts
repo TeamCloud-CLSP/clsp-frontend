@@ -22,6 +22,7 @@ export class StudentDashboardComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.songs = [];
         console.log("Student dashboard");
         this.service.getClass().then(myClass => {
             console.log("got class");
@@ -33,11 +34,16 @@ export class StudentDashboardComponent implements OnInit {
                 this.units = units;
             }).then(() => {
                 for (let i = 0; i < this.units.length; i++) {
-                    this.service.getSongs(this.units[i].course_id).then(songs => {
-                        this.songs[this.units[i].course_id] = songs;
+                    this.service.getSongs(this.units[i].id).then(songs => {
+                        this.songs[this.units[i].id] = songs;
+                        console.log(this.songs);
                     })
                 }
             });
         });
+    }
+
+    goToUnit(unit: Unit) {
+        this.router.navigate(['./student/unit', unit.id]);
     }
 }

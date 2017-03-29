@@ -1,0 +1,21 @@
+<div *ngIf="unit">
+    <h1>{{unit.name}}</h1>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Artist</th>
+                    <th>Album</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let song of songs" (click)="goToSong(song)">
+                    <td>{{song.title}}</td>
+                    <td>{{song.artist}}</td>
+                    <td>{{song.album}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
