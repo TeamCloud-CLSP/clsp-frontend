@@ -172,7 +172,10 @@ export class CourseService {
         console.log(this.options);
         return this.http.get(url, this.options)
             .toPromise()
-            .then(response => response.json() as Song)
+            .then(response => {
+                console.log(response.json());
+                return response.json() as Song
+            })
             .catch(this.handleError);
     }
 

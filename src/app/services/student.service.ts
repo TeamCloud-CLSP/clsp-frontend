@@ -5,7 +5,7 @@ import {CLSPClass, SingleClass, CreateClass, StudentClass} from '../models/clsp-
 import { ProfInfo } from '../models/professor-info';
 import {StudentRegistration, Student} from "../models/studentregistration";
 import {GlobalParameters} from '../global-parameters';
-import {Unit, Song} from "../models/course";
+import {Unit, Song, Module} from "../models/course";
 
 @Injectable()
 export class StudentService {
@@ -31,9 +31,17 @@ export class StudentService {
         return this.http.get(this.baseUrl + "/class", this.options)
             .toPromise()
             .then(response => {
-                // console.log(response.json().data);
-                // return response.json().data as StudentClass
                 return sample as StudentClass;
+            })
+            .catch(this.handleError);
+    }
+
+    getCourse(courseId: number): Promise<string> {
+        return this.http.get(this.baseUrl + "/course/" + courseId, this.options)
+            .toPromise()
+            .then(response => {
+                let name = response.json().name;
+                return name;
             })
             .catch(this.handleError);
     }
@@ -51,8 +59,6 @@ export class StudentService {
         return this.http.get(this.baseUrl + "/unit/" + unitId, this.options)
             .toPromise()
             .then(response => {
-                console.log("got unit from serv");
-                console.log(response.json());
                 return response.json() as Unit;
             })
             .catch(this.handleError);
@@ -63,6 +69,24 @@ export class StudentService {
             .toPromise()
             .then(response => {
                 return response.json().data as Song[];
+            })
+            .catch(this.handleError);
+    }
+
+    getSong(songId: number): Promise<any> {
+        return this.http.get(this.baseUrl + "/song/" + songId, this.options)
+            .toPromise()
+            .then(response => {
+                return response.json();
+            })
+            .catch(this.handleError);
+    }
+
+    getModules(songId: number): Promise<Module[]> {
+        return this.http.get(this.baseUrl + "/song/" + songId + "/modules", this.options)
+            .toPromise()
+            .then(response => {
+                return response.json().data as Module[];
             })
             .catch(this.handleError);
     }

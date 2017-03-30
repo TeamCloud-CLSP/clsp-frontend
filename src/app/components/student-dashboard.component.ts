@@ -23,13 +23,9 @@ export class StudentDashboardComponent implements OnInit {
 
     ngOnInit(): void {
         this.songs = [];
-        console.log("Student dashboard");
         this.service.getClass().then(myClass => {
-            console.log("got class");
-            console.log(myClass);
             this.myClass = myClass;
         }).then(() => {
-            console.log("whaddup");
             this.service.getUnits(this.myClass.course_id).then(units => {
                 this.units = units;
             }).then(() => {

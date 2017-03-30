@@ -40,6 +40,7 @@ import {MediaService} from "./services/media.service";
 import {StudentDashboardComponent} from "./components/student-dashboard.component";
 import {StudentService} from "./services/student.service";
 import {StudentUnitDetailComponent} from "./components/student/unit-detail.component";
+import {StudentSongDetailComponent} from "./components/student/student-song-detail.component";
 
 @NgModule({
     imports: [
@@ -69,7 +70,8 @@ import {StudentUnitDetailComponent} from "./components/student/unit-detail.compo
         HeaderDetailComponent,
         MediaUploadComponent,
         StudentDashboardComponent,
-        StudentUnitDetailComponent
+        StudentUnitDetailComponent,
+        StudentSongDetailComponent
     ],
     entryComponents: [
         AnnotationComponent

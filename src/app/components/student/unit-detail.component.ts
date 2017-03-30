@@ -39,7 +39,7 @@ export class StudentUnitDetailComponent implements OnInit {
     }
 
     goToSong(song: Song) {
-        
+        this.router.navigate(['./student/unit/' + this.unit.id + '/song/' + song.id]);
     }
 
 }

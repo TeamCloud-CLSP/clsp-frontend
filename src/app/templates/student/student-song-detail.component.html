@@ -1,0 +1,36 @@
+<div>
+    <div class="row" *ngIf="courseName">
+        <p>
+            <a href="student/course/{{unit.course_id}}">{{courseName}}</a> >> <a href="student/unit/{{unit.id}}">{{unit.name}}</a> >> <b *ngIf="song">{{song.title}}</b>
+        </p>
+    </div>
+    <div class="row" *ngIf="courseName">
+        <h1 *ngIf="song">Modules for {{song.title}}</h1>
+    </div>
+
+    <div *ngIf="song" style="text-align: center;">
+        <div *ngIf="song.embed" [innerHTML]="song.embed">
+        </div>
+        <p><b>Title: </b>{{song.title}}</p>
+        <p><b>Artist: </b>{{song.artist}}</p>
+        <p><b>Album: </b>{{song.album}}</p>
+    </div>
+
+    <div class="row" *ngIf="courseName">
+        <ul class="nav nav-tabs">
+            <!-- <li class="active"><a data-toggle="tab" href="/#home">Home</a></li> -->
+            <li *ngFor="let module of modules" [ngClass]="{'active': module.module_type == currentModule}">
+                <a data-toggle="tab" (click)="setCurrModule(module.module_type)">{{module.name}}</a>
+            </li>
+        </ul>
+        <br />
+        <div class="tab-content" *ngFor="let module of modules">
+
+            <div class="panel panel-default" *ngIf="courseName && module.module_type == currentModule">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{module.name}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
