@@ -30,6 +30,27 @@ export class ModuleService {
             .catch(this.handleError);
     }
 
+
+    createHeader(header: Header, modName: string): Promise<Header> {
+        const url = `${this.designerUrl}/song/${header.song_id}/${modName}/headers`
+        return this.http.post(url,
+            JSON.stringify({
+                name: header.name
+            }),
+            this.options)
+            .toPromise()
+            .then(response => response.json() as Header)
+            .catch(this.handleError)
+    }
+
+    getHeaders(songId: number, modName: string): Promise<Header[]> {
+        const url = `${this.designerUrl}/song/${songId}/${modName}/headers`;
+        return this.http.get(url, this.options)
+            .toPromise()
+            .then(response => response.json().data as Header[])
+            .catch(this.handleError);
+    }
+
     createDWHeader(header: Header): Promise<Header> {
         const url = `${this.designerUrl}/song/${header.song_id}/module_dw/headers`
         return this.http.post(url,

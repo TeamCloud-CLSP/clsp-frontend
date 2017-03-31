@@ -20,6 +20,7 @@ export class DiscussionAndWritingComponent implements OnInit {
     newHeader: Header;
     @Input() songId: number;
     @Input() unitId: number;
+    @Input() moduleType: string;
 
     constructor(private courseService: CourseService,
         private route: ActivatedRoute,
@@ -31,7 +32,7 @@ export class DiscussionAndWritingComponent implements OnInit {
 
     ngOnInit() {
         //console.log(this.songId);
-        this.moduleService.getDWHeaders(this.songId)
+        this.moduleService.getHeaders(this.songId, this.moduleType)
             .then(headers => {
                 this.headers = headers;
             });
@@ -47,7 +48,7 @@ export class DiscussionAndWritingComponent implements OnInit {
     }
 
     submitHeader(): void {
-        this.moduleService.createDWHeader(this.newHeader)
+        this.moduleService.createHeader(this.newHeader, this.moduleType)
             .then(header => {
                 this.headers.push(header);
                 this.newHeader = null;

@@ -72,9 +72,11 @@
                             <clsp-cultural-notes [song]="song"></clsp-cultural-notes>
                         </div>
                         <div *ngSwitchCase="'module_dw'">
-                            <clsp-discussion-and-writing [songId]="song.id" [unitId]="unit.id"></clsp-discussion-and-writing>
+                            <clsp-discussion-and-writing [songId]="song.id" [unitId]="unit.id" [moduleType]="module.module_type"></clsp-discussion-and-writing>
                         </div>
-                        <div *ngSwitchDefault>default</div>
+                        <div *ngSwitchDefault>
+                            <clsp-discussion-and-writing [songId]="song.id" [unitId]="unit.id" [moduleType]="module.module_type"></clsp-discussion-and-writing>
+                        </div>
                     </div>
                 </div>
             </div>

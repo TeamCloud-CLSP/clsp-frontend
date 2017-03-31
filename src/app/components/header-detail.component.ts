@@ -24,7 +24,7 @@ export class HeaderDetailComponent implements OnInit {
     choices: Choice[];
     mcAnswer: string;
     msAnswers: string[];
-    fbAnswers: string[];
+    fbAnswers: Choice[];
 
     constructor(
         private courseService: CourseService,
@@ -72,6 +72,7 @@ export class HeaderDetailComponent implements OnInit {
         this.mcAnswer = null;
         this.selectedType = null;
         this.msAnswers = [];
+        this.fbAnswers = [];
         this.newQuestion = new Question();
     }
 
@@ -102,6 +103,20 @@ export class HeaderDetailComponent implements OnInit {
         return JSON.parse(choiceString) as Choice[];
     }
 
+    fillBlankChoices(): Choice[] {
+        this.fbAnswers = [];
+        if (this.newQuestion.content != null) {
+            var question = this.newQuestion.content;
+            var underscores = (question.split("_").length - 1)
+            for (var i = 0; i < underscores; i++) {
+                var answer = new Choice();
+                answer.choice = "Blank Answer"
+                this.fbAnswers.push(answer);
+            }
+        }
+        return this.fbAnswers;
+    }
+
     onSubmit(): void {
         this.newQuestion.heading_id = +this.header.id;
         this.newQuestion.type = this.selectedType;
@@ -120,6 +135,10 @@ export class HeaderDetailComponent implements OnInit {
                 answers.push(choice);
             }
             this.newQuestion.answers = JSON.stringify(answers);
+        }
+        else if (this.selectedType == "fill-blank") {
+            var answers: Choice[] = [];
+            this.newQuestion.answers = JSON.stringify(this.fbAnswers);
         }
         this.moduleService.createQuestion(this.newQuestion)
             .then(question => {
