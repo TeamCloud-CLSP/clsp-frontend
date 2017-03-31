@@ -45,10 +45,7 @@ import {StudentCulturalNotesComponent} from "./components/student/student-cultur
 import {AppRoutingModule} from './app-routing.module';
 import {PopoverModule} from "ng2-bootstrap";
 
-
-
-
-
+import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 @NgModule({
     imports: [
@@ -57,7 +54,7 @@ import {PopoverModule} from "ng2-bootstrap";
         AppRoutingModule,
         HttpModule,
         InMemoryWebApiModule.forRoot(InMemoryDataService, { passThruUnknownUrl: true }),
-        PopoverModule.forRoot(),
+        PopoverModule.forRoot()
     ],
     declarations: [
         AppComponent,
@@ -77,6 +74,8 @@ import {PopoverModule} from "ng2-bootstrap";
         AnnotationComponent,
         HeaderDetailComponent,
         MediaUploadComponent,
+        FileSelectDirective,
+        FileDropDirective,
         StudentDashboardComponent,
         StudentUnitDetailComponent,
         StudentSongDetailComponent,
