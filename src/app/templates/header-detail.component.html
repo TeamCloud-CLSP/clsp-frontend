@@ -14,9 +14,7 @@
         </h3>
         <h4>Type: {{question.type}}</h4>
         <div *ngIf="question.type == 'fill-blank'">
-            <p>
-                <b>Answer: </b> {{question.answers}}
-            </p>
+            <p *ngFor="let answer of getChoices(question.answers); let i = index"><b>Blank {{i+1}}:</b> {{answer.choice}} </p>
         </div>
         <div *ngIf="question.type == 'multiple-choice' || question.type =='multiple-select'">
             <div *ngFor="let choice of getChoices(question.choices); let i = index;" class="col-md-12">
@@ -30,9 +28,9 @@
                 </p>
             </div>
             <div class="col-md-12" *ngIf="question.type == 'multiple-select'">
-                <b>Correct Choices:</b>
-                <p *ngFor="let answer of getChoices(question.answers);">
-                    {{answer.choice}}
+
+                <p>
+                    <b>Correct Choices: </b> <span *ngFor="let answer of getChoices(question.answers);"> {{answer.choice}} </span>
                 </p>
             </div>
         </div>
@@ -66,7 +64,7 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Question</label>
-                        <input type="text" class="form-control" id="content" required [(ngModel)]="newQuestion.content" name="content">
+                        <input type="text" class="form-control" id="content" required [(ngModel)]="newQuestion.content" name="content" (ngModelChange)="fillBlankChoices()">
                     </div>
                     <div *ngIf="selectedType == 'multiple-choice' || selectedType == 'multiple-select'">
                         <div style="margin-left:20px;">
@@ -98,8 +96,11 @@
                         </div>
                     </div>
                     <div class="form-group" *ngIf="selectedType == 'fill-blank'">
-                        <label for="type">Answer</label>
-                        <input type="text" class="form-control" id="answer" [(ngModel)]="newQuestion.answers" name="answer">
+                        <div *ngFor="let blank of fbAnswers; let i = index">
+                            <label for="type">Blank {{i + 1}}</label>
+                            <input type="text" class="form-control" id="answer" [(ngModel)]="fbAnswers[i].choice" name="answer">
+                            <br />
+                        </div>
                     </div>
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>

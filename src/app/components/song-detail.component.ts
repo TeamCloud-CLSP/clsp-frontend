@@ -22,22 +22,23 @@ export class SongDetailComponent implements OnInit {
     selectors: any;
     passwordEdit: boolean;
     moduleEditId: string;
+    currentModule: string;
 
     constructor(private courseService: CourseService,
-                private moduleService: ModuleService,
-                private route: ActivatedRoute,
-                private location: Location,
-                private sanitizer: DomSanitizer,
-                private router: Router) {
+        private moduleService: ModuleService,
+        private route: ActivatedRoute,
+        private location: Location,
+        private sanitizer: DomSanitizer,
+        private router: Router) {
     }
 
     ngOnInit() {
 
-        console.log(this.route.params);
+        //console.log(this.route.params);
         this.route.params
             .switchMap((params: Params) => this.courseService.getSong(+params['id']))
             .subscribe(song => {
-                console.log(song);
+                //console.log(song);
                 this.song = song;
             });
 
@@ -52,14 +53,15 @@ export class SongDetailComponent implements OnInit {
                 console.log(modules);
                 this.modules = modules;
                 for (let i = 0; i < this.modules.length; i++) {
-                    this.modules[i].friendly_name = names[this.modules[i].module_type] || this.modules[i].module_type;
+                    this.modules[i].name = this.modules[i].name || this.modules[i].module_type;
                 }
+                this.currentModule = this.modules[0].module_type;
             });
 
-       /* var i = 0;
-        for (i = 0; i < 6; i++) {
-            this.passwords[i] = this.modules[i].password;
-        }*/
+        /* var i = 0;
+         for (i = 0; i < 6; i++) {
+             this.passwords[i] = this.modules[i].password;
+         }*/
 
         this.passwordEdit = false;
 
@@ -67,40 +69,48 @@ export class SongDetailComponent implements OnInit {
         this.route.params
             .switchMap((params: Params) => this.courseService.getUnit(+params['unit_id']))
             .subscribe(unit => {
-                console.log("got unit");
+                //console.log("got unit");
                 this.unit = unit;
 
                 this.courseService.getCourse(unit.course_id).then(course => {
-                    console.log("got course name");
+                    //console.log("got course name");
                     this.courseName = course.name;
                 });
             });
     }
 
+    setCurrModule(name: string) {
+        this.currentModule = name;
+    }
+
+    setModuleName(mod: Module) {
+        this.moduleService.setModuleName(this.song.id, mod);
+    }
+
     setPassword(type: string) {
         if (type == "module_cn") {
             this.moduleService.setPasswordCN(this.song.id, this.modules[0].password).then(value => {
-                console.log("password updated");
+                //console.log("password updated");
             });
         } else if (type == "module_dw") {
             this.moduleService.setPasswordDW(this.song.id, this.modules[1].password).then(value => {
-                console.log("password updated");
+                //console.log("password updated");
             });
         } else if (type == "module_ge") {
             this.moduleService.setPasswordGE(this.song.id, this.modules[2].password).then(value => {
-                console.log("password updated");
+                //console.log("password updated");
             });
         } else if (type == "module_ls") {
             this.moduleService.setPasswordLS(this.song.id, this.modules[3].password).then(value => {
-                console.log("password updated");
+                //console.log("password updated");
             });
         } else if (type == "module_lt") {
             this.moduleService.setPasswordLT(this.song.id, this.modules[4].password).then(value => {
-                console.log("password updated");
+                //console.log("password updated");
             });
         } else if (type == "module_qu") {
             this.moduleService.setPasswordQU(this.song.id, this.modules[5].password).then(value => {
-                console.log("password updated");
+                //console.log("password updated");
             });
         }
         this.passwordEdit = false;

@@ -10,9 +10,11 @@ export class AccountService {
     private accountUrl = this.parameters.url + "/api/account";
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private options = new RequestOptions({ withCredentials: true, headers: this.headers })
-    public account: User;
+    private account: User;
+    private accountSet: boolean;
+
     constructor(private http: Http) {
-        this.account = this.getEmptyAccount();
+        this.accountSet = false;
         this.getAccount();
     }
 
@@ -22,10 +24,21 @@ export class AccountService {
     }
 
     getAccount(): Promise<User> {
-        return this.http.get(this.accountUrl, this.options)
-            .toPromise()
-            .then(response => response.json() as User)
-            .catch(this.handleError);
+        if (this.accountSet) {
+            return new Promise((resolve, reject) => {
+                resolve(this.account);
+            });
+        } else {
+            this.account = this.getEmptyAccount();
+            return this.http.get(this.accountUrl, this.options)
+                .toPromise()
+                .then(response => {
+                    this.account = response.json() as User;
+                    this.accountSet = true;
+                    return this.account;
+                })
+                .catch(this.handleError);
+        }
     }
 
     public getEmptyAccount() {

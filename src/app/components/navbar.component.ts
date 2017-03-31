@@ -16,12 +16,7 @@ export class NavbarComponent {
         private accountService: AccountService,
         private router: Router
     ) {
-        this.account = accountService.account;
-        this.getAccount();
-    }
-
-    getAccount(): void {
-        this.accountService.getAccount().then(account => {
+        accountService.getAccount().then(account => {
             this.account = account;
         });
     }

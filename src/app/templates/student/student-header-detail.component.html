@@ -1,0 +1,80 @@
+<div *ngIf="header">
+    <div class="row" *ngIf="courseName">
+        <p>
+            <a href="student/course/{{unit.course_id}}">{{courseName}}</a> >> <a href="unit/{{unit.id}}">{{unit.name}}</a> >>
+            <a href="student/unit/{{unit.id}}/song/{{song.id}}" *ngIf="song">{{song.title}}</a> >> <b>{{header.name}}</b>
+        </p>
+    </div>
+    <div class="row">
+        <h2>Questions for {{header.name}}</h2>
+    </div>
+    <div *ngIf="!printVersion">
+        <div class="row" *ngFor="let question of questions">
+            <h3>
+                {{question.weight}}. {{question.content}}
+            </h3>
+            <div *ngIf="question.type == 'fill-blank'">
+                <div class="form-group" *ngFor="let answer of question.fbAnswers;let i = index">
+                    <label for="name">Blank {{i + 1}}</label>
+                    <input type="text" class="form-control" id="fbAnswer" required [(ngModel)]="question.fbAnswers[i]" name="fbAnswer">
+                </div>
+            </div>
+            <div *ngIf="question.type == 'multiple-choice' || question.type =='multiple-select'">
+                <div class="col-md-12" *ngIf="question.type == 'multiple-choice'">
+                    <form>
+                        <div class="radio" *ngFor="let choice of question.displayChoices; let i = index">
+                            <label>
+                            <input type="radio" [(ngModel)]="question.mcAnswer" name="answer" [value]="choice.choice" />
+                            {{choice.choice}}
+                        </label>
+                        </div>
+                    </form>
+                    <p>
+                        <b>Selected Answer: </b> {{question.mcAnswer}}
+                    </p>
+                </div>
+                <div class="col-md-12" *ngIf="question.type == 'multiple-select'">
+                    <div>
+                        <select multiple class="form-control" name="msAnswers" id="msAnswers" [(ngModel)]="question.msAnswers">
+                            <option *ngFor="let choice of  question.displayChoices;" value="{{choice.choice}}">{{choice.choice}}</option>
+                        </select>
+                    </div>
+                    <p>
+                        <b>Selected Answers:
+                            <span *ngFor="let answer of question.msAnswers">
+                                <br />
+                                {{answer}}
+                            </span>
+                        </b>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="printVersion">
+        <div class="row" *ngFor="let question of questions">
+            <h3>
+                {{question.weight}}. {{question.content}}
+            </h3>
+            <div *ngIf="question.type == 'fill-blank'">
+                <p *ngFor="let answer of getChoices(question.answers); let i = index"><b>Blank {{i+1}}:</b> </p>
+            </div>
+            <div *ngIf="question.type == 'multiple-choice' || question.type =='multiple-select'">
+                <div *ngFor="let choice of getChoices(question.choices); let i = index;" class="col-md-12">
+                    <p>
+                        <b>{{convertAscii(i)}}:</b> {{choice.choice}}
+                    </p>
+                </div>
+                <div class="col-md-12" *ngIf="question.type == 'multiple-choice'">
+                </div>
+                <div class="col-md-12" *ngIf="question.type == 'multiple-select'">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <button class="btn btn-default" *ngIf="!printVersion" (click)="printerVersion()">Printable View</button>
+        <button class="btn btn-default" *ngIf="printVersion" (click)="cancelPrint()">Normal View</button>
+    </div>
+</div>

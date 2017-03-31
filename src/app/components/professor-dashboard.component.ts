@@ -53,12 +53,18 @@ export class ProfessorDashboardComponent implements OnInit {
         this.professorService.createClass(this.newClass).then(
             clspClass => {
                 var dbClass = new CLSPClass();
+                dbClass.class_description = clspClass.description;
                 dbClass.class_id = clspClass.id;
                 dbClass.class_name = clspClass.name;
                 var profIndex = this.profInfo.findIndex(x => x.course_id == this.createNumber);
                 this.profInfo[profIndex].classes.push(dbClass);
                 this.createNumber = -1;
-            });
+            })
+            .catch(
+            error => {
+                console.log(error);
+            }
+            );
     }
 
     onDelete(deleteClass: CLSPClass) {
