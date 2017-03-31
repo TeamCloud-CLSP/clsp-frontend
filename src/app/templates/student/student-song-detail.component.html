@@ -25,10 +25,18 @@
         </ul>
         <br />
         <div class="tab-content" *ngFor="let module of modules">
-
             <div class="panel panel-default" *ngIf="courseName && module.module_type == currentModule">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{module.name}}</h3>
+                </div>
+                <div *ngIf="song">
+                    <div class="panel-body container" [ngSwitch]="module.module_type">
+                        <div *ngSwitchCase="'module_cn'">
+                        </div>
+                        <div *ngSwitchDefault>
+                            <student-question-module [songId]="song.id" [unitId]="unit.id" [moduleType]="module.module_type"></student-question-module>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

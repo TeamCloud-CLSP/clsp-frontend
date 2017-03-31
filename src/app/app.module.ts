@@ -13,6 +13,8 @@ import { AdminService } from './services/admin.service'
 import {AccountService} from "./services/account.service";
 import {ProfessorService} from "./services/professor.service";
 import {ModuleService} from "./services/module.service";
+import {StudentService} from "./services/student.service";
+import {MediaService} from "./services/media.service";
 
 // Components
 import { CoursesComponent } from './components/courses.component'
@@ -26,21 +28,26 @@ import { AccountDashboardComponent } from './components/account-dashboard.compon
 import { ProfessorDashboardComponent } from "./components/professor-dashboard.component";
 import { UnitDetailComponent } from "./components/unit-detail.component";
 import { HeaderDetailComponent } from "./components/header-detail.component"
-
-//Routing
-import {AppRoutingModule} from './app-routing.module';
+import {StudentDashboardComponent} from "./components/student-dashboard.component";
+import {StudentUnitDetailComponent} from "./components/student/unit-detail.component";
+import {StudentSongDetailComponent} from "./components/student/student-song-detail.component";
+import {MediaUploadComponent} from "./components/media-upload.component";
 import {ProfessorClassComponent} from "./components/professor-class.component";
 import {SongDetailComponent} from "./components/song-detail.component";
 import {CulturalNotesComponent} from "./components/modules/culturalnotes.component";
 import {DiscussionAndWritingComponent} from "./components/modules/discussionandwriting.component";
 import {AnnotationComponent} from "./components/modules/annotation.component";
+import {StudentQuestionModuleComponent} from "./components/student/student-question-module";
+import {StudentHeaderDetailComponent, GetChoicesPipe} from "./components/student/student-header-detail.component"
+
+//Routing
+import {AppRoutingModule} from './app-routing.module';
 import {PopoverModule} from "ng2-bootstrap";
-import {MediaUploadComponent} from "./components/media-upload.component";
-import {MediaService} from "./services/media.service";
-import {StudentDashboardComponent} from "./components/student-dashboard.component";
-import {StudentService} from "./services/student.service";
-import {StudentUnitDetailComponent} from "./components/student/unit-detail.component";
-import {StudentSongDetailComponent} from "./components/student/student-song-detail.component";
+
+
+
+
+
 
 @NgModule({
     imports: [
@@ -71,7 +78,10 @@ import {StudentSongDetailComponent} from "./components/student/student-song-deta
         MediaUploadComponent,
         StudentDashboardComponent,
         StudentUnitDetailComponent,
-        StudentSongDetailComponent
+        StudentSongDetailComponent,
+        StudentQuestionModuleComponent,
+        StudentHeaderDetailComponent,
+        GetChoicesPipe
     ],
     entryComponents: [
         AnnotationComponent

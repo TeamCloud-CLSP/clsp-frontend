@@ -22,11 +22,11 @@ export class StudentSongDetailComponent implements OnInit {
     currentModule: string;
 
     constructor(private studentService: StudentService,
-                private moduleService: ModuleService,
-                private route: ActivatedRoute,
-                private location: Location,
-                private sanitizer: DomSanitizer,
-                private router: Router) {
+        private moduleService: ModuleService,
+        private route: ActivatedRoute,
+        private location: Location,
+        private sanitizer: DomSanitizer,
+        private router: Router) {
     }
 
     ngOnInit() {
@@ -75,33 +75,5 @@ export class StudentSongDetailComponent implements OnInit {
 
     setModuleName(mod: Module) {
         this.moduleService.setModuleName(this.song.id, mod);
-    }
-
-    setPassword(type: string) {
-        if (type == "module_cn") {
-            this.moduleService.setPasswordCN(this.song.id, this.modules[0].password).then(value => {
-                //console.log("password updated");
-            });
-        } else if (type == "module_dw") {
-            this.moduleService.setPasswordDW(this.song.id, this.modules[1].password).then(value => {
-                //console.log("password updated");
-            });
-        } else if (type == "module_ge") {
-            this.moduleService.setPasswordGE(this.song.id, this.modules[2].password).then(value => {
-                //console.log("password updated");
-            });
-        } else if (type == "module_ls") {
-            this.moduleService.setPasswordLS(this.song.id, this.modules[3].password).then(value => {
-                //console.log("password updated");
-            });
-        } else if (type == "module_lt") {
-            this.moduleService.setPasswordLT(this.song.id, this.modules[4].password).then(value => {
-                //console.log("password updated");
-            });
-        } else if (type == "module_qu") {
-            this.moduleService.setPasswordQU(this.song.id, this.modules[5].password).then(value => {
-                //console.log("password updated");
-            });
-        }
     }
 }

@@ -13,6 +13,10 @@ export class Question {
     weight: number;
     choices: string;
     answers: string;
+    mcAnswer: string;
+    msAnswers: string[];
+    fbAnswers: string[];
+    displayChoices: Choice[];
     constructor() { }
 }
 

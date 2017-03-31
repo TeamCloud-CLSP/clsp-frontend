@@ -16,6 +16,7 @@ import {MediaUploadComponent} from "./components/media-upload.component";
 import {StudentDashboardComponent} from "./components/student-dashboard.component";
 import {StudentUnitDetailComponent} from "./components/student/unit-detail.component";
 import {StudentSongDetailComponent} from "./components/student/student-song-detail.component";
+import {StudentHeaderDetailComponent} from "./components/student/student-header-detail.component";
 
 const routes: Routes = [
     {
@@ -82,6 +83,10 @@ const routes: Routes = [
     {
         path: 'designer/media',
         component: MediaUploadComponent
+    },
+    {
+        path: 'student/unit/:unit_id/song/:song_id/header/:header_id',
+        component: StudentHeaderDetailComponent
     }
 ];
 

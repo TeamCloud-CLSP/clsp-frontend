@@ -6,6 +6,7 @@ import { ProfInfo } from '../models/professor-info';
 import {StudentRegistration, Student} from "../models/studentregistration";
 import {GlobalParameters} from '../global-parameters';
 import {Unit, Song, Module} from "../models/course";
+import {Header, Question} from '../models/modules/header';
 
 @Injectable()
 export class StudentService {
@@ -25,18 +26,19 @@ export class StudentService {
 
     getClass(): Promise<StudentClass> {
         // TODO: response returns nothing, backend problems
-        var sample = {"id":1,"name":"CHIN 3002 A",
-            "description":"advanced chinese course","date_start":0,"date_end":1497057872,
-            "course_id":1,"registration_id":1};
+        // var sample = {"id":1,"name":"CHIN 3002 A",
+        //     "description":"advanced chinese course","date_start":0,"date_end":1497057872,
+        //     "course_id":1,"registration_id":1};
         return this.http.get(this.baseUrl + "/class", this.options)
             .toPromise()
             .then(response => {
-                return sample as StudentClass;
+                return response.json() as StudentClass;
             })
             .catch(this.handleError);
     }
 
     getCourse(courseId: number): Promise<string> {
+        console.log(courseId);
         return this.http.get(this.baseUrl + "/course/" + courseId, this.options)
             .toPromise()
             .then(response => {
@@ -88,6 +90,30 @@ export class StudentService {
             .then(response => {
                 return response.json().data as Module[];
             })
+            .catch(this.handleError);
+    }
+
+    getHeaders(songId: number, modName: string): Promise<Header[]> {
+        const url = `${this.baseUrl}/song/${songId}/${modName}/headers`;
+        return this.http.get(url, this.options)
+            .toPromise()
+            .then(response => response.json().data as Header[])
+            .catch(this.handleError);
+    }
+
+    getHeader(headerId: number): Promise<Header> {
+        const url = `${this.baseUrl}/header/${headerId}`
+        return this.http.get(url, this.options)
+            .toPromise()
+            .then(response => response.json() as Header)
+            .catch(this.handleError);
+    }
+
+    getQuestions(headerId: number): Promise<Question[]> {
+        const url = `${this.baseUrl}/header/${headerId}/items`;
+        return this.http.get(url, this.options)
+            .toPromise()
+            .then(response => response.json().data as Question[])
             .catch(this.handleError);
     }
 }
