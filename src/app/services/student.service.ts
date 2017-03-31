@@ -7,6 +7,7 @@ import {StudentRegistration, Student} from "../models/studentregistration";
 import {GlobalParameters} from '../global-parameters';
 import {Unit, Song, Module} from "../models/course";
 import {Header, Question} from '../models/modules/header';
+import {CulturalNote} from "../models/modules/CulturalNote";
 
 @Injectable()
 export class StudentService {
@@ -115,5 +116,21 @@ export class StudentService {
             .toPromise()
             .then(response => response.json().data as Question[])
             .catch(this.handleError);
+    }
+
+    getCulturalNote(songId: number): Promise < CulturalNote[] > {
+        const url = `${this.baseUrl}/song/${songId}/keywords`;
+        return this.http.get(url, this.options)
+            .toPromise()
+            .then(response => {
+                let data = response.json().data as CulturalNote[];
+                for (let i = 0; i < data.length; i++) {
+                    data[i].songId = songId;
+                }
+                return data;
+            })
+            .catch(error => {
+                console.log("ERRORR");
+            });
     }
 }

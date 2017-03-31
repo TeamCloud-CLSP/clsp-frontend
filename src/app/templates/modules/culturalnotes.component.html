@@ -12,23 +12,23 @@
                 <span *ngIf="checkPiece(piece)">
                     {{piece}}
                 </span>
-            <span *ngIf="!checkPiece(piece)">
+                <span *ngIf="!checkPiece(piece)">
                     <clsp-annotation [note]="notes[+piece]"></clsp-annotation>
                 </span>
             </span>
         </p>
 
         <button class="btn btn-default" (click)="startEdit()">Edit</button>
-        <br />
+        <br/>
         <div *ngIf="annotating">
             <h2>Add Annotations</h2>
             <span><b>Current phrase:</b> {{currentPhrase}}</span>
             <textarea [(ngModel)]="currentDescription" class="form-control" [value]="currentDescription"></textarea>
-            <br />
+            <br/>
             <button (click)="saveAnnotation()" class="btn btn-default">Annotate</button>
         </div>
-        <br />
-        <br />
+        <br/>
+        <br/>
         <div>
             <h2>Annotations</h2>
             <table class="table">
@@ -48,10 +48,11 @@
                         {{annotation.phrase}}
                     </td>
                     <td>
-                        <input class="form-control" [(ngModel)]="notes[i].description" />
+                        <input class="form-control" [(ngModel)]="notes[i].description"/>
                     </td>
                     <td>
-                        <button (click)="updateAnnotation(i)" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <button (click)="updateAnnotation(i)" class="btn btn-default"><span
+                                class="glyphicon glyphicon-pencil"></span></button>
                     </td>
                 </tr>
             </table>
@@ -59,7 +60,7 @@
     </div>
     <div *ngIf="editing">
         <textarea class="form-control" [value]="this.song.lyrics" style="resize:none;" rows="10" cols="40"></textarea>
-        <br />
+        <br/>
         <div class="btn-group" role="group">
             <button class="btn btn-default" (click)="cancelEdit()">Cancel</button>
             <button (click)="updateLyrics()" class="btn btn-default">Save</button>

@@ -39,6 +39,7 @@ import {DiscussionAndWritingComponent} from "./components/modules/discussionandw
 import {AnnotationComponent} from "./components/modules/annotation.component";
 import {StudentQuestionModuleComponent} from "./components/student/student-question-module";
 import {StudentHeaderDetailComponent, GetChoicesPipe} from "./components/student/student-header-detail.component"
+import {StudentCulturalNotesComponent} from "./components/student/student-cultural-notes.component";
 
 //Routing
 import {AppRoutingModule} from './app-routing.module';
@@ -81,7 +82,8 @@ import {PopoverModule} from "ng2-bootstrap";
         StudentSongDetailComponent,
         StudentQuestionModuleComponent,
         StudentHeaderDetailComponent,
-        GetChoicesPipe
+        GetChoicesPipe,
+        StudentCulturalNotesComponent
     ],
     entryComponents: [
         AnnotationComponent

@@ -27,6 +27,7 @@ export class StudentSongDetailComponent implements OnInit {
         private location: Location,
         private sanitizer: DomSanitizer,
         private router: Router) {
+
     }
 
     ngOnInit() {
@@ -36,12 +37,16 @@ export class StudentSongDetailComponent implements OnInit {
                 return this.studentService.getSong(+params['song_id'])
             })
             .subscribe(song => {
+
                 this.song = song;
+                this.song.embed = this.sanitizer.bypassSecurityTrustHtml(song.embed);
+                console.log(song);
             });
 
         let names = {
             'module_cn': 'Cultural Notes',
             'module_dw': 'Discussion and Writing',
+            'module_qu': 'Questions for Understanding',
         };
 
         this.route.params
@@ -51,6 +56,7 @@ export class StudentSongDetailComponent implements OnInit {
                 this.modules = modules;
                 for (let i = 0; i < this.modules.length; i++) {
                     this.modules[i].name = this.modules[i].name || this.modules[i].module_type;
+                    this.modules[i].name = names[this.modules[i].name] || this.modules[i].name;
                 }
 
                 this.currentModule = this.modules[0].module_type;

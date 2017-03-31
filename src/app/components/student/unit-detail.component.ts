@@ -42,4 +42,8 @@ export class StudentUnitDetailComponent implements OnInit {
         this.router.navigate(['./student/unit/' + this.unit.id + '/song/' + song.id]);
     }
 
+    getProgress(song: Song) {
+        return { complete: 3, uncomplete: 3 }
+    }
+
 }
