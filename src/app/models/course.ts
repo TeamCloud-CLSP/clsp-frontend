@@ -46,3 +46,11 @@ export class Module {
     is_enabled: boolean;
     password: string;
 }
+
+export class Media {
+    id: number;
+    user_id: number;
+    name: string;
+    filename: string;
+    file_type: string;
+}

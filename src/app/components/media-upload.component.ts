@@ -7,6 +7,7 @@ import {MediaService} from "../services/media.service";
 import {Router} from "@angular/router";
 import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import {GlobalParameters} from '../global-parameters';
+import {Media} from "../models/course";
 
 
 @Component({
@@ -22,22 +23,27 @@ import {GlobalParameters} from '../global-parameters';
 
 export class MediaUploadComponent implements OnInit {
 
-    /*fileNames: string[];*/
     private parameters = new GlobalParameters();
     private mediaUrl = this.parameters.url + "/api/designer/media";
     public uploader: FileUploader = new FileUploader({url: this.mediaUrl});
     public hasBaseDropZoneOver: boolean = false;
+    files: Media[];
+
 
     constructor(private mediaService: MediaService,
                 private router: Router) {
     }
 
     ngOnInit(): void {
-
+        this.getFiles();
     }
 
     public fileOverBase(e: any): void {
         this.hasBaseDropZoneOver = e;
+    }
+
+    getFiles(): void {
+        this.mediaService.getAllFiles().then(files => this.files = files);
     }
 }
 
