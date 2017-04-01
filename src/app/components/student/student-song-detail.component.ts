@@ -53,10 +53,10 @@ export class StudentSongDetailComponent implements OnInit {
             .switchMap((params: Params) => this.studentService.getModules(+params['song_id']))
             .subscribe(modules => {
                 console.log(modules);
-                this.modules = modules;
+                this.modules = modules.filter(x => x.is_enabled == 1);
                 for (let i = 0; i < this.modules.length; i++) {
                     this.modules[i].name = this.modules[i].name || this.modules[i].module_type;
-                    this.modules[i].name = names[this.modules[i].name] || this.modules[i].name;
+                    //this.modules[i].name = names[this.modules[i].name] || this.modules[i].name;
                 }
 
                 this.currentModule = this.modules[0].module_type;

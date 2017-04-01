@@ -129,13 +129,13 @@ export class SongDetailComponent implements OnInit {
 
     enableModule(mod: Module, index: number) {
         this.moduleService.enableModule(this.song.id, mod)
-            .then(() => this.modules[index].is_enabled = true)
+            .then(() => this.modules[index].is_enabled = 1)
             .catch(() => console.log("Error in enabling module"));
     }
 
     disableModule(mod: Module, index: number) {
         this.moduleService.disableModule(this.song.id, mod)
-            .then(() => this.modules[index].is_enabled = false)
+            .then(() => this.modules[index].is_enabled = 0)
             .catch(() => console.log("Error in disabling module"));
     }
 }

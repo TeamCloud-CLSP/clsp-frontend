@@ -1,7 +1,7 @@
 <div>
     <div class="row" *ngIf="courseName">
         <p>
-            <a href="student/course/{{unit.course_id}}">{{courseName}}</a> >> <a href="student/unit/{{unit.id}}">{{unit.name}}</a> >> <b *ngIf="song">{{song.title}}</b>
+            <a href="student/">{{courseName}}</a> >> <a href="student/unit/{{unit.id}}">{{unit.name}}</a> >> <b *ngIf="song">{{song.title}}</b>
         </p>
     </div>
     <div class="row" *ngIf="courseName">
@@ -9,7 +9,7 @@
     </div>
 
     <div *ngIf="song" style="text-align: center;">
-        <div *ngIf="song.embed" >
+        <div *ngIf="song.embed">
             <div [innerHTML]="song.embed"></div>
         </div>
         <p><b>Title: </b>{{song.title}}</p>
