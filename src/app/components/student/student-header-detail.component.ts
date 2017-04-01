@@ -78,9 +78,9 @@ export class StudentHeaderDetailComponent implements OnInit {
                 for (let question of this.questions) {
                     question.displayChoices = JSON.parse(question.choices) as Choice[];
                     if (question.type == "fill-blank") {
-                        question.displayChoices = JSON.parse(question.answers) as Choice[];
+                        var blankNumber = (question.content.split("_").length - 1)
                         question.fbAnswers = [];
-                        for (var i = 0; i < question.displayChoices.length; i++) {
+                        for (var i = 0; i < blankNumber; i++) {
                             var choice = "";
                             question.fbAnswers.push(choice);
                         }

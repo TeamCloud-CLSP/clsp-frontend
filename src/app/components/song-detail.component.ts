@@ -126,4 +126,16 @@ export class SongDetailComponent implements OnInit {
         this.passwordEdit = false;
         this.moduleEditId = "";
     }
+
+    enableModule(mod: Module, index: number) {
+        this.moduleService.enableModule(this.song.id, mod)
+            .then(() => this.modules[index].is_enabled = true)
+            .catch(() => console.log("Error in enabling module"));
+    }
+
+    disableModule(mod: Module, index: number) {
+        this.moduleService.disableModule(this.song.id, mod)
+            .then(() => this.modules[index].is_enabled = false)
+            .catch(() => console.log("Error in disabling module"));
+    }
 }

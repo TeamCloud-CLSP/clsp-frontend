@@ -24,3 +24,8 @@ export class Choice {
     choice: string;
     constructor() { }
 }
+
+export class AnswerCheck {
+    id: number;
+
+}

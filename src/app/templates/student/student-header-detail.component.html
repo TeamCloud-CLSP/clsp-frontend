@@ -74,7 +74,10 @@
         </div>
     </div>
     <div class="row">
-        <button class="btn btn-default" *ngIf="!printVersion" (click)="printerVersion()">Printable View</button>
-        <button class="btn btn-default" *ngIf="printVersion" (click)="cancelPrint()">Normal View</button>
+        <div class="btn-group" role="group">
+            <button class="btn btn-success">Check Answers</button>
+            <button class="btn btn-default" *ngIf="!printVersion" (click)="printerVersion()">Printable View</button>
+            <button class="btn btn-default" *ngIf="printVersion" (click)="cancelPrint()">Normal View</button>
+        </div>
     </div>
 </div>

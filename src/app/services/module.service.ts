@@ -225,7 +225,37 @@ setModuleName(songId: number, mod: Module): Promise < null > {
     return this.http.post(url,
         JSON.stringify({
             name: mod.name,
+            is_enabled: mod.is_enabled,
+            password: mod.password,
+            has_password: mod.has_password
+        }),
+        this.options)
+        .toPromise()
+        .then(() => null)
+        .catch(this.handleError);
+}
+
+enableModule(songId: number, mod: Module): Promise < null > {
+    const url = `${this.designerUrl}/song/${songId}/${mod.module_type}/edit`;
+    return this.http.post(url,
+        JSON.stringify({
+            name: mod.name,
             is_enabled: true,
+            password: mod.password,
+            has_password: mod.has_password
+        }),
+        this.options)
+        .toPromise()
+        .then(() => null)
+        .catch(this.handleError);
+}
+
+disableModule(songId: number, mod: Module): Promise < null > {
+    const url = `${this.designerUrl}/song/${songId}/${mod.module_type}/edit`;
+    return this.http.post(url,
+        JSON.stringify({
+            name: mod.name,
+            is_enabled: false,
             password: mod.password,
             has_password: mod.has_password
         }),

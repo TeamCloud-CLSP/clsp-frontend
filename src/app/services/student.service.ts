@@ -118,7 +118,7 @@ export class StudentService {
             .catch(this.handleError);
     }
 
-    getCulturalNote(songId: number): Promise < CulturalNote[] > {
+    getCulturalNote(songId: number): Promise<CulturalNote[]> {
         const url = `${this.baseUrl}/song/${songId}/keywords`;
         return this.http.get(url, this.options)
             .toPromise()
@@ -133,4 +133,5 @@ export class StudentService {
                 console.log("ERRORR");
             });
     }
+
 }
