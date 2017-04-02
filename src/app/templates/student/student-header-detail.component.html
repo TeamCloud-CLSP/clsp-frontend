@@ -18,6 +18,9 @@
                     <label for="name">Blank {{i + 1}}</label>
                     <input type="text" class="form-control" [name]="'fbanswer' + i" attr.name="{{'fbanswer' + i}}" required [(ngModel)]="question.fbAnswers[i].choice">
                 </div>
+                <p *ngIf="question.correct != null">
+                    <b>Correct:</b> {{question.correct}}
+                </p>
             </form>
             <div *ngIf="question.type == 'multiple-choice' || question.type =='multiple-select'">
                 <div class="col-md-12" *ngIf="question.type == 'multiple-choice'">
