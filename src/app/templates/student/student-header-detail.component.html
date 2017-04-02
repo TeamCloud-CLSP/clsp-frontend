@@ -13,12 +13,12 @@
             <h3>
                 {{question.weight}}. {{question.content}}
             </h3>
-            <div *ngIf="question.type == 'fill-blank'">
+            <form *ngIf="question.type == 'fill-blank'">
                 <div class="form-group" *ngFor="let answer of question.fbAnswers;let i = index">
                     <label for="name">Blank {{i + 1}}</label>
-                    <input type="text" class="form-control" id="fbAnswer" required [(ngModel)]="question.fbAnswers[i]" name="fbAnswer">
+                    <input type="text" class="form-control" [name]="'fbanswer' + i" attr.name="{{'fbanswer' + i}}" required [(ngModel)]="question.fbAnswers[i].choice">
                 </div>
-            </div>
+            </form>
             <div *ngIf="question.type == 'multiple-choice' || question.type =='multiple-select'">
                 <div class="col-md-12" *ngIf="question.type == 'multiple-choice'">
                     <form>
@@ -31,6 +31,9 @@
                     </form>
                     <p>
                         <b>Selected Answer: </b> {{question.mcAnswer}}
+                    </p>
+                    <p *ngIf="question.correct != null">
+                        <b>Correct:</b> {{question.correct}}
                     </p>
                 </div>
                 <div class="col-md-12" *ngIf="question.type == 'multiple-select'">
@@ -46,6 +49,9 @@
                                 {{answer}}
                             </span>
                         </b>
+                    </p>
+                    <p *ngIf="question.correct  != null">
+                        <b>Correct:</b> {{question.correct}}
                     </p>
                 </div>
             </div>
@@ -75,7 +81,7 @@
     </div>
     <div class="row">
         <div class="btn-group" role="group">
-            <button class="btn btn-success">Check Answers</button>
+            <button class="btn btn-success" (click)="checkAnswers()">Check Answers</button>
             <button class="btn btn-default" *ngIf="!printVersion" (click)="printerVersion()">Printable View</button>
             <button class="btn btn-default" *ngIf="printVersion" (click)="cancelPrint()">Normal View</button>
         </div>

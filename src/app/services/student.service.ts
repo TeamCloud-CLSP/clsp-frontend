@@ -6,7 +6,7 @@ import { ProfInfo } from '../models/professor-info';
 import {StudentRegistration, Student} from "../models/studentregistration";
 import {GlobalParameters} from '../global-parameters';
 import {Unit, Song, Module} from "../models/course";
-import {Header, Question} from '../models/modules/header';
+import {Header, Question, AnswerCheck} from '../models/modules/header';
 import {CulturalNote} from "../models/modules/CulturalNote";
 
 @Injectable()
@@ -132,6 +132,14 @@ export class StudentService {
             .catch(error => {
                 console.log("ERRORR");
             });
+    }
+
+    checkAnswers(question: string): Promise<AnswerCheck[]> {
+        const url = `${this.baseUrl}/checkitems`;
+        return this.http.post(url, question, this.options)
+            .toPromise()
+            .then(response => response.json().data as AnswerCheck[])
+            .catch(this.handleError);
     }
 
 }

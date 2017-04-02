@@ -15,8 +15,13 @@ export class Question {
     answers: string;
     mcAnswer: string;
     msAnswers: string[];
-    fbAnswers: string[];
+    fbAnswers: Choice[];
     displayChoices: Choice[];
+    correct: string;
+
+    public get getFBAnswers() {
+        return this.fbAnswers;
+    }
     constructor() { }
 }
 
@@ -27,5 +32,5 @@ export class Choice {
 
 export class AnswerCheck {
     id: number;
-
+    result: string;
 }

@@ -5,7 +5,7 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import { CourseService } from '../../services/course.service';
 import { Course, Unit, Song } from '../../models/course';
 import { Router }   from '@angular/router';
-import { Header, Question, Choice } from '../../models/modules/header';
+import { Header, Question, Choice, AnswerCheck } from '../../models/modules/header';
 import { StudentService } from '../../services/student.service';
 import 'rxjs/add/operator/switchMap';
 
@@ -39,6 +39,7 @@ export class StudentHeaderDetailComponent implements OnInit {
     msAnswers: string[];
     fbAnswers: Choice[];
     printVersion: boolean;
+    answerChecks: AnswerCheck[];
 
     constructor(
         private route: ActivatedRoute,
@@ -81,7 +82,8 @@ export class StudentHeaderDetailComponent implements OnInit {
                         var blankNumber = (question.content.split("_").length - 1)
                         question.fbAnswers = [];
                         for (var i = 0; i < blankNumber; i++) {
-                            var choice = "";
+                            var choice = new Choice();
+                            choice.choice = "";
                             question.fbAnswers.push(choice);
                         }
                     }
@@ -103,6 +105,45 @@ export class StudentHeaderDetailComponent implements OnInit {
 
     cancelPrint(): void {
         this.printVersion = false;
+    }
+
+
+    checkAnswers() {
+        var test = "{";
+        var check = this.questions.filter(x => x.type == "fill-blank" || x.type == "multiple-choice" || x.type == "multiple-select");
+        for (let q of check) {
+            if (q.type == "fill-blank") {
+                var answers = JSON.stringify(q.fbAnswers);
+                test = test + "\"" + q.id + "\" : " + answers + ",";
+            }
+            else if (q.type == "multiple-choice") {
+                var choice = new Choice();
+                choice.choice = q.mcAnswer;
+                var answers = JSON.stringify([choice]);
+                test = test + "\"" + q.id + "\" : " + answers + ",";
+            }
+            else if (q.type == "multiple-select") {
+                let choices: Choice[] = [];
+                for (let a of q.msAnswers) {
+                    var choice = new Choice();
+                    choice.choice = a;
+                    choices.push(choice);
+                }
+                test = test + "\"" + q.id + "\" : " + answers + ",";
+            }
+        }
+        test = test.substring(0, test.length - 1);
+        test = test + "}";
+        this.studentService.checkAnswers(test)
+            .then(
+            response => {
+                for (let a of response) {
+                    var choice = this.questions.find(x => x.id == a.id);
+                    choice.correct = a.result;
+                }
+                console.log(this.questions);
+            }
+            )
     }
 
 }
