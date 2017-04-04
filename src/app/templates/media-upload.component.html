@@ -111,18 +111,35 @@
         <table class="table">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>File Type</th>
-                <th>Actions</th>
+                <!--<th width="5%">ID</th>-->
+                <th width="65%">Name</th>
+                <th width="10%">File Type</th>
+                <th width="25%">Actions</th>
             </tr>
             </thead>
             <tbody>
-            <tr  *ngFor="let file of files" class="row">
-                <td><strong>{{file.id}}</strong></td>
-                <td>{{file.name}}</td>
+            <tr *ngFor="let file of files">
+                <!--<td><strong>{{file.id}}</strong></td>-->
+                <td *ngIf="file.id != nameEditId && !nameEdit">{{file.name}}</td>
+                <td *ngIf="file.id != nameEditId && nameEdit">{{file.name}}</td>
+                <td *ngIf="file.id == nameEditId && !nameEdit">{{file.name}}</td>
+                <td *ngIf="file.id == nameEditId && nameEdit"><input [(ngModel)]="file.name" class="form-control" name="newName" id="newName" /></td>
                 <td>{{file.file_type}}</td>
+                <td *ngIf="file.id != nameEditId && !nameEdit">
+                    <button type="btn btn-default" (click)="editName(file.id)">Edit Name</button>
+                    <button type="btn btn-default" (click)="deleteFile(file.id)">Delete File</button>
+                </td>
+                <td *ngIf="file.id == nameEditId && nameEdit">
+                    <button type="btn btn-default" (click)="setName(file.id)">Set Name</button>
+                    <button type="btn btn-default" (click)="cancelNameEdit()">Cancel</button>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
+<!--
+<div *ngIf="files">
+    <div *ngFor="let file of files" class="row">
+        {{file.name}}
+    </div>
+</div>-->

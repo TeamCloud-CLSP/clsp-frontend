@@ -33,4 +33,25 @@ export class MediaService {
             .then(response => response.json().data as Media[])
             .catch(this.handleError);
     }
+
+    editMedia(id: number, name: string): Promise<Media> {
+        const url = `${this.designerUrl}/media/${id}`;
+        return this.http.post(url,
+            JSON.stringify({
+                name: name
+            }),
+            this.options)
+            .toPromise()
+            .then(response => response.json() as Media)
+            .catch(this.handleError);
+
+    }
+
+    deleteMedia(id: number): Promise<null> {
+        const url = `${this.designerUrl}/media/${id}`;
+        return this.http.delete(url, this.options)
+            .toPromise()
+            .then(() => null)
+            .catch(this.handleError);
+    }
 }

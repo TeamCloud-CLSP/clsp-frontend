@@ -50,7 +50,6 @@ export class Module {
 
 export class Media {
     id: number;
-    user_id: number;
     name: string;
     filename: string;
     file_type: string;
