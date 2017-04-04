@@ -68,6 +68,10 @@ export class UnitDetailComponent implements OnInit {
         this.router.navigate(['./unit/' + this.unit.id + '/song', song.id]);
     }
 
+    toMediaLink(song: Song): void {
+        this.router.navigate(['./unit/' + this.unit.id + '/song/' + song.id + "/media"]);
+    }
+
     onSubmit(): void {
         this.newSong.unit_id = +this.unit.id;
         this.courseService.createSong(this.newSong)

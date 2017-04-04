@@ -54,3 +54,8 @@ export class Media {
     filename: string;
     file_type: string;
 }
+
+export class MediaLink {
+    song_id: number;
+    media_id: number;
+}

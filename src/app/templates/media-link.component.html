@@ -1,0 +1,30 @@
+<h2 *ngIf="song">Link Media to {{song.title}}</h2>
+
+<div>
+    <br/>
+    <table class="table">
+        <thead>
+        <tr>
+            <th width="60%">Name</th>
+            <th width="10%">File Type</th>
+            <th width="5%">Linked</th>
+            <th width="25%">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let file of files">
+            <!--<td><strong>{{file.id}}</strong></td>-->
+            <td>{{file.name}}</td>
+            <td>{{file.file_type}}</td>
+            <td *ngIf="isLinked(file.id)"><strong>Yes</strong></td>
+            <td *ngIf="!isLinked(file.id)"><strong>No</strong></td>
+            <td *ngIf="!isLinked(file.id)">
+                <button type="btn btn-default" (click)="linkMedia(file.id)" >Link File</button>
+            </td>
+            <td *ngIf="isLinked(file.id)">
+                <button type="btn btn-default" (click)="deleteLink(file.id)" >Unlink File</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

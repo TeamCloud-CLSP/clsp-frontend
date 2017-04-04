@@ -17,6 +17,7 @@ import {StudentDashboardComponent} from "./components/student-dashboard.componen
 import {StudentUnitDetailComponent} from "./components/student/unit-detail.component";
 import {StudentSongDetailComponent} from "./components/student/student-song-detail.component";
 import {StudentHeaderDetailComponent} from "./components/student/student-header-detail.component";
+import {MediaLinkComponent} from "./components/media-link.component";
 
 const routes: Routes = [
     {
@@ -87,6 +88,10 @@ const routes: Routes = [
     {
         path: 'student/unit/:unit_id/song/:song_id/header/:header_id',
         component: StudentHeaderDetailComponent
+    },
+    {
+        path: 'unit/:unit_id/song/:id/media',
+        component: MediaLinkComponent
     }
 ];
 

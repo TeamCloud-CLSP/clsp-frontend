@@ -46,6 +46,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {PopoverModule} from "ng2-bootstrap";
 
 import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import {MediaLinkComponent} from "./components/media-link.component";
 
 @NgModule({
     imports: [
@@ -82,7 +83,8 @@ import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-u
         StudentQuestionModuleComponent,
         StudentHeaderDetailComponent,
         GetChoicesPipe,
-        StudentCulturalNotesComponent
+        StudentCulturalNotesComponent,
+        MediaLinkComponent
     ],
     entryComponents: [
         AnnotationComponent
