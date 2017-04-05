@@ -5,7 +5,7 @@ import {CLSPClass, SingleClass, CreateClass, StudentClass} from '../models/clsp-
 import { ProfInfo } from '../models/professor-info';
 import {StudentRegistration, Student} from "../models/studentregistration";
 import {GlobalParameters} from '../global-parameters';
-import {Unit, Song, Module} from "../models/course";
+import {Unit, Song, Module, Media} from "../models/course";
 import {Header, Question, AnswerCheck} from '../models/modules/header';
 import {CulturalNote} from "../models/modules/CulturalNote";
 
@@ -90,6 +90,15 @@ export class StudentService {
             .toPromise()
             .then(response => {
                 return response.json().data as Module[];
+            })
+            .catch(this.handleError);
+    }
+
+    getMedia(songId: number): Promise<Media[]> {
+        return this.http.get(this.baseUrl + "/song/" + songId + "/media", this.options)
+            .toPromise()
+            .then(response => {
+                return response.json().data as Media[];
             })
             .catch(this.handleError);
     }

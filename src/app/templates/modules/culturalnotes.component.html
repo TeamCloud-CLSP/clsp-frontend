@@ -23,7 +23,10 @@
         <div *ngIf="annotating">
             <h2>Add Annotations</h2>
             <span><b>Current phrase:</b> {{currentPhrase}}</span>
-            <textarea [(ngModel)]="currentDescription" class="form-control" [value]="currentDescription"></textarea>
+            <ckeditor
+                    [(ngModel)]="currentDescription"
+                    debounce="500">
+            </ckeditor>
             <br/>
             <button (click)="saveAnnotation()" class="btn btn-default">Annotate</button>
         </div>
@@ -48,7 +51,10 @@
                         {{annotation.phrase}}
                     </td>
                     <td>
-                        <input class="form-control" [(ngModel)]="notes[i].description"/>
+                        <ckeditor
+                                [(ngModel)]="notes[i].description"
+                                debounce="500">
+                        </ckeditor>
                     </td>
                     <td>
                         <button (click)="updateAnnotation(i)" class="btn btn-default"><span
@@ -58,8 +64,9 @@
             </table>
         </div>
     </div>
-    <div *ngIf="editing">
+    <div *ngIf="editing ">
         <textarea class="form-control" [value]="this.song.lyrics" style="resize:none;" rows="10" cols="40"></textarea>
+
         <br/>
         <div class="btn-group" role="group">
             <button class="btn btn-default" (click)="cancelEdit()">Cancel</button>

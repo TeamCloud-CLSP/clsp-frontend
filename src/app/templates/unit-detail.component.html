@@ -33,7 +33,7 @@
         <div class="panel panel-default">
             <div class="panel-heading song-title" (click)="toSong(song)">
                 <h3 class="panel-title">{{song.title}}</h3>
-                <span (click)="deleteSong(song)" class="pull-right clickable glyphicon glyphicon-remove" data-effect="fadeOut"></span>
+                <span (click)="deleteSong(song, $event)" class="pull-right clickable glyphicon glyphicon-remove" data-effect="fadeOut"></span>
             </div>
             <div class="panel-body container">
                 <div class="row">
@@ -78,7 +78,7 @@
                 </div>
                 <div>
                     <div class="col-md-5 col-sm-6">
-                        <button type="btn btn-default" (click)="toMediaLink(song)">Link Media</button>
+                        <button class="btn btn-default" (click)="toMediaLink(song)">Link Media</button>
                     </div>
                 </div>
             </div>

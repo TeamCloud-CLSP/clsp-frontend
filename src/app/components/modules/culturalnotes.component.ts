@@ -30,6 +30,7 @@ export class CulturalNotesComponent implements OnInit {
     notes: CulturalNote[];
     showLyrics: boolean;
     lyricPieces: string[];
+    checked: any;
 
     constructor(private courseService: CourseService,
         private route: ActivatedRoute,
@@ -41,6 +42,7 @@ export class CulturalNotesComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.checked = {};
         this.showLyrics = false;
         this.editing = false;
         this.annotating = false;

@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 // Imports for loading & configuring the in-memory web api
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './services/in-memory-data.service';
+import {CKEditorModule} from "ng2-ckeditor";
 
 // Services
 import { CourseService } from './services/course.service'
@@ -55,7 +56,8 @@ import {MediaLinkComponent} from "./components/media-link.component";
         AppRoutingModule,
         HttpModule,
         InMemoryWebApiModule.forRoot(InMemoryDataService, { passThruUnknownUrl: true }),
-        PopoverModule.forRoot()
+        PopoverModule.forRoot(),
+        CKEditorModule
     ],
     declarations: [
         AppComponent,

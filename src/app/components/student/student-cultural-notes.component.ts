@@ -52,13 +52,16 @@ export class StudentCulturalNotesComponent implements OnInit {
             //Remove all matching lyric pieces and replace them with '|i|' where
             //i corresponds to the index of the note in the notes CulturalNotes array
             //the '|i|' are replaced with the corresponding CulturalNotes text in the template
-            for (let i = 0; i < notes.length; i++) {
-                let test = "|" + i.toString() + "|";
-                lyrics = lyrics.split(notes[i].phrase).join(test);
+            if (notes) {
+                for (let i = 0; i < notes.length; i++) {
+                    let test = "|" + i.toString() + "|";
+                    lyrics = lyrics.split(notes[i].phrase).join(test);
+                }
+                this.lyricPieces = lyrics.split('|').filter(x => x != "");
+                console.log(this.lyricPieces);
+                this.showLyrics = true;
             }
-            this.lyricPieces = lyrics.split('|').filter(x => x != "");
-            console.log(this.lyricPieces);
-            this.showLyrics = true;
+
         })
     }
 

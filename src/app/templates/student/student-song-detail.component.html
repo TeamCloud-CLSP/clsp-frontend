@@ -1,3 +1,17 @@
+<style>
+    video::-internal-media-controls-download-button {
+        display:none;
+    }
+
+    video::-webkit-media-controls-enclosure {
+        overflow:hidden;
+    }
+
+    video::-webkit-media-controls-panel {
+        width: calc(100% + 30px); /* Adjust as needed */
+    }
+</style>
+
 <div>
     <div class="row" *ngIf="courseName">
         <p>
@@ -11,6 +25,31 @@
     <div *ngIf="song" style="text-align: center;">
         <div *ngIf="song.embed">
             <div [innerHTML]="song.embed"></div>
+        </div>
+        <div *ngFor="let item of media">
+            <div [ngSwitch]="item.file_type">
+                <div *ngSwitchCase="'png'">
+                    <img style="max-width: 400px; max-height: 400px" src="{{publicBaseUrl + item.filename}}">
+                </div>
+                <div *ngSwitchCase="'jpg'">
+                    <img style="max-width: 400px; max-height: 400px" src="{{publicBaseUrl + item.filename}}">
+                </div>
+                <div *ngSwitchCase="'jpeg'">
+                    <img style="max-width: 400px; max-height: 400px" src="{{publicBaseUrl + item.filename}}">
+                </div>
+                <div *ngSwitchCase="'pdf'">
+                    <p>PDFs not supported</p>
+                    <!--<embed src="{{sanitizer.bypassSecurityTrustUrl(publicBaseUrl + item.filename)}}" width="800px" height="2100px" />-->
+                </div>
+                <div *ngSwitchCase="'mp3'">
+                    <video controls>
+                        <source src="{{publicBaseUrl + item.filename}}" type="audio/mpeg">
+                    </video>
+                </div>
+                <div *ngSwitchDefault>
+                    <p>File type {{item.file_type}} not supported</p>
+                </div>
+            </div>
         </div>
         <p><b>Title: </b>{{song.title}}</p>
         <p><b>Artist: </b>{{song.artist}}</p>

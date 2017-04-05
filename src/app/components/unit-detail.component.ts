@@ -53,11 +53,14 @@ export class UnitDetailComponent implements OnInit {
         );
     }
 
-    deleteSong(song: Song): void {
-        this.courseService.deleteSong(song)
-            .then(() => {
-                this.songs = this.songs.filter(x => x != song);
-            })
+    deleteSong(song: Song, event: any): void {
+        event.preventDefault();
+        if(confirm("Are you sure you want to delete " + song.title + "?")) {
+            this.courseService.deleteSong(song)
+                .then(() => {
+                    this.songs = this.songs.filter(x => x != song);
+                })
+        }
     }
 
     createSong(): void {

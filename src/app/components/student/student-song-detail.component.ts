@@ -2,11 +2,12 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Params}   from '@angular/router';
 import {Location}                 from '@angular/common';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {Course, Unit, Song, Module} from '../../models/course';
+import {Course, Unit, Song, Module, Media} from '../../models/course';
 import {Router}   from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import {ModuleService} from "../../services/module.service";
 import {StudentService} from "../../services/student.service";
+import {GlobalParameters} from "../../global-parameters";
 
 @Component({
     moduleId: module.id,
@@ -20,6 +21,8 @@ export class StudentSongDetailComponent implements OnInit {
     modules: Module[];
     courseName: string;
     currentModule: string;
+    media: Media[];
+    publicBaseUrl: string;
 
     constructor(private studentService: StudentService,
         private moduleService: ModuleService,
@@ -31,6 +34,8 @@ export class StudentSongDetailComponent implements OnInit {
     }
 
     ngOnInit() {
+        let parameters = new GlobalParameters();
+        this.publicBaseUrl = parameters.url + "/files/";
         this.route.params
             .switchMap((params: Params) => {
                 console.log(params);
@@ -56,12 +61,19 @@ export class StudentSongDetailComponent implements OnInit {
                 this.modules = modules.filter(x => x.is_enabled == 1);
                 for (let i = 0; i < this.modules.length; i++) {
                     this.modules[i].name = this.modules[i].name || this.modules[i].module_type;
-                    //this.modules[i].name = names[this.modules[i].name] || this.modules[i].name;
+                    this.modules[i].name = names[this.modules[i].name] || this.modules[i].name;
                 }
 
                 this.currentModule = this.modules[0].module_type;
             });
 
+        this.route.params
+            .switchMap((params: Params) => this.studentService.getMedia(+params['song_id']))
+            .subscribe(media => {
+                console.log(media);
+
+                this.media = media;
+            });
 
         this.route.params
             .switchMap((params: Params) => this.studentService.getUnit(+params['unit_id']))
