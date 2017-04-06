@@ -3,7 +3,8 @@ import { Course } from '../models/course';
 import { CourseService } from '../services/course.service';
 import {Router} from "@angular/router";
 import {User} from "../models/user";
-import {AccountService} from "../services/account.service";
+import {AuthenticationService} from "../services/authentication.service";
+import {auditTime} from "rxjs/operator/auditTime";
 
 @Component({
     moduleId: module.id,
@@ -14,17 +15,18 @@ import {AccountService} from "../services/account.service";
 export class DashboardComponent implements OnInit {
     courses: Course[] = [];
     user: User;
-    constructor(private accountService : AccountService,
-                private courseService: CourseService, private router: Router) { }
+    constructor(private authService: AuthenticationService,
+                private courseService: CourseService,
+                private router: Router) { }
 
     ngOnInit(): void {
-        this.accountService.getAccount().then(account => {
-            this.user = account;
-            if (account.is_student) {
-                this.router.navigate(['./student']);
-            } else if (account.is_professor || account.is_designer) {
-                this.courseService.getCourses().then(courses => this.courses = courses.slice(0, 2));
-            }
-        });
+        let account: User;
+        account = this.authService.getAccount();
+        this.user = account;
+        if (account.is_student) {
+            this.router.navigate(['./student']);
+        } else if (account.is_professor || account.is_designer) {
+            this.courseService.getCourses().then(courses => this.courses = courses.slice(0, 2));
+        }
     }
 }

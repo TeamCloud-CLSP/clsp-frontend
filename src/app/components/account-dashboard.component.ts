@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { User } from '../models/user';
 import 'rxjs/add/operator/switchMap';
-import {AccountService} from '../services/account.service'
+import {AuthenticationService} from "../services/authentication.service";
 
 @Component ({
     moduleId: module.id,
@@ -15,14 +15,9 @@ export class AccountDashboardComponent {
     account: User;
 
     constructor(
-        private accountService: AccountService
+        private authService: AuthenticationService
     ) {
-        this.account = accountService.getEmptyAccount();
-        this.getAccount();
-    }
-
-    getAccount(): void {
-        this.accountService.getAccount().then(account => this.account = account);
+        this.account = authService.getEmptyAccount();
     }
 
     getRoles(): string {

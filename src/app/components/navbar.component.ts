@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
-import { AccountService } from '../services/account.service'
 import { Router } from '@angular/router'
+import {UserToken} from "../models/user-token";
+import {AuthenticationService} from "../services/authentication.service";
 
 @Component({
     moduleId: module.id,
@@ -13,11 +14,16 @@ export class NavbarComponent {
     private account: User;
 
     constructor(
-        private accountService: AccountService,
+        private authService: AuthenticationService,
         private router: Router
     ) {
-        accountService.getAccount().then(account => {
-            this.account = account;
-        });
+        this.account = authService.getAccount();
+    }
+
+    logout() {
+        console.log("Logging user out");
+        this.authService.logout();
+        console.log("Logging user out 2");
+        this.account = this.authService.getAccount();
     }
 }

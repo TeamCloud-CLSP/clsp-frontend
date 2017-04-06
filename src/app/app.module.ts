@@ -11,11 +11,11 @@ import {CKEditorModule} from "ng2-ckeditor";
 // Services
 import { CourseService } from './services/course.service'
 import { AdminService } from './services/admin.service'
-import {AccountService} from "./services/account.service";
 import {ProfessorService} from "./services/professor.service";
 import {ModuleService} from "./services/module.service";
 import {StudentService} from "./services/student.service";
 import {MediaService} from "./services/media.service";
+import {AuthenticationService} from "./services/authentication.service";
 
 // Components
 import { CoursesComponent } from './components/courses.component'
@@ -41,6 +41,7 @@ import {AnnotationComponent} from "./components/modules/annotation.component";
 import {StudentQuestionModuleComponent} from "./components/student/student-question-module";
 import {StudentHeaderDetailComponent, GetChoicesPipe} from "./components/student/student-header-detail.component"
 import {StudentCulturalNotesComponent} from "./components/student/student-cultural-notes.component";
+import {LoginComponent} from "./components/login.component";
 
 //Routing
 import {AppRoutingModule} from './app-routing.module';
@@ -48,6 +49,8 @@ import {PopoverModule} from "ng2-bootstrap";
 
 import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import {MediaLinkComponent} from "./components/media-link.component";
+
+
 
 @NgModule({
     imports: [
@@ -86,7 +89,8 @@ import {MediaLinkComponent} from "./components/media-link.component";
         StudentHeaderDetailComponent,
         GetChoicesPipe,
         StudentCulturalNotesComponent,
-        MediaLinkComponent
+        MediaLinkComponent,
+        LoginComponent
     ],
     entryComponents: [
         AnnotationComponent
@@ -94,11 +98,11 @@ import {MediaLinkComponent} from "./components/media-link.component";
     providers: [
         CourseService,
         AdminService,
-        AccountService,
         ProfessorService,
         ModuleService,
         MediaService,
-        StudentService
+        StudentService,
+        AuthenticationService
     ],
     bootstrap: [AppComponent]
 })
