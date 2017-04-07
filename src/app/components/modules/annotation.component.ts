@@ -16,6 +16,7 @@ import { SafeHtml } from '@angular/platform-browser';
 export class AnnotationComponent implements OnInit {
     @Input() note: CulturalNote;
     safeDesc: SafeHtml;
+    placement: string;
 
     constructor(
         private route: ActivatedRoute,
@@ -25,14 +26,30 @@ export class AnnotationComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.placement = "top";
         //console.log("annotation created");
         //console.log(this.note.phrase);
         // console.log($('what'));
         this.safeDesc = this.sanitizer.bypassSecurityTrustHtml(this.note.description);
     }
 
-    onClickAnnotation(element: HTMLElement) {
+    onClickAnnotation(element: HTMLElement, event: any) {
         // console.log(this.content);
+        this.placement = "bottom";
+
+        let yHalf = window.innerHeight / 2;
+        let xHalf = window.innerWidth / 2;
+
+        let x = event.clientX;
+        let y = event.clientY;
+
+
+        if (x > xHalf) {
+            this.placement = "left";
+        } else {
+            this.placement = "right";
+        }
+
         let popover = element.querySelector('.pop-floating');
         // if(popover.style.display == "inline-block") {
         //     popover.style.display = "none";

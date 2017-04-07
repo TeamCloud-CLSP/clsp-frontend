@@ -13,5 +13,5 @@
     }
 
 </style>
-<span (click)="onClickAnnotation($event.target)" class="highlight" placement="top" [popover]="popTemplate"> {{note.phrase}}</span>
+<span (click)="onClickAnnotation($event.target, $event)" class="highlight" placement="{{this.placement}}" [popover]="popTemplate"> {{note.phrase}}</span>
 <template #popTemplate><div [innerHTML]="safeDesc"></div></template>
