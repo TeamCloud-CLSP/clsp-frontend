@@ -23,6 +23,7 @@ export class MediaLinkComponent implements OnInit {
 
     private parameters = new GlobalParameters();
     private mediaUrl = this.parameters.url + "/api/designer/media";
+    private siteUrl = this.parameters.url;
     files: Media[];
     linked: Media[];
     song: Song;
@@ -86,5 +87,9 @@ export class MediaLinkComponent implements OnInit {
     deleteLink(mediaId: number) {
         this.mediaService.deleteMediaLink(this.song.id, mediaId);
         this.getLinkedMedia(this.song.id);
+    }
+
+    goBack(): void {
+        this.location.back();
     }
 }

@@ -4,12 +4,13 @@
 
 import {Component, OnInit, Directive} from "@angular/core";
 import {MediaService} from "../services/media.service";
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute, Params} from "@angular/router";
 import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import {GlobalParameters} from '../global-parameters';
 import {Media} from "../models/course";
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
+import { Location }                 from '@angular/common';
 
 @Component({
     moduleId: module.id,
@@ -26,6 +27,7 @@ export class MediaUploadComponent implements OnInit {
 
     private parameters = new GlobalParameters();
     private mediaUrl = this.parameters.url + "/api/designer/media";
+    private siteUrl = this.parameters.url;
     public uploader: FileUploader = new FileUploader({url: this.mediaUrl});
     public hasBaseDropZoneOver: boolean = false;
     files: Media[];
@@ -34,6 +36,9 @@ export class MediaUploadComponent implements OnInit {
 
 
     constructor(private mediaService: MediaService,
+                private route: ActivatedRoute,
+                private location: Location,
+                private sanitizer: DomSanitizer,
                 private router: Router) {
     }
 
@@ -76,6 +81,10 @@ export class MediaUploadComponent implements OnInit {
 
     getFiles(): void {
         this.mediaService.getAllFiles().then(files => this.files = files);
+    }
+
+    goBack(): void {
+        this.location.back();
     }
 }
 
