@@ -42,7 +42,7 @@
                     <!--<embed src="{{sanitizer.bypassSecurityTrustUrl(publicBaseUrl + item.filename)}}" width="800px" height="2100px" />-->
                 </div>
                 <div *ngSwitchCase="'mp3'">
-                    <video controls>
+                    <video style="width: 100%; height: 40px;" controls>
                         <source src="{{publicBaseUrl + item.filename}}" type="audio/mpeg">
                     </video>
                 </div>

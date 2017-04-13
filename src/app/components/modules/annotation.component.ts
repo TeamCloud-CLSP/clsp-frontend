@@ -6,6 +6,7 @@ import {Router}   from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import {CulturalNote} from "../../models/modules/CulturalNote";
 import { SafeHtml } from '@angular/platform-browser';
+import {CourseService} from "../../services/course.service";
 
 @Component({
     moduleId: module.id,
@@ -15,10 +16,13 @@ import { SafeHtml } from '@angular/platform-browser';
 
 export class AnnotationComponent implements OnInit {
     @Input() note: CulturalNote;
+    @Input() isDesigner: boolean;
     safeDesc: SafeHtml;
     placement: string;
+    status: string;
 
     constructor(
+        private courseService: CourseService,
         private route: ActivatedRoute,
         private location: Location,
         private sanitizer: DomSanitizer,
@@ -26,11 +30,22 @@ export class AnnotationComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.status = "Save";
         this.placement = "top";
         //console.log("annotation created");
         //console.log(this.note.phrase);
         // console.log($('what'));
         this.safeDesc = this.sanitizer.bypassSecurityTrustHtml(this.note.description);
+    }
+
+    updateAnnotation() {
+        this.status = "Saving...";
+        this.courseService.updateCulturalNotes(this.note).then(
+            note => {
+                this.note = note;
+                this.status = "Save";
+            }
+        )
     }
 
     onClickAnnotation(element: HTMLElement, event: any) {
