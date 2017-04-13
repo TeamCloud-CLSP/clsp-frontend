@@ -34,6 +34,15 @@ export class MediaService {
             .catch(this.handleError);
     }
 
+    getAVFiles(): Promise<Media[]> {
+        const url = `${this.designerUrl}/avmedia`;
+        return this.http
+            .get(url, this.options)
+            .toPromise()
+            .then(response => response.json().data as Media[])
+            .catch(this.handleError);
+    }
+
     getLinkedMedia(songId: number): Promise<Media[]> {
         const url = `${this.designerUrl}/song/${songId}/media`;
         return this.http.get(url, this.options)

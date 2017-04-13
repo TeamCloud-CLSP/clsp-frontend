@@ -1,8 +1,8 @@
 <h2 *ngIf="song">Link Media to {{song.title}}</h2>
 
-<div>
+<div *ngIf="files">
     <br/>
-    <table class="table">
+    <table class="table" *ngIf="linked">
         <thead>
         <tr>
             <th width="30%">Name</th>

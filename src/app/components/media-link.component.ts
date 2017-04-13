@@ -40,7 +40,6 @@ export class MediaLinkComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.linked = [];
         this.route.params
             .switchMap((params: Params) => this.courseService.getSong(+params['id']))
             .subscribe(song => {
@@ -63,7 +62,7 @@ export class MediaLinkComponent implements OnInit {
     }
 
     getFiles(): void {
-        this.mediaService.getAllFiles().then(files => this.files = files);
+        this.mediaService.getAVFiles().then(files => this.files = files);
     }
 
     getLinkedMedia(songId: number): void {
