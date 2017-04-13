@@ -10,10 +10,24 @@
     </div>
     <div *ngIf="!printVersion">
         <div class="row" *ngFor="let question of questions">
-            <h3>
+            <h3 *ngIf="question.type == 'fill-blank'">
+                {{question.weight}}.
+                <span *ngFor="let piece of question.fbPieces;">
+                    <span *ngIf ="checkBlank(piece)">
+                        {{piece}}
+                    </span>
+                    <span *ngIf="!checkBlank(piece)">
+                        <input type="text" class="form-control" [name]="'fbanswer' + piece" attr.name="{{'fbanswer' + piece}}" required [(ngModel)]="question.fbAnswers[+piece].choice" style="width:300px">
+                        <span *ngIf="question.correct != null">
+                            <b>Correct:</b> {{question.correct[+piece]}}
+                        </span>
+                    </span>
+                </span>
+            </h3>
+            <h3 *ngIf="question.type != 'fill-blank'">
                 {{question.weight}}. {{question.content}}
             </h3>
-            <form *ngIf="question.type == 'fill-blank'">
+            <!-- <form *ngIf="question.type == 'fill-blank'">
                 <div class="form-group" *ngFor="let answer of question.fbAnswers;let i = index">
                     <label for="name">Blank {{i + 1}}</label>
                     <input type="text" class="form-control" [name]="'fbanswer' + i" attr.name="{{'fbanswer' + i}}" required [(ngModel)]="question.fbAnswers[i].choice">
@@ -21,7 +35,7 @@
                 <p *ngIf="question.correct != null">
                     <b>Correct:</b> {{question.correct}}
                 </p>
-            </form>
+            </form> -->
             <div *ngIf="question.type == 'multiple-choice' || question.type =='multiple-select'">
                 <div class="col-md-12" *ngIf="question.type == 'multiple-choice'">
                     <form>
@@ -62,22 +76,38 @@
     </div>
     <div *ngIf="printVersion">
         <div class="row" *ngFor="let question of questions">
-            <h3>
+            <h3 *ngIf="question.type == 'fill-blank'">
+                {{question.weight}}.
+                <span *ngFor="let piece of question.fbPieces;">
+                    <span *ngIf ="checkBlank(piece)">
+                        {{piece}}
+                    </span>
+                    <span *ngIf="!checkBlank(piece)" style="text-decoration:underline">
+                        {{question.fbAnswers[+piece].choice}}
+                    </span>
+                </span>
+            </h3>
+            <h3 *ngIf="question.type != 'fill-blank'">
                 {{question.weight}}. {{question.content}}
             </h3>
-            <div *ngIf="question.type == 'fill-blank'">
-                <p *ngFor="let answer of getChoices(question.answers); let i = index"><b>Blank {{i+1}}:</b> </p>
-            </div>
             <div *ngIf="question.type == 'multiple-choice' || question.type =='multiple-select'">
                 <div *ngFor="let choice of getChoices(question.choices); let i = index;" class="col-md-12">
-                    <p>
-                        <b>{{convertAscii(i)}}:</b> {{choice.choice}}
-                    </p>
-                </div>
-                <div class="col-md-12" *ngIf="question.type == 'multiple-choice'">
-                </div>
-                <div class="col-md-12" *ngIf="question.type == 'multiple-select'">
-
+                    <div *ngIf="question.type == 'multiple-choice'">
+                        <p *ngIf="choice.choice != question.mcAnswer">
+                            <b>{{convertAscii(i)}}:</b> {{choice.choice}}
+                        </p>
+                        <p *ngIf="choice.choice == question.mcAnswer" style="font-weight:900">
+                            <b>{{convertAscii(i)}}: {{choice.choice}}</b>
+                        </p>
+                    </div>
+                    <div *ngIf="question.type == 'multiple-select'">
+                        <p *ngIf="!isMsAnswer(question, choice.choice)">
+                            <b>{{convertAscii(i)}}:</b> {{choice.choice}}
+                        </p>
+                        <p *ngIf="isMsAnswer(question, choice.choice)" style="font-weight:900">
+                            <b>{{convertAscii(i)}}: {{choice.choice}}</b>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

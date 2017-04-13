@@ -18,6 +18,7 @@ export class Question {
     fbAnswers: Choice[];
     displayChoices: Choice[];
     correct: string;
+    fbPieces: string[];
 
     public get getFBAnswers() {
         return this.fbAnswers;
