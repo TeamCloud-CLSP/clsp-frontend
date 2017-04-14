@@ -21,7 +21,7 @@ export class SongDetailComponent implements OnInit {
     courseName: string;
     selectors: any;
     passwordEdit: boolean;
-    moduleEditId: string;
+    /*moduleEditId: string;*/
     currentModule: string;
 
     constructor(private courseService: CourseService,
@@ -87,12 +87,12 @@ export class SongDetailComponent implements OnInit {
         this.moduleService.setModuleName(this.song.id, mod);
     }
 
-    setPassword(type: string) {
-        if (type == "module_cn") {
-            this.moduleService.setPasswordCN(this.song.id, this.modules[0].password).then(value => {
+    setPassword() {
+            this.moduleService.setPasswordCN(this.song.id, this.modules[0])
+                .then(value => {
                 //console.log("password updated");
             });
-        } else if (type == "module_dw") {
+        /*} else if (type == "module_dw") {
             this.moduleService.setPasswordDW(this.song.id, this.modules[1].password).then(value => {
                 //console.log("password updated");
             });
@@ -112,19 +112,19 @@ export class SongDetailComponent implements OnInit {
             this.moduleService.setPasswordQU(this.song.id, this.modules[5].password).then(value => {
                 //console.log("password updated");
             });
-        }
+        }*/
         this.passwordEdit = false;
     }
 
     changePassword(id: string) {
         this.passwordEdit = true;
-        this.moduleEditId = id;
-        console.log(id);
+        /*this.moduleEditId = id;*/
+        /*console.log(id);*/
     }
 
     cancelPassEdit() {
         this.passwordEdit = false;
-        this.moduleEditId = "";
+        /*this.moduleEditId = "";*/
     }
 
     enableModule(mod: Module, index: number) {

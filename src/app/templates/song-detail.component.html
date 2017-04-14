@@ -59,15 +59,17 @@
                             <button class="btn btn-success" (click)="setModuleName(module)">Save</button>
                         </div>
                         <br />
-                        <div *ngIf="!passwordEdit">
-                            <label for="password">Password</label>
-                            <p>{{module.password}}</p>
-                            <button (click)="changePassword(module.module_type)" class="btn btn-default">Change Password</button>
-                        </div>
-                        <div *ngIf="passwordEdit && module.module_type == moduleEditId">
-                            <label for="password">Password</label>
-                            <input [(ngModel)]="module.password" class="form-control " name="password" id="password" />
-                            <button class="btn btn-default" (click)="setPassword(module.module_type)">Set Password</button><button class="btn btn-default" (click)="cancelPassEdit()">Cancel</button>
+                        <div *ngIf="module.module_type == 'module_cn'">
+                            <div *ngIf="!passwordEdit">
+                                <label for="password">Password</label>
+                                <p>{{module.password}}</p>
+                                <button (click)="changePassword(module.module_type)" class="btn btn-default">Change Password</button>
+                            </div>
+                            <div *ngIf="passwordEdit" >
+                                <label for="password">Password</label>
+                                <input [(ngModel)]="module.password" class="form-control " name="password" id="password" />
+                                <button class="btn btn-default" (click)="setPassword()">Set Password</button><button class="btn btn-default" (click)="cancelPassEdit()">Cancel</button>
+                            </div>
                         </div>
                         <div *ngSwitchCase="'module_cn'">
                             <clsp-cultural-notes [song]="song"></clsp-cultural-notes>

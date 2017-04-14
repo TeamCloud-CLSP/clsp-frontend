@@ -46,6 +46,7 @@ export class Module {
     is_enabled: number;
     password: string;
     name: string;
+    song_enabled: boolean;
 }
 
 export class Media {

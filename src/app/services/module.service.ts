@@ -112,24 +112,26 @@ export class ModuleService {
             .catch(this.handleError);
     }
 
-    setPasswordCN(songId: number, password: string): Promise<null> {
+    setPasswordCN(songId: number, mod: Module): Promise<null> {
         const url = `${this.designerUrl}/song/${songId}/module_cn/edit`;
         var has_password = true;
-        if(password == "") {
+        if(mod.password == "") {
             has_password = false;
         }
         return this.http.post(url,
             JSON.stringify({
-                password: password,
+                password: mod.password,
                 has_password: has_password,
-                is_enabled: true
+                is_enabled: mod.is_enabled,
+                name: mod.name,
+                song_enabled: mod.song_enabled
             }),
             this.options)
             .toPromise()
             .then(response => response.json() as Module)
             .catch(this.handleError);
     }
-
+/*
 setPasswordDW(songId: number, password: string): Promise < null > {
     const url = `${this.designerUrl}/song/${songId}/module_dw/edit`;
     var has_password = true;
@@ -218,7 +220,7 @@ setPasswordQU(songId: number, password: string): Promise < null > {
         .toPromise()
         .then(response => response.json() as Module)
         .catch(this.handleError);
-}
+}*/
 
 setModuleName(songId: number, mod: Module): Promise < null > {
     const url = `${this.designerUrl}/song/${songId}/${mod.module_type}/edit`;
@@ -227,7 +229,8 @@ setModuleName(songId: number, mod: Module): Promise < null > {
             name: mod.name,
             is_enabled: mod.is_enabled,
             password: mod.password,
-            has_password: mod.has_password
+            has_password: mod.has_password,
+            song_enabled: mod.song_enabled
         }),
         this.options)
         .toPromise()
@@ -242,7 +245,8 @@ enableModule(songId: number, mod: Module): Promise < null > {
             name: mod.name,
             is_enabled: true,
             password: mod.password,
-            has_password: mod.has_password
+            has_password: mod.has_password,
+            song_enabled: mod.song_enabled
         }),
         this.options)
         .toPromise()
@@ -257,7 +261,8 @@ disableModule(songId: number, mod: Module): Promise < null > {
             name: mod.name,
             is_enabled: false,
             password: mod.password,
-            has_password: mod.has_password
+            has_password: mod.has_password,
+            song_enabled: mod.song_enabled
         }),
         this.options)
         .toPromise()

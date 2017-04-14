@@ -23,6 +23,9 @@ export class StudentSongDetailComponent implements OnInit {
     currentModule: string;
     media: Media[];
     publicBaseUrl: string;
+    enteredPassword: string;
+    passwordValidated: boolean;
+    displayPassError: boolean;
 
     constructor(private studentService: StudentService,
         private moduleService: ModuleService,
@@ -85,6 +88,8 @@ export class StudentSongDetailComponent implements OnInit {
                     this.courseName = name;
                 });
             });
+        this.passwordValidated = false;
+        this.enteredPassword = "";
     }
 
     setCurrModule(name: string) {
@@ -93,5 +98,15 @@ export class StudentSongDetailComponent implements OnInit {
 
     setModuleName(mod: Module) {
         this.moduleService.setModuleName(this.song.id, mod);
+    }
+
+    validatePassword() {
+        if (this.enteredPassword == this.modules[0].password) {
+            this.passwordValidated = true;
+        } else {
+            this.displayPassError = true;
+            console.log(this.modules[0].password);
+            console.log(this.enteredPassword);
+        }
     }
 }

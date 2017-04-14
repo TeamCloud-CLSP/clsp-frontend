@@ -72,7 +72,13 @@
             <div *ngIf="courseName && module.module_type == currentModule">
                 <div [ngSwitch]="module.module_type">
                     <div *ngSwitchCase="'module_cn'">
-                        <student-cultural-notes [song]="song"></student-cultural-notes>
+                        <div *ngIf="(!passwordValidated) && (module.has_password != 0)" >
+                            <label for="password">Enter Password</label>
+                            <input [(ngModel)]="enteredPassword" class="form-control " name="password" id="password" />
+                            <p *ngIf="displayPassError">Incorrect password entered. Please try again.</p>
+                            <button class="btn btn-default" (click)="validatePassword()">Enter</button>
+                        </div>
+                        <student-cultural-notes *ngIf="passwordValidated || (module.has_password == 0)" [song]="song"></student-cultural-notes>
                     </div>
                     <div *ngSwitchDefault>
                         <student-question-module [songId]="song.id" [unitId]="unit.id" [moduleType]="module.module_type"></student-question-module>
