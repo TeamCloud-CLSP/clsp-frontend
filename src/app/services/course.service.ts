@@ -6,18 +6,20 @@ import {ProfRegistration} from '../models/profregistration'
 import {CulturalNoteKeywords} from "../models/modules/CulturalNoteKeywords";
 import {GlobalParameters} from '../global-parameters';
 import {CulturalNote} from "../models/modules/CulturalNote";
+import {AuthenticationService} from "./authentication.service";
 @Injectable()
 export class CourseService {
     private parameters = new GlobalParameters();
     private designerUrl = this.parameters.url + "/api/designer";
-    private headers = new Headers({ 'Content-Type': 'application/json' });
-    private options = new RequestOptions({ withCredentials: true, headers: this.headers });
 
-    constructor(private http: Http) {
+    constructor(private http: Http,
+                private authService: AuthenticationService) {
     }
 
     getCourses(): Promise<Course[]> {
-        return this.http.get(this.designerUrl + "/courses", this.options)
+        console.log("what the fuck is going on");
+        console.log(this.authService.getOptions());
+        return this.http.get(this.designerUrl + "/courses", this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as Course[])
             .catch(this.handleError);
@@ -30,7 +32,7 @@ export class CourseService {
 
     getCourse(id: number): Promise<Course> {
         const url = `${this.designerUrl}/course/${id}`;
-        return this.http.get(url, this.options)
+        return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as Course)
             .catch(this.handleError);
@@ -43,7 +45,7 @@ export class CourseService {
                 name: course.name,
                 description: course.description,
                 language_id: +course.language_id
-            }), this.options)
+            }), this.authService.getOptions())
             .toPromise()
             .then(() => course)
             .catch(this.handleError);
@@ -57,7 +59,7 @@ export class CourseService {
                 name: course.name,
                 description: course.description,
                 language_id: +course.language_id
-            }), this.options)
+            }), this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as Course)
             .catch(this.handleError);
@@ -65,7 +67,7 @@ export class CourseService {
 
     delete(id: number): Promise<void> {
         const url = `${this.designerUrl}/course/${id}`;
-        return this.http.delete(url, this.options)
+        return this.http.delete(url, this.authService.getOptions())
             .toPromise()
             .then(() => null)
             .catch(this.handleError);
@@ -73,7 +75,7 @@ export class CourseService {
 
     getProfRegistrations(): Promise<ProfRegistration[]> {
         const url = `${this.designerUrl}/registrations/professor`
-        return this.http.get(url, this.options)
+        return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as ProfRegistration[])
             .catch(this.handleError);
@@ -81,7 +83,7 @@ export class CourseService {
 
     getProfRegistrationsByCourse(id: number): Promise<ProfRegistration[]> {
         const url = `${this.designerUrl}/course/${id}/registrations/professor`;
-        return this.http.get(url, this.options)
+        return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as ProfRegistration[])
             .catch(this.handleError);
@@ -94,7 +96,7 @@ export class CourseService {
                 date_start: reg.date_start,
                 date_end: reg.date_end,
                 course_id: reg.course_id
-            }), this.options)
+            }), this.authService.getOptions())
             .toPromise()
             .then(() => null)
             .catch(this.handleError);
@@ -102,7 +104,7 @@ export class CourseService {
 
     deleteProfRegistration(id: number): Promise<void> {
         const url = `${this.designerUrl}/registrations/professor/${id}`;
-        return this.http.delete(url, this.options)
+        return this.http.delete(url, this.authService.getOptions())
             .toPromise()
             .then(() => null)
             .catch(this.handleError);
@@ -110,7 +112,7 @@ export class CourseService {
 
     getLanguages(): Promise<Language[]> {
         const url = `${this.designerUrl}/languages`;
-        return this.http.get(url, this.options)
+        return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as Language[])
             .catch(this.handleError);
@@ -118,7 +120,7 @@ export class CourseService {
 
     getUnits(courseId: number): Promise<Unit[]> {
         const url = `${this.designerUrl}/course/${courseId}/units`;
-        return this.http.get(url, this.options)
+        return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as Unit[])
             .catch(this.handleError);
@@ -133,7 +135,7 @@ export class CourseService {
                 course_id: unit.course_id,
                 weight: unit.weight
             }),
-            this.options)
+            this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as Unit)
             .catch(this.handleError);
@@ -141,7 +143,7 @@ export class CourseService {
 
     getUnit(unitId: number): Promise<Unit> {
         const url = `${this.designerUrl}/unit/${unitId}`;
-        return this.http.get(url, this.options)
+        return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as Unit)
             .catch(this.handleError);
@@ -151,7 +153,7 @@ export class CourseService {
         const url = `${this.designerUrl}/unit/${unit.id}`;
         return this.http.post(url,
             JSON.stringify({ name: unit.name, description: unit.description, weight: unit.weight }),
-            this.options)
+            this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as Unit)
             .catch(this.handleError);
@@ -160,7 +162,7 @@ export class CourseService {
 
     getSongs(unitId: number): Promise<Song[]> {
         const url = `${this.designerUrl}/unit/${unitId}/songs`;
-        return this.http.get(url, this.options)
+        return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as Song[])
             .catch(this.handleError);
@@ -169,8 +171,8 @@ export class CourseService {
     getSong(songId: number): Promise<Song> {
         const url = `${this.designerUrl}/song/${songId}`;
         console.log("song options");
-        console.log(this.options);
-        return this.http.get(url, this.options)
+        console.log(this.authService.getOptions());
+        return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => {
                 console.log(response.json());
@@ -194,7 +196,7 @@ export class CourseService {
                 weight: song.weight,
                 unit_id: song.unit_id
             }),
-            this.options)
+            this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as Song)
             .catch(this.handleError);
@@ -202,7 +204,7 @@ export class CourseService {
 
     deleteSong(song: Song): Promise<null> {
         const url = `${this.designerUrl}/song/${song.id}`;
-        return this.http.delete(url, this.options)
+        return this.http.delete(url, this.authService.getOptions())
             .toPromise()
             .then(() => null)
             .catch(this.handleError);
@@ -224,7 +226,7 @@ updateSong(song: Song): Promise < null > {
             weight: song.weight,
             unit_id: song.unit_id
         }),
-        this.options)
+        this.authService.getOptions())
         .toPromise()
         .then(response => response.json() as Unit)
         .catch(this.handleError);
@@ -240,7 +242,7 @@ createCulturalNote(note: CulturalNote): Promise < CulturalNote > {
     console.log(data);
     return this.http.post(url,
         data,
-        this.options)
+        this.authService.getOptions())
         .toPromise()
         .then(response => response.json() as CulturalNote)
         .catch(this.handleError);
@@ -269,7 +271,7 @@ createCulturalNote(note: CulturalNote): Promise < CulturalNote > {
 
 getCulturalNote(songId: number): Promise < CulturalNote[] > {
     const url = `${this.designerUrl}/song/${songId}/keywords`;
-    return this.http.get(url, this.options)
+    return this.http.get(url, this.authService.getOptions())
         .toPromise()
         .then(response => {
             let data = response.json().data as CulturalNote[];
@@ -291,7 +293,7 @@ updateCulturalNotes(note: CulturalNote): Promise < CulturalNote > {
             phrase: note.phrase,
             description: note.description
         }),
-        this.options
+        this.authService.getOptions()
     )
         .toPromise()
         .then(response => response.json() as CulturalNote)
@@ -300,7 +302,7 @@ updateCulturalNotes(note: CulturalNote): Promise < CulturalNote > {
 
 getModules(songId: number): Promise < Module[] > {
     const url = `${this.designerUrl}/song/${songId}/modules`;
-    return this.http.get(url, this.options)
+    return this.http.get(url, this.authService.getOptions())
         .toPromise()
         .then(response => response.json().data as Module[])
         .catch(this.handleError);
@@ -308,7 +310,7 @@ getModules(songId: number): Promise < Module[] > {
 
 deleteUnit(unit: Unit): Promise < null > {
     const url = `${this.designerUrl}/unit/${unit.id}`;
-    return this.http.delete(url, this.options)
+    return this.http.delete(url, this.authService.getOptions())
         .toPromise()
         .then(() => null)
         .catch(this.handleError);

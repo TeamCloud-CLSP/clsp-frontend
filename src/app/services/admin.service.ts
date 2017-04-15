@@ -4,13 +4,12 @@ import 'rxjs/add/operator/toPromise';
 import { User } from '../models/user'
 import {ProfRegistration} from '../models/profregistration'
 import {GlobalParameters} from '../global-parameters';
+import {AuthenticationService} from "./authentication.service";
 @Injectable()
 export class AdminService {
     private parameters = new GlobalParameters();
     private adminUrl = this.parameters.url + "/api/admin";
-    private headers = new Headers({ 'Content-Type': 'application/json' });
-    private options = new RequestOptions({ withCredentials: true, headers: this.headers })
-    constructor(private http: Http) { }
+    constructor(private http: Http, private authService: AuthenticationService) { }
 
     private handleError(error: any): Promise<any> {
         console.error('An error occured', error);
@@ -19,7 +18,7 @@ export class AdminService {
 
 
     getUsers(): Promise<User[]> {
-        return this.http.get(this.adminUrl + "/users", this.options)
+        return this.http.get(this.adminUrl + "/users", this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as User[])
             .catch(this.handleError);
@@ -27,7 +26,7 @@ export class AdminService {
 
     deleteUser(id: number): Promise<void> {
         const url = `${this.adminUrl}/users/${id}`;
-        return this.http.delete(url, this.options)
+        return this.http.delete(url, this.authService.getOptions())
             .toPromise()
             .then(() => null)
             .catch(this.handleError);
@@ -36,7 +35,7 @@ export class AdminService {
     addDesigner(user: User): Promise<User> {
         const url = `${this.adminUrl}/designer`;
         return this.http.post(url,
-            JSON.stringify({ username: user.username, password: user.password, email: user.email }), this.options)
+            JSON.stringify({ username: user.username, password: user.password, email: user.email }), this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as User)
             .catch(this.handleError);

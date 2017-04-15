@@ -5,15 +5,15 @@ import { CLSPClass, SingleClass, CreateClass } from '../models/clsp-class';
 import { ProfInfo } from '../models/professor-info';
 import {StudentRegistration, Student} from "../models/studentregistration";
 import {GlobalParameters} from '../global-parameters';
+import {AuthenticationService} from "./authentication.service";
 
 @Injectable()
 export class ProfessorService {
     private parameters = new GlobalParameters();
     private baseUrl = this.parameters.url + "/api/professor";
-    private headers = new Headers({ 'Content-Type': 'application/json' });
-    private options = new RequestOptions({ withCredentials: true, headers: this.headers });
 
-    constructor(private http: Http) {
+    constructor(private http: Http,
+                private authService: AuthenticationService) {
 
     }
 
@@ -23,14 +23,14 @@ export class ProfessorService {
     }
 
     getClasses(): Promise<CLSPClass[]> {
-        return this.http.get(this.baseUrl + "/classes", this.options)
+        return this.http.get(this.baseUrl + "/classes", this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as CLSPClass[])
             .catch(this.handleError);
     }
 
     getClass(id: number): Promise<SingleClass> {
-        return this.http.get(this.baseUrl + "/classes/" + id, this.options)
+        return this.http.get(this.baseUrl + "/classes/" + id, this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as SingleClass)
             .catch(this.handleError);
@@ -38,7 +38,7 @@ export class ProfessorService {
 
     getDashboard(): Promise<ProfInfo[]> {
         const url = `${this.baseUrl}/main`;
-        return this.http.get(url, this.options)
+        return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as ProfInfo[])
             .catch(this.handleError);
@@ -47,7 +47,7 @@ export class ProfessorService {
     createClass(clspClass: CreateClass): Promise<SingleClass> {
         const url = `${this.baseUrl}/classes`;
         console.log(clspClass)
-        return this.http.post(url, JSON.stringify({ name: clspClass.name, course_id: clspClass.course_id, description: clspClass.description }), this.options)
+        return this.http.post(url, JSON.stringify({ name: clspClass.name, course_id: clspClass.course_id, description: clspClass.description }), this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as SingleClass)
             .catch(this.handleError);
@@ -55,7 +55,7 @@ export class ProfessorService {
 
     deleteClass(id: number): Promise<void> {
         const url = `${this.baseUrl}/classes/${id}`;
-        return this.http.delete(url, this.options)
+        return this.http.delete(url, this.authService.getOptions())
             .toPromise()
             .then(() => null)
             .catch(this.handleError);
@@ -63,7 +63,7 @@ export class ProfessorService {
 
     getStudentRegistrationForClass(id: number): Promise<StudentRegistration> {
         const url = `${this.baseUrl}/classes/${id}/registrations/student`;
-        return this.http.get(url, this.options)
+        return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as StudentRegistration)
             .catch(null);
@@ -72,7 +72,7 @@ export class ProfessorService {
     createStudentRegistration(reg: StudentRegistration): Promise<void> {
         console.log(reg);
         const url = `${this.baseUrl}/registrations/student`;
-        return this.http.post(url, JSON.stringify({ date_start: reg.student_registration_date_start, date_end: reg.student_registration_date_end, class_id: reg.class_id }), this.options)
+        return this.http.post(url, JSON.stringify({ date_start: reg.student_registration_date_start, date_end: reg.student_registration_date_end, class_id: reg.class_id }), this.authService.getOptions())
             .toPromise()
             .then(() => null)
             .catch(this.handleError);
@@ -80,7 +80,7 @@ export class ProfessorService {
 
     getStudents(regId: number): Promise<Student[]> {
         const url = `${this.baseUrl}/registrations/student/${regId}/students`;
-        return this.http.get(url, this.options)
+        return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as Student[])
             .catch(this.handleError);
@@ -88,7 +88,7 @@ export class ProfessorService {
 
     deleteStudent(studentId: number): Promise<void> {
         const url = `${this.baseUrl}/student/${studentId}`;
-        return this.http.delete(url, this.options)
+        return this.http.delete(url, this.authService.getOptions())
             .toPromise()
             .then(() => null)
             .catch(this.handleError);

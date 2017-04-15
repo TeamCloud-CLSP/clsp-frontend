@@ -7,6 +7,7 @@ import {GlobalParameters} from "../global-parameters";
 import {Headers, RequestOptions, Http} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
 import {Media, MediaLink} from "../models/course";
+import {AuthenticationService} from "./authentication.service";
 
 
 @Injectable()
@@ -14,10 +15,9 @@ export class MediaService {
 
     private parameters = new GlobalParameters();
     private designerUrl = this.parameters.url + "/api/designer";
-    private headers = new Headers({ 'Content-Type': 'application/json' });
-    private options = new RequestOptions({ withCredentials: true, headers: this.headers })
 
-    constructor(private http: Http) {
+    constructor(private http: Http,
+                private authService: AuthenticationService) {
     }
 
     private handleError(error: any): Promise<any> {
@@ -28,7 +28,7 @@ export class MediaService {
     getAllFiles(): Promise<Media[]> {
         const url = `${this.designerUrl}/media`;
         return this.http
-            .get(url, this.options)
+            .get(url, this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as Media[])
             .catch(this.handleError);
@@ -36,7 +36,7 @@ export class MediaService {
 
     getLinkedMedia(songId: number): Promise<Media[]> {
         const url = `${this.designerUrl}/song/${songId}/media`;
-        return this.http.get(url, this.options)
+        return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as Media[])
             .catch(this.handleError);
@@ -48,7 +48,7 @@ export class MediaService {
             JSON.stringify({
                 name: name
             }),
-            this.options)
+            this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as Media)
             .catch(this.handleError);
@@ -57,7 +57,7 @@ export class MediaService {
 
     deleteMedia(id: number): Promise<null> {
         const url = `${this.designerUrl}/media/${id}`;
-        return this.http.delete(url, this.options)
+        return this.http.delete(url, this.authService.getOptions())
             .toPromise()
             .then(() => null)
             .catch(this.handleError);
@@ -70,7 +70,7 @@ export class MediaService {
             song_id: songId,
             media_id: mediaId
         }),
-        this.options)
+        this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as MediaLink)
             .catch(this.handleError);
@@ -79,7 +79,7 @@ export class MediaService {
     deleteMediaLink(songId: number, mediaId: number): Promise<null> {
         const url = `${this.designerUrl}/song/${songId}/media/${mediaId}`;
         return this.http.delete(url,
-            this.options)
+            this.authService.getOptions())
             .toPromise()
             .then(() => null)
             .catch(this.handleError);
@@ -88,7 +88,7 @@ export class MediaService {
     checkMediaLink(songId: number, mediaId: number): Promise<boolean> {
         const url = `${this.designerUrl}/song/${songId}/media/${mediaId}`;
         return this.http.get(url,
-            this.options)
+            this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as boolean)
             .catch(this.handleError);

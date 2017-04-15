@@ -7,14 +7,14 @@ import {CulturalNoteKeywords} from "../models/modules/CulturalNoteKeywords";
 import {GlobalParameters} from '../global-parameters';
 import {Header, Question} from '../models/modules/header';
 import {CulturalNote} from "../models/modules/CulturalNote";
+import {AuthenticationService} from "./authentication.service";
 @Injectable()
 export class ModuleService {
     private parameters = new GlobalParameters();
     private designerUrl = this.parameters.url + "/api/designer";
-    private headers = new Headers({ 'Content-Type': 'application/json' });
-    private options = new RequestOptions({ withCredentials: true, headers: this.headers });
 
-    constructor(private http: Http) {
+    constructor(private http: Http,
+                private authService: AuthenticationService) {
     }
 
     private handleError(error: any): Promise<any> {
@@ -24,7 +24,7 @@ export class ModuleService {
 
     getHeader(headerId: number): Promise<Header> {
         const url = `${this.designerUrl}/header/${headerId}`
-        return this.http.get(url, this.options)
+        return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as Header)
             .catch(this.handleError);
@@ -37,7 +37,7 @@ export class ModuleService {
             JSON.stringify({
                 name: header.name
             }),
-            this.options)
+            this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as Header)
             .catch(this.handleError)
@@ -45,7 +45,7 @@ export class ModuleService {
 
     getHeaders(songId: number, modName: string): Promise<Header[]> {
         const url = `${this.designerUrl}/song/${songId}/${modName}/headers`;
-        return this.http.get(url, this.options)
+        return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as Header[])
             .catch(this.handleError);
@@ -57,7 +57,7 @@ export class ModuleService {
             JSON.stringify({
                 name: header.name
             }),
-            this.options)
+            this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as Header)
             .catch(this.handleError)
@@ -65,7 +65,7 @@ export class ModuleService {
 
     getDWHeaders(songId: number): Promise<Header[]> {
         const url = `${this.designerUrl}/song/${songId}/module_dw/headers`;
-        return this.http.get(url, this.options)
+        return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as Header[])
             .catch(this.handleError);
@@ -73,7 +73,7 @@ export class ModuleService {
 
     getQuestions(headerId: number): Promise<Question[]> {
         const url = `${this.designerUrl}/header/${headerId}/items`;
-        return this.http.get(url, this.options)
+        return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as Question[])
             .catch(this.handleError);
@@ -90,7 +90,7 @@ export class ModuleService {
                 choices: question.choices,
                 answers: question.answers
             }),
-            this.options)
+            this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as Question)
             .catch(this.handleError);
@@ -98,7 +98,7 @@ export class ModuleService {
 
     deleteQuestion(questionId: number): Promise<void> {
         const url = `${this.designerUrl}/item/${questionId}`;
-        return this.http.delete(url, this.options)
+        return this.http.delete(url, this.authService.getOptions())
             .toPromise()
             .then(() => null)
             .catch(this.handleError);
@@ -106,7 +106,7 @@ export class ModuleService {
 
     getModuleCN(songId: number): Promise<any> {
         const url = `${this.designerUrl}/song/${songId}/module_cn`;
-        return this.http.get(url, this.options)
+        return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as Question[])
             .catch(this.handleError);
@@ -124,7 +124,7 @@ export class ModuleService {
                 has_password: has_password,
                 is_enabled: true
             }),
-            this.options)
+            this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as Module)
             .catch(this.handleError);
@@ -142,7 +142,7 @@ setPasswordDW(songId: number, password: string): Promise < null > {
             has_password: has_password,
             is_enabled: true
         }),
-        this.options)
+        this.authService.getOptions())
         .toPromise()
         .then(response => response.json() as Module)
         .catch(this.handleError);
@@ -160,7 +160,7 @@ setPasswordGE(songId: number, password: string): Promise < null > {
             has_password: has_password,
             is_enabled: true
         }),
-        this.options)
+        this.authService.getOptions())
         .toPromise()
         .then(response => response.json() as Module)
         .catch(this.handleError);
@@ -178,7 +178,7 @@ setPasswordLS(songId: number, password: string): Promise < null > {
             has_password: has_password,
             is_enabled: true
         }),
-        this.options)
+        this.authService.getOptions())
         .toPromise()
         .then(response => response.json() as Module)
         .catch(this.handleError);
@@ -196,7 +196,7 @@ setPasswordLT(songId: number, password: string): Promise < null > {
             has_password: has_password,
             is_enabled: true
         }),
-        this.options)
+        this.authService.getOptions())
         .toPromise()
         .then(response => response.json() as Module)
         .catch(this.handleError);
@@ -214,7 +214,7 @@ setPasswordQU(songId: number, password: string): Promise < null > {
             has_password: has_password,
             is_enabled: true
         }),
-        this.options)
+        this.authService.getOptions())
         .toPromise()
         .then(response => response.json() as Module)
         .catch(this.handleError);
@@ -229,7 +229,7 @@ setModuleName(songId: number, mod: Module): Promise < null > {
             password: mod.password,
             has_password: mod.has_password
         }),
-        this.options)
+        this.authService.getOptions())
         .toPromise()
         .then(() => null)
         .catch(this.handleError);
@@ -244,7 +244,7 @@ enableModule(songId: number, mod: Module): Promise < null > {
             password: mod.password,
             has_password: mod.has_password
         }),
-        this.options)
+        this.authService.getOptions())
         .toPromise()
         .then(() => null)
         .catch(this.handleError);
@@ -259,7 +259,7 @@ disableModule(songId: number, mod: Module): Promise < null > {
             password: mod.password,
             has_password: mod.has_password
         }),
-        this.options)
+        this.authService.getOptions())
         .toPromise()
         .then(() => null)
         .catch(this.handleError);

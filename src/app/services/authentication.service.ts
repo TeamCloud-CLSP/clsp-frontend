@@ -33,6 +33,16 @@ export class AuthenticationService {
         this.router.navigate(['/login']);
     }
 
+    // assumes that you're already logged in
+    public getOptions() {
+        let headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.getToken() });
+        console.log("headers");
+        console.log(headers);
+        let options = new RequestOptions({ headers: headers });
+        console.log(options);
+        return options;
+    }
+
     private loginHandler(res: Response) {
         console.log("stuff loginhandler");
         let user: UserToken;
@@ -56,12 +66,21 @@ export class AuthenticationService {
         return Observable.throw(errMsg);
     }
 
-    getAccount(): User {
+    public getAccount(): User {
         if(localStorage.getItem("currentUser")) {
             let user: UserToken = JSON.parse(localStorage.getItem("currentUser")) as UserToken;
             return user.user_info;
         } else {
             return this.getEmptyAccount();
+        }
+    }
+
+    public getToken(): String {
+        if(localStorage.getItem("currentUser")) {
+            let user: UserToken = JSON.parse(localStorage.getItem("currentUser")) as UserToken;
+            return user.token;
+        } else {
+            return "";
         }
     }
 
