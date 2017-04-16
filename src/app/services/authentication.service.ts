@@ -13,6 +13,7 @@ export class AuthenticationService {
     private tokenUrl = '/api/security/loginToken';
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private options = new RequestOptions({ headers: this.headers });
+    redirectUrl: string;
 
     constructor(private http: Http,
                 private router: Router
@@ -98,5 +99,9 @@ export class AuthenticationService {
             'is_designer': false,
             'is_administrator': false
         } as User;
+    }
+
+    public isLoggedIn(): Boolean {
+        return localStorage.getItem('currentUser') !== null;
     }
 }

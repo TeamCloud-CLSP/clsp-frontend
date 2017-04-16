@@ -49,6 +49,7 @@ import {PopoverModule} from 'ng2-bootstrap';
 
 import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import {MediaLinkComponent} from './components/media-link.component';
+import {AuthGuard} from "./auth.guard";
 
 
 
@@ -102,7 +103,8 @@ import {MediaLinkComponent} from './components/media-link.component';
         ModuleService,
         MediaService,
         StudentService,
-        AuthenticationService
+        AuthenticationService,
+        AuthGuard
     ],
     bootstrap: [AppComponent]
 })

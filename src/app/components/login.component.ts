@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService) { }
+        private authService: AuthenticationService) { }
 
     ngOnInit() {
         // reset login status
@@ -29,12 +29,16 @@ export class LoginComponent implements OnInit {
     login() {
         this.loading = true;
         this.loginErrors = '';
-        this.authenticationService.login(this.model.username, this.model.password)
+        this.authService.login(this.model.username, this.model.password)
             .subscribe(
                 user => {
 //                    console.log(user);
                     this.loading = false;
-                    this.router.navigate(['./dashboard']);
+                    if (this.authService.redirectUrl) {
+                        this.router.navigate([this.authService.redirectUrl]);
+                    } else {
+                        this.router.navigate(['./dashboard']);
+                    }
                 },
                 error =>  {
                     console.log(error);

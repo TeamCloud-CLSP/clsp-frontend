@@ -1,4 +1,4 @@
-import { NgModule }  from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from './components/dashboard.component';
@@ -19,13 +19,16 @@ import {StudentSongDetailComponent} from './components/student/student-song-deta
 import {StudentHeaderDetailComponent} from './components/student/student-header-detail.component';
 import {MediaLinkComponent} from './components/media-link.component';
 import {LoginComponent} from './components/login.component';
+import {AuthGuard} from './auth.guard';
 
 const routes: Routes = [
     {
+        canActivate: [AuthGuard],
         path: 'designer/courses',
         component: CoursesComponent
     },
     {
+        canActivate: [AuthGuard],
         path: 'dashboard',
         component: DashboardComponent
     },
@@ -35,62 +38,77 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
+        canActivate: [AuthGuard],
         path: 'course/:id',
         component: CourseDetailComponent
     },
     {
+        canActivate: [AuthGuard],
         path: 'profregistrationlist/:id',
         component: ProfRegistrationsComponent
     },
     {
+        canActivate: [AuthGuard],
         path: 'admin',
         component: AdminDashboardComponent
     },
     {
+        canActivate: [AuthGuard],
         path: 'account',
         component: AccountDashboardComponent
     },
     {
+        canActivate: [AuthGuard],
         path: 'student',
         component: StudentDashboardComponent
     },
     {
+        canActivate: [AuthGuard],
         path: 'student/unit/:id',
         component: StudentUnitDetailComponent
     },
     {
+        canActivate: [AuthGuard],
         path: 'professor',
         component: ProfessorDashboardComponent
     },
     {
+        canActivate: [AuthGuard],
         path: 'professor/class/:id',
         component: ProfessorClassComponent
     },
     {
+        canActivate: [AuthGuard],
         path: 'unit/:id',
         component: UnitDetailComponent
     },
     {
+        canActivate: [AuthGuard],
         path: 'unit/:unit_id/song/:id',
         component: SongDetailComponent
     },
     {
+        canActivate: [AuthGuard],
         path: 'student/unit/:unit_id/song/:song_id',
         component: StudentSongDetailComponent
     },
     {
+        canActivate: [AuthGuard],
         path: 'unit/:unit_id/song/:song_id/header/:header_id',
         component: HeaderDetailComponent
     },
     {
+        canActivate: [AuthGuard],
         path: 'designer/media',
         component: MediaUploadComponent
     },
     {
+        canActivate: [AuthGuard],
         path: 'student/unit/:unit_id/song/:song_id/header/:header_id',
         component: StudentHeaderDetailComponent
     },
     {
+        canActivate: [AuthGuard],
         path: 'unit/:unit_id/song/:id/media',
         component: MediaLinkComponent
     },

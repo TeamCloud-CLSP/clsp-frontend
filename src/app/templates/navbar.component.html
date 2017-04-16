@@ -17,7 +17,7 @@
             </ul>
             <ul *ngIf="getAccount().name" class="nav navbar-nav navbar-right">
                 <li><a routerLink="/account" routerLinkActive="active">{{ getAccount().name }}</a></li>
-                <li><a (click)="logout()">Logout</a></li>
+                <li><a id="logout-button" (click)="logout()">Logout</a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->
