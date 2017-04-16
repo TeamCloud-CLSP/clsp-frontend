@@ -24,4 +24,8 @@ export class NavbarComponent {
         // console.log('Logging user out 2');
         this.account = this.authService.getAccount();
     }
+
+    getAccount() {
+        return this.authService.getAccount();
+    }
 }
