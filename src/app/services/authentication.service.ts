@@ -20,7 +20,7 @@ export class AuthenticationService {
     ) { }
 
     login(username: string, password: string): Observable<UserToken> {
-        console.log("Logging in " + username + " " + password);
+        // console.log("Logging in " + username + " " + password);
         return this.http.post(this.tokenUrl, JSON.stringify({ username: username, password: password }), this.options)
             .map(this.loginHandler)
             .catch(this.handleError);
@@ -34,19 +34,19 @@ export class AuthenticationService {
     // assumes that you're already logged in
     public getOptions() {
         let headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.getToken() });
-        console.log("headers");
-        console.log(headers);
+        // console.log("headers");
+        // console.log(headers);
         let options = new RequestOptions({ headers: headers });
-        console.log(options);
+        // console.log(options);
         return options;
     }
 
     private loginHandler(res: Response) {
-        console.log("stuff loginhandler");
+        // console.log("stuff loginhandler");
         let user: UserToken;
         user = res.json() as UserToken;
-        console.log("Successful login");
-        console.log(user);
+        // console.log("Successful login");
+        // console.log(user);
         localStorage.setItem('currentUser', JSON.stringify(user));
         return user;
     }
