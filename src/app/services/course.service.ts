@@ -1,21 +1,21 @@
-import {Injectable} from '@angular/core';
-import {Headers, Http, RequestOptions} from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import {Course, Language, Unit, Song, Module} from '../models/course'
-import {ProfRegistration} from '../models/profregistration'
-import {CulturalNoteKeywords} from "../models/modules/CulturalNoteKeywords";
-import {CulturalNote} from "../models/modules/CulturalNote";
-import {AuthenticationService} from "./authentication.service";
+import { Course, Language, Unit, Song, Module } from '../models/course';
+import { ProfRegistration } from '../models/profregistration';
+import { CulturalNote } from '../models/modules/CulturalNote';
+import { AuthenticationService } from './authentication.service';
+
 @Injectable()
 export class CourseService {
-    private designerUrl = "/api/designer";
+    private designerUrl = '/api/designer';
 
     constructor(private http: Http,
                 private authService: AuthenticationService) {
     }
 
     getCourses(): Promise<Course[]> {
-        return this.http.get(this.designerUrl + "/courses", this.authService.getOptions())
+        return this.http.get(this.designerUrl + '/courses', this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as Course[])
             .catch(this.handleError);
@@ -70,7 +70,7 @@ export class CourseService {
     }
 
     getProfRegistrations(): Promise<ProfRegistration[]> {
-        const url = `${this.designerUrl}/registrations/professor`
+        const url = `${this.designerUrl}/registrations/professor`;
         return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as ProfRegistration[])
@@ -166,13 +166,13 @@ export class CourseService {
 
     getSong(songId: number): Promise<Song> {
         const url = `${this.designerUrl}/song/${songId}`;
-        console.log("song options");
+        console.log('song options');
         console.log(this.authService.getOptions());
         return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => {
                 console.log(response.json());
-                return response.json() as Song
+                return response.json() as Song;
             })
             .catch(this.handleError);
     }
@@ -230,7 +230,7 @@ updateSong(song: Song): Promise < null > {
 
 createCulturalNote(note: CulturalNote): Promise < CulturalNote > {
     const url = `${this.designerUrl}/keyword`;
-    let data = JSON.stringify({
+    const data = JSON.stringify({
         song_id: note.songId,
         phrase: note.phrase,
         description: note.description
@@ -270,14 +270,14 @@ getCulturalNote(songId: number): Promise < CulturalNote[] > {
     return this.http.get(url, this.authService.getOptions())
         .toPromise()
         .then(response => {
-            let data = response.json().data as CulturalNote[];
+            const data = response.json().data as CulturalNote[];
             for (let i = 0; i < data.length; i++) {
                 data[i].songId = songId;
             }
             return data;
         })
         .catch(error => {
-            console.log("ERRORR");
+            console.log('ERRORR');
         });
 }
 

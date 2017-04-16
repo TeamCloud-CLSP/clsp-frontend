@@ -1,15 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
-import { Location }                 from '@angular/common';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import { Router }   from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import {Unit, Song} from "../../models/course";
-import {StudentService} from "../../services/student.service";
+import { Unit, Song } from '../../models/course';
+import { StudentService } from '../../services/student.service';
 
 @Component({
-    moduleId: module.id,
-    selector: 'student-unit-detail',
+    selector: 'app-student-unit-detail',
     templateUrl: '../../templates/student/student-unit-detail.component.html',
     styleUrls: ['../../css/unit-detail.component.css']
 })
@@ -34,7 +33,7 @@ export class StudentUnitDetailComponent implements OnInit {
                 console.log(unit);
                 this.studentService.getSongs(unit.id).then(songs => {
                     this.songs = songs;
-                })
+                });
             });
     }
 
@@ -43,7 +42,7 @@ export class StudentUnitDetailComponent implements OnInit {
     }
 
     getProgress(song: Song) {
-        return { complete: 3, uncomplete: 3 }
+        return { complete: 3, uncomplete: 3 };
     }
 
 }

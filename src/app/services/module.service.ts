@@ -1,15 +1,13 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, RequestOptions} from '@angular/http';
+import {Http} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import {Course, Language, Unit, Song, Module} from '../models/course'
-import {ProfRegistration} from '../models/profregistration'
-import {CulturalNoteKeywords} from "../models/modules/CulturalNoteKeywords";
+import {Module} from '../models/course';
 import {Header, Question} from '../models/modules/header';
-import {CulturalNote} from "../models/modules/CulturalNote";
-import {AuthenticationService} from "./authentication.service";
+import {AuthenticationService} from './authentication.service';
+
 @Injectable()
 export class ModuleService {
-    private designerUrl = "/api/designer";
+    private designerUrl = '/api/designer';
 
     constructor(private http: Http,
                 private authService: AuthenticationService) {
@@ -21,7 +19,7 @@ export class ModuleService {
     }
 
     getHeader(headerId: number): Promise<Header> {
-        const url = `${this.designerUrl}/header/${headerId}`
+        const url = `${this.designerUrl}/header/${headerId}`;
         return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as Header)
@@ -30,7 +28,7 @@ export class ModuleService {
 
 
     createHeader(header: Header, modName: string): Promise<Header> {
-        const url = `${this.designerUrl}/song/${header.song_id}/${modName}/headers`
+        const url = `${this.designerUrl}/song/${header.song_id}/${modName}/headers`;
         return this.http.post(url,
             JSON.stringify({
                 name: header.name
@@ -38,7 +36,7 @@ export class ModuleService {
             this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as Header)
-            .catch(this.handleError)
+            .catch(this.handleError);
     }
 
     getHeaders(songId: number, modName: string): Promise<Header[]> {
@@ -50,7 +48,7 @@ export class ModuleService {
     }
 
     createDWHeader(header: Header): Promise<Header> {
-        const url = `${this.designerUrl}/song/${header.song_id}/module_dw/headers`
+        const url = `${this.designerUrl}/song/${header.song_id}/module_dw/headers`;
         return this.http.post(url,
             JSON.stringify({
                 name: header.name
@@ -58,7 +56,7 @@ export class ModuleService {
             this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as Header)
-            .catch(this.handleError)
+            .catch(this.handleError);
     }
 
     getDWHeaders(songId: number): Promise<Header[]> {
@@ -112,8 +110,8 @@ export class ModuleService {
 
     setPasswordCN(songId: number, mod: Module): Promise<null> {
         const url = `${this.designerUrl}/song/${songId}/module_cn/edit`;
-        var has_password = true;
-        if(mod.password == "") {
+        let has_password = true;
+        if (mod.password == '') {
             has_password = false;
         }
         return this.http.post(url,

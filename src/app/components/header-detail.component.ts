@@ -1,18 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
-import { Location }                 from '@angular/common';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
 import { CourseService } from '../services/course.service';
-import { Course, Unit, Song } from '../models/course';
-import { Router }   from '@angular/router';
+import { Unit, Song } from '../models/course';
+import { Router } from '@angular/router';
 import { Header, Question, Choice } from '../models/modules/header';
 import { ModuleService } from '../services/module.service';
 import 'rxjs/add/operator/switchMap';
+
 @Component({
-    moduleId: module.id,
-    selector: 'module-detail',
+    selector: 'app-module-detail',
     templateUrl: '../templates/header-detail.component.html'
 })
+
 export class HeaderDetailComponent implements OnInit {
     unit: Unit;
     courseName: string;
@@ -66,8 +67,8 @@ export class HeaderDetailComponent implements OnInit {
     }
 
     createQuestion(): void {
-        var newChoice = new Choice();
-        newChoice.choice = "New Choice"
+        const newChoice = new Choice();
+        newChoice.choice = 'New Choice';
         this.choices = [newChoice];
         this.mcAnswer = null;
         this.selectedType = null;
@@ -86,8 +87,8 @@ export class HeaderDetailComponent implements OnInit {
     }
 
     addChoice(): void {
-        var newChoice = new Choice();
-        newChoice.choice = "New Choice"
+        const newChoice = new Choice();
+        newChoice.choice = 'New Choice';
         this.choices.push(newChoice);
     }
 
@@ -106,11 +107,11 @@ export class HeaderDetailComponent implements OnInit {
     fillBlankChoices(): Choice[] {
         this.fbAnswers = [];
         if (this.newQuestion.content != null) {
-            var question = this.newQuestion.content;
-            var underscores = (question.split("_").length - 1)
-            for (var i = 0; i < underscores; i++) {
-                var answer = new Choice();
-                answer.choice = "Blank Answer"
+            const question = this.newQuestion.content;
+            const underscores = (question.split('_').length - 1);
+            for (let i = 0; i < underscores; i++) {
+                const answer = new Choice();
+                answer.choice = 'Blank Answer';
                 this.fbAnswers.push(answer);
             }
         }
@@ -120,24 +121,22 @@ export class HeaderDetailComponent implements OnInit {
     onSubmit(): void {
         this.newQuestion.heading_id = +this.header.id;
         this.newQuestion.type = this.selectedType;
-        if (this.selectedType == "multiple-choice") {
+        if (this.selectedType == 'multiple-choice') {
             this.newQuestion.choices = JSON.stringify(this.choices);
-            var answer = new Choice();
+            const answer = new Choice();
             answer.choice = this.mcAnswer;
             this.newQuestion.answers = JSON.stringify([answer]);
-        }
-        else if (this.selectedType == "multiple-select") {
+        } else if (this.selectedType == 'multiple-select') {
             this.newQuestion.choices = JSON.stringify(this.choices);
-            var answers: Choice[] = [];
-            for (let answer of this.msAnswers) {
-                var choice = new Choice();
+            const answers: Choice[] = [];
+            for (const answer of this.msAnswers) {
+                const choice = new Choice();
                 choice.choice = answer;
                 answers.push(choice);
             }
             this.newQuestion.answers = JSON.stringify(answers);
-        }
-        else if (this.selectedType == "fill-blank") {
-            var answers: Choice[] = [];
+        } else if (this.selectedType == 'fill-blank') {
+            const answers: Choice[] = [];
             this.newQuestion.answers = JSON.stringify(this.fbAnswers);
         }
         this.moduleService.createQuestion(this.newQuestion)

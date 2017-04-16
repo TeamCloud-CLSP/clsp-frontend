@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions } from '@angular/http';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { CLSPClass, SingleClass, CreateClass } from '../models/clsp-class';
 import { ProfInfo } from '../models/professor-info';
-import {StudentRegistration, Student} from "../models/studentregistration";
-import {AuthenticationService} from "./authentication.service";
+import { StudentRegistration, Student } from '../models/studentregistration';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class ProfessorService {
-    private baseUrl = "/api/professor";
+    private baseUrl = '/api/professor';
 
     constructor(private http: Http,
                 private authService: AuthenticationService) {
@@ -21,14 +21,14 @@ export class ProfessorService {
     }
 
     getClasses(): Promise<CLSPClass[]> {
-        return this.http.get(this.baseUrl + "/classes", this.authService.getOptions())
+        return this.http.get(this.baseUrl + '/classes', this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as CLSPClass[])
             .catch(this.handleError);
     }
 
     getClass(id: number): Promise<SingleClass> {
-        return this.http.get(this.baseUrl + "/classes/" + id, this.authService.getOptions())
+        return this.http.get(this.baseUrl + '/classes/' + id, this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as SingleClass)
             .catch(this.handleError);
@@ -44,7 +44,7 @@ export class ProfessorService {
 
     createClass(clspClass: CreateClass): Promise<SingleClass> {
         const url = `${this.baseUrl}/classes`;
-        console.log(clspClass)
+        console.log(clspClass);
         return this.http.post(url, JSON.stringify({ name: clspClass.name, course_id: clspClass.course_id, description: clspClass.description }), this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as SingleClass)

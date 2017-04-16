@@ -1,17 +1,15 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, Params}   from '@angular/router';
-import {Location}                 from '@angular/common';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {CourseService} from '../../services/course.service';
-import {ModuleService} from '../../services/module.service';
-import {Course, Unit, Song, Module} from '../../models/course';
-import {Router}   from '@angular/router';
-import {Header} from '../../models/modules/header';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
+import { CourseService } from '../../services/course.service';
+import { ModuleService } from '../../services/module.service';
+import { Router } from '@angular/router';
+import { Header } from '../../models/modules/header';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
-    moduleId: module.id,
-    selector: 'clsp-discussion-and-writing',
+    selector: 'app-discussion-and-writing',
     templateUrl: '../../templates/modules/discussionandwriting.component.html'
 })
 
@@ -31,7 +29,7 @@ export class DiscussionAndWritingComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        //console.log(this.songId);
+        // console.log(this.songId);
         this.moduleService.getHeaders(this.songId, this.moduleType)
             .then(headers => {
                 this.headers = headers;
@@ -60,6 +58,6 @@ export class DiscussionAndWritingComponent implements OnInit {
     }
 
     onChange(newSelection: string) {
-        //console.log(newSelection);
+        // console.log(newSelection);
     }
 }

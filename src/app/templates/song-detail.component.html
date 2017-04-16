@@ -72,13 +72,13 @@
                             </div>
                         </div>
                         <div *ngSwitchCase="'module_cn'">
-                            <clsp-cultural-notes [song]="song"></clsp-cultural-notes>
+                            <app-cultural-notes [song]="song"></app-cultural-notes>
                         </div>
                         <div *ngSwitchCase="'module_dw'">
-                            <clsp-discussion-and-writing [songId]="song.id" [unitId]="unit.id" [moduleType]="module.module_type"></clsp-discussion-and-writing>
+                            <app-discussion-and-writing [songId]="song.id" [unitId]="unit.id" [moduleType]="module.module_type"></app-discussion-and-writing>
                         </div>
                         <div *ngSwitchDefault>
-                            <clsp-discussion-and-writing [songId]="song.id" [unitId]="unit.id" [moduleType]="module.module_type"></clsp-discussion-and-writing>
+                            <app-discussion-and-writing [songId]="song.id" [unitId]="unit.id" [moduleType]="module.module_type"></app-discussion-and-writing>
                         </div>
                     </div>
                 </div>

@@ -1,18 +1,15 @@
-import {Component, Input, OnInit } from '@angular/core';
-import {ActivatedRoute, Params}   from '@angular/router';
-import {Location}                 from '@angular/common';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {StudentService} from '../../services/student.service';
-import {Course, Unit, Song, Module} from '../../models/course';
-import {Router}   from '@angular/router';
-import {Header} from '../../models/modules/header';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
+import { StudentService } from '../../services/student.service';
+import { Song } from '../../models/course';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import {CulturalNote} from "../../models/modules/CulturalNote";
-import {CourseService} from "../../services/course.service";
+import { CulturalNote } from '../../models/modules/CulturalNote';
 
 @Component({
-    moduleId: module.id,
-    selector: 'student-cultural-notes',
+    selector: 'app-student-cultural-notes',
     templateUrl: '../../templates/student/student-cultural-notes.component.html'
 })
 
@@ -41,28 +38,28 @@ export class StudentCulturalNotesComponent implements OnInit {
         this.showLyrics = false;
         this.editing = false;
         this.annotating = false;
-        this.currentPhrase = "";
-        this.currentDescription = "";
+        this.currentPhrase = '';
+        this.currentDescription = '';
         this.studentService.getCulturalNote(this.song.id).then(notes => {
-            console.log("Got notes")
-            console.log(notes)
-            //console.log(this.song.lyrics);
+            console.log('Got notes');
+            console.log(notes);
+            // console.log(this.song.lyrics);
             let lyrics = this.song.lyrics;
             this.notes = notes;
-            //Remove all matching lyric pieces and replace them with '|i|' where
-            //i corresponds to the index of the note in the notes CulturalNotes array
-            //the '|i|' are replaced with the corresponding CulturalNotes text in the template
+            // Remove all matching lyric pieces and replace them with '|i|' where
+            // i corresponds to the index of the note in the notes CulturalNotes array
+            // the '|i|' are replaced with the corresponding CulturalNotes text in the template
             if (notes) {
                 for (let i = 0; i < notes.length; i++) {
-                    let test = "|" + i.toString() + "|";
+                    const test = '|' + i.toString() + '|';
                     lyrics = lyrics.replace(notes[i].phrase, test);
                 }
-                this.lyricPieces = lyrics.split('|').filter(x => x != "");
+                this.lyricPieces = lyrics.split('|').filter(x => x != '');
                 console.log(this.lyricPieces);
                 this.showLyrics = true;
             }
 
-        })
+        });
     }
 
     checkPiece(piece: string) {
@@ -70,6 +67,6 @@ export class StudentCulturalNotesComponent implements OnInit {
     }
 
     onChange(newSelection: string) {
-        //console.log(newSelection);
+        // console.log(newSelection);
     }
 }

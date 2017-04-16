@@ -1,26 +1,21 @@
-/**
- * Created by Zakir on 4/4/2017.
- */
-import {Component, OnInit, Directive} from "@angular/core";
-import {MediaService} from "../services/media.service";
-import {Location}                 from '@angular/common';
-import {Router, Params, ActivatedRoute} from "@angular/router";
-import {Media, Unit, Song} from "../models/course";
-import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { MediaService } from '../services/media.service';
+import { Location } from '@angular/common';
+import { Router, Params, ActivatedRoute } from '@angular/router';
+import { Media, Unit, Song } from '../models/course';
+import { DomSanitizer } from '@angular/platform-browser';
 import 'rxjs/add/operator/switchMap';
-import {CourseService} from "../services/course.service";
+import { CourseService } from '../services/course.service';
 
 @Component({
-    moduleId: module.id,
-    selector: 'media-link',
+    selector: 'app-media-link',
     templateUrl: '../templates/media-link.component.html'
 })
 
 
 export class MediaLinkComponent implements OnInit {
 
-    private mediaUrl = "/api/designer/media";
+    private mediaUrl = '/api/designer/media';
     files: Media[];
     linked: Media[];
     song: Song;
@@ -40,18 +35,18 @@ export class MediaLinkComponent implements OnInit {
         this.route.params
             .switchMap((params: Params) => this.courseService.getSong(+params['id']))
             .subscribe(song => {
-                //console.log(song);
+                // console.log(song);
                 this.song = song;
                 this.getLinkedMedia(song.id);
             });
         this.route.params
             .switchMap((params: Params) => this.courseService.getUnit(+params['unit_id']))
             .subscribe(unit => {
-                //console.log("got unit");
+                // console.log("got unit");
                 this.unit = unit;
 
                 this.courseService.getCourse(unit.course_id).then(course => {
-                    //console.log("got course name");
+                    // console.log("got course name");
                     this.courseName = course.name;
                 });
             });
@@ -67,7 +62,7 @@ export class MediaLinkComponent implements OnInit {
     }
 
     isLinked(mediaId: number): boolean {
-        for (var i = 0, len = this.linked.length; i < len; i++) {
+        for (let i = 0, len = this.linked.length; i < len; i++) {
             if (this.linked[i].id == mediaId) {
                 return true;
             }

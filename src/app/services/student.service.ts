@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions } from '@angular/http';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import {CLSPClass, SingleClass, CreateClass, StudentClass} from '../models/clsp-class';
-import { ProfInfo } from '../models/professor-info';
-import {StudentRegistration, Student} from "../models/studentregistration";
-import {Unit, Song, Module, Media} from "../models/course";
-import {Header, Question, AnswerCheck} from '../models/modules/header';
-import {CulturalNote} from "../models/modules/CulturalNote";
-import {AuthenticationService} from "./authentication.service";
+import { StudentClass } from '../models/clsp-class';
+import { Unit, Song, Module, Media } from '../models/course';
+import { Header, Question, AnswerCheck } from '../models/modules/header';
+import { CulturalNote } from '../models/modules/CulturalNote';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class StudentService {
-    private baseUrl = "/api/student";
+    private baseUrl = '/api/student';
 
     constructor(private http: Http, private authService: AuthenticationService) {
 
@@ -27,7 +25,7 @@ export class StudentService {
         // var sample = {"id":1,"name":"CHIN 3002 A",
         //     "description":"advanced chinese course","date_start":0,"date_end":1497057872,
         //     "course_id":1,"registration_id":1};
-        return this.http.get(this.baseUrl + "/class", this.authService.getOptions())
+        return this.http.get(this.baseUrl + '/class', this.authService.getOptions())
             .toPromise()
             .then(response => {
                 return response.json() as StudentClass;
@@ -37,17 +35,17 @@ export class StudentService {
 
     getCourse(courseId: number): Promise<string> {
         console.log(courseId);
-        return this.http.get(this.baseUrl + "/course/" + courseId, this.authService.getOptions())
+        return this.http.get(this.baseUrl + '/course/' + courseId, this.authService.getOptions())
             .toPromise()
             .then(response => {
-                let name = response.json().name;
+                const name = response.json().name;
                 return name;
             })
             .catch(this.handleError);
     }
 
     getUnits(courseId: number): Promise<Unit[]> {
-        return this.http.get(this.baseUrl + "/course/" + courseId + "/units", this.authService.getOptions())
+        return this.http.get(this.baseUrl + '/course/' + courseId + '/units', this.authService.getOptions())
             .toPromise()
             .then(response => {
                 return response.json().data as Unit[];
@@ -56,7 +54,7 @@ export class StudentService {
     }
 
     getUnit(unitId: number): Promise<Unit> {
-        return this.http.get(this.baseUrl + "/unit/" + unitId, this.authService.getOptions())
+        return this.http.get(this.baseUrl + '/unit/' + unitId, this.authService.getOptions())
             .toPromise()
             .then(response => {
                 return response.json() as Unit;
@@ -65,7 +63,7 @@ export class StudentService {
     }
 
     getSongs(unitId: number): Promise<Song[]> {
-        return this.http.get(this.baseUrl + "/unit/" + unitId + "/songs", this.authService.getOptions())
+        return this.http.get(this.baseUrl + '/unit/' + unitId + '/songs', this.authService.getOptions())
             .toPromise()
             .then(response => {
                 return response.json().data as Song[];
@@ -74,7 +72,7 @@ export class StudentService {
     }
 
     getSong(songId: number): Promise<any> {
-        return this.http.get(this.baseUrl + "/song/" + songId, this.authService.getOptions())
+        return this.http.get(this.baseUrl + '/song/' + songId, this.authService.getOptions())
             .toPromise()
             .then(response => {
                 return response.json();
@@ -83,7 +81,7 @@ export class StudentService {
     }
 
     getModules(songId: number): Promise<Module[]> {
-        return this.http.get(this.baseUrl + "/song/" + songId + "/modules", this.authService.getOptions())
+        return this.http.get(this.baseUrl + '/song/' + songId + '/modules', this.authService.getOptions())
             .toPromise()
             .then(response => {
                 return response.json().data as Module[];
@@ -92,7 +90,7 @@ export class StudentService {
     }
 
     getMedia(songId: number): Promise<Media[]> {
-        return this.http.get(this.baseUrl + "/song/" + songId + "/media", this.authService.getOptions())
+        return this.http.get(this.baseUrl + '/song/' + songId + '/media', this.authService.getOptions())
             .toPromise()
             .then(response => {
                 return response.json().data as Media[];
@@ -109,7 +107,7 @@ export class StudentService {
     }
 
     getHeader(headerId: number): Promise<Header> {
-        const url = `${this.baseUrl}/header/${headerId}`
+        const url = `${this.baseUrl}/header/${headerId}`;
         return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as Header)
@@ -129,14 +127,14 @@ export class StudentService {
         return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => {
-                let data = response.json().data as CulturalNote[];
+                const data = response.json().data as CulturalNote[];
                 for (let i = 0; i < data.length; i++) {
                     data[i].songId = songId;
                 }
                 return data;
             })
             .catch(error => {
-                console.log("ERRORR");
+                console.log('ERRORR');
             });
     }
 

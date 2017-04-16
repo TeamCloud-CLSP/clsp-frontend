@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions } from '@angular/http';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { User } from '../models/user'
-import {ProfRegistration} from '../models/profregistration'
-import {AuthenticationService} from "./authentication.service";
+import { User } from '../models/user';
+import { AuthenticationService } from './authentication.service';
+
 @Injectable()
 export class AdminService {
-    private adminUrl = "/api/admin";
+    private adminUrl = '/api/admin';
     constructor(private http: Http, private authService: AuthenticationService) { }
 
     private handleError(error: any): Promise<any> {
@@ -16,7 +16,7 @@ export class AdminService {
 
 
     getUsers(): Promise<User[]> {
-        return this.http.get(this.adminUrl + "/users", this.authService.getOptions())
+        return this.http.get(this.adminUrl + '/users', this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as User[])
             .catch(this.handleError);

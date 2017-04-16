@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfessorService } from "../services/professor.service";
-import { ActivatedRoute, Params, Router }   from '@angular/router';
-import { CLSPClass, SingleClass } from "../models/clsp-class";
-import {StudentRegistration, Student} from "../models/studentregistration";
-import { User } from "../models/user";
+import { ProfessorService } from '../services/professor.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { SingleClass } from '../models/clsp-class';
+import { StudentRegistration, Student } from '../models/studentregistration';
+
 @Component({
-    moduleId: module.id,
-    selector: 'professor-class',
+    selector: 'app-professor-class',
     templateUrl: '../templates/professor-class.component.html'
 })
 
@@ -30,7 +29,7 @@ export class ProfessorClassComponent implements OnInit {
             .subscribe(clspClass => {
                 this.currClass = clspClass;
                 this.professorService.getStudentRegistrationForClass(this.currClass.id).then(registration => {
-                    this.studentRegistration = registration
+                    this.studentRegistration = registration;
                     this.professorService.getStudents(registration.student_registration_id).then(
                         students => this.students = students
                     );
@@ -53,7 +52,7 @@ export class ProfessorClassComponent implements OnInit {
         this.newRegistration.student_registration_date_start = new Date(this.newRegistration.student_registration_date_start).getTime() / 1000;
         this.professorService.createStudentRegistration(this.newRegistration).then(() => {
             this.newRegistration = null;
-            this.ngOnInit()
+            this.ngOnInit();
         });
     }
 

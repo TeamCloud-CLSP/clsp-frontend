@@ -1,16 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
-import { Router }   from '@angular/router';
-import { Location }                 from '@angular/common';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '../models/user';
 import 'rxjs/add/operator/switchMap';
-import {AdminService} from '../services/admin.service'
+import { AdminService } from '../services/admin.service';
 
 @Component ({
-    moduleId: module.id,
-    selector: 'admin-dashboard',
+    selector: 'app-admin-dashboard',
     templateUrl: '../templates/admin-dashboard.component.html'
 })
 
@@ -57,6 +52,6 @@ export class AdminDashboardComponent implements OnInit {
             .then(designer => {
                 this.newDesigner = null;
                 this.designers.push(designer);
-            })
+            });
     }
 }

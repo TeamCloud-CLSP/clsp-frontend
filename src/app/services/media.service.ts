@@ -1,18 +1,14 @@
-/**
- * Created by Zakir on 3/14/2017.
- */
-
-import {Injectable} from "@angular/core";
-import {Headers, RequestOptions, Http} from "@angular/http";
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import {Media, MediaLink} from "../models/course";
-import {AuthenticationService} from "./authentication.service";
+import { Media, MediaLink } from '../models/course';
+import { AuthenticationService } from './authentication.service';
 
 
 @Injectable()
 export class MediaService {
 
-    private designerUrl = "/api/designer";
+    private designerUrl = '/api/designer';
 
     constructor(private http: Http,
                 private authService: AuthenticationService) {

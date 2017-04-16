@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 
 import { User } from '../models/user';
 import 'rxjs/add/operator/switchMap';
-import {AuthenticationService} from "../services/authentication.service";
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component ({
-    moduleId: module.id,
-    selector: 'account-dashboard',
+    selector: 'app-account-dashboard',
     templateUrl: '../templates/account-dashboard.component.html'
 })
 
@@ -21,18 +20,18 @@ export class AccountDashboardComponent {
     }
 
     getRoles(): string {
-        var stuff = "";
-        if(this.account.is_designer) {
-            stuff += "ROLE_DESIGNER, ";
+        let stuff = '';
+        if (this.account.is_designer) {
+            stuff += 'ROLE_DESIGNER, ';
         }
-        if(this.account.is_student) {
-            stuff += "ROLE_STUDENT, ";
+        if (this.account.is_student) {
+            stuff += 'ROLE_STUDENT, ';
         }
-        if(this.account.is_administrator) {
-            stuff += "ROLE_ADMIN, ";
+        if (this.account.is_administrator) {
+            stuff += 'ROLE_ADMIN, ';
         }
-        if(this.account.is_professor) {
-            stuff += "ROLE_PROFESSOR, ";
+        if (this.account.is_professor) {
+            stuff += 'ROLE_PROFESSOR, ';
         }
         return stuff;
     }

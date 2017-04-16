@@ -1,15 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
-import { Location }                 from '@angular/common';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
 import { CourseService } from '../services/course.service';
-import { Course, Unit, Song } from '../models/course';
-import { Router }   from '@angular/router';
+import { Unit, Song } from '../models/course';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
-    moduleId: module.id,
-    selector: 'unit-detail',
+    selector: 'app-unit-detail',
     templateUrl: '../templates/unit-detail.component.html',
     styleUrls: ['../css/unit-detail.component.css']
 })
@@ -35,7 +34,7 @@ export class UnitDetailComponent implements OnInit {
                 this.unit = unit;
                 this.courseService.getCourse(unit.course_id).then(course => {
                     this.courseName = course.name;
-                })
+                });
             });
         this.route.params
             .switchMap((params: Params) => this.courseService.getSongs(+params['id']))
@@ -55,11 +54,11 @@ export class UnitDetailComponent implements OnInit {
 
     deleteSong(song: Song, event: any): void {
         event.preventDefault();
-        if(confirm("Are you sure you want to delete " + song.title + "?")) {
+        if (confirm('Are you sure you want to delete ' + song.title + '?')) {
             this.courseService.deleteSong(song)
                 .then(() => {
                     this.songs = this.songs.filter(x => x != song);
-                })
+                });
         }
     }
 
@@ -72,7 +71,7 @@ export class UnitDetailComponent implements OnInit {
     }
 
     toMediaLink(song: Song): void {
-        this.router.navigate(['./unit/' + this.unit.id + '/song/' + song.id + "/media"]);
+        this.router.navigate(['./unit/' + this.unit.id + '/song/' + song.id + '/media']);
     }
 
     onSubmit(): void {

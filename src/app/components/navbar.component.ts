@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { User } from '../models/user';
-import { Router } from '@angular/router'
-import {UserToken} from "../models/user-token";
-import {AuthenticationService} from "../services/authentication.service";
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
-    moduleId: module.id,
-    selector: 'site-navbar',
+    selector: 'app-navbar',
     templateUrl: '../templates/navbar.component.html'
 })
 
@@ -21,9 +19,9 @@ export class NavbarComponent {
     }
 
     logout() {
-        console.log("Logging user out");
+        // console.log('Logging user out');
         this.authService.logout();
-        console.log("Logging user out 2");
+        // console.log('Logging user out 2');
         this.account = this.authService.getAccount();
     }
 }

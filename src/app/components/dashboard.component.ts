@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core';
 import { Course } from '../models/course';
 import { CourseService } from '../services/course.service';
-import {Router} from "@angular/router";
-import {User} from "../models/user";
-import {AuthenticationService} from "../services/authentication.service";
-import {auditTime} from "rxjs/operator/auditTime";
+import {Router} from '@angular/router';
+import {User} from '../models/user';
+import {AuthenticationService} from '../services/authentication.service';
 
 @Component({
-    moduleId: module.id,
-    selector: 'my-dashboard',
+    selector: 'app-dashboard',
     templateUrl: '../templates/dashboard.component.html'
 })
 

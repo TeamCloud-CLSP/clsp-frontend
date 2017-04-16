@@ -1,16 +1,14 @@
-import {Component, Input, OnInit } from '@angular/core';
-import {ActivatedRoute, Params}   from '@angular/router';
-import {Location}                 from '@angular/common';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {StudentService} from '../../services/student.service';
-import {Course, Unit, Song, Module} from '../../models/course';
-import {Router}   from '@angular/router';
-import {Header} from '../../models/modules/header';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
+import { StudentService } from '../../services/student.service';
+import { Router } from '@angular/router';
+import { Header } from '../../models/modules/header';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
-    moduleId: module.id,
-    selector: 'student-question-module',
+    selector: 'app-student-question-module',
     templateUrl: '../../templates/student/student-question-module.html'
 })
 
@@ -42,6 +40,6 @@ export class StudentQuestionModuleComponent implements OnInit {
 }
 
 onChange(newSelection: string) {
-    //console.log(newSelection);
+    // console.log(newSelection);
 }
 }

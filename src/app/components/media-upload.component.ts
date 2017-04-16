@@ -1,19 +1,13 @@
-/**
- * Created by Zakir on 3/14/2017.
- */
-
-import {Component, OnInit, Directive} from "@angular/core";
-import {MediaService} from "../services/media.service";
-import {Router, ActivatedRoute, Params} from "@angular/router";
-import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
-import {Media} from "../models/course";
-import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
-import { Location }                 from '@angular/common';
+import { Component, OnInit, Directive } from '@angular/core';
+import { MediaService } from '../services/media.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { Media } from '../models/course';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Location } from '@angular/common';
 
 @Component({
-    moduleId: module.id,
-    selector: 'media-upload',
+    selector: 'app-media-upload',
     templateUrl: '../templates/media-upload.component.html'
 })
 
@@ -24,9 +18,9 @@ import { Location }                 from '@angular/common';
 
 export class MediaUploadComponent implements OnInit {
 
-    private mediaUrl = "/api/designer/media";
+    private mediaUrl = '/api/designer/media';
     public uploader: FileUploader = new FileUploader({url: this.mediaUrl});
-    public hasBaseDropZoneOver: boolean = false;
+    public hasBaseDropZoneOver = false;
     files: Media[];
     nameEdit: boolean;
     nameEditId: number;
@@ -56,8 +50,8 @@ export class MediaUploadComponent implements OnInit {
     }
 
     setName(id: number) {
-        var name: string;
-        for (var i = 0, len = this.files.length; i < len; i++) {
+        let name: string;
+        for (let i = 0, len = this.files.length; i < len; i++) {
             if (this.files[i].id == id) {
                 name = this.files[i].name;
             }

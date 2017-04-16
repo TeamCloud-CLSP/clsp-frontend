@@ -1,16 +1,15 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, Params}   from '@angular/router';
-import {Location}                 from '@angular/common';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {CourseService} from '../services/course.service';
-import {Course, Unit, Song, Module} from '../models/course';
-import {Router}   from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
+import { CourseService } from '../services/course.service';
+import { Unit, Song, Module } from '../models/course';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import {ModuleService} from "../services/module.service";
+import { ModuleService } from '../services/module.service';
 
 @Component({
-    moduleId: module.id,
-    selector: 'song-detail',
+    selector: 'app-song-detail',
     templateUrl: '../templates/song-detail.component.html'
 })
 
@@ -34,15 +33,15 @@ export class SongDetailComponent implements OnInit {
 
     ngOnInit() {
 
-        //console.log(this.route.params);
+        // console.log(this.route.params);
         this.route.params
             .switchMap((params: Params) => this.courseService.getSong(+params['id']))
             .subscribe(song => {
-                //console.log(song);
+                // console.log(song);
                 this.song = song;
             });
 
-        let names = {
+        const names = {
             'module_cn': 'Cultural Notes',
             'module_dw': 'Discussion and Writing',
         };
@@ -69,11 +68,11 @@ export class SongDetailComponent implements OnInit {
         this.route.params
             .switchMap((params: Params) => this.courseService.getUnit(+params['unit_id']))
             .subscribe(unit => {
-                //console.log("got unit");
+                // console.log("got unit");
                 this.unit = unit;
 
                 this.courseService.getCourse(unit.course_id).then(course => {
-                    //console.log("got course name");
+                    // console.log("got course name");
                     this.courseName = course.name;
                 });
             });
@@ -90,7 +89,7 @@ export class SongDetailComponent implements OnInit {
     setPassword() {
             this.moduleService.setPasswordCN(this.song.id, this.modules[0])
                 .then(value => {
-                //console.log("password updated");
+                // console.log("password updated");
             });
         /*} else if (type == "module_dw") {
             this.moduleService.setPasswordDW(this.song.id, this.modules[1].password).then(value => {
@@ -130,12 +129,12 @@ export class SongDetailComponent implements OnInit {
     enableModule(mod: Module, index: number) {
         this.moduleService.enableModule(this.song.id, mod)
             .then(() => this.modules[index].is_enabled = 1)
-            .catch(() => console.log("Error in enabling module"));
+            .catch(() => console.log('Error in enabling module'));
     }
 
     disableModule(mod: Module, index: number) {
         this.moduleService.disableModule(this.song.id, mod)
             .then(() => this.modules[index].is_enabled = 0)
-            .catch(() => console.log("Error in disabling module"));
+            .catch(() => console.log('Error in disabling module'));
     }
 }

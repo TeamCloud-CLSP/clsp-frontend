@@ -1,10 +1,9 @@
-import { Component, Input, OnInit, Pipe, PipeTransform } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
-import { Location }                 from '@angular/common';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import { CourseService } from '../../services/course.service';
-import { Course, Unit, Song } from '../../models/course';
-import { Router }   from '@angular/router';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Unit, Song } from '../../models/course';
+import { Router } from '@angular/router';
 import { Header, Question, Choice, AnswerCheck } from '../../models/modules/header';
 import { StudentService } from '../../services/student.service';
 import 'rxjs/add/operator/switchMap';
@@ -19,11 +18,8 @@ export class GetChoicesPipe implements PipeTransform {
     }
 }
 
-
-
 @Component({
-    moduleId: module.id,
-    selector: 'module-detail',
+    selector: 'app-module-detail',
     templateUrl: '../../templates/student/student-header-detail.component.html'
 })
 export class StudentHeaderDetailComponent implements OnInit {

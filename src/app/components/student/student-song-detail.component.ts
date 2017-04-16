@@ -1,16 +1,15 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, Params}   from '@angular/router';
-import {Location}                 from '@angular/common';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {Course, Unit, Song, Module, Media} from '../../models/course';
-import {Router}   from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Unit, Module, Media } from '../../models/course';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import {ModuleService} from "../../services/module.service";
-import {StudentService} from "../../services/student.service";
+import { ModuleService } from '../../services/module.service';
+import { StudentService } from '../../services/student.service';
 
 @Component({
-    moduleId: module.id,
-    selector: 'student-song-detail',
+    selector: 'app-student-song-detail',
     templateUrl: '../../templates/student/student-song-detail.component.html'
 })
 
@@ -36,11 +35,11 @@ export class StudentSongDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.publicBaseUrl = "/files/";
+        this.publicBaseUrl = '/files/';
         this.route.params
             .switchMap((params: Params) => {
                 console.log(params);
-                return this.studentService.getSong(+params['song_id'])
+                return this.studentService.getSong(+params['song_id']);
             })
             .subscribe(song => {
 
@@ -49,7 +48,7 @@ export class StudentSongDetailComponent implements OnInit {
                 console.log(song);
             });
 
-        let names = {
+        const names = {
             'module_cn': 'Cultural Notes',
             'module_dw': 'Discussion and Writing',
             'module_qu': 'Questions for Understanding',
@@ -79,7 +78,7 @@ export class StudentSongDetailComponent implements OnInit {
         this.route.params
             .switchMap((params: Params) => this.studentService.getUnit(+params['unit_id']))
             .subscribe(unit => {
-                //console.log("got unit");
+                // console.log("got unit");
                 this.unit = unit;
 
                 this.studentService.getCourse(unit.course_id).then(name => {
@@ -87,7 +86,7 @@ export class StudentSongDetailComponent implements OnInit {
                 });
             });
         this.passwordValidated = false;
-        this.enteredPassword = "";
+        this.enteredPassword = '';
     }
 
     setCurrModule(name: string) {

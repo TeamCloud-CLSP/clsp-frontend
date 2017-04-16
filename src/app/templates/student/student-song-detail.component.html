@@ -78,10 +78,10 @@
                             <p *ngIf="displayPassError">Incorrect password entered. Please try again.</p>
                             <button class="btn btn-default" (click)="validatePassword()">Enter</button>
                         </div>
-                        <student-cultural-notes *ngIf="passwordValidated || (module.has_password == 0)" [song]="song"></student-cultural-notes>
+                        <app-student-cultural-notes *ngIf="passwordValidated || (module.has_password == 0)" [song]="song"></app-student-cultural-notes>
                     </div>
                     <div *ngSwitchDefault>
-                        <student-question-module [songId]="song.id" [unitId]="unit.id" [moduleType]="module.module_type"></student-question-module>
+                        <app-student-question-module [songId]="song.id" [unitId]="unit.id" [moduleType]="module.module_type"></app-student-question-module>
                     </div>
                 </div>
             </div>
