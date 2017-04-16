@@ -4,15 +4,13 @@ import 'rxjs/add/operator/toPromise';
 import {CLSPClass, SingleClass, CreateClass, StudentClass} from '../models/clsp-class';
 import { ProfInfo } from '../models/professor-info';
 import {StudentRegistration, Student} from "../models/studentregistration";
-import {GlobalParameters} from '../global-parameters';
 import {Unit, Song, Module, Media} from "../models/course";
 import {Header, Question, AnswerCheck} from '../models/modules/header';
 import {CulturalNote} from "../models/modules/CulturalNote";
 
 @Injectable()
 export class StudentService {
-    private parameters = new GlobalParameters();
-    private baseUrl = this.parameters.url + "/api/student";
+    private baseUrl = "/api/student";
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private options = new RequestOptions({ withCredentials: true, headers: this.headers });
 

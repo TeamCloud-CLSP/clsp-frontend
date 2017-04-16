@@ -4,13 +4,11 @@ import 'rxjs/add/operator/toPromise';
 import {Course, Language, Unit, Song, Module} from '../models/course'
 import {ProfRegistration} from '../models/profregistration'
 import {CulturalNoteKeywords} from "../models/modules/CulturalNoteKeywords";
-import {GlobalParameters} from '../global-parameters';
 import {Header, Question} from '../models/modules/header';
 import {CulturalNote} from "../models/modules/CulturalNote";
 @Injectable()
 export class ModuleService {
-    private parameters = new GlobalParameters();
-    private designerUrl = this.parameters.url + "/api/designer";
+    private designerUrl = "/api/designer";
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private options = new RequestOptions({ withCredentials: true, headers: this.headers });
 

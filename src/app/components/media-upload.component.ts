@@ -6,7 +6,6 @@ import {Component, OnInit, Directive} from "@angular/core";
 import {MediaService} from "../services/media.service";
 import {Router, ActivatedRoute, Params} from "@angular/router";
 import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
-import {GlobalParameters} from '../global-parameters';
 import {Media} from "../models/course";
 import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
@@ -25,9 +24,7 @@ import { Location }                 from '@angular/common';
 
 export class MediaUploadComponent implements OnInit {
 
-    private parameters = new GlobalParameters();
-    private mediaUrl = this.parameters.url + "/api/designer/media";
-    private siteUrl = this.parameters.url;
+    private mediaUrl = "/api/designer/media";
     public uploader: FileUploader = new FileUploader({url: this.mediaUrl});
     public hasBaseDropZoneOver: boolean = false;
     files: Media[];

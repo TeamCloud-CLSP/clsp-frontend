@@ -3,7 +3,6 @@
  */
 
 import {Injectable} from "@angular/core";
-import {GlobalParameters} from "../global-parameters";
 import {Headers, RequestOptions, Http} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
 import {Media, MediaLink} from "../models/course";
@@ -11,9 +10,7 @@ import {Media, MediaLink} from "../models/course";
 
 @Injectable()
 export class MediaService {
-
-    private parameters = new GlobalParameters();
-    private designerUrl = this.parameters.url + "/api/designer";
+    private designerUrl = "/api/designer";
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private options = new RequestOptions({ withCredentials: true, headers: this.headers })
 

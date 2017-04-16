@@ -5,7 +5,6 @@ import {Component, OnInit, Directive} from "@angular/core";
 import {MediaService} from "../services/media.service";
 import {Location}                 from '@angular/common';
 import {Router, Params, ActivatedRoute} from "@angular/router";
-import {GlobalParameters} from '../global-parameters';
 import {Media, Unit, Song} from "../models/course";
 import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
@@ -21,9 +20,7 @@ import {CourseService} from "../services/course.service";
 
 export class MediaLinkComponent implements OnInit {
 
-    private parameters = new GlobalParameters();
-    private mediaUrl = this.parameters.url + "/api/designer/media";
-    private siteUrl = this.parameters.url;
+    private mediaUrl = "/api/designer/media";
     files: Media[];
     linked: Media[];
     song: Song;

@@ -7,7 +7,6 @@ import {Router}   from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import {ModuleService} from "../../services/module.service";
 import {StudentService} from "../../services/student.service";
-import {GlobalParameters} from "../../global-parameters";
 
 @Component({
     moduleId: module.id,
@@ -37,8 +36,7 @@ export class StudentSongDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        let parameters = new GlobalParameters();
-        this.publicBaseUrl = parameters.url + "/files/";
+        this.publicBaseUrl = "/files/";
         this.route.params
             .switchMap((params: Params) => {
                 console.log(params);
