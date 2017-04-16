@@ -112,8 +112,9 @@
             <thead>
             <tr>
                 <!--<th width="5%">ID</th>-->
-                <th width="65%">Name</th>
+                <th width="35%">Name</th>
                 <th width="10%">File Type</th>
+                <th width="30%">Embed URL</th>
                 <th width="25%">Actions</th>
             </tr>
             </thead>
@@ -125,6 +126,7 @@
                 <td *ngIf="file.id == nameEditId && !nameEdit">{{file.name}}</td>
                 <td *ngIf="file.id == nameEditId && nameEdit"><input [(ngModel)]="file.name" class="form-control" name="newName" id="newName" /></td>
                 <td>{{file.file_type}}</td>
+                <td>{{this.siteUrl}}/files/{{file.filename}}</td>
                 <td *ngIf="file.id != nameEditId && !nameEdit">
                     <button type="btn btn-default" (click)="editName(file.id)">Edit Name</button>
                     <button type="btn btn-default" (click)="deleteFile(file.id)">Delete File</button>
@@ -137,6 +139,11 @@
             </tbody>
         </table>
     </div>
+<div class="row">
+    <div class="btn-group" role="group">
+        <button class="btn btn-default" (click)="goBack()">Back</button>
+    </div>
+</div>
 <!--
 <div *ngIf="files">
     <div *ngFor="let file of files" class="row">

@@ -13,5 +13,24 @@
     }
 
 </style>
-<span (click)="onClickAnnotation($event.target)" class="highlight" placement="top" [popover]="popTemplate"> {{note.phrase}}</span>
-<template #popTemplate><div [innerHTML]="safeDesc"></div></template>
+<div *ngIf="isDesigner" style="display: inline-block">
+    <span (click)="onClickAnnotation($event.target, $event)" class="highlight" placement="{{this.placement}}"
+          [popover]="popTemplate"> {{note.phrase}}</span>
+    <template #popTemplate>
+        <div>
+            <ckeditor
+                    [(ngModel)]="note.description"
+                    debounce="500">
+            </ckeditor>
+        </div>
+        <button class="btn btn-default" (click)="updateAnnotation()">{{status}}</button>
+    </template>
+</div>
+<div *ngIf="!isDesigner" style="display: inline-block">
+    <span (click)="onClickAnnotation($event.target, $event)" class="highlight" placement="{{this.placement}}"
+          [popover]="popTemplate"> {{note.phrase}}</span>
+    <template #popTemplate>
+        <div [innerHTML]="safeDesc"></div>
+    </template>
+</div>
+

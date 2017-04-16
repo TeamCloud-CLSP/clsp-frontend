@@ -7,7 +7,6 @@ import {Router}   from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import {ModuleService} from "../../services/module.service";
 import {StudentService} from "../../services/student.service";
-import {GlobalParameters} from "../../global-parameters";
 
 @Component({
     moduleId: module.id,
@@ -23,6 +22,9 @@ export class StudentSongDetailComponent implements OnInit {
     currentModule: string;
     media: Media[];
     publicBaseUrl: string;
+    enteredPassword: string;
+    passwordValidated: boolean;
+    displayPassError: boolean;
 
     constructor(private studentService: StudentService,
         private moduleService: ModuleService,
@@ -34,8 +36,7 @@ export class StudentSongDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        let parameters = new GlobalParameters();
-        this.publicBaseUrl = parameters.url + "/files/";
+        this.publicBaseUrl = "/files/";
         this.route.params
             .switchMap((params: Params) => {
                 console.log(params);
@@ -85,6 +86,8 @@ export class StudentSongDetailComponent implements OnInit {
                     this.courseName = name;
                 });
             });
+        this.passwordValidated = false;
+        this.enteredPassword = "";
     }
 
     setCurrModule(name: string) {
@@ -93,5 +96,15 @@ export class StudentSongDetailComponent implements OnInit {
 
     setModuleName(mod: Module) {
         this.moduleService.setModuleName(this.song.id, mod);
+    }
+
+    validatePassword() {
+        if (this.enteredPassword == this.modules[0].password) {
+            this.passwordValidated = true;
+        } else {
+            this.displayPassError = true;
+            console.log(this.modules[0].password);
+            console.log(this.enteredPassword);
+        }
     }
 }

@@ -4,13 +4,11 @@ import 'rxjs/add/operator/toPromise';
 import { CLSPClass, SingleClass, CreateClass } from '../models/clsp-class';
 import { ProfInfo } from '../models/professor-info';
 import {StudentRegistration, Student} from "../models/studentregistration";
-import {GlobalParameters} from '../global-parameters';
 import {AuthenticationService} from "./authentication.service";
 
 @Injectable()
 export class ProfessorService {
-    private parameters = new GlobalParameters();
-    private baseUrl = this.parameters.url + "/api/professor";
+    private baseUrl = "/api/professor";
 
     constructor(private http: Http,
                 private authService: AuthenticationService) {

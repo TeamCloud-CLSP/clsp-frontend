@@ -3,7 +3,6 @@
  */
 
 import {Injectable} from "@angular/core";
-import {GlobalParameters} from "../global-parameters";
 import {Headers, RequestOptions, Http} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
 import {Media, MediaLink} from "../models/course";
@@ -13,8 +12,7 @@ import {AuthenticationService} from "./authentication.service";
 @Injectable()
 export class MediaService {
 
-    private parameters = new GlobalParameters();
-    private designerUrl = this.parameters.url + "/api/designer";
+    private designerUrl = "/api/designer";
 
     constructor(private http: Http,
                 private authService: AuthenticationService) {
@@ -27,6 +25,15 @@ export class MediaService {
 
     getAllFiles(): Promise<Media[]> {
         const url = `${this.designerUrl}/media`;
+        return this.http
+            .get(url, this.authService.getOptions())
+            .toPromise()
+            .then(response => response.json().data as Media[])
+            .catch(this.handleError);
+    }
+
+    getAVFiles(): Promise<Media[]> {
+        const url = `${this.designerUrl}/avmedia`;
         return this.http
             .get(url, this.authService.getOptions())
             .toPromise()

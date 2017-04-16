@@ -57,7 +57,7 @@ export class CulturalNotesComponent implements OnInit {
             //the '|i|' are replaced with the corresponding CulturalNotes text in the template
             for (var i = 0; i < notes.length; i++) {
                 var test = "|" + i.toString() + "|";
-                lyrics = lyrics.split(notes[i].phrase).join(test);
+                lyrics = lyrics.replace(notes[i].phrase, test);
             }
             this.lyricPieces = lyrics.split('|').filter(x => x != "");
             console.log(this.lyricPieces);
