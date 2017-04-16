@@ -15,8 +15,6 @@ export class CourseService {
     }
 
     getCourses(): Promise<Course[]> {
-        console.log("what the fuck is going on");
-        console.log(this.authService.getOptions());
         return this.http.get(this.designerUrl + "/courses", this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as Course[])

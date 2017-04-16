@@ -4,15 +4,13 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import {GlobalParameters} from "../global-parameters";
 import {UserToken} from "../models/user-token";
 import {User} from "../models/user";
 import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthenticationService {
-    private parameters = new GlobalParameters();
-    private tokenUrl = this.parameters.url + "/api/security/loginToken";
+    private tokenUrl = "/api/security/loginToken";
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private options = new RequestOptions({ headers: this.headers })
 
