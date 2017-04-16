@@ -1,0 +1,36 @@
+<style>
+    .highlight {
+        background-color: #222222;
+        color: #F5F5F5;
+        padding-left: 2px;
+        padding-right: 2px;
+        cursor: pointer;
+    }
+
+    .highlight:hover {
+        background-color: lightgrey;
+        color: black;
+    }
+
+</style>
+<div *ngIf="isDesigner" style="display: inline-block">
+    <span (click)="onClickAnnotation($event.target, $event)" class="highlight" placement="{{this.placement}}"
+          [popover]="popTemplate"> {{note.phrase}}</span>
+    <template #popTemplate>
+        <div>
+            <ckeditor
+                    [(ngModel)]="note.description"
+                    debounce="500">
+            </ckeditor>
+        </div>
+        <button class="btn btn-default" (click)="updateAnnotation()">{{status}}</button>
+    </template>
+</div>
+<div *ngIf="!isDesigner" style="display: inline-block">
+    <span (click)="onClickAnnotation($event.target, $event)" class="highlight" placement="{{this.placement}}"
+          [popover]="popTemplate"> {{note.phrase}}</span>
+    <template #popTemplate>
+        <div [innerHTML]="safeDesc"></div>
+    </template>
+</div>
+

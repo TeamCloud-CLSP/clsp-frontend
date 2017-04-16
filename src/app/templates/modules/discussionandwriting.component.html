@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-md-12">
+        <h2>Headers</h2>
+        <ul class="list-group">
+            <a (click)="toHeader(header)" *ngFor="let header of headers " class="list-group-item header-item">
+                {{header.name}}
+            </a>
+        </ul>
+    </div>
+    <div class="col-md-12 " *ngIf="newHeader ">
+        <label for="header_name ">Header Name</label>
+        <input [(ngModel)]="newHeader.name " class="form-control " name="header_name " id="header_name " />
+        <br />
+        <div class="btn-group " role="group ">
+            <button class="btn btn-default " (click)="cancel() ">Cancel</button>
+            <button (click)="submitHeader() " class="btn btn-success ">Submit</button>
+        </div>
+    </div>
+    <div class="col-md-12 ">
+        <button *ngIf="!newHeader " (click)="createHeader() " class="btn btn-default ">Add Header</button>
+    </div>
+</div>

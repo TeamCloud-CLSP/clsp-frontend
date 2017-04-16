@@ -1,0 +1,9 @@
+<h3>Dashboard</h3>
+<div class="grid grid-pad">
+
+    <a *ngFor="let course of courses" [routerLink]="['/course', course.id]" class="col-1-4">
+        <div class="module course">
+            <h4>{{course.name}}</h4>
+        </div>
+    </a>
+</div>

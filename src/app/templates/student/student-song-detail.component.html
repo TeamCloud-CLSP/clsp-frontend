@@ -1,0 +1,90 @@
+<style>
+    video::-internal-media-controls-download-button {
+        display:none;
+    }
+
+    video::-webkit-media-controls-enclosure {
+        overflow:hidden;
+    }
+
+    video::-webkit-media-controls-panel {
+        width: calc(100% + 30px); /* Adjust as needed */
+    }
+</style>
+
+<div>
+    <div class="row" *ngIf="courseName">
+        <p>
+            <a href="student/">{{courseName}}</a> >> <a href="student/unit/{{unit.id}}">{{unit.name}}</a> >> <b *ngIf="song">{{song.title}}</b>
+        </p>
+    </div>
+    <div class="row" *ngIf="courseName">
+        <h1 *ngIf="song">Modules for {{song.title}}</h1>
+    </div>
+
+    <div *ngIf="song" style="text-align: center;">
+        <div *ngIf="song.embed">
+            <div [innerHTML]="song.embed"></div>
+        </div>
+        <div *ngFor="let item of media">
+            <div [ngSwitch]="item.file_type">
+                <div *ngSwitchCase="'png'">
+                    <img style="max-width: 400px; max-height: 400px" src="{{publicBaseUrl + item.filename}}">
+                </div>
+                <div *ngSwitchCase="'jpg'">
+                    <img style="max-width: 400px; max-height: 400px" src="{{publicBaseUrl + item.filename}}">
+                </div>
+                <div *ngSwitchCase="'jpeg'">
+                    <img style="max-width: 400px; max-height: 400px" src="{{publicBaseUrl + item.filename}}">
+                </div>
+                <div *ngSwitchCase="'pdf'">
+                    <p>PDFs not supported</p>
+                    <!--<embed src="{{sanitizer.bypassSecurityTrustUrl(publicBaseUrl + item.filename)}}" width="800px" height="2100px" />-->
+                </div>
+                <div *ngSwitchCase="'mp3'">
+                    <video style="width: 100%; height: 40px;" controls>
+                        <source src="{{publicBaseUrl + item.filename}}" type="audio/mpeg">
+                    </video>
+                </div>
+                <div *ngSwitchCase="'ogg'">
+                    <video style="width: 100%; height: 40px;" controls>
+                        <source src="{{publicBaseUrl + item.filename}}" type="video/ogg">
+                    </video>
+                </div>
+                <div *ngSwitchDefault>
+                    <p>File type {{item.file_type}} not supported</p>
+                </div>
+            </div>
+        </div>
+        <p><b>Title: </b>{{song.title}}</p>
+        <p><b>Artist: </b>{{song.artist}}</p>
+        <p><b>Album: </b>{{song.album}}</p>
+    </div>
+
+    <div class="row" *ngIf="courseName">
+        <ul class="nav nav-tabs">
+            <!-- <li class="active"><a data-toggle="tab" href="/#home">Home</a></li> -->
+            <li *ngFor="let module of modules" [ngClass]="{'active': module.module_type == currentModule}">
+                <a data-toggle="tab" (click)="setCurrModule(module.module_type)">{{module.name}}</a>
+            </li>
+        </ul>
+        <div class="tab-content" *ngFor="let module of modules">
+            <div *ngIf="courseName && module.module_type == currentModule">
+                <div [ngSwitch]="module.module_type">
+                    <div *ngSwitchCase="'module_cn'">
+                        <div *ngIf="(!passwordValidated) && (module.has_password != 0)" >
+                            <label for="password">Enter Password</label>
+                            <input [(ngModel)]="enteredPassword" class="form-control " name="password" id="password" />
+                            <p *ngIf="displayPassError">Incorrect password entered. Please try again.</p>
+                            <button class="btn btn-default" (click)="validatePassword()">Enter</button>
+                        </div>
+                        <student-cultural-notes *ngIf="passwordValidated || (module.has_password == 0)" [song]="song"></student-cultural-notes>
+                    </div>
+                    <div *ngSwitchDefault>
+                        <student-question-module [songId]="song.id" [unitId]="unit.id" [moduleType]="module.module_type"></student-question-module>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

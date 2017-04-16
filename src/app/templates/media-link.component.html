@@ -1,0 +1,37 @@
+<h2 *ngIf="song">Link Media to {{song.title}}</h2>
+
+<div *ngIf="files">
+    <br/>
+    <table class="table" *ngIf="linked">
+        <thead>
+        <tr>
+            <th width="30%">Name</th>
+            <th width="10%">File Type</th>
+            <th width="30%">Embed URL</th>
+            <th width="5%">Linked</th>
+            <th width="25%">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let file of files">
+            <!--<td><strong>{{file.id}}</strong></td>-->
+            <td>{{file.name}}</td>
+            <td>{{file.file_type}}</td>
+            <td>{{this.siteUrl}}/files/{{file.filename}}</td>
+            <td *ngIf="isLinked(file.id)"><strong>Yes</strong></td>
+            <td *ngIf="!isLinked(file.id)"><strong>No</strong></td>
+            <td *ngIf="!isLinked(file.id)">
+                <button type="btn btn-default" (click)="linkMedia(file.id)" >Link File</button>
+            </td>
+            <td *ngIf="isLinked(file.id)">
+                <button type="btn btn-default" (click)="deleteLink(file.id)" >Unlink File</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="btn-group" role="group">
+        <button class="btn btn-default" (click)="goBack()">Back</button>
+    </div>
+</div>
