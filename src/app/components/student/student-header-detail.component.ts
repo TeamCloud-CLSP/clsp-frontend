@@ -170,11 +170,12 @@ export class StudentHeaderDetailComponent implements OnInit {
         this.studentService.checkAnswers(test)
             .then(
             response => {
+                //console.log(response);
                 for (let a of response) {
                     var choice = this.questions.find(x => x.id == a.id);
                     choice.correct = a.result;
                 }
-                //console.log(this.questions);
+                console.log(this.questions);
             }
             )
     }

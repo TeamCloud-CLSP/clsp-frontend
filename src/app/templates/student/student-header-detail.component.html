@@ -10,22 +10,27 @@
   </div>
   <div *ngIf="!printVersion">
     <div class="row" *ngFor="let question of questions">
-      <h3 *ngIf="question.type == 'fill-blank'">
+      <h3 *ngIf="question.type == 'fill-blank'" style="display:inline">
                 {{question.weight}}.
                 <span *ngFor="let piece of question.fbPieces;">
                     <span *ngIf ="checkBlank(piece)">
                         {{piece}}
                     </span>
-                    <span *ngIf="!checkBlank(piece)" style="display:inline">
-                        <input type="text" class="form-control" [name]="'fbanswer' + piece" attr.name="{{'fbanswer' + piece}}" required [(ngModel)]="question.fbAnswers[+piece].choice" style="width:300px">
+                    <span *ngIf="!checkBlank(piece)">
+                        <input type="text" class="form-control" [name]="'fbanswer' + piece" attr.name="{{'fbanswer' + piece}}" required [(ngModel)]="question.fbAnswers[+piece].choice" style="width:300px;display:inline;margin-top:-10px;">
                         <span *ngIf="question.correct != null">
-                            <b>Correct:</b> {{question.correct[+piece]}}
+                            <span class = "glyphicon glyphicon-remove" style="color:red" *ngIf="question.correct[+piece] == false"></span>
+                            <span class = "glyphicon glyphicon-ok" style="color:green" *ngIf="question.correct[+piece] == true"></span>
                         </span>
                     </span>
                 </span>
             </h3>
       <h3 *ngIf="question.type != 'fill-blank'">
                 {{question.weight}}. {{question.content}}
+                <span *ngIf="question.correct != null">
+                    <span class = "glyphicon glyphicon-remove" style="color:red" *ngIf="question.correct == false"></span>
+                    <span class = "glyphicon glyphicon-ok" style="color:green" *ngIf="question.correct == true"></span>
+                </span>
             </h3>
       <!-- <form *ngIf="question.type == 'fill-blank'">
                 <div class="form-group" *ngFor="let answer of question.fbAnswers;let i = index">
@@ -48,9 +53,6 @@
           </form>
           <p>
             <b>Selected Answer: </b> {{question.mcAnswer}}
-          </p>
-          <p *ngIf="question.correct != null">
-            <b>Correct:</b> {{question.correct}}
           </p>
         </div>
         <div class="col-md-12" *ngIf="question.type == 'multiple-select'">
@@ -112,6 +114,7 @@
       </div>
     </div>
   </div>
+  <br />
   <div class="row">
     <div class="btn-group" role="group">
       <button class="btn btn-success" (click)="checkAnswers()">Check Answers</button>
