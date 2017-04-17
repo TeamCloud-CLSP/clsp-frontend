@@ -73,7 +73,9 @@ export class StudentHeaderDetailComponent implements OnInit {
                 this.questions = questions.sort((x, y) => x.weight - y.weight);
                 console.log(questions);
                 for (let question of this.questions) {
-                    question.displayChoices = JSON.parse(question.choices) as Choice[];
+                    console.log(question.choices);
+                    if(question.choices) question.displayChoices = JSON.parse(question.choices) as Choice[];
+                    console.log(question.displayChoices);
                     if (question.type == "fill-blank") {
                         var blankNumber = (question.content.split("_").length - 1)
                         question.fbPieces = this.splitBlanks(question.content, blankNumber);
