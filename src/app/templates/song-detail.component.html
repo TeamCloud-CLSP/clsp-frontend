@@ -40,10 +40,10 @@
                 <a data-toggle="tab" (click)="setCurrModule(module.module_type)">{{module.name}}</a>
             </li>
         </ul>
-        <br />
+        <!-- <br /> -->
         <div class="tab-content" *ngFor="let module of modules; let i = index">
             <div class="panel panel-default" *ngIf="courseName && module.module_type == currentModule">
-                <div class="panel-heading">
+                <div class="panel-heading" style="display: none;">
                     <h3 class="panel-title">{{module.name}}
                         <button *ngIf="module.is_enabled == 1" class="btn btn-default" (click) = "disableModule(module, i)">Disable</button>
                         <button *ngIf="module.is_enabled == 0" class="btn btn-default" (click) = "enableModule(module, i)">Enable</button>

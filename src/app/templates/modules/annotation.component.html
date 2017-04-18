@@ -20,10 +20,23 @@
         <div>
             <ckeditor
                     [(ngModel)]="note.description"
+                    [config]="{toolbar : [
+                        { name: 'document', items: [ 'Source','PasteFromWord',  '-','Preview', 'Maximize' ] },
+                        { name: 'clipboard', items: [  'Undo', 'Redo' ] },
+                        { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline' ] },
+                        { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },
+                        { name: 'insert' },
+    '/',
+    { name: 'styles' },
+    { name: 'colors' },
+    { name: 'tools' },
+    { name: 'others' },
+    { name: 'about' }
+                    ]}"
                     debounce="500">
             </ckeditor>
         </div>
-        <button class="btn btn-default" (click)="updateAnnotation()">{{status}}</button>
+        <button style="width: 100%; margin-top: 8px;" class="btn btn-default" (click)="updateAnnotation()">{{status}}</button>
     </template>
 </div>
 <div *ngIf="!isDesigner" style="display: inline-block">

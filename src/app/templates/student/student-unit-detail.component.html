@@ -5,8 +5,12 @@
   }
 
   .clsp-table-row td {
-    padding: 8px;
-    padding-bottom: 0px;
+    padding: 10px;
+    font-size: 1.2em;
+    /*padding-bottom: 0px;*/
+  }
+  .clsp-table-container {
+    padding: 10px;
   }
 </style>
 <div class="row" *ngIf="courseName">
@@ -17,7 +21,8 @@
 <div *ngIf="unit">
   <h1>{{unit.name}}</h1>
   <h2>{{unit.description}}</h2>
-  <div>
+  <div class="clsp-table-container">
+  <h3 style="text-align: center;">Songs</h3>
     <table class="table">
       <thead>
         <tr>
