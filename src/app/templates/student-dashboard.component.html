@@ -10,6 +10,10 @@
     font-weight: bold;
     cursor: pointer;
   }
+
+  .min-header {
+    margin-top: 5px;
+  }
 </style>
 
 <div *ngIf="myClass">
@@ -22,9 +26,12 @@
         <h3 class="panel-title">{{unit.name}}</h3>
       </div>
       <div class="panel-body" *ngIf ="unit.songs">
-        <h3 *ngIf="unit.songs.length > 0">Songs</h3>
+        <h3 class="min-header" *ngIf="unit.songs.length > 0">Songs</h3>
         <div *ngFor="let song of unit.songs">
           <span>{{song.title}}</span>
+        </div>
+        <div *ngIf="unit.songs.length == 0">
+        <span>No songs for this unit</span>
         </div>
       </div>
     </div>
