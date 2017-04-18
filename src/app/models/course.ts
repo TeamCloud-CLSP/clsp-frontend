@@ -19,6 +19,7 @@ export class Unit {
     id: number;
     weight: number;
     course_id: number;
+    songs: Song[];
     constructor() { }
 }
 

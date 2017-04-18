@@ -9,7 +9,11 @@
     padding-bottom: 0px;
   }
 </style>
-
+<div class="row" *ngIf="courseName">
+  <p>
+    <a href="student">{{courseName}}</a> >> <b>{{unit.name}}</b>
+  </p>
+</div>
 <div *ngIf="unit">
   <h1>{{unit.name}}</h1>
   <h2>{{unit.description}}</h2>

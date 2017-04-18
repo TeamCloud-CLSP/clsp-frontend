@@ -21,9 +21,9 @@
       <div class="panel-heading" (click)="goToUnit(unit)">
         <h3 class="panel-title">{{unit.name}}</h3>
       </div>
-      <div class="panel-body">
-        <h3>Songs</h3>
-        <div *ngFor="let song of songs[unit.id]">
+      <div class="panel-body" *ngIf ="unit.songs">
+        <h3 *ngIf="unit.songs.length > 0">Songs</h3>
+        <div *ngFor="let song of unit.songs">
           <span>{{song.title}}</span>
         </div>
       </div>

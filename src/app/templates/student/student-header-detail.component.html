@@ -1,7 +1,7 @@
 <div *ngIf="header">
   <div class="row" *ngIf="courseName">
     <p>
-      <a href="student/course/{{unit.course_id}}">{{courseName}}</a> >> <a href="unit/{{unit.id}}">{{unit.name}}</a> >>
+      <a href="student">{{courseName}}</a> >> <a href="student/unit/{{unit.id}}">{{unit.name}}</a> >>
       <a href="student/unit/{{unit.id}}/song/{{song.id}}" *ngIf="song">{{song.title}}</a> >> <b>{{header.name}}</b>
     </p>
   </div>
