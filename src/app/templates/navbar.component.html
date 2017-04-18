@@ -1,25 +1,38 @@
-<nav class="navbar navbar-inverse navbar-static-top">
+<style>
+.special-list > li > a {
+    color: #232323;
+}
+.special-list {
+    margin-right: 100px;
+}
+</style>
+
+<nav style="border-color: white" class="navbar navbar-inverse navbar-static-top">
     <div class="container">
-        <div class="navbar-header">
+        <div class="navbar-header" style="width: 100%;">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-            <a class="navbar-brand" href="/">CLSP</a>
+          <img style="float: left; margin: 15px;" src="/assets/modlangs.png">
+            <a style="float: right; color: #efefef; font-weight: bold; width: 300px; text-align: right; margin-top: 11px; line-height: 1.2em; font-size: 2em;" class="navbar-brand" href="/">Critical Languages Song Project</a>
         </div>
+
+        <!--/.nav-collapse -->
+    </div>
+    <div style="background-color: #eeb211;">
         <div id="navbar" class="navbar-collapse collapse">
-            <ul *ngIf="account" class="nav navbar-nav">
+            <ul *ngIf="account" class="nav navbar-nav special-list">
                 <li *ngIf="getAccount().is_designer"><a routerLink="/designer/courses" routerLinkActive="active">Courses</a></li>
                 <li *ngIf="getAccount().is_administrator"><a routerLink="/admin" routerLinkActive="active">Admin</a></li>
                 <li *ngIf="getAccount().is_professor"><a routerLink="/professor" routerLinkActive="active">Dashboard</a></li>
             </ul>
-            <ul *ngIf="getAccount().name" class="nav navbar-nav navbar-right">
-                <li><a routerLink="/account" routerLinkActive="active">{{ getAccount().name }}</a></li>
-                <li><a id="logout-button" (click)="logout()">Logout</a></li>
+            <ul *ngIf="getAccount().name" class="nav navbar-nav navbar-right special-list">
+                <li><a routerLink="/account" routerLinkActive="active"><i class="fa fa-user" aria-hidden="true"></i> {{ getAccount().name }}</a></li>
+                <li><a id="logout-button" (click)="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
             </ul>
         </div>
-        <!--/.nav-collapse -->
     </div>
 </nav>
