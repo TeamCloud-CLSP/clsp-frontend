@@ -52,6 +52,9 @@ export class StudentSongDetailComponent implements OnInit {
             'module_cn': 'Cultural Notes',
             'module_dw': 'Discussion and Writing',
             'module_qu': 'Questions for Understanding',
+            'module_ge': 'Grammar Exercises',
+            'module_lt': 'Listening Tasks',
+            'module_ls': 'Listening Suggestions'
         };
 
         this.route.params

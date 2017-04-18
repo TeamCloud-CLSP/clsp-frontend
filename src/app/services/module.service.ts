@@ -110,9 +110,9 @@ export class ModuleService {
 
     setPasswordCN(songId: number, mod: Module): Promise<null> {
         const url = `${this.designerUrl}/song/${songId}/module_cn/edit`;
-        let has_password = true;
+        let has_password = 1;
         if (mod.password == '') {
-            has_password = false;
+            has_password = 0;
         }
         return this.http.post(url,
             JSON.stringify({
@@ -239,7 +239,7 @@ enableModule(songId: number, mod: Module): Promise < null > {
     return this.http.post(url,
         JSON.stringify({
             name: mod.name,
-            is_enabled: true,
+            is_enabled: 1,
             password: mod.password,
             has_password: mod.has_password,
             song_enabled: mod.song_enabled
@@ -255,7 +255,7 @@ disableModule(songId: number, mod: Module): Promise < null > {
     return this.http.post(url,
         JSON.stringify({
             name: mod.name,
-            is_enabled: false,
+            is_enabled: 0,
             password: mod.password,
             has_password: mod.has_password,
             song_enabled: mod.song_enabled

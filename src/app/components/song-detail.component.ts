@@ -44,6 +44,10 @@ export class SongDetailComponent implements OnInit {
         const names = {
             'module_cn': 'Cultural Notes',
             'module_dw': 'Discussion and Writing',
+            'module_ge': 'Grammar Exercises',
+            'module_ls': 'Listening Suggestions',
+            'module_lt': 'Listening Tasks',
+            'module_qu': 'Questions for Understanding'
         };
 
         this.route.params
