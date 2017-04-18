@@ -44,7 +44,7 @@ export class StudentSongDetailComponent implements OnInit {
             .subscribe(song => {
 
                 this.song = song;
-                this.song.embed = this.sanitizer.bypassSecurityTrustHtml(song.embed);
+                this.song.embed_display = this.sanitizer.bypassSecurityTrustHtml(song.embed_display);
                 console.log(song);
             });
 

@@ -23,8 +23,8 @@
     </div>
 
     <div *ngIf="song" style="text-align: center;">
-        <div *ngIf="song.embed">
-            <div [innerHTML]="song.embed"></div>
+        <div *ngIf="song.embed_display">
+            <div [innerHTML]="song.embed_display"></div>
         </div>
         <div *ngFor="let item of media">
             <div [ngSwitch]="item.file_type">

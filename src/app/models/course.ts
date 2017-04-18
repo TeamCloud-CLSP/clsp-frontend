@@ -34,6 +34,7 @@ export class Song {
     file_name: string;
     file_type: string;
     embed: string;
+    embed_display: string;
     weight: number;
     constructor() { }
 }
