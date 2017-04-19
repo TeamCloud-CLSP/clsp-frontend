@@ -99,7 +99,7 @@
             <p *ngIf="choice.choice != question.mcAnswer">
               <b>{{convertAscii(i)}}:</b> {{choice.choice}}
             </p>
-            <p *ngIf="choice.choice == question.mcAnswer" style="font-weight:900">
+            <p *ngIf="choice.choice == question.mcAnswer" style="font-weight:900; color:blue;">
               <b>{{convertAscii(i)}}: {{choice.choice}}</b>
             </p>
           </div>
@@ -107,7 +107,7 @@
             <p *ngIf="!isMsAnswer(question, choice.choice)">
               <b>{{convertAscii(i)}}:</b> {{choice.choice}}
             </p>
-            <p *ngIf="isMsAnswer(question, choice.choice)" style="font-weight:900">
+            <p *ngIf="isMsAnswer(question, choice.choice)" style="font-weight:900; color:blue;">
               <b>{{convertAscii(i)}}: {{choice.choice}}</b>
             </p>
           </div>
