@@ -5,10 +5,11 @@ import { CLSPClass, SingleClass, CreateClass } from '../models/clsp-class';
 import { ProfInfo } from '../models/professor-info';
 import { StudentRegistration, Student } from '../models/studentregistration';
 import { AuthenticationService } from './authentication.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ProfessorService {
-    private baseUrl = 'app.php/api/professor';
+    private baseUrl = environment.apiBase + 'api/professor';
 
     constructor(private http: Http,
                 private authService: AuthenticationService) {

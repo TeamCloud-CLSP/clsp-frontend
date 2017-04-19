@@ -7,10 +7,11 @@ import 'rxjs/add/observable/throw';
 import { UserToken } from '../models/user-token';
 import { User } from '../models/user';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthenticationService {
-    private tokenUrl = 'app.php/api/security/loginToken';
+    private tokenUrl = environment.apiBase + 'api/security/loginToken';
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private options = new RequestOptions({ headers: this.headers });
     redirectUrl: string;

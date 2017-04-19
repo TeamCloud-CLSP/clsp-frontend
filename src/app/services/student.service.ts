@@ -6,10 +6,11 @@ import { Unit, Song, Module, Media } from '../models/course';
 import { Header, Question, AnswerCheck } from '../models/modules/header';
 import { CulturalNote } from '../models/modules/CulturalNote';
 import { AuthenticationService } from './authentication.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class StudentService {
-    private baseUrl = 'app.php/api/student';
+    private baseUrl = environment.apiBase + 'api/student';
 
     constructor(private http: Http, private authService: AuthenticationService) {
 

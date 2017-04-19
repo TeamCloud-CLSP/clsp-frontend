@@ -4,10 +4,11 @@ import 'rxjs/add/operator/toPromise';
 import {Module} from '../models/course';
 import {Header, Question} from '../models/modules/header';
 import {AuthenticationService} from './authentication.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ModuleService {
-    private designerUrl = 'app.php/api/designer';
+    private designerUrl = environment.apiBase + 'api/designer';
 
     constructor(private http: Http,
                 private authService: AuthenticationService) {

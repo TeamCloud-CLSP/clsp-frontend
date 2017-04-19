@@ -3,12 +3,13 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Media, MediaLink } from '../models/course';
 import { AuthenticationService } from './authentication.service';
+import { environment } from '../../environments/environment';
 
 
 @Injectable()
 export class MediaService {
 
-    private designerUrl = 'app.php/api/designer';
+    private designerUrl = environment.apiBase + 'api/designer';
 
     constructor(private http: Http,
                 private authService: AuthenticationService) {

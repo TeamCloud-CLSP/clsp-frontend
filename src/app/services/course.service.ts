@@ -5,10 +5,11 @@ import { Course, Language, Unit, Song, Module } from '../models/course';
 import { ProfRegistration } from '../models/profregistration';
 import { CulturalNote } from '../models/modules/CulturalNote';
 import { AuthenticationService } from './authentication.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class CourseService {
-    private designerUrl = 'app.php/api/designer';
+    private designerUrl = environment.apiBase + 'api/designer';
 
     constructor(private http: Http,
                 private authService: AuthenticationService) {
