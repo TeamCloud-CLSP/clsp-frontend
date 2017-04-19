@@ -20,6 +20,7 @@ import {StudentHeaderDetailComponent} from './components/student/student-header-
 import {MediaLinkComponent} from './components/media-link.component';
 import {LoginComponent} from './components/login.component';
 import {AuthGuard} from './auth.guard';
+import {RegisterComponent} from './components/register/register.component';
 
 const routes: Routes = [
     {
@@ -115,6 +116,10 @@ const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'register',
+        component: RegisterComponent
     }
 ];
 

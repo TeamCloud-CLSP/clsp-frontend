@@ -49,7 +49,9 @@ import {PopoverModule} from 'ng2-bootstrap';
 
 import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import {MediaLinkComponent} from './components/media-link.component';
-import {AuthGuard} from "./auth.guard";
+import {AuthGuard} from './auth.guard';
+import { RegisterComponent } from './components/register/register.component';
+import {CustomFormsModule} from 'ng2-validation';
 
 
 
@@ -61,7 +63,8 @@ import {AuthGuard} from "./auth.guard";
         HttpModule,
         InMemoryWebApiModule.forRoot(InMemoryDataService, { passThruUnknownUrl: true }),
         PopoverModule.forRoot(),
-        CKEditorModule
+        CKEditorModule,
+        CustomFormsModule
     ],
     declarations: [
         AppComponent,
@@ -91,7 +94,8 @@ import {AuthGuard} from "./auth.guard";
         GetChoicesPipe,
         StudentCulturalNotesComponent,
         MediaLinkComponent,
-        LoginComponent
+        LoginComponent,
+        RegisterComponent
     ],
     entryComponents: [
         AnnotationComponent
