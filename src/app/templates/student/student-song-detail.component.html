@@ -10,6 +10,9 @@
     video::-webkit-media-controls-panel {
         width: calc(100% + 30px); /* Adjust as needed */
     }
+    .tab-item-clsp:hover {
+        cursor: pointer;
+    }
 </style>
 
 <div *ngIf="courseName">
@@ -23,7 +26,7 @@
     </div>
 
     <div *ngIf="song" style="text-align: center;">
-        <div *ngIf="song.embed_display">
+        <div *ngIf="song.embed_display && song.embed_display != 'undefined'">
             <div [innerHTML]="song.embed_display"></div>
         </div>
         <div *ngFor="let item of media">
@@ -69,12 +72,12 @@
     <div class="row" *ngIf="courseName">
         <ul class="nav nav-tabs">
             <!-- <li class="active"><a data-toggle="tab" href="/#home">Home</a></li> -->
-            <li *ngFor="let module of modules" [ngClass]="{'active': module.module_type == currentModule}">
-                <a data-toggle="tab" (click)="setCurrModule(module.module_type)">{{module.name}}</a>
+            <li class="tab-item-clsp" *ngFor="let module of modules" [ngClass]="{'active': module.module_type == currentModule}">
+                <a style="box-shadow: 0 1px 0 #fff;" data-toggle="tab" (click)="setCurrModule(module.module_type)">{{module.name}}</a>
             </li>
         </ul>
-        <div class="tab-content" *ngFor="let module of modules">
-            <div *ngIf="courseName && module.module_type == currentModule">
+        <div class="tab-content"  *ngFor="let module of modules">
+            <div style="background-color: white; border: 1px solid #ddd; padding: 15px; padding-top: 0;" *ngIf="courseName && module.module_type == currentModule">
                 <div [ngSwitch]="module.module_type">
                     <div *ngSwitchCase="'module_cn'">
                         <div *ngIf="(!passwordValidated) && (module.has_password != 0)" >
