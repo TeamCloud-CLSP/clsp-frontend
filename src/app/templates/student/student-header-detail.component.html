@@ -1,4 +1,4 @@
-<div *ngIf="header">
+<div *ngIf="header && courseName">
   <div class="row" *ngIf="courseName">
     <p>
       <a href="student">{{courseName}}</a> >> <a href="student/unit/{{unit.id}}">{{unit.name}}</a> >>
