@@ -16,7 +16,7 @@
 <div *ngIf="isDesigner" style="display: inline-block">
     <span (click)="onClickAnnotation($event.target, $event)" class="highlight" placement="{{this.placement}}"
           [popover]="popTemplate"> {{note.phrase}}</span>
-    <template #popTemplate style="min-width:350px">
+    <template #popTemplate>
         <div>
             <ckeditor
                     [(ngModel)]="note.description"
@@ -39,7 +39,7 @@
 <div *ngIf="!isDesigner" style="display: inline-block">
     <span (click)="onClickAnnotation($event.target, $event)" class="highlight" placement="{{this.placement}}"
           [popover]="popTemplate"> {{note.phrase}}</span>
-    <template #popTemplate >
+    <template #popTemplate>
         <div [innerHTML]="safeDesc"></div>
     </template>
 </div>
