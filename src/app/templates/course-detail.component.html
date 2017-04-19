@@ -26,7 +26,7 @@
         <h2>Units</h2>
         <table class="table table-hover">
             <tr>
-                <th>
+                <th class="col-md-2">
                     Name
                 </th>
                 <th>
@@ -44,7 +44,7 @@
                     {{unit.name}}
                 </td>
                 <td (click)="toUnit(unit)">
-                    {{unit.description}}
+                    <p style="white-space:pre-wrap;">{{getShortenedDescription(unit)}}</p>
                 </td>
                 <td (click)="toUnit(unit)">
                     {{unit.weight}}

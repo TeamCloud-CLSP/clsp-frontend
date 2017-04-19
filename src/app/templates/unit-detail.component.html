@@ -8,9 +8,7 @@
         <h2>{{unit.name}} Details</h2>
     </div>
     <div *ngIf="!edited" class="row">
-        <p>
-            {{unit.description}}
-        </p>
+        <p style="white-space:pre-wrap;">{{unit.description}}</p>
         <button (click)="editUnit()" class="btn btn-default">Edit</button>
     </div>
     <div *ngIf="edited" class="row">
@@ -72,9 +70,7 @@
                         <b>Song Intro</b>
                     </div>
                     <div class="col-md-6 col-sm-6">
-                        <p>
-                            {{song.description}}
-                        </p>
+                        <p style="white-space:pre-wrap">{{getShortenedDescription(song)}}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -86,8 +82,6 @@
         </div>
     </div>
     <div class="row">
-
-        <br />
         <br />
         <div *ngIf="newSong" class="panel panel-default">
             <div class="panel-heading">
@@ -130,4 +124,5 @@
             <button *ngIf="!newSong" (click)="createSong()" class="btn btn-default">Add Song</button>
         </div>
     </div>
+    <br>
 </div>

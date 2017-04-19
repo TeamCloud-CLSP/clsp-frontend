@@ -91,4 +91,11 @@ export class CourseDetailComponent implements OnInit {
     editCourse(): void {
         this.edited = true;
     }
+
+    getShortenedDescription(unit: Unit): string {
+        if (unit.description.length > 305) {
+            return unit.description.substr(0, 300) + "...";
+        }
+        return unit.description;
+    }
 }

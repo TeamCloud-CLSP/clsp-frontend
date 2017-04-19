@@ -32,6 +32,15 @@
     </div>
     <div class="row" *ngIf="courseName">
         <h1 *ngIf="song">Modules for {{song.title}}</h1>
+        <div style="text-align: left;">
+            <br>
+            <p><b>Title: </b>{{song.title}}</p>
+            <p><b>Artist: </b>{{song.artist}}</p>
+            <p><b>Album: </b>{{song.album}}</p>
+            <p style="white-space:pre-wrap;"><b>Description: </b>{{song.description}}</p>
+            <p *ngIf="song.embed"><b>Embed Link: </b>{{song.embed}}</p>
+            <br>
+        </div>
     </div>
     <div class="row" *ngIf="courseName">
         <ul class="nav nav-tabs">

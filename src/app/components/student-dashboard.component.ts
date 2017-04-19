@@ -46,4 +46,11 @@ export class StudentDashboardComponent implements OnInit {
     hasSongs(unit_id: number) {
         return this.songs[unit_id].length > 0;
     }
+
+    getShortenedDescription(unit: Unit): string {
+        if (unit.description.length > 305) {
+            return unit.description.substr(0, 300) + "...";
+        }
+        return unit.description;
+    }
 }

@@ -9,9 +9,7 @@
     <div *ngIf="!editing" (mouseup)="startAnnotate()">
         <p *ngIf="showLyrics == true && notes">
             <span *ngFor="let piece of lyricPieces">
-                <span *ngIf="checkPiece(piece)">
-                    {{piece}}
-                </span>
+                <span *ngIf="checkPiece(piece)" style="white-space:pre-wrap;">{{piece}}</span>
                 <span *ngIf="!checkPiece(piece)">
                     <app-annotation [note]="notes[+piece]" [isDesigner]="true"></app-annotation>
                 </span>

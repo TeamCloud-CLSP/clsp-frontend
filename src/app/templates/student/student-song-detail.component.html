@@ -12,7 +12,7 @@
     }
 </style>
 
-<div>
+<div *ngIf="courseName">
     <div class="row" *ngIf="courseName">
         <p>
             <a href="student/">{{courseName}}</a> >> <a href="student/unit/{{unit.id}}">{{unit.name}}</a> >> <b *ngIf="song">{{song.title}}</b>
@@ -56,9 +56,14 @@
                 </div>
             </div>
         </div>
-        <p><b>Title: </b>{{song.title}}</p>
-        <p><b>Artist: </b>{{song.artist}}</p>
-        <p><b>Album: </b>{{song.album}}</p>
+        <div style="text-align: left;">
+            <br>
+            <p><b>Title: </b>{{song.title}}</p>
+            <p><b>Artist: </b>{{song.artist}}</p>
+            <p><b>Album: </b>{{song.album}}</p>
+            <p style="white-space:pre-wrap;"><b>Description: </b>{{song.description}}</p>
+            <br>
+        </div>
     </div>
 
     <div class="row" *ngIf="courseName">

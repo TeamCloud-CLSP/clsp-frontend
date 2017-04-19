@@ -89,4 +89,11 @@ export class UnitDetailComponent implements OnInit {
         this.edited = true;
     }
 
+    getShortenedDescription(song: Song): string {
+        if (song.description.length > 305) {
+            return song.description.substr(0, 300) + "...";
+        }
+        return song.description;
+    }
+
 }
