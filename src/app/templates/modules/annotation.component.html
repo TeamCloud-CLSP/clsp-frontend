@@ -16,23 +16,20 @@
 <div *ngIf="isDesigner" style="display: inline-block">
     <span (click)="onClickAnnotation($event.target, $event)" class="highlight" placement="{{this.placement}}"
           [popover]="popTemplate"> {{note.phrase}}</span>
-    <template #popTemplate>
+    <template #popTemplate style="min-width:350px">
         <div>
             <ckeditor
                     [(ngModel)]="note.description"
-                    [config]="{toolbar : [
-                        { name: 'document', items: [ 'Source','PasteFromWord',  '-','Preview', 'Maximize' ] },
-                        { name: 'clipboard', items: [  'Undo', 'Redo' ] },
-                        { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline' ] },
-                        { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },
-                        { name: 'insert' },
-    '/',
-    { name: 'styles' },
-    { name: 'colors' },
-    { name: 'tools' },
-    { name: 'others' },
-    { name: 'about' }
-                    ]}"
+                    [config]="{toolbarGroups: [
+						{'name':'basicstyles','groups':['basicstyles']},
+						{'name':'links','groups':['links']},
+						{'name':'paragraph','groups':['list','blocks']},
+						{'name':'document','groups':['mode']},
+						{'name':'insert','groups':['insert']}
+					],
+                    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
+
+}"
                     debounce="500">
             </ckeditor>
         </div>
@@ -42,8 +39,7 @@
 <div *ngIf="!isDesigner" style="display: inline-block">
     <span (click)="onClickAnnotation($event.target, $event)" class="highlight" placement="{{this.placement}}"
           [popover]="popTemplate"> {{note.phrase}}</span>
-    <template #popTemplate>
+    <template #popTemplate >
         <div [innerHTML]="safeDesc"></div>
     </template>
 </div>
-
