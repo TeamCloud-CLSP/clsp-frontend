@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthenticationService {
-    private tokenUrl = '/api/security/loginToken';
+    private tokenUrl = 'app.php/api/security/loginToken';
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private options = new RequestOptions({ headers: this.headers });
     redirectUrl: string;

@@ -9,7 +9,7 @@ import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class StudentService {
-    private baseUrl = '/api/student';
+    private baseUrl = 'app.php/api/student';
 
     constructor(private http: Http, private authService: AuthenticationService) {
 

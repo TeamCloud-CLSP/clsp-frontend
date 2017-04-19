@@ -7,7 +7,7 @@ import {AuthenticationService} from './authentication.service';
 
 @Injectable()
 export class ModuleService {
-    private designerUrl = '/api/designer';
+    private designerUrl = 'app.php/api/designer';
 
     constructor(private http: Http,
                 private authService: AuthenticationService) {

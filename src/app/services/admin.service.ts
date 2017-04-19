@@ -6,7 +6,7 @@ import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class AdminService {
-    private adminUrl = '/api/admin';
+    private adminUrl = 'app.php/api/admin';
     constructor(private http: Http, private authService: AuthenticationService) { }
 
     private handleError(error: any): Promise<any> {
