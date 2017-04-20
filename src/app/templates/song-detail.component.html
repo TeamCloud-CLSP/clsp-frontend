@@ -1,97 +1,139 @@
 <style>
-    .clsp-disabled-cover {
-        position: relative;
-        float: left;
-        cursor: pointer;
-    }
+	.clsp-disabled-cover {
+		position: relative;
+		float: left;
+		cursor: pointer;
+	}
 
-    .clsp-disabled-cover:before {
-        content: "";
-        display: block;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.5);
-        -moz-transition: background .1s linear;
-        -webkit-transition: background .1s linear;
-        -o-transition: background .1s linear;
-        transition: background .1s linear;
-    }
-    /*.clsp-disabled-cover:hover:before {*/
-    /*background: none;*/
-    /*}*/
+	.clsp-disabled-cover:before {
+		content: "";
+		display: block;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: rgba(0, 0, 0, 0.5);
+		-moz-transition: background .1s linear;
+		-webkit-transition: background .1s linear;
+		-o-transition: background .1s linear;
+		transition: background .1s linear;
+	}
+	/*.clsp-disabled-cover:hover:before {*/
+	/*background: none;*/
+	/*}*/
 </style>
 
 <div>
-    <div class="row" *ngIf="courseName">
-        <p>
-            <a href="course/{{unit.course_id}}">{{courseName}}</a> >> <a href="unit/{{unit.id}}">{{unit.name}}</a> >> <b *ngIf="song">{{song.title}}</b>
-        </p>
-    </div>
-    <div class="row" *ngIf="courseName">
-        <h1 *ngIf="song">Modules for {{song.title}}</h1>
-        <div style="text-align: left;">
-            <br>
-            <p><b>Title: </b>{{song.title}}</p>
-            <p><b>Artist: </b>{{song.artist}}</p>
-            <p><b>Album: </b>{{song.album}}</p>
-            <p style="white-space:pre-wrap;"><b>Description: </b>{{song.description}}</p>
-            <p *ngIf="song.embed"><b>Embed Link: </b>{{song.embed}}</p>
-            <br>
-        </div>
-    </div>
-    <div class="row" *ngIf="courseName">
-        <ul class="nav nav-tabs">
-            <!-- <li class="active"><a data-toggle="tab" href="/#home">Home</a></li> -->
-            <li *ngFor="let module of modules" [ngClass]="{'active': module.module_type == currentModule}">
-                <a data-toggle="tab" (click)="setCurrModule(module.module_type)">{{module.name}}</a>
-            </li>
-        </ul>
-        <!-- <br /> -->
-        <div class="tab-content"  *ngFor="let module of modules; let i = index">
-            <div class="panel panel-default" *ngIf="courseName && module.module_type == currentModule">
-                <div class="panel-heading" style="display: none;">
-                    <h3 class="panel-title">{{module.name}}
+	<div class="row" *ngIf="courseName">
+		<p>
+			<a href="course/{{unit.course_id}}">{{courseName}}</a> >> <a href="unit/{{unit.id}}">{{unit.name}}</a> >> <b *ngIf="song">{{song.title}}</b>
+		</p>
+	</div>
+	<div class="row" *ngIf="courseName">
+		<h1 *ngIf="song">Modules for {{song.title}}</h1>
+		<div style="text-align: left;background:white;border-width:thin;border-style:solid;border-color:#c3c3c3;padding:15px">
+			<div *ngIf="!songEdit">
+				<br>
+				<p><b>Title: </b>{{song.title}}</p>
+				<p><b>Artist: </b>{{song.artist}}</p>
+				<p><b>Album: </b>{{song.album}}</p>
+				<p style="white-space:pre-wrap;"><b>Description: </b>{{song.description}}</p>
+				<p *ngIf="song.embed"><b>Embed Link: </b>{{song.embed}}</p>
+				<br>
+				<button class="btn btn-default" (click)="editSong()">Edit</button>
+			</div>
+			<div *ngIf="songEdit">
+				<form (ngSubmit)="onSubmitEditSong()" #songForm="ngForm">
+					<div class="form-group">
+						<label for="name">Weight</label>
+						<input type="number" class="form-control description-text" id="weight" [(ngModel)]="song.weight" name="weight">
+					</div>
+					<div class="form-group">
+						<label for="name">Song Title</label>
+						<input type="text" class="form-control" id="title" required [(ngModel)]="song.title" name="title">
+					</div>
+					<div class="form-group">
+						<label for="name">Album</label>
+						<input type="text" class="form-control" id="album" required [(ngModel)]="song.album" name="album">
+					</div>
+					<div class="form-group">
+						<label for="name">Artist</label>
+						<input type="text" class="form-control" id="artist" required [(ngModel)]="song.artist" name="artist">
+					</div>
+					<div class="form-group">
+						<label for="name">Song Intro</label>
+						<textarea type="text" class="form-control description-text" id="description" [(ngModel)]="song.description" name="description" rows="10" cols="12"></textarea>
+					</div>
+					<div class="form-group">
+						<label for="name">Embed Link</label>
+						<input type="text" class="form-control" id="album" required [(ngModel)]="song.embed" name="album">
+					</div>
+
+
+					<div class="btn-group" role="group">
+						<button type="button" class="btn btn-default" (click)="cancelEdit()">Cancel</button>
+						<button type="submit" class="btn btn-success" [disabled]="!songForm.form.valid">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<br />
+	<br />
+	<div class="row" *ngIf="courseName">
+		<ul class="nav nav-tabs">
+			<!-- <li class="active"><a data-toggle="tab" href="/#home">Home</a></li> -->
+			<li *ngFor="let module of modules" [ngClass]="{'active': module.module_type == currentModule}">
+				<a data-toggle="tab" (click)="setCurrModule(module.module_type)">{{module.name}}</a>
+			</li>
+		</ul>
+		<!-- <br /> -->
+		<div class="tab-content" *ngFor="let module of modules; let i = index">
+			<div class="panel panel-default" *ngIf="courseName && module.module_type == currentModule">
+				<div class="panel-heading" style="display: none;">
+					<h3 class="panel-title">{{module.name}}
                         <button *ngIf="module.is_enabled == 1" class="btn btn-default" (click) = "disableModule(module, i)">Disable</button>
                         <button *ngIf="module.is_enabled == 0" class="btn btn-default" (click) = "enableModule(module, i)">Enable</button>
                         <span class="pull-right clickable glyphicon glyphicon-remove" data-effect="fadeOut"></span>
                     </h3>
-                </div>
-                <div *ngIf="song">
-                    <div class="panel-body container" [ngSwitch]="module.module_type">
-                        <div>
-                            <h2>Edit Module Name</h2>
-                            <input [(ngModel)]="module.name" class="form-control" name="module_name" id="module_name" />
-                            <br />
-                            <button class="btn btn-success" (click)="setModuleName(module)">Save</button>
-                        </div>
-                        <br />
-                        <div *ngIf="module.module_type == 'module_cn'">
-                            <div *ngIf="!passwordEdit">
-                                <label for="password">Password</label>
-                                <p>{{module.password}}</p>
-                                <button (click)="changePassword(module.module_type)" class="btn btn-default">Change Password</button>
-                            </div>
-                            <div *ngIf="passwordEdit" >
-                                <label for="password">Password</label>
-                                <input [(ngModel)]="module.password" class="form-control " name="password" id="password" />
-                                <button class="btn btn-default" (click)="setPassword()">Set Password</button><button class="btn btn-default" (click)="cancelPassEdit()">Cancel</button>
-                            </div>
-                        </div>
-                        <div *ngSwitchCase="'module_cn'">
-                            <app-cultural-notes [song]="song"></app-cultural-notes>
-                        </div>
-                        <div *ngSwitchCase="'module_dw'">
-                            <app-discussion-and-writing [songId]="song.id" [unitId]="unit.id" [moduleType]="module.module_type"></app-discussion-and-writing>
-                        </div>
-                        <div *ngSwitchDefault>
-                            <app-discussion-and-writing [songId]="song.id" [unitId]="unit.id" [moduleType]="module.module_type"></app-discussion-and-writing>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+				</div>
+				<div *ngIf="song">
+					<div class="panel-body container" [ngSwitch]="module.module_type">
+						<button *ngIf="module.is_enabled == 1" class="btn btn-default" (click)="disableModule(module, i)">Disable Module</button>
+						<button *ngIf="module.is_enabled == 0" class="btn btn-default" (click)="enableModule(module, i)">Enable Module</button>
+						<div>
+							<h2>Edit Module Name</h2>
+							<input [(ngModel)]="module.name" class="form-control" name="module_name" id="module_name" />
+							<br />
+							<button class="btn btn-success" (click)="setModuleName(module)">Save</button>
+						</div>
+						<br />
+
+						<div *ngIf="module.module_type == 'module_cn'">
+							<div *ngIf="!passwordEdit">
+								<label for="password">Password</label>
+								<p>{{module.password}}</p>
+								<button (click)="changePassword(module.module_type)" class="btn btn-default">Change Password</button>
+							</div>
+							<div *ngIf="passwordEdit">
+								<label for="password">Password</label>
+								<input [(ngModel)]="module.password" class="form-control " name="password" id="password" />
+								<button class="btn btn-default" (click)="setPassword()">Set Password</button><button class="btn btn-default" (click)="cancelPassEdit()">Cancel</button>
+							</div>
+						</div>
+						<div *ngSwitchCase="'module_cn'">
+							<app-cultural-notes [song]="song"></app-cultural-notes>
+						</div>
+						<div *ngSwitchCase="'module_dw'">
+							<app-discussion-and-writing [songId]="song.id" [unitId]="unit.id" [moduleType]="module.module_type"></app-discussion-and-writing>
+						</div>
+						<div *ngSwitchDefault>
+							<app-discussion-and-writing [songId]="song.id" [unitId]="unit.id" [moduleType]="module.module_type"></app-discussion-and-writing>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

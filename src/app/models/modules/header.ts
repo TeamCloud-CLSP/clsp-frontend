@@ -1,7 +1,8 @@
 export class Header {
   id: number;
-  song_id: number;
   name: string;
+  weight: number;
+  song_id: number;
   constructor() { }
 }
 
