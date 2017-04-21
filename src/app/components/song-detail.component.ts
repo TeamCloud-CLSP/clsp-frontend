@@ -143,6 +143,18 @@ export class SongDetailComponent implements OnInit {
       .catch(() => console.log('Error in disabling module'));
   }
 
+  enableSongModule(mod: Module, index: number) {
+    this.moduleService.enableSongModule(this.song.id, mod)
+      .then(() => this.modules[index].song_enabled = 1)
+      .catch(() => console.log('Error in enabling module'));
+  }
+
+  disableSongModule(mod: Module, index: number) {
+    this.moduleService.disableSongModule(this.song.id, mod)
+      .then(() => this.modules[index].song_enabled = 0)
+      .catch(() => console.log('Error in disabling module'));
+  }
+
   editSong(): void {
     this.songEdit = true;
   }

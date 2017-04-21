@@ -2,7 +2,7 @@ import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Unit, Song } from '../../models/course';
+import { Unit, Song, Media } from '../../models/course';
 import { Router } from '@angular/router';
 import { Header, Question, Choice, AnswerCheck } from '../../models/modules/header';
 import { StudentService } from '../../services/student.service';
@@ -25,7 +25,7 @@ export class GetChoicesPipe implements PipeTransform {
 export class StudentHeaderDetailComponent implements OnInit {
   unit: Unit;
   courseName: string;
-  song: Song;
+  song: any;
   header: Header;
   questions: Question[];
   newQuestion: Question;
@@ -38,6 +38,9 @@ export class StudentHeaderDetailComponent implements OnInit {
   answerChecks: AnswerCheck[];
   prevId: number;
   nextId: number;
+  media: Media[];
+  publicBaseUrl: string;
+  songEnable: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,6 +51,7 @@ export class StudentHeaderDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.publicBaseUrl = '/files/';
     this.route.params
       .switchMap((params: Params) => this.studentService.getUnit(+params['unit_id']))
       .subscribe(unit => {
@@ -57,11 +61,7 @@ export class StudentHeaderDetailComponent implements OnInit {
           this.courseName = course;
         });
       });
-    this.route.params
-      .switchMap((params: Params) => this.studentService.getSong(+params['song_id']))
-      .subscribe(song => {
-        this.song = song;
-      });
+
 
     this.route.params
       .switchMap((params: Params) => this.studentService.getHeader(+params['header_id']))
@@ -72,15 +72,16 @@ export class StudentHeaderDetailComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) => this.studentService.getQuestions(+params['header_id']))
       .subscribe(questions => {
+        this.songEnable = questions.songEnable;
         this.questions = questions.questions;
         this.prevId = questions.prev;
         this.nextId = questions.next;
         this.questions = this.questions.sort((x, y) => x.weight - y.weight);
-        console.log(questions);
+        //console.log(questions);
         for (let question of this.questions) {
-          console.log(question.choices);
+          //console.log(question.choices);
           if (question.choices) question.displayChoices = JSON.parse(question.choices) as Choice[];
-          console.log(question.displayChoices);
+          //console.log(question.displayChoices);
           if (question.type == "fill-blank") {
             var blankNumber = (question.content.split("_").length - 1)
             question.fbPieces = this.splitBlanks(question.content, blankNumber);
@@ -92,6 +93,22 @@ export class StudentHeaderDetailComponent implements OnInit {
             }
           }
         }
+        console.log(this.songEnable);
+        this.route.params
+          .switchMap((params: Params) => this.studentService.getSong(+params['song_id']))
+          .subscribe(song => {
+            this.song = song;
+            if (this.song.embed) {
+              this.song.embed_display = this.sanitizer.bypassSecurityTrustHtml(song.embed_display);
+            }
+            this.route.params
+              .switchMap((params: Params) => this.studentService.getMedia(+params['song_id']))
+              .subscribe(media => {
+                console.log(media);
+
+                this.media = media;
+              });
+          });
       });
   }
 

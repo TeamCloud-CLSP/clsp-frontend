@@ -41,5 +41,6 @@ export class Items {
   questions: Question[];
   next: number;
   prev: number;
+  songEnable: number;
   constructor() { }
 }

@@ -124,6 +124,7 @@ export class StudentService {
         items.questions = response.json().data as Question[];
         items.next = response.json().next_id;
         items.prev = response.json().prev_id;
+		items.songEnable = response.json().song_enabled;
         return items;
       })
       .catch(this.handleError);

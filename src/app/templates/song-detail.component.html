@@ -91,17 +91,21 @@
 		<!-- <br /> -->
 		<div class="tab-content" *ngFor="let module of modules; let i = index">
 			<div class="panel panel-default" *ngIf="courseName && module.module_type == currentModule">
-				<div class="panel-heading" style="display: none;">
+				<!-- <div class="panel-heading" style="display: none;">
 					<h3 class="panel-title">{{module.name}}
                         <button *ngIf="module.is_enabled == 1" class="btn btn-default" (click) = "disableModule(module, i)">Disable</button>
                         <button *ngIf="module.is_enabled == 0" class="btn btn-default" (click) = "enableModule(module, i)">Enable</button>
                         <span class="pull-right clickable glyphicon glyphicon-remove" data-effect="fadeOut"></span>
                     </h3>
-				</div>
+				</div> -->
 				<div *ngIf="song">
 					<div class="panel-body container" [ngSwitch]="module.module_type">
-						<button *ngIf="module.is_enabled == 1" class="btn btn-default" (click)="disableModule(module, i)">Disable Module</button>
-						<button *ngIf="module.is_enabled == 0" class="btn btn-default" (click)="enableModule(module, i)">Enable Module</button>
+						<div class="btn-group" role="group">
+							<button *ngIf="module.is_enabled == 1" class="btn btn-default" (click)="disableModule(module, i)">Disable Module</button>
+							<button *ngIf="module.is_enabled == 0" class="btn btn-default" (click)="enableModule(module, i)">Enable Module</button>
+							<button *ngIf="module.song_enabled == 1" class="btn btn-default" (click)="disableSongModule(module, i)">Hide Song in Module</button>
+							<button *ngIf="module.song_enabled == 0" class="btn btn-default" (click)="enableSongModule(module, i)">Show Song in Module</button>
+						</div>
 						<div>
 							<h2>Edit Module Name</h2>
 							<input [(ngModel)]="module.name" class="form-control" name="module_name" id="module_name" />
