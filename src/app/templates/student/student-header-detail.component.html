@@ -11,7 +11,7 @@
 			<button class="btn btn-default pull-right" (click)="toHeader(nextId)" *ngIf="nextId">Next Topic>></button>
 		</p>
 	</div>
-	<div class="row" *ngIf="songEnable == 1 && song">
+	<div class="row" *ngIf="songEnable == 1 && song" style="text-align: center">
 		<div *ngIf="song.embed_display && song.embed_display != 'undefined'">
 			<div [innerHTML]="song.embed_display" style="margin:0 auto"></div>
 		</div>
