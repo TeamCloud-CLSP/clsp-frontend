@@ -82,6 +82,11 @@
                     <b>Correct:</b> {{question.correct}}
                 </p>
             </form> -->
+			<div *ngIf="question.type == 'short-answer'">
+				<div>
+					<textarea type="text" class="form-control description-text" id="saAnswer" [(ngModel)]="question.saAnswer" name="saAnswer" rows="10" cols="12"></textarea>
+				</div>
+			</div>
 			<div *ngIf="question.type == 'multiple-choice' || question.type =='multiple-select'">
 				<div class="col-md-12" *ngIf="question.type == 'multiple-choice'">
 					<form>
@@ -116,7 +121,10 @@
 				</div>
 			</div>
 			<br />
+			<br />
+
 		</div>
+		<br />
 	</div>
 	<div *ngIf="printVersion">
 		<div class="row" *ngFor="let question of questions">
@@ -134,6 +142,11 @@
 			<h3 *ngIf="question.type != 'fill-blank'">
                 {{question.weight}}. {{question.content}}
             </h3>
+			<div *ngIf="question.type == 'short-answer'">
+				<p>
+					{{question.saAnswer}}
+				</p>
+			</div>
 			<div *ngIf="question.type == 'multiple-choice' || question.type =='multiple-select'">
 				<div *ngFor="let choice of getChoices(question.choices); let i = index;" class="col-md-12">
 					<div *ngIf="question.type == 'multiple-choice'">
