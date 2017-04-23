@@ -104,8 +104,8 @@
 						<div class="btn-group" role="group">
 							<button *ngIf="module.is_enabled == 1" class="btn btn-default" (click)="disableModule(module, i)">Disable Module</button>
 							<button *ngIf="module.is_enabled == 0" class="btn btn-default" (click)="enableModule(module, i)">Enable Module</button>
-							<button *ngIf="module.song_enabled == 1" class="btn btn-default" (click)="disableSongModule(module, i)">Hide Song in Module</button>
-							<button *ngIf="module.song_enabled == 0" class="btn btn-default" (click)="enableSongModule(module, i)">Show Song in Module</button>
+							<button *ngIf="module.module_type != 'module_cn' && module.song_enabled == 1" class="btn btn-default" (click)="disableSongModule(module, i)">Hide Song in Module</button>
+							<button *ngIf="module.module_type != 'module_cn' && module.song_enabled == 0" class="btn btn-default" (click)="enableSongModule(module, i)">Show Song in Module</button>
 						</div>
 						<div>
 							<h2>Edit Module Name</h2>

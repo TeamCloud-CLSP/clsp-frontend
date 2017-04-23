@@ -66,9 +66,7 @@
                     </span>
                 </span>
             </h3>
-			<h3 *ngIf="question.type != 'fill-blank'">
-                {{question.weight}}. {{question.content}}
-                <span *ngIf="question.correct != null">
+			<h3 *ngIf="question.type != 'fill-blank'" style="white-space:pre-wrap">{{question.weight}}. {{question.content}}<span *ngIf="question.correct != null">
                     <span class = "glyphicon glyphicon-remove" style="color:red" *ngIf="question.correct == false"></span>
                     <span class = "glyphicon glyphicon-ok" style="color:green" *ngIf="question.correct == true"></span>
                 </span>
@@ -139,9 +137,7 @@
                     </span>
                 </span>
             </h3>
-			<h3 *ngIf="question.type != 'fill-blank'">
-                {{question.weight}}. {{question.content}}
-            </h3>
+			<h3 *ngIf="question.type != 'fill-blank'" style="white-space:pre-wrap">{{question.weight}}. {{question.content}}</h3>
 			<div *ngIf="question.type == 'short-answer'">
 				<p>
 					{{question.saAnswer}}
