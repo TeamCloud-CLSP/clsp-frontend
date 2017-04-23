@@ -1,94 +1,94 @@
 <div *ngIf="course">
-    <div class="row">
-        <h1>Professor Registrations for {{course.name}}</h1>
-    </div>
-    <div *ngFor="let registration of profRegistrations" class="row">
-        <br />
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Registration for {{registration.professor_username != null ? registration.professor_username : "Unassigned"}}</h3>
-                <span (click)="deleteReg(registration)" class="pull-right clickable glyphicon glyphicon-remove" data-effect="fadeOut"></span>
-            </div>
-            <div class="panel-body container">
-                <div class="row">
-                    <div class="col-md-5 col-sm-6">
-                        <b>Signup Code</b>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <p>
-                            {{registration.signup_code}}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5 col-sm-6">
-                        <b>Date Created</b>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <p>
-                            {{registration.date_created * 1000 | date}}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5 col-sm-6">
-                        <b>Date Deleted</b>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <p>
-                            {{registration.date_deleted != null ? (registration.date_deleted * 1000 | date) : "N/A"}}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5 col-sm-6">
-                        <b>Start Date</b>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <p>
-                            {{registration.date_start * 1000 | date}}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5 col-sm-6">
-                        <b>End Date</b>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <p>
-                            {{registration.date_end * 1000 | date}}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <button *ngIf="!newRegistration" (click)="newCode()" class="btn btn-default">New Registration Code</button>
-        <br />
-        <br />
-        <div *ngIf="newRegistration" class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Create Student Registration</h3>
-            </div>
-            <div class="panel-body container">
-                <form (ngSubmit)="onSubmit()" #registrationForm="ngForm">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" required [(ngModel)]="newRegistration.name" name="date_start">
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Start Date</label>
-                        <input type="date" class="form-control" id="date_start" required [(ngModel)]="newRegistration.date_start" name="date_start">
-                    </div>
-                    <div class="form-group">
-                        <label for="name">End Date</label>
-                        <input type="date" class="form-control" id="date_end" required [(ngModel)]="newRegistration.date_end" name="date_end">
-                    </div>
-                    <button type="submit" class="btn btn-success" [disabled]="!registrationForm.form.valid">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<h1>Professor Registrations for {{course.name}}</h1>
+	</div>
+	<div *ngFor="let registration of profRegistrations" class="row">
+		<br />
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title" style="display:inline">Registration for {{registration.professor_username != null ? registration.professor_username : "Unassigned"}}</h3>
+				<span (click)="deleteReg(registration)" style="display:inline" class="pull-right clickable glyphicon glyphicon-remove" data-effect="fadeOut"></span>
+			</div>
+			<div class="panel-body container">
+				<div class="row">
+					<div class="col-md-5 col-sm-6">
+						<b>Signup Code</b>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<p>
+							{{registration.signup_code}}
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5 col-sm-6">
+						<b>Date Created</b>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<p>
+							{{registration.date_created * 1000 | date}}
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5 col-sm-6">
+						<b>Date Deleted</b>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<p>
+							{{registration.date_deleted != null ? (registration.date_deleted * 1000 | date) : "N/A"}}
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5 col-sm-6">
+						<b>Start Date</b>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<p>
+							{{registration.date_start * 1000 | date}}
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5 col-sm-6">
+						<b>End Date</b>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<p>
+							{{registration.date_end * 1000 | date}}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<button *ngIf="!newRegistration" (click)="newCode()" class="btn btn-default">New Registration Code</button>
+		<br />
+		<br />
+		<div *ngIf="newRegistration" class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Create Professor Registration</h3>
+			</div>
+			<div class="panel-body container">
+				<form (ngSubmit)="onSubmit()" #registrationForm="ngForm">
+					<div class="form-group">
+						<label for="name">Name</label>
+						<input type="text" class="form-control" id="name" required [(ngModel)]="newRegistration.name" name="date_start">
+					</div>
+					<div class="form-group">
+						<label for="name">Start Date</label>
+						<input type="date" class="form-control" id="date_start" required [(ngModel)]="newRegistration.date_start" name="date_start">
+					</div>
+					<div class="form-group">
+						<label for="name">End Date</label>
+						<input type="date" class="form-control" id="date_end" required [(ngModel)]="newRegistration.date_end" name="date_end">
+					</div>
+					<button type="submit" class="btn btn-success" [disabled]="!registrationForm.form.valid">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
 <br />
