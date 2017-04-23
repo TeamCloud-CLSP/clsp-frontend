@@ -14,6 +14,7 @@ export class StudentDashboardComponent implements OnInit {
     private myClass: StudentClass;
     private units: Unit[];
     private songs: Song[][];
+    private loadedSongs: boolean;
 
     constructor(private service: StudentService,
                 private router: Router) {
@@ -21,6 +22,7 @@ export class StudentDashboardComponent implements OnInit {
 
     ngOnInit(): void {
         this.songs = [];
+        this.loadedSongs = false;
         this.service.getClass().then(myClass => {
             this.myClass = myClass;
         }).then(() => {
@@ -29,15 +31,26 @@ export class StudentDashboardComponent implements OnInit {
             }).then(() => {
                 for (let i = 0; i < this.units.length; i++) {
                     this.service.getSongs(this.units[i].id).then(songs => {
-                        this.songs[this.units[i].id] = songs;
-                        console.log(this.songs);
+                        this.units[i].songs = songs;
                     });
                 }
+                this.loadedSongs = true;
             });
         });
     }
 
     goToUnit(unit: Unit) {
         this.router.navigate(['./student/unit', unit.id]);
+    }
+
+    hasSongs(unit_id: number) {
+        return this.songs[unit_id].length > 0;
+    }
+
+    getShortenedDescription(unit: Unit): string {
+        if (unit.description.length > 305) {
+            return unit.description.substr(0, 300) + "...";
+        }
+        return unit.description;
     }
 }

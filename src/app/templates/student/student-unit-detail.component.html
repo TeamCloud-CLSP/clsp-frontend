@@ -1,50 +1,64 @@
 <style>
-    .clsp-table-row:hover {
-        background-color: #e7e7e7;
-        cursor: pointer;
-    }
+	.clsp-table-row:hover {
+		background-color: #e7e7e7;
+		cursor: pointer;
+	}
 
-    .clsp-table-row td {
-        padding: 8px;
-        padding-bottom: 0px;
-    }
+	.clsp-table-row td {
+		padding: 10px;
+		font-size: 1.2em;
+		/*padding-bottom: 0px;*/
+	}
+
+	.clsp-table-container {
+		padding: 10px;
+	}
 </style>
-
-<div *ngIf="unit">
-    <h1>{{unit.name}}</h1>
-    <div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Artist</th>
-                    <th>Album</th>
-                    <!-- <th>Progress</th> -->
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="clickable-item clsp-table-row" *ngFor="let song of songs" (click)="goToSong(song)">
-                    <td>{{song.title}}</td>
-                    <td>{{song.artist}}</td>
-                    <td>{{song.album}}</td>
-                    <!-- <td>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="70"
-                                 aria-valuemin="0" aria-valuemax="100" style="width:50%">
-                                <div *ngIf="getProgress(song).complete > 0">
-                                    {{getProgress(song).complete}} complete
+<div *ngIf="courseName">
+	<div class="row" *ngIf="courseName">
+		<p>
+			<a href="student">{{courseName}}</a> >> <b>{{unit.name}}</b>
+		</p>
+	</div>
+	<div *ngIf="unit">
+		<h1>{{unit.name}}</h1>
+		<!-- <p style="white-space:pre-wrap;">{{unit.description}}<p> -->
+		<div style="white-space:pre-wrap;" [innerHTML]="unit.description"></div>
+		<div class="clsp-table-container">
+			<h3 style="text-align: center;">Songs</h3>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Artist</th>
+						<th>Album</th>
+						<!-- <th>Progress</th> -->
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="clickable-item clsp-table-row" *ngFor="let song of songs" (click)="goToSong(song)">
+						<td>{{song.title}}</td>
+						<td>{{song.artist}}</td>
+						<td>{{song.album}}</td>
+						<!-- <td>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="70"
+                                     aria-valuemin="0" aria-valuemax="100" style="width:50%">
+                                    <div *ngIf="getProgress(song).complete > 0">
+                                        {{getProgress(song).complete}} complete
+                                    </div>
+                                </div>
+                                <div class="progress-bar progress-bar-danger" role="progressbar"
+                                     aria-valuemin="0" aria-valuemax="100" style="width:50%">
+                                    <div *ngIf="getProgress(song).uncomplete > 0">
+                                        {{getProgress(song).uncomplete}} remaining
+                                    </div>
                                 </div>
                             </div>
-                            <div class="progress-bar progress-bar-danger" role="progressbar"
-                                 aria-valuemin="0" aria-valuemax="100" style="width:50%">
-                                <div *ngIf="getProgress(song).uncomplete > 0">
-                                    {{getProgress(song).uncomplete}} remaining
-                                </div>
-                            </div>
-                        </div>
-                    </td> -->
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                        </td> -->
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>

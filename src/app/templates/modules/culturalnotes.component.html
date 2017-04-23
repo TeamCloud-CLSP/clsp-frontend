@@ -1,76 +1,71 @@
 <div id="cultural-notes-module">
-    <!--<textarea [(ngModel)]="currentDescription">-->
-    <!--</textarea>-->
-    <!--<button (click)="addAnnotation()">Annotate</button>-->
-    <!--<p *ngIf="currentPhrase">Annotating: {{currentPhrase}}</p>-->
-    <!--<button class="btn btn-default">Save</button>-->
-    <h2>Lyrics</h2>
-    <!--<div [froalaEditor]>Hello, Froala!</div>-->
-    <div *ngIf="!editing" (mouseup)="startAnnotate()">
-        <p *ngIf="showLyrics == true && notes">
-            <span *ngFor="let piece of lyricPieces">
-                <span *ngIf="checkPiece(piece)">
-                    {{piece}}
-                </span>
-                <span *ngIf="!checkPiece(piece)">
+	<!--<textarea [(ngModel)]="currentDescription">-->
+	<!--</textarea>-->
+	<!--<button (click)="addAnnotation()">Annotate</button>-->
+	<!--<p *ngIf="currentPhrase">Annotating: {{currentPhrase}}</p>-->
+	<!--<button class="btn btn-default">Save</button>-->
+	<h2>Lyrics</h2>
+	<!--<div [froalaEditor]>Hello, Froala!</div>-->
+	<div *ngIf="!editing" (mouseup)="startAnnotate()">
+		<p *ngIf="showLyrics == true && notes">
+			<span *ngFor="let piece of lyricPieces">
+                <span *ngIf="checkPiece(piece)" style="white-space:pre-wrap;">{{piece}}</span>
+			<span *ngIf="!checkPiece(piece)">
                     <app-annotation [note]="notes[+piece]" [isDesigner]="true"></app-annotation>
                 </span>
-            </span>
-        </p>
+			</span>
+		</p>
 
-        <button class="btn btn-default" (click)="startEdit()">Edit</button>
-        <br/>
-        <div *ngIf="annotating">
-            <h2>Add Annotations</h2>
-            <span><b>Current phrase:</b> {{currentPhrase}}</span>
-            <ckeditor
-                    [(ngModel)]="currentDescription"
-                    debounce="500">
-            </ckeditor>
-            <br/>
-            <button (click)="saveAnnotation()" class="btn btn-default">Annotate</button>
-        </div>
-        <br/>
-        <br/>
-        <div *ngIf="false">
-            <h2>Annotations</h2>
-            <table class="table">
-                <tr>
-                    <th>
-                        Phrase
-                    </th>
-                    <th>
-                        Description
-                    </th>
-                    <th>
+		<button class="btn btn-default" (click)="startEdit()">Edit</button>
+		<br/>
+		<div *ngIf="annotating">
+			<h2>Add Annotations</h2>
+			<span><b>Current phrase:</b> {{currentPhrase}}</span>
+			<ckeditor [(ngModel)]="currentDescription" debounce="500">
+			</ckeditor>
+			<br/>
+			<button (click)="saveAnnotation()" class="btn btn-default">Annotate</button>
+		</div>
+		<br/>
+		<br/>
+		<div *ngIf="false">
+			<h2>Annotations</h2>
+			<table class="table">
+				<tr>
+					<th>
+						Phrase
+					</th>
+					<th>
+						Description
+					</th>
+					<th>
 
-                    </th>
-                </tr>
-                <tr *ngFor="let annotation of notes;let i = index">
-                    <td>
-                        {{annotation.phrase}}
-                    </td>
-                    <td>
-                        <ckeditor
-                                [(ngModel)]="notes[i].description"
-                                debounce="500">
-                        </ckeditor>
-                    </td>
-                    <td>
-                        <button (click)="updateAnnotation(i)" class="btn btn-default"><span
+					</th>
+				</tr>
+				<tr *ngFor="let annotation of notes;let i = index">
+					<td>
+						{{annotation.phrase}}
+					</td>
+					<td>
+						<ckeditor [(ngModel)]="notes[i].description" debounce="500">
+						</ckeditor>
+					</td>
+					<td>
+						<button (click)="updateAnnotation(i)" class="btn btn-default"><span
                                 class="glyphicon glyphicon-pencil"></span></button>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <div *ngIf="editing ">
-        <textarea class="form-control" [value]="this.song.lyrics" style="resize:none;" rows="10" cols="40"></textarea>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div *ngIf="editing ">
+		<textarea class="form-control" [(ngModel)]="song.lyrics" style="resize:none;" rows="10" cols="40"></textarea>
 
-        <br/>
-        <div class="btn-group" role="group">
-            <button class="btn btn-default" (click)="cancelEdit()">Cancel</button>
-            <button (click)="updateLyrics()" class="btn btn-default">Save</button>
-        </div>
-    </div>
+		<br/>
+		<div class="btn-group" role="group">
+			<button class="btn btn-default" (click)="cancelEdit()">Cancel</button>
+			<button (click)="updateLyrics()" class="btn btn-default">Save</button>
+		</div>
+	</div>
+	<p *ngIf="lyricPieces"><i class="fa fa-lightbulb-o" aria-hidden="true" style="font-size:larger;"></i> To create an annotation, highlight the relevant section in the lyrics.</p>
 </div>

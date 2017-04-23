@@ -1,132 +1,137 @@
 <div *ngIf="courseName">
-    <div class="row">
-        <p>
-            <a href="course/{{unit.course_id}}">{{courseName}}</a> >> <b>{{unit.name}}</b>
-        </p>
-    </div>
-    <div class="row">
-        <h2>{{unit.name}} Details</h2>
-    </div>
-    <div *ngIf="!edited" class="row">
-        <p>
-            {{unit.description}}
-        </p>
-        <button (click)="editUnit()" class="btn btn-default">Edit</button>
-    </div>
-    <div *ngIf="edited" class="row">
-        <div class="form-group">
-            <label for="name"> Name: </label>
-            <input class="form-control" [(ngModel)]="unit.name" placeholder="name" />
-        </div>
-        <div class="form-group">
-            <label for="description"> Unit Intro: </label>
-            <textarea class="form-control" [(ngModel)]="unit.description" placeholder="description"></textarea>
-        </div>
-        <button class="btn btn-default" (click)="updateUnit()">Save</button>
-        <!-- <prof-registrations [courseId]="course.id"></prof-registrations> -->
-    </div>
-    <div class="row">
-        <h2>Songs in {{unit.name}}</h2>
-    </div>
-    <div *ngFor="let song of songs" class="row">
-        <br />
-        <div class="panel panel-default">
-            <div class="panel-heading song-title" (click)="toSong(song)">
-                <h3 class="panel-title">{{song.title}}</h3>
-                <span (click)="deleteSong(song, $event)" class="pull-right clickable glyphicon glyphicon-remove" data-effect="fadeOut"></span>
-            </div>
-            <div class="panel-body container">
-                <div class="row">
-                    <div class="col-md-5 col-sm-6">
-                        <b>Weight</b>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <p>
-                            {{song.weight}}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5 col-sm-6">
-                        <b>Album</b>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <p>
-                            {{song.album}}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5 col-sm-6">
-                        <b>Artist</b>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <p>
-                            {{song.artist}}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5 col-sm-6">
-                        <b>Song Intro</b>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <p>
-                            {{song.description}}
-                        </p>
-                    </div>
-                </div>
-                <div>
-                    <div class="col-md-5 col-sm-6">
-                        <button class="btn btn-default" (click)="toMediaLink(song)">Link Media</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
+	<div class="row">
+		<p>
+			<a href="course/{{unit.course_id}}">{{courseName}}</a> >> <b>{{unit.name}}</b>
+		</p>
+	</div>
+	<div class="row">
+		<h2>{{unit.weight}}. {{unit.name}}</h2>
+	</div>
+	<div class="row" style="background:white;border-width:thin;border-style:solid;border-color:#c3c3c3;padding:15px">
+		<div *ngIf="!edited" class="row" style="padding:15px">
+			<div style="white-space:pre-wrap;" [innerHTML]="unit.description"></div>
+			<br />
+			<button (click)="editUnit()" class="btn btn-default">Edit</button>
+		</div>
+		<div *ngIf="edited" class="row" style="padding:15px">
+			<div class="form-group">
+				<label for="name"> Name: </label>
+				<input class="form-control" [(ngModel)]="unit.name" placeholder="name" />
+			</div>
+			<div class="form-group">
+				<label for="description"> Unit Intro: </label>
+				<textarea class="form-control" [(ngModel)]="unit.description" placeholder="description" rows="10" cols="12"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="weight"> Unit Weight: </label>
+				<input class="form-control" [(ngModel)]="unit.weight" type="number" />
+			</div>
+			<button class="btn btn-success" (click)="updateUnit()">Save</button>
+			<!-- <prof-registrations [courseId]="course.id"></prof-registrations> -->
+		</div>
+	</div>
 
-        <br />
-        <br />
-        <div *ngIf="newSong" class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Create New Song</h3>
-            </div>
-            <div class="panel-body container">
-                <form (ngSubmit)="onSubmit()" #songForm="ngForm">
-                    <div class="form-group">
-                        <label for="name">Song Title</label>
-                        <input type="text" class="form-control" id="title" required [(ngModel)]="newSong.title" name="title">
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Album</label>
-                        <input type="text" class="form-control" id="album" required [(ngModel)]="newSong.album" name="album">
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Artist</label>
-                        <input type="text" class="form-control" id="artist" required [(ngModel)]="newSong.artist" name="artist">
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Lyrics</label>
-                        <textarea type="text" class="form-control description-text" id="lyrics" [(ngModel)]="newSong.lyrics" name="lyrics" rows="10" cols="12"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Song Intro</label>
-                        <textarea type="text" class="form-control description-text" id="description" [(ngModel)]="newSong.description" name="description" rows="10" cols="12"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Weight</label>
-                        <input type="number" class="form-control description-text" id="weight" [(ngModel)]="newSong.weight" name="weight">
-                    </div>
-                    <button type="submit" class="btn btn-success" [disabled]="!songForm.form.valid">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="btn-group" role="group">
-            <button class="btn btn-default" (click)="goBack()">Back</button>
-            <button *ngIf="!newSong" (click)="createSong()" class="btn btn-default">Add Song</button>
-        </div>
-    </div>
+	<div class="row">
+		<h2>Songs in {{unit.name}}</h2>
+	</div>
+	<div *ngFor="let song of songs" class="row">
+		<br />
+		<div class="panel panel-default">
+			<div class="panel-heading song-title" (click)="toSong(song)">
+				<div class="panel-title">{{song.title}}
+					<span (click)="deleteSong(song, $event)" class="pull-right clickable glyphicon glyphicon-remove" data-effect="fadeOut"></span>
+				</div>
+			</div>
+			<div class="panel-body container">
+				<div class="row">
+					<div class="col-md-5 col-sm-6">
+						<b>Weight</b>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<p>
+							{{song.weight}}
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5 col-sm-6">
+						<b>Album</b>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<p>
+							{{song.album}}
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5 col-sm-6">
+						<b>Artist</b>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<p>
+							{{song.artist}}
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5 col-sm-6">
+						<b>Song Intro</b>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<p style="white-space:pre-wrap">{{getShortenedDescription(song)}}</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5 col-sm-6">
+						<button class="btn btn-default" (click)="toMediaLink(song)">Link Media</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<br />
+		<div *ngIf="newSong" class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Create New Song</h3>
+			</div>
+			<div class="panel-body container">
+				<form (ngSubmit)="onSubmit()" #songForm="ngForm">
+					<div class="form-group">
+						<label for="name">Song Title</label>
+						<input type="text" class="form-control" id="title" required [(ngModel)]="newSong.title" name="title">
+					</div>
+					<div class="form-group">
+						<label for="name">Album</label>
+						<input type="text" class="form-control" id="album" [(ngModel)]="newSong.album" name="album">
+					</div>
+					<div class="form-group">
+						<label for="name">Artist</label>
+						<input type="text" class="form-control" id="artist" required [(ngModel)]="newSong.artist" name="artist">
+					</div>
+					<div class="form-group">
+						<label for="name">Song Intro</label>
+						<textarea type="text" class="form-control description-text" id="description" [(ngModel)]="newSong.description" name="description" rows="10" cols="12"></textarea>
+					</div>
+					<div class="form-group">
+						<label for="name">Lyrics</label>
+						<textarea type="text" class="form-control description-text" id="lyrics" [(ngModel)]="newSong.lyrics" name="lyrics" rows="10" cols="12"></textarea>
+					</div>
+
+					<div class="form-group">
+						<label for="name">Weight</label>
+						<input type="number" class="form-control description-text" id="weight" [(ngModel)]="newSong.weight" name="weight">
+					</div>
+					<button type="submit" class="btn btn-success" [disabled]="!songForm.form.valid">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="btn-group" role="group">
+			<button class="btn btn-default" (click)="goBack()">Back</button>
+			<button *ngIf="!newSong" (click)="createSong()" class="btn btn-default">Add Song</button>
+		</div>
+	</div>
+	<br>
 </div>

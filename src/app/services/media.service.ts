@@ -3,12 +3,13 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Media, MediaLink } from '../models/course';
 import { AuthenticationService } from './authentication.service';
+import { environment } from '../../environments/environment';
 
 
 @Injectable()
 export class MediaService {
 
-    private designerUrl = '/api/designer';
+    private designerUrl = environment.apiBase + 'api/designer';
 
     constructor(private http: Http,
                 private authService: AuthenticationService) {
@@ -58,11 +59,11 @@ export class MediaService {
 
     }
 
-    deleteMedia(id: number): Promise<null> {
+    deleteMedia(id: number): Promise<boolean> {
         const url = `${this.designerUrl}/media/${id}`;
         return this.http.delete(url, this.authService.getOptions())
             .toPromise()
-            .then(() => null)
+            .then(response => response.status === 200)
             .catch(this.handleError);
     }
 

@@ -3,10 +3,11 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { User } from '../models/user';
 import { AuthenticationService } from './authentication.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AdminService {
-    private adminUrl = '/api/admin';
+    private adminUrl = environment.apiBase + 'api/admin';
     constructor(private http: Http, private authService: AuthenticationService) { }
 
     private handleError(error: any): Promise<any> {

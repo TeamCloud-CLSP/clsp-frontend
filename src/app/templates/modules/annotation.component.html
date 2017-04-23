@@ -20,10 +20,20 @@
         <div>
             <ckeditor
                     [(ngModel)]="note.description"
+                    [config]="{toolbarGroups: [
+						{'name':'basicstyles','groups':['basicstyles']},
+						{'name':'links','groups':['links']},
+						{'name':'paragraph','groups':['list','blocks']},
+						{'name':'document','groups':['mode']},
+						{'name':'insert','groups':['insert']}
+					],
+                    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
+
+}"
                     debounce="500">
             </ckeditor>
         </div>
-        <button class="btn btn-default" (click)="updateAnnotation()">{{status}}</button>
+        <button style="width: 100%; margin-top: 8px;" class="btn btn-default" (click)="updateAnnotation()">{{status}}</button>
     </template>
 </div>
 <div *ngIf="!isDesigner" style="display: inline-block">
@@ -33,4 +43,3 @@
         <div [innerHTML]="safeDesc"></div>
     </template>
 </div>
-

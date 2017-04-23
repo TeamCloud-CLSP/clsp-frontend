@@ -1,29 +1,43 @@
 <style>
-    .clsp-description {
-        margin: 0;
-        margin-bottom: 5px;
-        font-size: 1.5em;
-        color: #4e4e4f;
-    }
+  .clsp-description {
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 1.5em;
+    color: #4e4e4f;
+  }
+
+  .panel-default>.panel-heading :hover {
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .min-header {
+    margin-top: 5px;
+  }
 </style>
 
 <div *ngIf="myClass">
-    <h1>{{myClass.name}}</h1>
-    <h2 class="clsp-description">{{myClass.description}}</h2>
+  <h1>{{myClass.name}}</h1>
+  <h2 class="clsp-description">{{myClass.description}}</h2>
 
-    <div *ngFor="let unit of units">
-        <div class="panel panel-default">
-            <div class="panel-heading" (click)="goToUnit(unit)">
-                <h3 class="panel-title">{{unit.name}}</h3>
-            </div>
-            <div class="panel-body">
-                <h3>Songs</h3>
-                <div *ngFor="let song of songs[unit.id]">
-                    <span>{{song.title}}</span>
-                </div>
-            </div>
+  <div *ngFor="let unit of units">
+    <div class="panel panel-default">
+      <div class="panel-heading" (click)="goToUnit(unit)">
+        <h3 class="panel-title">{{unit.name}}</h3>
+      </div>
+      <div class="panel-body" *ngIf ="unit.songs">
+        <!-- <span style="white-space:pre-wrap;">{{getShortenedDescription(unit)}}</span> -->
+        <br><br>
+        <h3 class="min-header" *ngIf="unit.songs.length > 0">Songs</h3>
+        <div *ngFor="let song of unit.songs">
+          <span>{{song.title}}</span>
         </div>
+        <div *ngIf="unit.songs.length == 0">
+        <span>No songs for this unit.</span>
+        </div>
+      </div>
     </div>
+  </div>
 
 
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit, Directive } from '@angular/core';
 import { MediaService } from '../services/media.service';
+import { AuthenticationService } from '../services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { Media } from '../models/course';
@@ -16,10 +17,13 @@ import { Location } from '@angular/common';
 
 @Directive({ selector: '[ng2FileDrop]' })
 
+
+
 export class MediaUploadComponent implements OnInit {
 
     private mediaUrl = '/api/designer/media';
-    public uploader: FileUploader = new FileUploader({url: this.mediaUrl});
+    public uploader: FileUploader;
+
     public hasBaseDropZoneOver = false;
     files: Media[];
     nameEdit: boolean;
@@ -30,10 +34,22 @@ export class MediaUploadComponent implements OnInit {
                 private route: ActivatedRoute,
                 private location: Location,
                 private sanitizer: DomSanitizer,
-                private router: Router) {
+                private router: Router,
+                private authService: AuthenticationService ) {
     }
 
     ngOnInit(): void {
+        //this.uploader.setHeader('Authorization', 'Bearer ' + this.authService.getToken() );
+        this.uploader = new FileUploader({
+            url: this.mediaUrl,
+            headers: [{
+                name: 'Authorization',
+                value: 'Bearer ' + this.authService.getToken()
+            }]
+        });
+        this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+                this.getFiles();
+            };
         this.getFiles();
         this.nameEdit = false;
         this.nameEditId = -1;
@@ -62,8 +78,15 @@ export class MediaUploadComponent implements OnInit {
     }
 
     deleteFile(id: number) {
-        this.mediaService.deleteMedia(id);
-        this.getFiles();
+        this.mediaService.deleteMedia(id)
+            .then(
+                response => {
+                    if (response) {
+                        this.getFiles();
+                    }
+                }
+            );
+        //this.getFiles();
     }
 
     public fileOverBase(e: any): void {
@@ -78,4 +101,3 @@ export class MediaUploadComponent implements OnInit {
         this.location.back();
     }
 }
-

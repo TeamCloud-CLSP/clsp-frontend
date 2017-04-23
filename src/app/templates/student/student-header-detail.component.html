@@ -1,33 +1,79 @@
-<div *ngIf="header">
-    <div class="row" *ngIf="courseName">
-        <p>
-            <a href="student/course/{{unit.course_id}}">{{courseName}}</a> >> <a href="unit/{{unit.id}}">{{unit.name}}</a> >>
-            <a href="student/unit/{{unit.id}}/song/{{song.id}}" *ngIf="song">{{song.title}}</a> >> <b>{{header.name}}</b>
-        </p>
-    </div>
-    <div class="row">
-        <h2>Questions for {{header.name}}</h2>
-    </div>
-    <div *ngIf="!printVersion">
-        <div class="row" *ngFor="let question of questions">
-            <h3 *ngIf="question.type == 'fill-blank'">
+<div *ngIf="header && courseName && songEnable">
+	<div class="row" *ngIf="courseName">
+		<p>
+			<a href="student">{{courseName}}</a> >> <a href="student/unit/{{unit.id}}">{{unit.name}}</a> >>
+			<a href="student/unit/{{unit.id}}/song/{{song.id}}" *ngIf="song">{{song.title}}</a> >> <b>{{header.name}}</b>
+		</p>
+	</div>
+	<div class="row" *ngIf="courseName">
+		<p>
+			<button class="btn btn-default pull-left" (click)="toHeader(prevId)" *ngIf="prevId"><<Previous Topic</button>
+			<button class="btn btn-default pull-right" (click)="toHeader(nextId)" *ngIf="nextId">Next Topic>></button>
+		</p>
+	</div>
+	<div class="row" *ngIf="songEnable == 1 && song" style="text-align: center">
+		<div *ngIf="song.embed_display && song.embed_display != 'undefined'">
+			<div [innerHTML]="song.embed_display" style="margin:0 auto"></div>
+		</div>
+		<div *ngFor="let item of media">
+			<div [ngSwitch]="item.file_type">
+				<div *ngSwitchCase="'png'">
+					<img style="max-width: 400px; max-height: 400px" src="{{publicBaseUrl + item.filename}}">
+				</div>
+				<div *ngSwitchCase="'jpg'">
+					<img style="max-width: 400px; max-height: 400px" src="{{publicBaseUrl + item.filename}}">
+				</div>
+				<div *ngSwitchCase="'jpeg'">
+					<img style="max-width: 400px; max-height: 400px" src="{{publicBaseUrl + item.filename}}">
+				</div>
+				<div *ngSwitchCase="'pdf'">
+					<p>PDFs not supported</p>
+					<!--<embed src="{{sanitizer.bypassSecurityTrustUrl(publicBaseUrl + item.filename)}}" width="800px" height="2100px" />-->
+				</div>
+				<div *ngSwitchCase="'mp3'">
+					<video style="width: 100%; height: 40px;" controls>
+                        <source src="{{publicBaseUrl + item.filename}}" type="audio/mpeg">
+                    </video>
+				</div>
+				<div *ngSwitchCase="'ogg'">
+					<video style="width: 100%; height: 40px;" controls>
+                        <source src="{{publicBaseUrl + item.filename}}" type="video/ogg">
+                    </video>
+				</div>
+				<div *ngSwitchDefault>
+					<p>File type {{item.file_type}} not supported</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<h2>Questions for {{header.name}}</h2>
+	</div>
+	<div *ngIf="!printVersion">
+		<div class="row" *ngFor="let question of questions">
+			<h3 *ngIf="question.type == 'fill-blank'" style="display:inline">
                 {{question.weight}}.
                 <span *ngFor="let piece of question.fbPieces;">
                     <span *ngIf ="checkBlank(piece)">
                         {{piece}}
                     </span>
                     <span *ngIf="!checkBlank(piece)">
-                        <input type="text" class="form-control" [name]="'fbanswer' + piece" attr.name="{{'fbanswer' + piece}}" required [(ngModel)]="question.fbAnswers[+piece].choice" style="width:300px">
+                        <input type="text" class="form-control" [name]="'fbanswer' + piece" attr.name="{{'fbanswer' + piece}}" required [(ngModel)]="question.fbAnswers[+piece].choice" style="width:300px;display:inline;margin-top:-10px;">
                         <span *ngIf="question.correct != null">
-                            <b>Correct:</b> {{question.correct[+piece]}}
+                            <span class = "glyphicon glyphicon-remove" style="color:red" *ngIf="question.correct[+piece] == false"></span>
+                            <span class = "glyphicon glyphicon-ok" style="color:green" *ngIf="question.correct[+piece] == true"></span>
                         </span>
                     </span>
                 </span>
             </h3>
-            <h3 *ngIf="question.type != 'fill-blank'">
+			<h3 *ngIf="question.type != 'fill-blank'">
                 {{question.weight}}. {{question.content}}
+                <span *ngIf="question.correct != null">
+                    <span class = "glyphicon glyphicon-remove" style="color:red" *ngIf="question.correct == false"></span>
+                    <span class = "glyphicon glyphicon-ok" style="color:green" *ngIf="question.correct == true"></span>
+                </span>
             </h3>
-            <!-- <form *ngIf="question.type == 'fill-blank'">
+			<!-- <form *ngIf="question.type == 'fill-blank'">
                 <div class="form-group" *ngFor="let answer of question.fbAnswers;let i = index">
                     <label for="name">Blank {{i + 1}}</label>
                     <input type="text" class="form-control" [name]="'fbanswer' + i" attr.name="{{'fbanswer' + i}}" required [(ngModel)]="question.fbAnswers[i].choice">
@@ -36,47 +82,45 @@
                     <b>Correct:</b> {{question.correct}}
                 </p>
             </form> -->
-            <div *ngIf="question.type == 'multiple-choice' || question.type =='multiple-select'">
-                <div class="col-md-12" *ngIf="question.type == 'multiple-choice'">
-                    <form>
-                        <div class="radio" *ngFor="let choice of question.displayChoices; let i = index">
-                            <label>
+			<div *ngIf="question.type == 'multiple-choice' || question.type =='multiple-select'">
+				<div class="col-md-12" *ngIf="question.type == 'multiple-choice'">
+					<form>
+						<div class="radio" *ngFor="let choice of question.displayChoices; let i = index">
+							<label>
                             <input type="radio" [(ngModel)]="question.mcAnswer" name="answer" [value]="choice.choice" />
                             {{choice.choice}}
                         </label>
-                        </div>
-                    </form>
-                    <p>
-                        <b>Selected Answer: </b> {{question.mcAnswer}}
-                    </p>
-                    <p *ngIf="question.correct != null">
-                        <b>Correct:</b> {{question.correct}}
-                    </p>
-                </div>
-                <div class="col-md-12" *ngIf="question.type == 'multiple-select'">
-                    <div>
-                        <select multiple class="form-control" name="msAnswers" id="msAnswers" [(ngModel)]="question.msAnswers">
+						</div>
+					</form>
+					<p>
+						<b>Selected Answer: </b> {{question.mcAnswer}}
+					</p>
+				</div>
+				<div class="col-md-12" *ngIf="question.type == 'multiple-select'">
+					<div>
+						<select multiple class="form-control" name="msAnswers" id="msAnswers" [(ngModel)]="question.msAnswers">
                             <option *ngFor="let choice of  question.displayChoices;" value="{{choice.choice}}">{{choice.choice}}</option>
                         </select>
-                    </div>
-                    <p>
-                        <b>Selected Answers:
+					</div>
+					<p>
+						<b>Selected Answers:
                             <span *ngFor="let answer of question.msAnswers">
                                 <br />
                                 {{answer}}
                             </span>
                         </b>
-                    </p>
-                    <p *ngIf="question.correct  != null">
-                        <b>Correct:</b> {{question.correct}}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div *ngIf="printVersion">
-        <div class="row" *ngFor="let question of questions">
-            <h3 *ngIf="question.type == 'fill-blank'">
+					</p>
+					<!-- <p *ngIf="question.correct  != null">
+            <b>Correct:</b> {{question.correct}}
+          </p> -->
+				</div>
+			</div>
+			<br />
+		</div>
+	</div>
+	<div *ngIf="printVersion">
+		<div class="row" *ngFor="let question of questions">
+			<h3 *ngIf="question.type == 'fill-blank'">
                 {{question.weight}}.
                 <span *ngFor="let piece of question.fbPieces;">
                     <span *ngIf ="checkBlank(piece)">
@@ -87,36 +131,38 @@
                     </span>
                 </span>
             </h3>
-            <h3 *ngIf="question.type != 'fill-blank'">
+			<h3 *ngIf="question.type != 'fill-blank'">
                 {{question.weight}}. {{question.content}}
             </h3>
-            <div *ngIf="question.type == 'multiple-choice' || question.type =='multiple-select'">
-                <div *ngFor="let choice of getChoices(question.choices); let i = index;" class="col-md-12">
-                    <div *ngIf="question.type == 'multiple-choice'">
-                        <p *ngIf="choice.choice != question.mcAnswer">
-                            <b>{{convertAscii(i)}}:</b> {{choice.choice}}
-                        </p>
-                        <p *ngIf="choice.choice == question.mcAnswer" style="font-weight:900">
-                            <b>{{convertAscii(i)}}: {{choice.choice}}</b>
-                        </p>
-                    </div>
-                    <div *ngIf="question.type == 'multiple-select'">
-                        <p *ngIf="!isMsAnswer(question, choice.choice)">
-                            <b>{{convertAscii(i)}}:</b> {{choice.choice}}
-                        </p>
-                        <p *ngIf="isMsAnswer(question, choice.choice)" style="font-weight:900">
-                            <b>{{convertAscii(i)}}: {{choice.choice}}</b>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="btn-group" role="group">
-            <button class="btn btn-success" (click)="checkAnswers()">Check Answers</button>
-            <button class="btn btn-default" *ngIf="!printVersion" (click)="printerVersion()">Printable View</button>
-            <button class="btn btn-default" *ngIf="printVersion" (click)="cancelPrint()">Normal View</button>
-        </div>
-    </div>
+			<div *ngIf="question.type == 'multiple-choice' || question.type =='multiple-select'">
+				<div *ngFor="let choice of getChoices(question.choices); let i = index;" class="col-md-12">
+					<div *ngIf="question.type == 'multiple-choice'">
+						<p *ngIf="choice.choice != question.mcAnswer">
+							<b>{{convertAscii(i)}}:</b> {{choice.choice}}
+						</p>
+						<p *ngIf="choice.choice == question.mcAnswer" style="font-weight:900;outline:solid;">
+							<b>{{convertAscii(i)}}: {{choice.choice}}</b>
+						</p>
+					</div>
+					<div *ngIf="question.type == 'multiple-select'">
+						<p *ngIf="!isMsAnswer(question, choice.choice)">
+							<b>{{convertAscii(i)}}:</b> {{choice.choice}}
+						</p>
+						<p *ngIf="isMsAnswer(question, choice.choice)" style="font-weight:900; outline:solid;">
+							<b>{{convertAscii(i)}}: {{choice.choice}}</b>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br />
+	<div class="row">
+		<div class="btn-group" role="group">
+			<button class="btn btn-success" (click)="checkAnswers()">Check Answers</button>
+			<button class="btn btn-default" *ngIf="!printVersion" (click)="printerVersion()">Printable View</button>
+			<button class="btn btn-default" *ngIf="printVersion" (click)="cancelPrint()">Normal View</button>
+		</div>
+	</div>
+	<br>
 </div>

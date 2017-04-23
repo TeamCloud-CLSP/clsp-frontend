@@ -9,55 +9,83 @@ import { Header } from '../../models/modules/header';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
-    selector: 'app-discussion-and-writing',
-    templateUrl: '../../templates/modules/discussionandwriting.component.html'
+  selector: 'app-discussion-and-writing',
+  templateUrl: '../../templates/modules/discussionandwriting.component.html'
 })
 
 export class DiscussionAndWritingComponent implements OnInit {
-    headers: Header[];
-    newHeader: Header;
-    @Input() songId: number;
-    @Input() unitId: number;
-    @Input() moduleType: string;
+  headers: Header[];
+  newHeader: Header;
+  @Input() songId: number;
+  @Input() unitId: number;
+  @Input() moduleType: string;
 
-    constructor(private courseService: CourseService,
-        private route: ActivatedRoute,
-        private location: Location,
-        private sanitizer: DomSanitizer,
-        private router: Router,
-        private moduleService: ModuleService
-    ) { }
+  constructor(private courseService: CourseService,
+    private route: ActivatedRoute,
+    private location: Location,
+    private sanitizer: DomSanitizer,
+    private router: Router,
+    private moduleService: ModuleService
+  ) { }
 
-    ngOnInit() {
-        // console.log(this.songId);
-        this.moduleService.getHeaders(this.songId, this.moduleType)
-            .then(headers => {
-                this.headers = headers;
-            });
-    }
+  ngOnInit() {
+    // console.log(this.songId);
+    this.moduleService.getHeaders(this.songId, this.moduleType)
+      .then(headers => {
+        console.log(headers);
+        this.headers = headers;
+        for (let h of this.headers) {
+          h.edit = false;
+        }
+      });
+  }
 
-    createHeader(): void {
-        this.newHeader = new Header();
-        this.newHeader.song_id = +this.songId;
-    }
+  createHeader(): void {
+    this.newHeader = new Header();
+    this.newHeader.song_id = +this.songId;
+  }
 
-    cancel() {
+  cancel() {
+    this.newHeader = null;
+  }
+
+  submitHeader(): void {
+    this.moduleService.createHeader(this.newHeader, this.moduleType)
+      .then(header => {
+        this.headers.push(header);
         this.newHeader = null;
-    }
+      });
+  }
 
-    submitHeader(): void {
-        this.moduleService.createHeader(this.newHeader, this.moduleType)
-            .then(header => {
-                this.headers.push(header);
-                this.newHeader = null;
-            });
+  updateHeader(i): void {
+    this.moduleService.editHeader(this.headers[i]).then(response => {
+      this.headers[i].edit = false;
     }
+    );
+  }
 
-    toHeader(header: Header): void {
-        this.router.navigate(['./unit/' + this.unitId + '/song/' + this.songId + '/header/' + header.id]);
-    }
+  deleteHeader(i: number): void {
+    var headerId = this.headers[i].id
+    this.moduleService.deleteHeader(+headerId).then(
+      response => {
+        this.headers = this.headers.filter(x => x.id != headerId);
+      }
+    )
+  }
 
-    onChange(newSelection: string) {
-        // console.log(newSelection);
-    }
+  toHeader(header: Header): void {
+    this.router.navigate(['./unit/' + this.unitId + '/song/' + this.songId + '/header/' + header.id]);
+  }
+
+  onChange(newSelection: string) {
+    // console.log(newSelection);
+  }
+
+  editHeader(i: number): void {
+    this.headers[i].edit = true;
+  }
+
+  cancelEdit(i: number): void {
+    this.headers[i].edit = false;
+  }
 }

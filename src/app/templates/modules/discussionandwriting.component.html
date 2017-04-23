@@ -1,22 +1,48 @@
 <div class="row">
-    <div class="col-md-12">
-        <h2>Headers</h2>
-        <ul class="list-group">
-            <a (click)="toHeader(header)" *ngFor="let header of headers " class="list-group-item header-item">
-                {{header.name}}
-            </a>
-        </ul>
-    </div>
-    <div class="col-md-12 " *ngIf="newHeader ">
-        <label for="header_name ">Header Name</label>
-        <input [(ngModel)]="newHeader.name " class="form-control " name="header_name " id="header_name " />
-        <br />
-        <div class="btn-group " role="group ">
-            <button class="btn btn-default " (click)="cancel() ">Cancel</button>
-            <button (click)="submitHeader() " class="btn btn-success ">Submit</button>
-        </div>
-    </div>
-    <div class="col-md-12 ">
-        <button *ngIf="!newHeader " (click)="createHeader() " class="btn btn-default ">Add Header</button>
-    </div>
+	<div class="col-md-12">
+		<h2>Headers</h2>
+		<table class="table table-hover">
+			<tr *ngFor="let header of headers;let i = index;">
+				<td class="col-md-2" *ngIf="header.edit">
+					<label for="header_weight ">Header Weight</label>
+					<input [(ngModel)]="headers[i].weight " class="form-control " name="header_weight " id="header_weight " type="number" />
+				</td>
+				<td *ngIf="header.edit">
+					<label for="header_name ">Header Name</label>
+					<input [(ngModel)]="headers[i].name " class="form-control " name="header_name " id="header_name " />
+				</td>
+				<td *ngIf="!header.edit">
+					<span class="badge badge-default badge-pill ">{{header.weight}}</span>
+				</td>
+				<td (click)="toHeader(header)" *ngIf="!header.edit" style="hover:cursor">
+					{{header.name}}
+				</td>
+				<td col-md-3>
+					<div class="btn-group " role="group " *ngIf="header.edit" style="margin-top:25px;">
+						<button class="btn btn-success " (click)="updateHeader(i) ">Save</button>
+						<button class="btn" (click)="cancelEdit(i) ">Cancel</button>
+					</div>
+					<div class="btn-group " role="group " *ngIf="!header.edit">
+						<button class="btn btn-default " (click)="editHeader(i) "><span class="glyphicon glyphicon-pencil"></span></button>
+						<button class="btn btn-default " (click)="deleteHeader(i) "><span class="glyphicon glyphicon-remove"></span></button>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="col-md-12 " *ngIf="newHeader ">
+		<label for="header_name ">Header Name</label>
+		<input [(ngModel)]="newHeader.name " class="form-control " name="header_name " id="header_name " />
+		<br />
+		<label for="header_weight ">Header Weight</label>
+		<input [(ngModel)]="newHeader.weight " class="form-control " name="header_weight " id="header_weight " type="number " />
+		<br />
+		<div class="btn-group " role="group ">
+			<button class="btn btn-default " (click)="cancel() ">Cancel</button>
+			<button (click)="submitHeader() " class="btn btn-success ">Submit</button>
+		</div>
+	</div>
+	<div class="col-md-12 ">
+		<button *ngIf="!newHeader " (click)="createHeader() " class="btn btn-default ">Add Header</button>
+	</div>
 </div>

@@ -16,6 +16,7 @@ import { StudentService } from '../../services/student.service';
 export class StudentUnitDetailComponent implements OnInit {
     unit : Unit;
     songs: Song[];
+    private courseName: string;
 
     constructor(
         private studentService: StudentService,
@@ -31,6 +32,9 @@ export class StudentUnitDetailComponent implements OnInit {
             .subscribe(unit => {
                 this.unit = unit;
                 console.log(unit);
+                this.studentService.getCourse(unit.course_id).then(course => {
+                    this.courseName = course;
+                });
                 this.studentService.getSongs(unit.id).then(songs => {
                     this.songs = songs;
                 });
