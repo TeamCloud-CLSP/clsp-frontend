@@ -52,6 +52,7 @@ import {MediaLinkComponent} from './components/media-link.component';
 import {AuthGuard} from './auth.guard';
 import { RegisterComponent } from './components/register/register.component';
 import {CustomFormsModule} from 'ng2-validation';
+import {RegisterService} from "./services/register.service";
 
 
 
@@ -108,7 +109,8 @@ import {CustomFormsModule} from 'ng2-validation';
         MediaService,
         StudentService,
         AuthenticationService,
-        AuthGuard
+        AuthGuard,
+        RegisterService
     ],
     bootstrap: [AppComponent]
 })

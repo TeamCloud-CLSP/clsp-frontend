@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '../../services/authentication.service';
+import {RegisterService} from "../../services/register.service";
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit {
   constructor(
       private route: ActivatedRoute,
       private router: Router,
-      private authService: AuthenticationService) { }
+      private registerService: RegisterService) { }
 
   ngOnInit() {
     // reset login status
@@ -29,16 +30,16 @@ export class RegisterComponent implements OnInit {
   register() {
     this.loading = true;
     this.registerErrors = '';
-    this.authService.login(this.model.username, this.model.password)
+    this.registerService.register(
+        this.model.regcode,
+        this.model.username,
+        this.model.password,
+        this.model.email,
+        this.model.name)
         .subscribe(
-            user => {
-//                    console.log(user);
-              this.loading = false;
-              if (this.authService.redirectUrl) {
-                this.router.navigate([this.authService.redirectUrl]);
-              } else {
-                this.router.navigate(['./dashboard']);
-              }
+            res => {
+                console.log('after successful registration');
+                this.loading = false;
             },
             error =>  {
               console.log(error);
