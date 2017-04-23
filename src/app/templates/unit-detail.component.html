@@ -7,23 +7,26 @@
 	<div class="row">
 		<h2>{{unit.name}} Details</h2>
 	</div>
-	<div *ngIf="!edited" class="row">
-		<div style="white-space:pre-wrap;" [innerHTML]="unit.description"></div>
-		<br />
-		<button (click)="editUnit()" class="btn btn-default">Edit</button>
-	</div>
-	<div *ngIf="edited" class="row">
-		<div class="form-group">
-			<label for="name"> Name: </label>
-			<input class="form-control" [(ngModel)]="unit.name" placeholder="name" />
+	<div class="row" style="background:white;border-width:thin;border-style:solid;border-color:#c3c3c3;padding:15px">
+		<div *ngIf="!edited" class="row" style="padding:15px">
+			<div style="white-space:pre-wrap;" [innerHTML]="unit.description"></div>
+			<br />
+			<button (click)="editUnit()" class="btn btn-default">Edit</button>
 		</div>
-		<div class="form-group">
-			<label for="description"> Unit Intro: </label>
-			<textarea class="form-control" [(ngModel)]="unit.description" placeholder="description" rows="10" cols="12"></textarea>
+		<div *ngIf="edited" class="row" style="padding:15px">
+			<div class="form-group">
+				<label for="name"> Name: </label>
+				<input class="form-control" [(ngModel)]="unit.name" placeholder="name" />
+			</div>
+			<div class="form-group">
+				<label for="description"> Unit Intro: </label>
+				<textarea class="form-control" [(ngModel)]="unit.description" placeholder="description" rows="10" cols="12"></textarea>
+			</div>
+			<button class="btn btn-success" (click)="updateUnit()">Save</button>
+			<!-- <prof-registrations [courseId]="course.id"></prof-registrations> -->
 		</div>
-		<button class="btn btn-default" (click)="updateUnit()">Save</button>
-		<!-- <prof-registrations [courseId]="course.id"></prof-registrations> -->
 	</div>
+
 	<div class="row">
 		<h2>Songs in {{unit.name}}</h2>
 	</div>
