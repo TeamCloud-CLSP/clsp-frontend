@@ -39,7 +39,7 @@
 				<p><b>Artist: </b>{{song.artist}}</p>
 				<p><b>Album: </b>{{song.album}}</p>
 				<p><b>Description: </b></p>
-				<div [innerHtml]="song.description" style="white-space:pre-wrap;"></div>
+				<div [innerHtml]="song.description | safeHtml" style="white-space:pre-wrap;"></div>
 				<p *ngIf="song.embed"><b>Embed Link: </b>{{song.embed}}</p>
 				<br>
 				<button class="btn btn-default" (click)="editSong()">Edit</button>

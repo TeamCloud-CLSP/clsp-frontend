@@ -39,6 +39,7 @@ export class Song {
   constructor() {
     this.album = "";
     this.artist = "";
+    this.description = "";
   }
 }
 

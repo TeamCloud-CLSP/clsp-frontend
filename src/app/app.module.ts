@@ -54,64 +54,66 @@ import { RegisterComponent } from './components/register/register.component';
 import {CustomFormsModule} from 'ng2-validation';
 import {RegisterService} from "./services/register.service";
 
-
+// Pipes
+import {SafeHtmlPipe} from './components/safe-html.pipe'
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        FormsModule,
-        AppRoutingModule,
-        HttpModule,
-        InMemoryWebApiModule.forRoot(InMemoryDataService, { passThruUnknownUrl: true }),
-        PopoverModule.forRoot(),
-        CKEditorModule,
-        CustomFormsModule
-    ],
-    declarations: [
-        AppComponent,
-        CourseDetailComponent,
-        CoursesComponent,
-        DashboardComponent,
-        NavbarComponent,
-        ProfRegistrationsComponent,
-        AdminDashboardComponent,
-        AccountDashboardComponent,
-        ProfessorDashboardComponent,
-        ProfessorClassComponent,
-        UnitDetailComponent,
-        SongDetailComponent,
-        CulturalNotesComponent,
-        DiscussionAndWritingComponent,
-        AnnotationComponent,
-        HeaderDetailComponent,
-        MediaUploadComponent,
-        FileSelectDirective,
-        FileDropDirective,
-        StudentDashboardComponent,
-        StudentUnitDetailComponent,
-        StudentSongDetailComponent,
-        StudentQuestionModuleComponent,
-        StudentHeaderDetailComponent,
-        GetChoicesPipe,
-        StudentCulturalNotesComponent,
-        MediaLinkComponent,
-        LoginComponent,
-        RegisterComponent
-    ],
-    entryComponents: [
-        AnnotationComponent
-    ],
-    providers: [
-        CourseService,
-        AdminService,
-        ProfessorService,
-        ModuleService,
-        MediaService,
-        StudentService,
-        AuthenticationService,
-        AuthGuard,
-        RegisterService
-    ],
-    bootstrap: [AppComponent]
+  imports: [
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+    HttpModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService, { passThruUnknownUrl: true }),
+    PopoverModule.forRoot(),
+    CKEditorModule,
+    CustomFormsModule
+  ],
+  declarations: [
+    AppComponent,
+    CourseDetailComponent,
+    CoursesComponent,
+    DashboardComponent,
+    NavbarComponent,
+    ProfRegistrationsComponent,
+    AdminDashboardComponent,
+    AccountDashboardComponent,
+    ProfessorDashboardComponent,
+    ProfessorClassComponent,
+    UnitDetailComponent,
+    SongDetailComponent,
+    CulturalNotesComponent,
+    DiscussionAndWritingComponent,
+    AnnotationComponent,
+    HeaderDetailComponent,
+    MediaUploadComponent,
+    FileSelectDirective,
+    FileDropDirective,
+    StudentDashboardComponent,
+    StudentUnitDetailComponent,
+    StudentSongDetailComponent,
+    StudentQuestionModuleComponent,
+    StudentHeaderDetailComponent,
+    GetChoicesPipe,
+    StudentCulturalNotesComponent,
+    MediaLinkComponent,
+    LoginComponent,
+    RegisterComponent,
+    SafeHtmlPipe
+  ],
+  entryComponents: [
+    AnnotationComponent
+  ],
+  providers: [
+    CourseService,
+    AdminService,
+    ProfessorService,
+    ModuleService,
+    MediaService,
+    StudentService,
+    AuthenticationService,
+    AuthGuard,
+    RegisterService
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
