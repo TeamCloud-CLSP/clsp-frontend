@@ -12,7 +12,7 @@ export class RegisterComponent implements OnInit {
   model: any = {};
   loading = false;
   registerErrors = '';
-  returnUrl: string;
+  registerMsgs = '';
 
   constructor(
       private route: ActivatedRoute,
@@ -30,6 +30,7 @@ export class RegisterComponent implements OnInit {
   register() {
     this.loading = true;
     this.registerErrors = '';
+    this.registerMsgs = '';
     this.registerService.register(
         this.model.regcode,
         this.model.username,
@@ -40,6 +41,7 @@ export class RegisterComponent implements OnInit {
             res => {
                 console.log('after successful registration');
                 this.loading = false;
+                this.registerMsgs = 'User successfully registered';
             },
             error =>  {
               console.log(error);

@@ -40,7 +40,9 @@ export class RegisterService {
         // In a real world app, you might use a remote logging infrastructure
         console.log(error);
         let errMsg: string;
-        if (error instanceof Response) {
+        if (error.json().error) {
+            errMsg = error.json().error;
+        } else if (error instanceof Response) {
             const body = error.json() || '';
             const err = body.error || JSON.stringify(body);
             errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
