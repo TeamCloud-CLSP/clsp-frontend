@@ -36,7 +36,10 @@ export class Song {
   embed: string;
   embed_display: string;
   weight: number;
-  constructor() { }
+  constructor() {
+    this.album = "";
+    this.artist = "";
+  }
 }
 
 export class Module {
