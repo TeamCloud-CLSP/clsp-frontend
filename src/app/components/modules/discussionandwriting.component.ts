@@ -34,6 +34,9 @@ export class DiscussionAndWritingComponent implements OnInit {
       .then(headers => {
         console.log(headers);
         this.headers = headers;
+        for (let h of this.headers) {
+          h.edit = false;
+        }
       });
   }
 
@@ -54,11 +57,35 @@ export class DiscussionAndWritingComponent implements OnInit {
       });
   }
 
+  updateHeader(i): void {
+    this.moduleService.editHeader(this.headers[i]).then(response => {
+      this.headers[i].edit = false;
+    }
+    );
+  }
+
+  deleteHeader(i: number): void {
+    var headerId = this.headers[i].id
+    this.moduleService.deleteHeader(+headerId).then(
+      response => {
+        this.headers = this.headers.filter(x => x.id != headerId);
+      }
+    )
+  }
+
   toHeader(header: Header): void {
     this.router.navigate(['./unit/' + this.unitId + '/song/' + this.songId + '/header/' + header.id]);
   }
 
   onChange(newSelection: string) {
     // console.log(newSelection);
+  }
+
+  editHeader(i: number): void {
+    this.headers[i].edit = true;
+  }
+
+  cancelEdit(i: number): void {
+    this.headers[i].edit = false;
   }
 }

@@ -41,6 +41,28 @@ export class ModuleService {
       .catch(this.handleError);
   }
 
+  editHeader(header: Header): Promise<void> {
+    const url = `${this.designerUrl}/header/${header.id}`;
+    return this.http.post(url,
+      JSON.stringify({
+        name: header.name,
+        weight: +header.weight
+      }),
+      this.authService.getOptions())
+      .toPromise()
+      .then(response => null)
+      .catch(this.handleError);
+  }
+
+  deleteHeader(headerId: number): Promise<void> {
+    const url = `${this.designerUrl}/header/${headerId}`;
+    return this.http.delete(url,
+      this.authService.getOptions())
+      .toPromise()
+      .then(response => null)
+      .catch(this.handleError);
+  }
+
   getHeaders(songId: number, modName: string): Promise<Header[]> {
     const url = `${this.designerUrl}/song/${songId}/${modName}/headers`;
     return this.http.get(url, this.authService.getOptions())

@@ -3,6 +3,7 @@ export class Header {
   name: string;
   weight: number;
   song_id: number;
+  edit: boolean;
   constructor() { }
 }
 
