@@ -1,7 +1,7 @@
 <div *ngIf="courseName">
 	<div class="row">
 		<p>
-			<a href="course/{{unit.course_id}}">{{courseName}}</a> >> <b>{{unit.name}}</b>
+			<a [routerLink]="['/course/' + unit.course_id]">{{courseName}}</a> >> <b>{{unit.name}}</b>
 		</p>
 	</div>
 	<div class="row">
