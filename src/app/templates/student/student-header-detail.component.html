@@ -52,7 +52,6 @@
 	<div *ngIf="!printVersion">
 		<div class="row" *ngFor="let question of questions">
 			<h3 *ngIf="question.type == 'fill-blank'" style="display:inline">
-                {{question.weight}}.
                 <span *ngFor="let piece of question.fbPieces;">
                     <span *ngIf ="checkBlank(piece)">
                         {{piece}}
@@ -66,7 +65,7 @@
                     </span>
                 </span>
             </h3>
-			<h3 *ngIf="question.type != 'fill-blank'" style="white-space:pre-wrap">{{question.weight}}. {{question.content}}<span *ngIf="question.correct != null">
+			<h3 *ngIf="question.type != 'fill-blank'" style="white-space:pre-wrap">{{question.content}}<span *ngIf="question.correct != null">
                     <span class = "glyphicon glyphicon-remove" style="color:red" *ngIf="question.correct == false"></span>
                     <span class = "glyphicon glyphicon-ok" style="color:green" *ngIf="question.correct == true"></span>
                 </span>
@@ -127,7 +126,6 @@
 	<div *ngIf="printVersion">
 		<div class="row" *ngFor="let question of questions">
 			<h3 *ngIf="question.type == 'fill-blank'">
-                {{question.weight}}.
                 <span *ngFor="let piece of question.fbPieces;">
                     <span *ngIf ="checkBlank(piece)">
                         {{piece}}
@@ -137,7 +135,7 @@
                     </span>
                 </span>
             </h3>
-			<h3 *ngIf="question.type != 'fill-blank'" style="white-space:pre-wrap">{{question.weight}}. {{question.content}}</h3>
+			<h3 *ngIf="question.type != 'fill-blank'" style="white-space:pre-wrap">{{question.content}}</h3>
 			<div *ngIf="question.type == 'short-answer'">
 				<p>
 					{{question.saAnswer}}
