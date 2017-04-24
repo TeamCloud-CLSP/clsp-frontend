@@ -62,7 +62,7 @@
 					<div class="form-group">
 						<label for="name">Question</label>
 						<ckeditor [(ngModel)]="newQuestion.content" name="content" id="content" required (ngModelChange)="fillBlankChoices()" [config]="{
-							    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
+							    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak'
 							}" debounce="500">
 						</ckeditor>
 						<!-- <textarea type="text" class="form-control" id="content" required [(ngModel)]="newQuestion.content" name="content" (ngModelChange)="fillBlankChoices()" rows="10" cols="12"></textarea> -->
