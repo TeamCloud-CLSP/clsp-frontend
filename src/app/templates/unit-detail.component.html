@@ -21,7 +21,7 @@
 			<div class="form-group">
 				<label for="description"> Unit Intro: </label>
 				<ckeditor [(ngModel)]="unit.description" [config]="{
-	                    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
+	                    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak'
 
 	}" debounce="500">
 				</ckeditor>
@@ -116,14 +116,14 @@
 					<div class="form-group">
 						<label for="name">Song Intro</label>
 						<ckeditor id="description" name="description" [(ngModel)]="newSong.description" [config]="{
-							    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
+							    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak'
 							}" debounce="500">
 						</ckeditor>
 					</div>
 					<div class="form-group">
 						<label for="name">Lyrics</label>
 						<ckeditor id="lyrics" name="lyrics" [(ngModel)]="newSong.lyrics" [config]="{
-							    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
+							    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak'
 							}" debounce="500">
 						</ckeditor>
 					</div>
