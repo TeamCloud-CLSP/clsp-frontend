@@ -9,7 +9,7 @@
 	<div *ngIf="!editing" (mouseup)="startAnnotate()">
 		<p *ngIf="showLyrics == true && notes">
 			<span *ngFor="let piece of lyricPieces">
-                <span *ngIf="checkPiece(piece)" style="white-space:pre-wrap;">{{piece}}</span>
+                <span *ngIf="checkPiece(piece)" style="white-space:pre-wrap;" [innerHTML]="piece | safeHtml"></span>
 			<span *ngIf="!checkPiece(piece)">
                     <app-annotation [note]="notes[+piece]" [isDesigner]="true"></app-annotation>
                 </span>
@@ -59,8 +59,14 @@
 		</div>
 	</div>
 	<div *ngIf="editing ">
-		<textarea class="form-control" [(ngModel)]="song.lyrics" style="resize:none;" rows="10" cols="40"></textarea>
+        <ckeditor
+                [(ngModel)]="song.lyrics"
+                [config]="{
+                removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
 
+}"
+                debounce="500">
+        </ckeditor>
 		<br/>
 		<div class="btn-group" role="group">
 			<button class="btn btn-default" (click)="cancelEdit()">Cancel</button>

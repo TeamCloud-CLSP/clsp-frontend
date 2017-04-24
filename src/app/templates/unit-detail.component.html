@@ -20,7 +20,14 @@
 			</div>
 			<div class="form-group">
 				<label for="description"> Unit Intro: </label>
-				<textarea class="form-control" [(ngModel)]="unit.description" placeholder="description" rows="10" cols="12"></textarea>
+	            <ckeditor
+	                    [(ngModel)]="unit.description"
+	                    [config]="{
+	                    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
+
+	}"
+	                    debounce="500">
+	            </ckeditor>
 			</div>
 			<div class="form-group">
 				<label for="weight"> Unit Weight: </label>
@@ -78,7 +85,7 @@
 						<b>Song Intro</b>
 					</div>
 					<div class="col-md-6 col-sm-6">
-						<p style="white-space:pre-wrap">{{getShortenedDescription(song)}}</p>
+						<p style="white-space:pre-wrap" [innerHTML]="getShortenedDescription(song) | safeHtml"></p>
 					</div>
 				</div>
 				<div class="row">
@@ -111,11 +118,25 @@
 					</div>
 					<div class="form-group">
 						<label for="name">Song Intro</label>
-						<textarea type="text" class="form-control description-text" id="description" [(ngModel)]="newSong.description" name="description" rows="10" cols="12"></textarea>
+						<ckeditor
+							id="description" name="description"
+						    [(ngModel)]="newSong.description"
+						    [config]="{
+							    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
+							}"
+						    debounce="500">
+						</ckeditor>
 					</div>
 					<div class="form-group">
 						<label for="name">Lyrics</label>
-						<textarea type="text" class="form-control description-text" id="lyrics" [(ngModel)]="newSong.lyrics" name="lyrics" rows="10" cols="12"></textarea>
+						<ckeditor
+							id="lyrics" name="lyrics"
+						    [(ngModel)]="newSong.lyrics"
+						    [config]="{
+							    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
+							}"
+						    debounce="500">
+						</ckeditor>
 					</div>
 
 					<div class="form-group">

@@ -8,6 +8,7 @@ import { Router} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { AnnotationComponent } from './annotation.component';
 import { CulturalNote } from '../../models/modules/CulturalNote';
+import {SafeHtmlPipe} from '../safe-html.pipe';
 
 
 @Component({

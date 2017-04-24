@@ -12,8 +12,7 @@
       </div>
       <div class="panel-body container">
         <div class="row">
-          <div class="col-md-12">
-            {{course.description}}
+          <div class="col-md-12" [innerHTML]="course.description | safeHtml">
           </div>
         </div>
         <br />
@@ -51,7 +50,14 @@
           </div>
           <div class="form-group">
             <label for="name">Course Description</label>
-            <textarea type="text" class="form-control description-text" id="description" [(ngModel)]="newCourse.description" name="description" rows="10" cols="12"></textarea>
+            <!-- <textarea type="text" class="form-control description-text" id="description" [(ngModel)]="newCourse.description" name="description" rows="10" cols="12"></textarea> -->
+            <ckeditor
+              [(ngModel)]="newCourse.description" name="description"
+              [config]="{
+                removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
+            }"
+              debounce="500">
+          </ckeditor>
           </div>
           <button type="submit" class="btn btn-success" [disabled]="!courseForm.form.valid">Submit</button>
         </form>

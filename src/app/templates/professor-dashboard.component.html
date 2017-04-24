@@ -29,8 +29,7 @@
             <td>
                 <a (click)="toClass(class)">{{class.class_name}}</a>
             </td>
-            <td>
-                {{class.class_description}}
+            <td [innerHTML]="class.class_description | safeHtml">
             </td>
             <td>
                 {{class.student_registration_date_start != null ? (class.student_registration_date_start * 1000 | date) : "N/A"}}
@@ -55,7 +54,14 @@
                 </div>
                 <div class="form-group">
                     <label for="name">Class Description</label>
-                    <textarea type="text" class="form-control description-text" id="description" [(ngModel)]="newClass.description" name="description" rows="10" cols="12"></textarea>
+                    <!-- <textarea type="text" class="form-control description-text" id="description" [(ngModel)]="newClass.description" name="description" rows="10" cols="12"></textarea> -->
+                    <ckeditor
+                        [(ngModel)]="newClass.description" name="description"
+                        [config]="{
+                            removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
+                        }"
+                        debounce="500">
+                    </ckeditor>
                 </div>
                 <button type="submit" class="btn btn-success" [disabled]="!classForm.form.valid">Submit</button>
             </form>

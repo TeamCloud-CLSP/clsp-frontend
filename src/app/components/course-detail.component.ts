@@ -6,6 +6,7 @@ import { CourseService } from '../services/course.service';
 import { Course, Unit } from '../models/course';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
+import {SafeHtmlPipe} from './safe-html.pipe'
 
 @Component({
   selector: 'app-course-detail',

@@ -64,7 +64,14 @@
 					</div>
 					<div class="form-group">
 						<label for="name">Song Intro</label>
-						<textarea type="text" class="form-control description-text" id="description" [(ngModel)]="song.description" name="description" rows="10" cols="12"></textarea>
+						<ckeditor
+						    [(ngModel)]="song.description"
+						    name="description" id="description"
+						    [config]="{
+							    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
+							}"
+						    debounce="500">
+						</ckeditor>
 					</div>
 					<div class="form-group">
 						<label for="name">Embed Link</label>

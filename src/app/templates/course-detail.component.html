@@ -3,8 +3,7 @@
         <h2>{{course.name}}</h2>
     </div>
     <div *ngIf="!edited" class="row">
-        <p>
-            {{course.description}}
+        <p [innerHTML]="course.description | safeHtml">
         </p>
         <button (click)="editCourse()" class="btn btn-default">Edit</button>
     </div>
@@ -16,7 +15,14 @@
         <br />
         <div class="form-group">
             <label for="description"> Description: </label>
-            <textarea class="form-control" [(ngModel)]="course.description" placeholder="description"></textarea>
+            <ckeditor
+                    [(ngModel)]="course.description"
+                    [config]="{
+                    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
+
+}"
+                    debounce="500">
+            </ckeditor>
         </div>
         <button class="btn btn-default" (click)="save()">Save</button>
         <!-- <prof-registrations [courseId]="course.id"></prof-registrations> -->
@@ -44,7 +50,7 @@
                     {{unit.name}}
                 </td>
                 <td (click)="toUnit(unit)">
-                    <p style="white-space:pre-wrap;">{{getShortenedDescription(unit)}}</p>
+                    <p style="white-space:pre-wrap;" [innerHTML]="getShortenedDescription(unit) | safeHtml">f</p>
                 </td>
                 <td (click)="toUnit(unit)">
                     {{unit.weight}}
@@ -68,7 +74,14 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Unit Intro</label>
-                        <textarea type="text" class="form-control description-text" id="description" [(ngModel)]="newUnit.description" name="description" rows="10" cols="12"></textarea>
+                        <ckeditor
+                            [(ngModel)]="newUnit.description"
+                            id="description" name="description"
+                            [config]="{
+                                removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
+                            }"
+                            debounce="500">
+                        </ckeditor>
                     </div>
                     <div class="form-group">
                         <label for="name">Weight</label>

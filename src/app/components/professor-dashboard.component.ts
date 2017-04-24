@@ -3,6 +3,7 @@ import { ProfessorService } from '../services/professor.service';
 import { CLSPClass, CreateClass } from '../models/clsp-class';
 import { ProfInfo } from '../models/professor-info';
 import { Router } from '@angular/router';
+import {SafeHtmlPipe} from './safe-html.pipe'
 
 @Component({
     selector: 'app-professor-dashboard',

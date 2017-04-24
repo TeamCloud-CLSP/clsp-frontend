@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Course, Language } from '../models/course';
 import { CourseService } from '../services/course.service';
 import { Router } from '@angular/router';
+import {SafeHtmlPipe} from './safe-html.pipe'
 
 @Component({
     selector: 'app-courses',
