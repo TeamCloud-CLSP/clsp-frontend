@@ -56,21 +56,17 @@
 					</div>
 					<div class="form-group">
 						<label for="name">Album</label>
-						<input type="text" class="form-control" id="album" required [(ngModel)]="song.album" name="album">
+						<input type="text" class="form-control" id="album" [(ngModel)]="song.album" name="album">
 					</div>
 					<div class="form-group">
 						<label for="name">Artist</label>
-						<input type="text" class="form-control" id="artist" required [(ngModel)]="song.artist" name="artist">
+						<input type="text" class="form-control" id="artist" [(ngModel)]="song.artist" name="artist">
 					</div>
 					<div class="form-group">
 						<label for="name">Song Intro</label>
-						<ckeditor
-						    [(ngModel)]="song.description"
-						    name="description" id="description"
-						    [config]="{
+						<ckeditor [(ngModel)]="song.description" name="description" id="description" [config]="{
 							    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
-							}"
-						    debounce="500">
+							}" debounce="500">
 						</ckeditor>
 					</div>
 					<div class="form-group">
