@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { Header, Question, Choice, AnswerCheck } from '../../models/modules/header';
 import { StudentService } from '../../services/student.service';
 import 'rxjs/add/operator/switchMap';
+import {SafeHtmlPipe} from '../safe-html.pipe'
+
 
 @Pipe({
   name: 'getChoices',

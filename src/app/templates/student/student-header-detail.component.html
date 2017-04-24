@@ -65,10 +65,7 @@
                     </span>
                 </span>
             </h3>
-			<h3 *ngIf="question.type != 'fill-blank'" style="white-space:pre-wrap">{{question.content}}<span *ngIf="question.correct != null">
-                    <span class = "glyphicon glyphicon-remove" style="color:red" *ngIf="question.correct == false"></span>
-                    <span class = "glyphicon glyphicon-ok" style="color:green" *ngIf="question.correct == true"></span>
-                </span>
+			<h3 *ngIf="question.type != 'fill-blank'" style="white-space:pre-wrap"><span *ngIf="question.correct != null"><span class = "glyphicon glyphicon-remove" style="color:red" *ngIf="question.correct == false"></span><span class = "glyphicon glyphicon-ok" style="color:green" *ngIf="question.correct == true"></span></span><span [innerHTML]="question.content | safeHtml"></span>
             </h3>
 			<!-- <form *ngIf="question.type == 'fill-blank'">
                 <div class="form-group" *ngFor="let answer of question.fbAnswers;let i = index">
@@ -97,6 +94,8 @@
 					<p>
 						<b>Selected Answer: </b> {{question.mcAnswer}}
 					</p>
+					<hr style="border-top:1px solid black !important" size="3" />
+
 				</div>
 				<div class="col-md-12" *ngIf="question.type == 'multiple-select'">
 					<div>
@@ -117,7 +116,6 @@
           </p> -->
 				</div>
 			</div>
-			<br />
 			<hr style="border-top:1px solid black !important" size="3" />
 		</div>
 		<br />
@@ -134,7 +132,8 @@
                     </span>
                 </span>
             </h3>
-			<h3 *ngIf="question.type != 'fill-blank'" style="white-space:pre-wrap">{{question.content}}</h3>
+
+			<h3 *ngIf="question.type != 'fill-blank'" style="white-space:pre-wrap"><span [innerHTML]="question.content | safeHtml"></span></h3>
 			<div *ngIf="question.type == 'short-answer'">
 				<p>
 					{{question.saAnswer}}
