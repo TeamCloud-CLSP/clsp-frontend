@@ -9,7 +9,7 @@
 		<h2>Questions for {{header.name}}</h2>
 	</div>
 	<div class="row" *ngFor="let question of questions">
-		<h3 style="white-space: pre-wrap;">{{question.weight}}. {{question.content}}</h3>
+		<h3 style="white-space: pre-wrap;"><span>{{question.weight}}. </span><span [innerHTML]="question.content | safeHtml"></span></h3>
 		<div *ngIf="question.type == 'fill-blank'">
 			<p *ngFor="let answer of getChoices(question.answers); let i = index"><b>Blank {{i+1}}:</b> {{answer.choice}} </p>
 		</div>
@@ -61,7 +61,15 @@
 					</div>
 					<div class="form-group">
 						<label for="name">Question</label>
-						<textarea type="text" class="form-control" id="content" required [(ngModel)]="newQuestion.content" name="content" (ngModelChange)="fillBlankChoices()" rows="10" cols="12"></textarea>
+						<ckeditor
+						    [(ngModel)]="newQuestion.content" name="content" id="content" required
+						    (ngModelChange)="fillBlankChoices()"
+						    [config]="{
+							    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
+							}"
+						    debounce="500">
+						</ckeditor>
+						<!-- <textarea type="text" class="form-control" id="content" required [(ngModel)]="newQuestion.content" name="content" (ngModelChange)="fillBlankChoices()" rows="10" cols="12"></textarea> -->
 					</div>
 					<div *ngIf="selectedType == 'multiple-choice' || selectedType == 'multiple-select'">
 						<div style="margin-left:20px;">

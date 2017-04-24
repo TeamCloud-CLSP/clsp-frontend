@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Header, Question, Choice } from '../models/modules/header';
 import { ModuleService } from '../services/module.service';
 import 'rxjs/add/operator/switchMap';
+import {SafeHtmlPipe} from './safe-html.pipe'
 
 @Component({
     selector: 'app-module-detail',
