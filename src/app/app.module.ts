@@ -16,6 +16,7 @@ import {ModuleService} from './services/module.service';
 import {StudentService} from './services/student.service';
 import {MediaService} from './services/media.service';
 import {AuthenticationService} from './services/authentication.service';
+import {AccountService} from './services/account.service';
 
 // Components
 import { CoursesComponent } from './components/courses.component';
@@ -42,6 +43,8 @@ import {StudentQuestionModuleComponent} from './components/student/student-quest
 import {StudentHeaderDetailComponent, GetChoicesPipe} from './components/student/student-header-detail.component';
 import {StudentCulturalNotesComponent} from './components/student/student-cultural-notes.component';
 import {LoginComponent} from './components/login.component';
+import { ForgotPassComponent } from './components/forgot-pass/forgot-pass.component';
+import { RegisterComponent } from './components/register/register.component';
 
 // Routing
 import {AppRoutingModule} from './app-routing.module';
@@ -50,9 +53,7 @@ import {PopoverModule} from 'ng2-bootstrap';
 import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import {MediaLinkComponent} from './components/media-link.component';
 import {AuthGuard} from './auth.guard';
-import { RegisterComponent } from './components/register/register.component';
 import {CustomFormsModule} from 'ng2-validation';
-import {RegisterService} from "./services/register.service";
 
 
 
@@ -96,7 +97,8 @@ import {RegisterService} from "./services/register.service";
         StudentCulturalNotesComponent,
         MediaLinkComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        ForgotPassComponent
     ],
     entryComponents: [
         AnnotationComponent
@@ -110,7 +112,7 @@ import {RegisterService} from "./services/register.service";
         StudentService,
         AuthenticationService,
         AuthGuard,
-        RegisterService
+        AccountService
     ],
     bootstrap: [AppComponent]
 })

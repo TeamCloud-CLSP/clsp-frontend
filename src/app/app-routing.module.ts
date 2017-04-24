@@ -21,6 +21,7 @@ import {MediaLinkComponent} from './components/media-link.component';
 import {LoginComponent} from './components/login.component';
 import {AuthGuard} from './auth.guard';
 import {RegisterComponent} from './components/register/register.component';
+import {ForgotPassComponent} from "./components/forgot-pass/forgot-pass.component";
 
 const routes: Routes = [
     {
@@ -120,6 +121,14 @@ const routes: Routes = [
     {
         path: 'register',
         component: RegisterComponent
+    },
+    {
+        path: 'forgotPass',
+        component: ForgotPassComponent
+    },
+    {
+        path: 'forgotPass/:id',
+        component: ForgotPassComponent
     }
 ];
 
