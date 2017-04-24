@@ -11,10 +11,10 @@ import { StudentRegistration, Student } from '../models/studentregistration';
 
 export class ProfessorClassComponent implements OnInit {
 
-    private currClass: SingleClass;
-    private students: Student[];
-    private studentRegistration: StudentRegistration;
-    private newRegistration: StudentRegistration;
+    public currClass: SingleClass;
+    public students: Student[];
+    public studentRegistration: StudentRegistration;
+    public newRegistration: StudentRegistration;
 
     constructor(
         private professorService: ProfessorService,

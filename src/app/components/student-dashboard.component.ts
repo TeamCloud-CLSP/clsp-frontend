@@ -11,10 +11,10 @@ import { Unit, Song } from '../models/course';
 
 export class StudentDashboardComponent implements OnInit {
 
-    private myClass: StudentClass;
-    private units: Unit[];
-    private songs: Song[][];
-    private loadedSongs: boolean;
+    public myClass: StudentClass;
+    public units: Unit[];
+    public songs: Song[][];
+    public loadedSongs: boolean;
 
     constructor(private service: StudentService,
                 private router: Router) {

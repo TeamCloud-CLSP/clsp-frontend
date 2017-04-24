@@ -1,4 +1,4 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -6,8 +6,6 @@ import { Router } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Unit, Song } from '../../models/course';
 import { StudentService } from '../../services/student.service';
-import {SafeHtmlPipe} from '../safe-html.pipe'
-
 
 @Component({
   selector: 'app-student-unit-detail',
@@ -18,7 +16,7 @@ import {SafeHtmlPipe} from '../safe-html.pipe'
 export class StudentUnitDetailComponent implements OnInit {
   unit: Unit;
   songs: Song[];
-  private courseName: string;
+  public courseName: string;
 
   constructor(
     private studentService: StudentService,
@@ -34,7 +32,6 @@ export class StudentUnitDetailComponent implements OnInit {
       .switchMap((params: Params) => this.studentService.getUnit(+params['id']))
       .subscribe(unit => {
         this.unit = unit;
-        //this.unit.description = this.sanitizer.bypassSecurityTrustHtml(this.unit.description);
         console.log(unit);
         this.studentService.getCourse(unit.course_id).then(course => {
           this.courseName = course;

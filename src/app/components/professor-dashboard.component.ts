@@ -12,10 +12,10 @@ import {SafeHtmlPipe} from './safe-html.pipe'
 
 export class ProfessorDashboardComponent implements OnInit {
 
-    private classes: CLSPClass[];
-    private profInfo: ProfInfo[];
-    private newClass: CreateClass;
-    private createNumber = -1;
+    public classes: CLSPClass[];
+    public profInfo: ProfInfo[];
+    public newClass: CreateClass;
+    public createNumber = -1;
 
     constructor(
         private professorService: ProfessorService,
