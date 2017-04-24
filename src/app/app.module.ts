@@ -19,6 +19,8 @@ import { MediaService } from './services/media.service';
 import { AuthenticationService } from './services/authentication.service';
 import { AccountService } from './services/account.service';
 import { AuthGuard } from './auth.guard';
+import { AlertService } from './services/alert.service';
+
 
 // Components
 import { CoursesComponent } from './components/courses.component';
@@ -47,7 +49,9 @@ import { StudentCulturalNotesComponent } from './components/student/student-cult
 import { LoginComponent } from './components/login.component';
 import { ForgotPassComponent } from './components/forgot-pass/forgot-pass.component';
 import { RegisterComponent } from './components/register/register.component';
-import {MediaLinkComponent} from './components/media-link.component';
+import { MediaLinkComponent } from './components/media-link.component';
+import { AlertGlobalComponent } from './components/alert-global/alert-global.component';
+
 
 // Routing
 import {AppRoutingModule} from './app-routing.module';
@@ -96,7 +100,8 @@ import {SafeHtmlPipe} from './components/safe-html.pipe';
         LoginComponent,
         RegisterComponent,
         ForgotPassComponent,
-        SafeHtmlPipe
+        SafeHtmlPipe,
+        AlertGlobalComponent
     ],
     entryComponents: [
         AnnotationComponent
@@ -110,7 +115,8 @@ import {SafeHtmlPipe} from './components/safe-html.pipe';
         StudentService,
         AuthenticationService,
         AuthGuard,
-        AccountService
+        AccountService,
+        AlertService
     ],
     bootstrap: [AppComponent]
 })

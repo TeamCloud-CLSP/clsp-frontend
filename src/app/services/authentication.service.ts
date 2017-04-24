@@ -8,6 +8,9 @@ import { UserToken } from '../models/user-token';
 import { User } from '../models/user';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
+import * as jwt_decode from 'jwt-decode';
+import { AlertService } from './alert.service';
+import {JwtToken} from "../models/jwt-token";
 
 @Injectable()
 export class AuthenticationService {
@@ -17,8 +20,8 @@ export class AuthenticationService {
     redirectUrl: string;
 
     constructor(private http: Http,
-                private router: Router
-
+                private router: Router,
+                private alertService: AlertService
     ) { }
 
     login(username: string, password: string): Observable<UserToken> {
@@ -35,11 +38,18 @@ export class AuthenticationService {
 
     // assumes that you're already logged in
     public getOptions() {
+        const token = jwt_decode(this.getToken()) as JwtToken;
+        console.log('outside get options');
+
+        if ( token.exp + 3600 < + new Date() ) {
+            console.log('inside get options');
+            this.alertService.setMsg('Session will expire in less than an hour');
+        }
         const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.getToken() });
         // console.log("headers");
         // console.log(headers);
         const options = new RequestOptions({ headers: headers });
-        // console.log(options);
+        console.log(options);
         return options;
     }
 
@@ -75,7 +85,7 @@ export class AuthenticationService {
         }
     }
 
-    public getToken(): String {
+    public getToken(): string {
         if (localStorage.getItem('currentUser')) {
             const user: UserToken = JSON.parse(localStorage.getItem('currentUser')) as UserToken;
             return user.token;
