@@ -22,8 +22,7 @@
 	</div>
 	<div *ngIf="unit">
 		<h1>{{unit.name}}</h1>
-		<!-- <p style="white-space:pre-wrap;">{{unit.description}}<p> -->
-		<div style="white-space:pre-wrap;" [innerHTML]="unit.description | safeHtml"></div>
+		<div [innerHTML]="unit.description | safeHtml"></div>
 		<div class="clsp-table-container">
 			<h3 style="text-align: center;">Songs</h3>
 			<table class="table">
