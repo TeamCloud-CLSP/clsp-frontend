@@ -65,7 +65,7 @@
                     </span>
                 </span>
             </h3>
-			<h3 *ngIf="question.type != 'fill-blank'" style="white-space:pre-wrap"><span *ngIf="question.correct != null"><span class = "glyphicon glyphicon-remove" style="color:red" *ngIf="question.correct == false"></span><span class = "glyphicon glyphicon-ok" style="color:green" *ngIf="question.correct == true"></span></span><span [innerHTML]="question.content | safeHtml"></span>
+			<h3 *ngIf="question.type != 'fill-blank'"><span *ngIf="question.correct != null"><span class = "glyphicon glyphicon-remove" style="color:red" *ngIf="question.correct == false"></span><span class = "glyphicon glyphicon-ok" style="color:green" *ngIf="question.correct == true"></span></span><span [innerHTML]="question.content | safeHtml"></span>
             </h3>
 			<!-- <form *ngIf="question.type == 'fill-blank'">
                 <div class="form-group" *ngFor="let answer of question.fbAnswers;let i = index">
@@ -133,7 +133,7 @@
                 </span>
             </h3>
 
-			<h3 *ngIf="question.type != 'fill-blank'" style="white-space:pre-wrap"><span [innerHTML]="question.content | safeHtml"></span></h3>
+			<h3 *ngIf="question.type != 'fill-blank'"><span [innerHTML]="question.content | safeHtml"></span></h3>
 			<div *ngIf="question.type == 'short-answer'">
 				<p>
 					{{question.saAnswer}}
