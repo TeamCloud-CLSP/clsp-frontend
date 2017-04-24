@@ -39,7 +39,7 @@
 				<p><b>Artist: </b>{{song.artist}}</p>
 				<p><b>Album: </b>{{song.album}}</p>
 				<p><b>Description: </b></p>
-				<div [innerHtml]="song.description" style="white-space:pre-wrap;"></div>
+				<div [innerHtml]="song.description | safeHtml" style="white-space:pre-wrap;"></div>
 				<p *ngIf="song.embed"><b>Embed Link: </b>{{song.embed}}</p>
 				<br>
 				<button class="btn btn-default" (click)="editSong()">Edit</button>
@@ -104,8 +104,8 @@
 						<div class="btn-group" role="group">
 							<button *ngIf="module.is_enabled == 1" class="btn btn-default" (click)="disableModule(module, i)">Disable Module</button>
 							<button *ngIf="module.is_enabled == 0" class="btn btn-default" (click)="enableModule(module, i)">Enable Module</button>
-							<button *ngIf="module.song_enabled == 1" class="btn btn-default" (click)="disableSongModule(module, i)">Hide Song in Module</button>
-							<button *ngIf="module.song_enabled == 0" class="btn btn-default" (click)="enableSongModule(module, i)">Show Song in Module</button>
+							<button *ngIf="module.module_type != 'module_cn' && module.song_enabled == 1" class="btn btn-default" (click)="disableSongModule(module, i)">Hide Song in Module</button>
+							<button *ngIf="module.module_type != 'module_cn' && module.song_enabled == 0" class="btn btn-default" (click)="enableSongModule(module, i)">Show Song in Module</button>
 						</div>
 						<div>
 							<h2>Edit Module Name</h2>

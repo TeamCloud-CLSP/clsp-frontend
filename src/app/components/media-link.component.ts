@@ -6,6 +6,7 @@ import { Media, Unit, Song } from '../models/course';
 import { DomSanitizer } from '@angular/platform-browser';
 import 'rxjs/add/operator/switchMap';
 import { CourseService } from '../services/course.service';
+import { environment } from '../../environments/environment';
 
 @Component({
     selector: 'app-media-link',
@@ -21,6 +22,9 @@ export class MediaLinkComponent implements OnInit {
     song: Song;
     unit: Unit;
     courseName: string;
+    searchName: string;
+    searchType: string;
+    siteUrl: string;
 
 
     constructor(private courseService: CourseService,
@@ -51,6 +55,9 @@ export class MediaLinkComponent implements OnInit {
                 });
             });
         this.getFiles();
+        this.searchName = "";
+        this.searchType = "";
+        this.siteUrl = environment.apiBase;
     }
 
     getFiles(): void {
@@ -82,5 +89,15 @@ export class MediaLinkComponent implements OnInit {
 
     goBack(): void {
         this.location.back();
+    }
+
+    searchFiles(): void {
+        this.mediaService.searchAVFiles(this.searchName, this.searchType).then(files => this.files = files);
+    }
+
+    clearSearch(): void {
+        this.searchName = "";
+        this.searchType = "";
+        this.getFiles();
     }
 }

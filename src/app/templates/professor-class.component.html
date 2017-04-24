@@ -1,53 +1,62 @@
-<div *ngIf="currClass">
-    <h2>Registration for {{currClass.name}}</h2>
-    <h4 *ngIf="studentRegistration">Start Date: {{studentRegistration.student_registration_date_start * 1000 | date}}</h4>
-    <h4 *ngIf="studentRegistration">End Date: {{studentRegistration.student_registration_date_end * 1000 | date}}</h4>
-    <div *ngIf="students">
-        <br />
-        <h4>Registered Students</h4>
-        <table class="table">
-            <tr>
-                <th>
-                    Id
-                </th>
-                <th>
-                    Username
-                </th>
-                <th>
+<div *ngIf="currClass" class="container" style="text-align: left;background:white;border-width:thin;border-style:solid;border-color:#c3c3c3;padding:15px">
+	<h2>Registration for {{currClass.name}}</h2>
+	<h4 *ngIf="studentRegistration">Start Date: {{studentRegistration.student_registration_date_start * 1000 | date}}</h4>
+	<h4 *ngIf="studentRegistration">End Date: {{studentRegistration.student_registration_date_end * 1000 | date}}</h4>
+	<h4 *ngIf="studentRegistration">Max Registrations: {{studentRegistration.student_registration_max_registrations}}</h4>
+	<br />
+	<h4 *ngIf="studentRegistration">Registration Code: {{studentRegistration.signup_code}}</h4>
 
-                </th>
-            </tr>
-            <tr *ngFor="let student of students">
-                <td>
-                    {{student.id}}
-                </td>
-                <td>
-                    {{student.username}}
-                </td>
-                <td>
-                    <button class="btn btn-default" (click)="deleteStudent(student)">Delete</button>
-                </td>
-            </tr>
-        </table>
-    </div>
 
-    <div *ngIf="newRegistration" class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">New Registration Code</h3>
-        </div>
-        <div class="panel-body container">
-            <form (ngSubmit)="onSubmit()" #registrationForm="ngForm">
-                <div class="form-group">
-                    <label for="name">Start Date</label>
-                    <input data-provide="datepicker" type="date" class="form-control" id="start_date" required [(ngModel)]="newRegistration.student_registration_date_start" name="date_start">
-                </div>
-                <div class="form-group">
-                    <label for="name">End Date</label>
-                    <input data-provide="datepicker" type="date" class="form-control" id="end_date" required [(ngModel)]="newRegistration.student_registration_date_end" name="date_end">
-                </div>
-                <button type="submit" class="btn btn-success" [disabled]="!registrationForm.form.valid">Submit</button>
-            </form>
-        </div>
-    </div>
-    <button class="btn btn-default" *ngIf="studentRegistration == null" (click)="openRegistration()">Open Registration</button>
+	<div *ngIf="students">
+		<br />
+		<h4>Registered Students</h4>
+		<table class="table">
+			<tr>
+				<th>
+					Id
+				</th>
+				<th>
+					Username
+				</th>
+				<th>
+
+				</th>
+			</tr>
+			<tr *ngFor="let student of students">
+				<td>
+					{{student.id}}
+				</td>
+				<td>
+					{{student.username}}
+				</td>
+				<td>
+					<button class="btn btn-default" (click)="deleteStudent(student)">Delete</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div *ngIf="newRegistration" class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">New Registration Code</h3>
+		</div>
+		<div class="panel-body container">
+			<form (ngSubmit)="onSubmit()" #registrationForm="ngForm">
+				<div class="form-group">
+					<label for="name">Start Date</label>
+					<input data-provide="datepicker" type="date" class="form-control" id="start_date" required [(ngModel)]="newRegistration.student_registration_date_start" name="date_start" style="width:95%">
+				</div>
+				<div class="form-group">
+					<label for="name">End Date</label>
+					<input data-provide="datepicker" type="date" class="form-control" id="end_date" required [(ngModel)]="newRegistration.student_registration_date_end" name="date_end" style="width:95%">
+				</div>
+				<div class="form-group">
+					<label for="name">Max Number of Registrations</label>
+					<input type="number" class="form-control" id="max_reg" required [(ngModel)]="newRegistration.student_registration_max_registrations" name="max_reg" style="width:95%">
+				</div>
+				<button type="submit" class="btn btn-success" [disabled]="!registrationForm.form.valid">Submit</button>
+			</form>
+		</div>
+	</div>
+	<button class="btn btn-default" *ngIf="studentRegistration == null" (click)="openRegistration()">Open Registration</button>
 </div>

@@ -1,5 +1,12 @@
 <h2 *ngIf="song">Link Media to {{song.title}}</h2>
 
+<div>
+    <h3>File Search</h3>
+    <p>Name</p><input [(ngModel)]="searchName" class="form-control" name="searchName" id="searchName" /><p>File Type</p><input [(ngModel)]="searchType" class="form-control" name="searchType" id="searchType" />
+    <button type="btn btn-default" (click)="searchFiles()">Search</button>
+    <button type="btn btn-default" (click)="clearSearch()">Clear</button>
+</div>
+
 <div *ngIf="files">
     <br/>
     <table class="table" *ngIf="linked">
@@ -17,7 +24,7 @@
             <!--<td><strong>{{file.id}}</strong></td>-->
             <td>{{file.name}}</td>
             <td>{{file.file_type}}</td>
-            <td>{{this.siteUrl}}/files/{{file.filename}}</td>
+            <td>/files/{{file.filename}}</td>
             <td *ngIf="isLinked(file.id)"><strong>Yes</strong></td>
             <td *ngIf="!isLinked(file.id)"><strong>No</strong></td>
             <td *ngIf="!isLinked(file.id)">

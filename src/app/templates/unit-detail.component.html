@@ -9,7 +9,7 @@
 	</div>
 	<div class="row" style="background:white;border-width:thin;border-style:solid;border-color:#c3c3c3;padding:15px">
 		<div *ngIf="!edited" class="row" style="padding:15px">
-			<div style="white-space:pre-wrap;" [innerHTML]="unit.description"></div>
+			<div style="white-space:pre-wrap;" [innerHTML]="unit.description | safeHtml"></div>
 			<br />
 			<button (click)="editUnit()" class="btn btn-default">Edit</button>
 		</div>

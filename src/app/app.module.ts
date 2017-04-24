@@ -55,7 +55,8 @@ import {MediaLinkComponent} from './components/media-link.component';
 import {AuthGuard} from './auth.guard';
 import {CustomFormsModule} from 'ng2-validation';
 
-
+// Pipes
+import {SafeHtmlPipe} from './components/safe-html.pipe'
 
 @NgModule({
     imports: [
@@ -98,7 +99,8 @@ import {CustomFormsModule} from 'ng2-validation';
         MediaLinkComponent,
         LoginComponent,
         RegisterComponent,
-        ForgotPassComponent
+        ForgotPassComponent,
+        SafeHtmlPipe
     ],
     entryComponents: [
         AnnotationComponent

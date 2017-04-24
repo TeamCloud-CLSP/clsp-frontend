@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { ModuleService } from '../../services/module.service';
 import { StudentService } from '../../services/student.service';
+import {SafeHtmlPipe} from '../safe-html.pipe'
 
 @Component({
   selector: 'app-student-song-detail',

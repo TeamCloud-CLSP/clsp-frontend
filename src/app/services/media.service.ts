@@ -29,10 +29,30 @@ export class MediaService {
             .catch(this.handleError);
     }
 
+    searchAllFiles(name: string, type: string): Promise<Media[]> {
+        const url = `${this.designerUrl}/media?name=${name}&file_type=${type}`;
+        return this.http
+            .get(url,
+                this.authService.getOptions())
+            .toPromise()
+            .then(response => response.json().data as Media[])
+            .catch(this.handleError);
+    }
+
     getAVFiles(): Promise<Media[]> {
         const url = `${this.designerUrl}/avmedia`;
         return this.http
             .get(url, this.authService.getOptions())
+            .toPromise()
+            .then(response => response.json().data as Media[])
+            .catch(this.handleError);
+    }
+
+    searchAVFiles(name: string, type: string): Promise<Media[]> {
+        const url = `${this.designerUrl}/avmedia?name=${name}&file_type=${type}`;
+        return this.http
+            .get(url,
+                this.authService.getOptions())
             .toPromise()
             .then(response => response.json().data as Media[])
             .catch(this.handleError);

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -7,6 +7,8 @@ import { Unit, Song, Module } from '../models/course';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { ModuleService } from '../services/module.service';
+import {SafeHtmlPipe} from './safe-html.pipe';
+
 
 @Component({
   selector: 'app-song-detail',

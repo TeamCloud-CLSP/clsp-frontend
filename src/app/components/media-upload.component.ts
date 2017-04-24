@@ -6,6 +6,7 @@ import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { Media } from '../models/course';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Location } from '@angular/common';
+import { environment } from '../../environments/environment';
 
 @Component({
     selector: 'app-media-upload',
@@ -28,6 +29,9 @@ export class MediaUploadComponent implements OnInit {
     files: Media[];
     nameEdit: boolean;
     nameEditId: number;
+    searchName: string;
+    searchType: string;
+    siteUrl: string;
 
 
     constructor(private mediaService: MediaService,
@@ -53,6 +57,9 @@ export class MediaUploadComponent implements OnInit {
         this.getFiles();
         this.nameEdit = false;
         this.nameEditId = -1;
+        this.searchName = "";
+        this.searchType = "";
+        this.siteUrl = environment.apiBase;
     }
 
     editName(id: number) {
@@ -99,5 +106,15 @@ export class MediaUploadComponent implements OnInit {
 
     goBack(): void {
         this.location.back();
+    }
+
+    searchFiles(): void {
+        this.mediaService.searchAllFiles(this.searchName, this.searchType).then(files => this.files = files);
+    }
+
+    clearSearch(): void {
+        this.searchName = "";
+        this.searchType = "";
+        this.getFiles();
     }
 }
