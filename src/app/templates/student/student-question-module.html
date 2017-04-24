@@ -1,10 +1,17 @@
-<div class="row">
-    <div class="col-md-12">
-        <h2>Assignments</h2>
-        <ul class="list-group">
-            <a (click)="toHeader(header)" *ngFor="let header of headers " class="list-group-item header-item">
+<div class="row" *ngIf="moduleType != 'module_ls'">
+	<div class="col-md-12">
+		<h2>Assignments</h2>
+		<ul class="list-group">
+			<a (click)="toHeader(header)" *ngFor="let header of headers " class="list-group-item header-item">
                 {{header.name}}
             </a>
-        </ul>
-    </div>
+		</ul>
+	</div>
+</div>
+<div class="row" *ngIf="moduleType == 'module_ls'">
+	<div style="padding:15px">
+		<div [innerHtml]="module.description | safeHtml">
+
+		</div>
+	</div>
 </div>

@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="moduleType != 'module_ls'">
 	<div class="col-md-12">
 		<h2>Headers</h2>
 		<table class="table table-hover">
@@ -45,4 +45,28 @@
 	<div class="col-md-12 ">
 		<button *ngIf="!newHeader " (click)="createHeader() " class="btn btn-default ">Add Header</button>
 	</div>
+</div>
+<div class="row" *ngIf="moduleType == 'module_ls'">
+	<div style="padding:15px" *ngIf="!editSug">
+		<div [innerHtml]="module.description | safeHtml">
+
+		</div>
+		<br />
+		<button class="btn btn-default" (click)="editSuggestions()">Edit</button>
+	</div>
+
+	<div class="form-group" style="padding:15px" *ngIf="editSug">
+		<label for="suggestions"> Suggestions: </label>
+		<ckeditor [(ngModel)]="module.description" [config]="{
+				removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak'
+
+}" debounce="500">
+		</ckeditor>
+		<br />
+		<div class="btn-group" role="group">
+			<button class="btn btn-success" (click)="saveSuggestions()">Save</button>
+			<button class="btn btn-default" (click)="cancelEditSug()">Cancel</button>
+		</div>
+	</div>
+
 </div>

@@ -321,4 +321,21 @@ disableSongModule(songId: number, mod: Module): Promise < null > {
     .then(() => null)
     .catch(this.handleError);
 }
+
+saveSuggestions(songId: number, mod: Module): Promise < null > {
+  const url = `${this.designerUrl}/song/${songId}/${mod.module_type}/edit`;
+  return this.http.post(url,
+    JSON.stringify({
+      name: mod.name,
+      is_enabled: mod.is_enabled,
+      password: mod.password,
+      has_password: mod.has_password,
+      song_enabled: mod.song_enabled,
+      description: mod.description
+    }),
+    this.authService.getOptions())
+    .toPromise()
+    .then(() => null)
+    .catch(this.handleError);
+}
 }

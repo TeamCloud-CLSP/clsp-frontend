@@ -6,6 +6,8 @@ import { CourseService } from '../../services/course.service';
 import { ModuleService } from '../../services/module.service';
 import { Router } from '@angular/router';
 import { Header } from '../../models/modules/header';
+import { Module } from '../../models/course';
+import {SafeHtmlPipe} from '../safe-html.pipe'
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -16,6 +18,8 @@ import 'rxjs/add/operator/switchMap';
 export class DiscussionAndWritingComponent implements OnInit {
   headers: Header[];
   newHeader: Header;
+  editSug: boolean;
+  @Input() module: Module;
   @Input() songId: number;
   @Input() unitId: number;
   @Input() moduleType: string;
@@ -30,6 +34,7 @@ export class DiscussionAndWritingComponent implements OnInit {
 
   ngOnInit() {
     // console.log(this.songId);
+    this.editSug = false;
     this.moduleService.getHeaders(this.songId, this.moduleType)
       .then(headers => {
         console.log(headers);
@@ -87,5 +92,21 @@ export class DiscussionAndWritingComponent implements OnInit {
 
   cancelEdit(i: number): void {
     this.headers[i].edit = false;
+  }
+
+  editSuggestions(): void {
+    this.editSug = true;
+  }
+
+  cancelEditSug(): void {
+    this.editSug = false;
+  }
+
+  saveSuggestions(): void {
+    this.moduleService.saveSuggestions(this.songId, this.module).then(
+      response => {
+        this.editSug = false;
+      }
+    )
   }
 }
