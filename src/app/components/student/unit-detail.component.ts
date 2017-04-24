@@ -32,7 +32,7 @@ export class StudentUnitDetailComponent implements OnInit {
       .switchMap((params: Params) => this.studentService.getUnit(+params['id']))
       .subscribe(unit => {
         this.unit = unit;
-        console.log(unit);
+        //console.log(unit);
         this.studentService.getCourse(unit.course_id).then(course => {
           this.courseName = course;
         });

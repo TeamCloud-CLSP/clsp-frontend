@@ -56,10 +56,12 @@ export class SongDetailComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) => this.courseService.getModules(+params['id']))
       .subscribe(modules => {
-        console.log(modules);
+        //console.log(modules);
         this.modules = modules;
-        for (let i = 0; i < this.modules.length; i++) {
-          this.modules[i].name = this.modules[i].name || this.modules[i].module_type;
+        for (let m of this.modules) {
+          if (m.name == null) {
+            m.name = names[m.module_type];
+          }
         }
         this.currentModule = this.modules[0].module_type;
       });

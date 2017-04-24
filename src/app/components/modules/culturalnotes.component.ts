@@ -60,7 +60,7 @@ export class CulturalNotesComponent implements OnInit {
         lyrics = lyrics.replace(notes[i].phrase, test);
       }
       this.lyricPieces = lyrics.split('|').filter(x => x != '');
-      console.log(this.lyricPieces);
+      //console.log(this.lyricPieces);
       this.showLyrics = true;
     });
   }
@@ -148,7 +148,7 @@ export class CulturalNotesComponent implements OnInit {
           lyrics = lyrics.replace(notes[i].phrase, test);
         }
         this.lyricPieces = lyrics.split('|').filter(x => x != '');
-        console.log(this.lyricPieces);
+        //console.log(this.lyricPieces);
         this.showLyrics = true;
         this.editing = false;
       });

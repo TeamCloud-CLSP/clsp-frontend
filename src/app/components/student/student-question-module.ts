@@ -32,7 +32,7 @@ export class StudentQuestionModuleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.songId);
+    //console.log(this.songId);
     this.studentService.getHeaders(this.songId, this.moduleType)
       .then(headers => {
         this.headers = new Array<Header>();

@@ -37,7 +37,7 @@ export class DiscussionAndWritingComponent implements OnInit {
     this.editSug = false;
     this.moduleService.getHeaders(this.songId, this.moduleType)
       .then(headers => {
-        console.log(headers);
+        //console.log(headers);
         this.headers = headers;
         for (let h of this.headers) {
           h.edit = false;

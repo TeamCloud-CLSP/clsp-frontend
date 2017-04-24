@@ -16,7 +16,7 @@ export class AccountService {
   constructor(private http: Http) { }
 
   register(signupCode: string, username: string, password: string, email: string, name: string): Observable<void> {
-    console.log('trying to register user ' + username);
+    //console.log('trying to register user ' + username);
     return this.http.post(this.registerUrl, JSON.stringify({
       signup_code: signupCode,
       username: username,
@@ -24,50 +24,50 @@ export class AccountService {
       email: email,
       name: name
     }), this.options)
-        .map(this.registerHandler)
-        .catch(this.handleError);
+      .map(this.registerHandler)
+      .catch(this.handleError);
   }
 
   private registerHandler(res: Response) {
-    console.log('successful registration');
-    console.log(res);
+    //console.log('successful registration');
+    //console.log(res);
     return;
   }
 
   forgotPassEmail(email: string): Observable<void> {
-    console.log('trying to send forgotten password email for' + email);
+    //console.log('trying to send forgotten password email for' + email);
     return this.http.post(this.securityUrl + '/forgotPass', JSON.stringify({
       email: email,
     }), this.options)
-        .map(this.forgotPassEmailHandler)
-        .catch(this.handleError);
+      .map(this.forgotPassEmailHandler)
+      .catch(this.handleError);
   }
 
   private forgotPassEmailHandler(res: Response) {
-    console.log('successful registration');
-    console.log(res);
+    //console.log('successful registration');
+    //console.log(res);
     return;
   }
 
   forgotPassResetPass(code: string, password: string): Observable<void> {
-    console.log('trying to reset password');
+    //console.log('trying to reset password');
     return this.http.post(this.securityUrl + '/resetPass', JSON.stringify({
       forgot_pass_code: code,
       new_password: password
     }), this.options)
-        .map(this.forgotPassResetPassHandler)
-        .catch(this.handleError);
+      .map(this.forgotPassResetPassHandler)
+      .catch(this.handleError);
   }
 
   private forgotPassResetPassHandler(res: Response) {
-    console.log('successful password reset');
-    console.log(res);
+    //console.log('successful password reset');
+    //console.log(res);
     return;
   }
 
-  private handleError (error: Response | any) {
+  private handleError(error: Response | any) {
     // In a real world app, you might use a remote logging infrastructure
-    console.log(error);
+    //console.log(error);
     let errMsg: string;
     if (error.json().error) {
       errMsg = error.json().error;
