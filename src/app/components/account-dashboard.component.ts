@@ -16,7 +16,7 @@ export class AccountDashboardComponent {
     constructor(
         private authService: AuthenticationService
     ) {
-        this.account = authService.getEmptyAccount();
+        this.account = authService.getAccount();
     }
 
     getRoles(): string {
