@@ -29,6 +29,7 @@
                 <li *ngIf="getAccount().is_designer"><a routerLink="/designer/courses" routerLinkActive="active">Courses</a></li>
                 <li *ngIf="getAccount().is_administrator"><a routerLink="/admin" routerLinkActive="active">Admin</a></li>
                 <li *ngIf="getAccount().is_professor"><a routerLink="/professor" routerLinkActive="active">Dashboard</a></li>
+                <li *ngIf="getAccount().is_student"><a routerLink="/student" routerLinkActive="active">Dashboard</a></li>
             </ul>
             <ul *ngIf="getAccount().name" class="nav navbar-nav navbar-right special-list">
                 <li><a routerLink="/account" routerLinkActive="active"><i class="fa fa-user" aria-hidden="true"></i> {{ getAccount().name }}</a></li>

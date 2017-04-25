@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { User } from '../models/user';
 import 'rxjs/add/operator/switchMap';
 import { AuthenticationService } from '../services/authentication.service';
+import { AccountService } from '../services/account.service';
 
 @Component ({
     selector: 'app-account-dashboard',
@@ -12,9 +13,11 @@ import { AuthenticationService } from '../services/authentication.service';
 export class AccountDashboardComponent {
 
     account: User;
+    edited: boolean;
 
     constructor(
-        private authService: AuthenticationService
+        private authService: AuthenticationService,
+        private accountService: AccountService
     ) {
         this.account = authService.getAccount();
     }
@@ -34,5 +37,19 @@ export class AccountDashboardComponent {
             stuff += 'ROLE_PROFESSOR, ';
         }
         return stuff;
+    }
+
+    editAccount(): void {
+        this.edited = true;
+    }
+
+    updateAccount(): void {
+        console.log(this.account);
+        this.accountService.updateAccount(this.account).then(
+          (user: User) => {
+              this.edited = false;
+              this.account = user;
+          }
+        );
     }
 }

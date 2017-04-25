@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { User } from '../models/user';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import {ActivatedRouteSnapshot, Router} from '@angular/router';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class AccountService {
   private registerUrl = '/api/register';
   private securityUrl = '/api/security';
+  private accountUrl = '/api/account'
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private options = new RequestOptions({ headers: this.headers });
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private authService: AuthenticationService) { }
 
   register(signupCode: string, username: string, password: string, email: string, name: string): Observable<void> {
     //console.log('trying to register user ' + username);
@@ -80,4 +83,24 @@ export class AccountService {
     }
     return Observable.throw(errMsg);
   }
+
+  updateAccount(user: User): Promise<User> {
+      const url = this.accountUrl;
+      if (user.password != null && user.password != "") {
+          return this.http.post(url,
+              JSON.stringify({ name: user.name, email: user.email, password: user.password }),
+              this.authService.getOptions())
+              .toPromise()
+              .then(response => response.json() as User)
+              .catch(this.handleError);
+      } else {
+          return this.http.post(url,
+              JSON.stringify({ name: user.name, email: user.email }),
+              this.authService.getOptions())
+              .toPromise()
+              .then(response => response.json() as User)
+              .catch(this.handleError);
+          }
+  }
+
 }
