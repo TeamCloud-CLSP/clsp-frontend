@@ -34,7 +34,7 @@ export class AdminService {
     addDesigner(user: User): Promise<User> {
         const url = `${this.adminUrl}/designer`;
         return this.http.post(url,
-            JSON.stringify({ username: user.username, password: user.password, email: user.email }), this.authService.getOptions())
+            JSON.stringify({ username: user.username, password: user.password, email: user.email, name: user.name }), this.authService.getOptions())
             .toPromise()
             .then(response => response.json() as User)
             .catch(this.handleError);

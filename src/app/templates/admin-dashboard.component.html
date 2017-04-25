@@ -43,6 +43,10 @@
     <div class="panel-body container">
         <form (ngSubmit)="submitDesigner()" #designerForm="ngForm">
             <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" required [(ngModel)]="newDesigner.name" name="name">
+            </div>
+            <div class="form-group">
                 <label for="name">Username</label>
                 <input type="text" class="form-control" id="username" required [(ngModel)]="newDesigner.username" name="username">
             </div>
