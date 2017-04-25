@@ -1,7 +1,5 @@
-import {User} from "./user";
-/**
- * Created by pjztam on 2/19/2017.
- */
+import { User } from './user';
+
 export class UserToken {
     token: string;
     user_info: User;
