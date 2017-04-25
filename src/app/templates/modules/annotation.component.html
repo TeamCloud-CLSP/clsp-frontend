@@ -20,16 +20,10 @@
         <div>
             <ckeditor
                     [(ngModel)]="note.description"
-                    [config]="{toolbarGroups: [
-						{'name':'basicstyles','groups':['basicstyles']},
-						{'name':'links','groups':['links']},
-						{'name':'paragraph','groups':['list','blocks']},
-						{'name':'document','groups':['mode']},
-						{'name':'insert','groups':['insert']}
-					],
-                    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
+                    [config]="{
+                        removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,'
 
-}"
+                    }"
                     debounce="500">
             </ckeditor>
         </div>
