@@ -95,7 +95,7 @@ export class StudentHeaderDetailComponent implements OnInit {
             }
           }
         }
-        console.log(this.songEnable);
+        //console.log(this.songEnable);
         this.route.params
           .switchMap((params: Params) => this.studentService.getSong(+params['song_id']))
           .subscribe(song => {
@@ -106,7 +106,7 @@ export class StudentHeaderDetailComponent implements OnInit {
             this.route.params
               .switchMap((params: Params) => this.studentService.getMedia(+params['song_id']))
               .subscribe(media => {
-                console.log(media);
+                //console.log(media);
 
                 this.media = media;
               });
@@ -135,7 +135,7 @@ export class StudentHeaderDetailComponent implements OnInit {
       question = question.replace('_', "|" + i.toString() + "|");
     }
     var pieces = question.split('|').filter(x => x != "");
-    console.log(pieces);
+    //console.log(pieces);
     return pieces;
   }
 
@@ -199,7 +199,7 @@ export class StudentHeaderDetailComponent implements OnInit {
           var choice = this.questions.find(x => x.id == a.id);
           choice.correct = a.result;
         }
-        console.log(this.questions);
+        //console.log(this.questions);
       }
       )
   }
@@ -211,7 +211,7 @@ export class StudentHeaderDetailComponent implements OnInit {
   }
 
   getFbCheck(correct: string, index: number): string {
-    console.log(correct);
+    //console.log(correct);
     return correct.split(',')[index];
   }
 

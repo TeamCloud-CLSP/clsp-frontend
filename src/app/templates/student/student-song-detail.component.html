@@ -56,26 +56,26 @@
                         <source src="{{publicBaseUrl + item.filename}}" type="video/ogg">
                     </video>
 				</div>
-                <div *ngSwitchCase="'mp4'">
-                    <video style="width: 100%;" controls>
+				<div *ngSwitchCase="'mp4'">
+					<video style="width: 100%;" controls>
                         <source src="{{publicBaseUrl + item.filename}}" type="video/mp4">
                     </video>
-                </div>
-                <div *ngSwitchCase="'webm'">
-                    <video style="width: 100%;" controls>
+				</div>
+				<div *ngSwitchCase="'webm'">
+					<video style="width: 100%;" controls>
                         <source src="{{publicBaseUrl + item.filename}}" type="video/webm">
                     </video>
-                </div>
-                <div *ngSwitchCase="'aac'">
-                    <video style="width: 100%; height: 40px;" controls>
+				</div>
+				<div *ngSwitchCase="'aac'">
+					<video style="width: 100%; height: 40px;" controls>
                         <source src="{{publicBaseUrl + item.filename}}" type="video/mp4">
                     </video>
-                </div>
-                <div *ngSwitchCase="'wav'">
-                    <video style="width: 100%; height: 40px;" controls>
+				</div>
+				<div *ngSwitchCase="'wav'">
+					<video style="width: 100%; height: 40px;" controls>
                         <source src="{{publicBaseUrl + item.filename}}" type="audio/wav">
                     </video>
-                </div>
+				</div>
 				<div *ngSwitchDefault>
 					<p>File type {{item.file_type}} not supported</p>
 				</div>
@@ -86,7 +86,7 @@
 			<p><b>Title: </b>{{song.title}}</p>
 			<p><b>Artist: </b>{{song.artist}}</p>
 			<p><b>Album: </b>{{song.album}}</p>
-			<div [innerHtml]="song.description | safeHtml" style="white-space:pre-wrap;"></div>
+			<div [innerHtml]="song.description | safeHtml"></div>
 			<p *ngIf="song.embed"><b>Embed Link: </b>{{song.embed}}</p>
 			<br>
 		</div>
@@ -112,7 +112,7 @@
 						<app-student-cultural-notes *ngIf="passwordValidated || (module.has_password == 0)" [song]="song"></app-student-cultural-notes>
 					</div>
 					<div *ngSwitchDefault>
-						<app-student-question-module [songId]="song.id" [unitId]="unit.id" [moduleType]="module.module_type"></app-student-question-module>
+						<app-student-question-module [module]="module" [songId]="song.id" [unitId]="unit.id" [moduleType]="module.module_type"></app-student-question-module>
 					</div>
 				</div>
 			</div>

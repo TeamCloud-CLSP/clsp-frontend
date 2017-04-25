@@ -9,7 +9,7 @@
 	</div>
 	<div class="row" style="background:white;border-width:thin;border-style:solid;border-color:#c3c3c3;padding:15px">
 		<div *ngIf="!edited" class="row" style="padding:15px">
-			<div style="white-space:pre-wrap;" [innerHTML]="unit.description | safeHtml"></div>
+			<div [innerHTML]="unit.description | safeHtml"></div>
 			<br />
 			<button (click)="editUnit()" class="btn btn-default">Edit</button>
 		</div>
@@ -20,14 +20,11 @@
 			</div>
 			<div class="form-group">
 				<label for="description"> Unit Intro: </label>
-	            <ckeditor
-	                    [(ngModel)]="unit.description"
-	                    [config]="{
-	                    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
+				<ckeditor [(ngModel)]="unit.description" [config]="{
+	                    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak'
 
-	}"
-	                    debounce="500">
-	            </ckeditor>
+	}" debounce="500">
+				</ckeditor>
 			</div>
 			<div class="form-group">
 				<label for="weight"> Unit Weight: </label>
@@ -85,7 +82,7 @@
 						<b>Song Intro</b>
 					</div>
 					<div class="col-md-6 col-sm-6">
-						<p style="white-space:pre-wrap" [innerHTML]="getShortenedDescription(song) | safeHtml"></p>
+						<p [innerHTML]="getShortenedDescription(song) | safeHtml"></p>
 					</div>
 				</div>
 				<div class="row">
@@ -118,24 +115,16 @@
 					</div>
 					<div class="form-group">
 						<label for="name">Song Intro</label>
-						<ckeditor
-							id="description" name="description"
-						    [(ngModel)]="newSong.description"
-						    [config]="{
-							    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
-							}"
-						    debounce="500">
+						<ckeditor id="description" name="description" [(ngModel)]="newSong.description" [config]="{
+							    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak'
+							}" debounce="500">
 						</ckeditor>
 					</div>
 					<div class="form-group">
 						<label for="name">Lyrics</label>
-						<ckeditor
-							id="lyrics" name="lyrics"
-						    [(ngModel)]="newSong.lyrics"
-						    [config]="{
-							    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe'
-							}"
-						    debounce="500">
+						<ckeditor id="lyrics" name="lyrics" [(ngModel)]="newSong.lyrics" [config]="{
+							    removeButtons: 'Subscript,Superscript,Anchor,CreateDiv,Save,NewPage,DocProps,Preview,Print,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak'
+							}" debounce="500">
 						</ckeditor>
 					</div>
 

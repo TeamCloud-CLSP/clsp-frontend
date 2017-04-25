@@ -4,12 +4,12 @@
 
 <h3>Lyrics</h3>
 <div *ngIf="song">
-    <p *ngIf="notes">
-        <span *ngFor="let piece of lyricPieces">
+	<p *ngIf="notes">
+		<span *ngFor="let piece of lyricPieces">
             <span *ngIf="checkPiece(piece)" style="white-space:pre-wrap;">{{piece}}</span>
-            <span *ngIf="!checkPiece(piece)">
+		<span *ngIf="!checkPiece(piece)">
                 <app-annotation [note]="notes[+piece]"></app-annotation>
             </span>
-        </span>
-    </p>
+		</span>
+	</p>
 </div>

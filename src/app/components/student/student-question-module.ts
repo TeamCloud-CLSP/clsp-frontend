@@ -5,6 +5,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { StudentService } from '../../services/student.service';
 import { Router } from '@angular/router';
 import { Header, Items } from '../../models/modules/header';
+import { Module } from '../../models/course';
+import {SafeHtmlPipe} from '../safe-html.pipe'
+
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -15,6 +18,7 @@ import 'rxjs/add/operator/switchMap';
 export class StudentQuestionModuleComponent implements OnInit {
   headers: Header[];
   newHeader: Header;
+  @Input() module: Module;
   @Input() songId: number;
   @Input() unitId: number;
   @Input() moduleType: string;
@@ -28,7 +32,7 @@ export class StudentQuestionModuleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.songId);
+    //console.log(this.songId);
     this.studentService.getHeaders(this.songId, this.moduleType)
       .then(headers => {
         this.headers = new Array<Header>();

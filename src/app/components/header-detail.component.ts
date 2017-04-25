@@ -63,7 +63,7 @@ export class HeaderDetailComponent implements OnInit {
       .switchMap((params: Params) => this.moduleService.getQuestions(+params['header_id']))
       .subscribe(questions => {
         this.questions = questions.sort((x, y) => x.weight - y.weight);
-        console.log(questions);
+        //console.log(questions);
       });
   }
 

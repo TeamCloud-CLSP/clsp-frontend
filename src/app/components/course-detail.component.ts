@@ -50,7 +50,7 @@ export class CourseDetailComponent implements OnInit {
   }
 
   addMedia(): void {
-    console.log(this.url)
+    //console.log(this.url)
     this.edited = true;
   }
 

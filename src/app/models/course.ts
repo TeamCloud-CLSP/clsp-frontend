@@ -53,6 +53,7 @@ export class Module {
   password: string;
   name: string;
   song_enabled: number;
+  description: string;
 }
 
 export class Media {

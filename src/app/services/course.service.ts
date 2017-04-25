@@ -49,7 +49,7 @@ export class CourseService {
     }
 
     createCourse(course: Course): Promise<Course> {
-        console.log(course);
+        //console.log(course);
         const url = `${this.designerUrl}/course`;
         return this.http
             .post(url, JSON.stringify({
@@ -167,12 +167,12 @@ export class CourseService {
 
     getSong(songId: number): Promise<Song> {
         const url = `${this.designerUrl}/song/${songId}`;
-        console.log('song options');
-        console.log(this.authService.getOptions());
+        //console.log('song options');
+        //console.log(this.authService.getOptions());
         return this.http.get(url, this.authService.getOptions())
             .toPromise()
             .then(response => {
-                console.log(response.json());
+                //console.log(response.json());
                 return response.json() as Song;
             })
             .catch(this.handleError);
@@ -236,7 +236,7 @@ createCulturalNote(note: CulturalNote): Promise < CulturalNote > {
         phrase: note.phrase,
         description: note.description
     });
-    console.log(data);
+    //console.log(data);
     return this.http.post(url,
         data,
         this.authService.getOptions())

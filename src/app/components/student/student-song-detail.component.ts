@@ -39,7 +39,7 @@ export class StudentSongDetailComponent implements OnInit {
     this.publicBaseUrl = '/files/';
     this.route.params
       .switchMap((params: Params) => {
-        console.log(params);
+        //console.log(params);
         return this.studentService.getSong(+params['song_id']);
       })
       .subscribe(song => {
@@ -48,7 +48,7 @@ export class StudentSongDetailComponent implements OnInit {
         if (this.song.embed) {
           this.song.embed_display = this.sanitizer.bypassSecurityTrustHtml(song.embed_display);
         }
-        console.log(song);
+        //console.log(song);
       });
 
     const names = {
@@ -63,7 +63,7 @@ export class StudentSongDetailComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) => this.studentService.getModules(+params['song_id']))
       .subscribe(modules => {
-        console.log(modules);
+        //console.log(modules);
         this.modules = modules.filter(x => x.is_enabled == 1);
         for (let i = 0; i < this.modules.length; i++) {
           this.modules[i].name = this.modules[i].name || this.modules[i].module_type;
@@ -76,7 +76,7 @@ export class StudentSongDetailComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) => this.studentService.getMedia(+params['song_id']))
       .subscribe(media => {
-        console.log(media);
+        //console.log(media);
 
         this.media = media;
       });
@@ -108,8 +108,8 @@ export class StudentSongDetailComponent implements OnInit {
       this.passwordValidated = true;
     } else {
       this.displayPassError = true;
-      console.log(this.modules[0].password);
-      console.log(this.enteredPassword);
+      //console.log(this.modules[0].password);
+      //console.log(this.enteredPassword);
     }
   }
 }

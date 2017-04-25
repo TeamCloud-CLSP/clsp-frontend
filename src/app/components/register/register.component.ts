@@ -15,31 +15,31 @@ export class RegisterComponent {
   registerMsgs = '';
 
   constructor(
-      private route: ActivatedRoute,
-      private router: Router,
-      private accountService: AccountService) { }
+    private route: ActivatedRoute,
+    private router: Router,
+    private accountService: AccountService) { }
 
   register() {
     this.loading = true;
     this.registerErrors = '';
     this.registerMsgs = '';
     this.accountService.register(
-        this.model.regcode,
-        this.model.username,
-        this.model.password,
-        this.model.email,
-        this.model.name)
-        .subscribe(
-            res => {
-                console.log('after successful registration');
-                this.loading = false;
-                this.registerMsgs = 'User successfully registered';
-            },
-            error =>  {
-              console.log(error);
-              this.loading = false;
-              this.registerErrors = error;
-            }
-        );
+      this.model.regcode,
+      this.model.username,
+      this.model.password,
+      this.model.email,
+      this.model.name)
+      .subscribe(
+      res => {
+        //console.log('after successful registration');
+        this.loading = false;
+        this.registerMsgs = 'User successfully registered';
+      },
+      error => {
+        console.log(error);
+        this.loading = false;
+        this.registerErrors = error;
+      }
+      );
   }
 }
