@@ -44,11 +44,10 @@ export class AccountDashboardComponent {
     }
 
     updateAccount(): void {
-        console.log(this.account);
         this.accountService.updateAccount(this.account).then(
           (user: User) => {
               this.edited = false;
-              this.account = user;
+              this.authService.refreshSavedToken();
           }
         );
     }
