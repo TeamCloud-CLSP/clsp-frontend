@@ -37,7 +37,18 @@ export class LoginComponent implements OnInit {
                     if (this.authService.redirectUrl) {
                         this.router.navigate([this.authService.redirectUrl]);
                     } else {
-                        this.router.navigate(['./dashboard']);
+                        if (this.authService.getAccount().is_designer) {
+                            this.router.navigate(['./designer/courses']);
+                        }
+                        if (this.authService.getAccount().is_student) {
+                            this.router.navigate(['./student']);
+                        }
+                        if (this.authService.getAccount().is_administrator) {
+                            this.router.navigate(['./admin']);
+                        }
+                        if (this.authService.getAccount().is_professor) {
+                            this.router.navigate(['./professor']);
+                        }
                     }
                 },
                 error =>  {
